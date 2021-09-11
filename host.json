@@ -1,0 +1,8 @@
+{
+	"hosts": [	
+		"dist/hosts/vidembed.js",
+		"dist/hosts/voe.js",
+		"dist/hosts/mixdrop.js",
+		"dist/hosts/vidsrc.js"
+	]
+}

@@ -1,0 +1,9 @@
+.dccache
+README.md
+index.js
+node_modules
+ts
+tsconfig.json
+package.json
+package-lock.json
+.DS_Store
