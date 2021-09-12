@@ -34,9 +34,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 var _this = this;
-hosts["streamrapid"] = function (html, host, provider, callback, callbackWebview) { return __awaiter(_this, void 0, void 0, function () {
+callbacksEmbed["vidcloud"] = function (dataCallback, host, provider, callback) { return __awaiter(_this, void 0, void 0, function () {
+    var data, parse, source1, source2, source3, _i, source3_1, item;
     return __generator(this, function (_a) {
+        libs.log(dataCallback, provider, 'DATA CALLBACK');
+        data = JSON.parse(dataCallback);
+        if (data.responseURL.indexOf("getSources") != -1) {
+            parse = JSON.parse(data.responseText);
+            source1 = parse['sources_1'];
+            source2 = parse['sources_2'];
+            source3 = __spreadArray(__spreadArray([], source1), source2);
+            for (_i = 0, source3_1 = source3; _i < source3_1.length; _i++) {
+                item = source3_1[_i];
+                callback({
+                    file: item.file,
+                    quality: item.type,
+                    host: host,
+                    provider: provider,
+                });
+            }
+            console.log(source1, source2, source3, "responseTextData");
+        }
         return [2];
     });
 }); };

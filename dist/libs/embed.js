@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-libs.embed_redirect = function (embed, quality, movieInfo, provider, callback, host, callbackWebview) { return __awaiter(_this, void 0, void 0, function () {
+libs.embed_redirect = function (embed, quality, movieInfo, provider, callback, host) { return __awaiter(_this, void 0, void 0, function () {
     var hostname, headersData, contentLength;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -66,7 +66,7 @@ libs.embed_redirect = function (embed, quality, movieInfo, provider, callback, h
                     });
                 }
                 if (hosts && hosts[hostname]) {
-                    hosts[hostname](embed, movieInfo, provider, {}, callback, callbackWebview);
+                    hosts[hostname](embed, movieInfo, provider, {}, callback);
                     return [2];
                 }
                 return [4, libs.request_head(embed, {})];

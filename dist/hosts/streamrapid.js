@@ -35,17 +35,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-hosts["streamrapid"] = function (url, movieInfo, provider, config, callback, callbackWebview) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers;
+hosts["streamrapid"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
+    var DOMAIN, HOST, headers, script;
     return __generator(this, function (_a) {
         DOMAIN = 'https://streamrapid.ru.co';
         HOST = 'VIDCLOUD';
-        headers = {};
-        callbackWebview({
-            provider: provider,
-            host: host,
-            url: url,
-            headers: headers
+        headers = {
+            "referer": "https://fmovies.app"
+        };
+        script = "";
+        callback({
+            callback: {
+                provider: provider,
+                host: HOST,
+                url: url,
+                headers: headers,
+                callback: callback,
+                beforeLoadScript: "var open = XMLHttpRequest.prototype.open;\n            XMLHttpRequest.prototype.open = function() {\n                this.addEventListener(\"load\", function() {\n                    var message = {\"status\" : this.status, \"responseURL\" : this.responseURL, \"responseText\": this.responseText, \"response\": this.response}\n                    \n                    window.ReactNativeWebView.postMessage(JSON.stringify(message));\n                });\n                open.apply(this, arguments);\n            };"
+            }
         });
         return [2];
     });

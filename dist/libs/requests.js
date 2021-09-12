@@ -169,11 +169,10 @@ libs.request_head = function (url, headers) {
                         })];
                 case 1:
                     requestData = _a.sent();
-                    console.log(requestData, 'haaha');
                     return [2, requestData.headers];
                 case 2:
                     e_2 = _a.sent();
-                    console.log("error_request_head", e_2);
+                    console.log("error_request_head", String(e_2));
                     return [2, ""];
                 case 3: return [2];
             }

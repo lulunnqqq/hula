@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-source.getResource = function (movieInfo, config, callback, callbackWebView) { return __awaiter(_this, void 0, void 0, function () {
+source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
     var PROVIDER, DOMAIN, urlSearch, parseSearch, LINK_DETAIL, filmId, serverIds, apiUrlEmbed, parseEmbedServer_1, apiUrlGetSeason, parseGetSeason_1, seasonId_1, apiUrlGetEpisode, episodeId_1, parseGetEpisode_1, urlGetEmbedTv, parseEmbedTv_1, apiGetLinkEmbed, _i, serverIds_1, serverIdItem, getLinkEmbedData;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -96,7 +96,7 @@ source.getResource = function (movieInfo, config, callback, callbackWebView) { r
             case 4:
                 parseGetSeason_1 = _a.sent();
                 seasonId_1 = 0;
-                libs.log({ apiUrlGetSeason: apiUrlGetSeason, length: parseGetSeason_1('.ss-item'), length: length }, PROVIDER, "SEASSON INFO");
+                libs.log({ apiUrlGetSeason: apiUrlGetSeason, length: parseGetSeason_1('.ss-item').length }, PROVIDER, "SEASSON INFO");
                 parseGetSeason_1('.ss-item').each(function (key, item) {
                     var season = parseGetSeason_1(item).text();
                     var seasonDataId = parseGetSeason_1(item).attr('data-id');
@@ -157,7 +157,7 @@ source.getResource = function (movieInfo, config, callback, callbackWebView) { r
                 getLinkEmbedData = _a.sent();
                 libs.log({ getLinkEmbedData: getLinkEmbedData }, PROVIDER, 'LINK EMBED DATA');
                 if (!(getLinkEmbedData && getLinkEmbedData.link)) return [3, 11];
-                return [4, libs.embed_redirect(getLinkEmbedData.link, '', movieInfo, PROVIDER, callback, '', callbackWebView)];
+                return [4, libs.embed_redirect(getLinkEmbedData.link, '', movieInfo, PROVIDER, callback, '')];
             case 10:
                 _a.sent();
                 _a.label = 11;
