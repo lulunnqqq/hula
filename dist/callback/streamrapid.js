@@ -43,7 +43,6 @@ var _this = this;
 callbacksEmbed["vidcloud"] = function (dataCallback, host, provider, callback) { return __awaiter(_this, void 0, void 0, function () {
     var data, parse, source1, source2, source3, _i, source3_1, item;
     return __generator(this, function (_a) {
-        libs.log(dataCallback, provider, 'DATA CALLBACK');
         data = JSON.parse(dataCallback);
         if (data.responseURL.indexOf("getSources") != -1) {
             parse = JSON.parse(data.responseText);
