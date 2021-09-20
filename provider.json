@@ -1,5 +1,7 @@
 {
 	"providers": [
+		"dist/providers/lookmovie.js",
+		"dist/providers/m4ufree.js",
 		"dist/providers/fmovies.js"
 	]
 }

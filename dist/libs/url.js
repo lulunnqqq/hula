@@ -9,5 +9,5 @@ libs.url_get_host = function (url) {
 };
 libs.url_slug_search = function (movieInfo, replacement) {
     if (replacement === void 0) { replacement = '-'; }
-    return slugify(movieInfo.title, { lower: true, replacement: replacement, remove: /[*+~.()'"!:@]/g });
+    return slugify(movieInfo.title, { lower: true, replacement: replacement, remove: /[*+~.()'"!:?@]/g });
 };

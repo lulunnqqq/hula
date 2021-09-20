@@ -1,5 +1,7 @@
 {
 	"hosts": [	
-		"dist/hosts/streamrapid.js"
+		"dist/hosts/streamrapid.js",
+		"dist/hosts/playmezzz.js",
+		"dist/hosts/playm4u.js"
 	]
 }
