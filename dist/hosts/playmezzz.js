@@ -64,12 +64,7 @@ hosts["playmezzz"] = function (url, movieInfo, provider, config, callback) { ret
                 if (!directUrl) {
                     return [2];
                 }
-                callback({
-                    file: directUrl,
-                    quality: 'hls',
-                    host: HOST,
-                    provider: provider,
-                });
+                libs.embed_callback(directUrl, provider, HOST, 'Hls', callback);
                 return [2];
         }
     });

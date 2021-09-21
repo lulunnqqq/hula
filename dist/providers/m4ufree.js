@@ -43,7 +43,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 PROVIDER = 'M4UFREE';
                 DOMAIN = "https://m4ufree.tv";
                 userAgent = libs.request_getRandomUserAgent();
-                urlSearch = DOMAIN + "/search/" + libs.url_slug_search(movieInfo) + ".html";
+                urlSearch = DOMAIN + "/search/" + libs.url_slug_search(movieInfo, '-', true) + ".html";
                 return [4, libs.request_get(urlSearch, {
                         'user-agent': userAgent,
                         origin: DOMAIN,
@@ -63,13 +63,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         title = title.replace(/\( *[0-9]+ *\)/i, "").trim();
                         var href = parseSearch(itemSearch).find("a").attr("href");
                         console.log(title, year, href, "--------- M4uFREE SEARCH INFO ---------");
-                        if (libs.string_matching_title(movieInfo, title)) {
-                            if (movieInfo.type == "movie" && year == movieInfo.year) {
-                                LINK_DETAIL = href;
-                            }
-                            if (movieInfo.type == 'tv') {
-                                LINK_DETAIL = href;
-                            }
+                        if (libs.string_matching_title(movieInfo, title) && year == movieInfo.year) {
+                            LINK_DETAIL = href;
                         }
                     }
                 });

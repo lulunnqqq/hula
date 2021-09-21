@@ -46,24 +46,14 @@ libs.embed_redirect = function (embed, quality, movieInfo, provider, callback, h
                 hostname = libs.url_get_host(embed);
                 libs.log({ hostname: hostname, embed: embed }, provider, 'EMBED HOST');
                 if (embed.indexOf('.m3u8') != -1 || embed.indexOf('.hls') != -1) {
-                    callback({
-                        file: embed,
-                        host: host ? host : hostname.toUpperCase(),
-                        provider: provider,
-                        quality: 'HLS',
-                    });
+                    libs.embed_callback(embed, provider, host ? host : hostname.toUpperCase(), 'Hls', callback);
                     return [2];
                 }
                 if (!hostname) {
                     return [2];
                 }
                 if (quality) {
-                    callback({
-                        file: embed,
-                        quality: quality,
-                        host: host ? host : hostname.toUpperCase(),
-                        provider: provider,
-                    });
+                    libs.embed_callback(embed, provider, host ? host : hostname.toUpperCase(), '', callback);
                 }
                 if (hosts && hosts[hostname]) {
                     hosts[hostname](embed, movieInfo, provider, {}, callback);
@@ -74,12 +64,7 @@ libs.embed_redirect = function (embed, quality, movieInfo, provider, callback, h
                 headersData = _a.sent();
                 contentLength = headersData['content-length'];
                 if (contentLength > 100000000) {
-                    callback({
-                        file: embed,
-                        size: contentLength,
-                        host: host ? host : hostname.toUpperCase(),
-                        provider: provider,
-                    });
+                    libs.embed_callback(embed, provider, host ? host : hostname.toUpperCase(), '', callback);
                 }
                 return [2];
         }
@@ -92,4 +77,12 @@ libs.embed_parse_source = function (html) {
     source = "parse = " + source;
     eval(source);
     return parse;
+};
+libs.embed_callback = function (urlDirect, provider, host, quality, callback, rank) {
+    callback({
+        file: urlDirect,
+        quality: quality,
+        host: '',
+        provider: libs.string_provider(provider, rank),
+    });
 };

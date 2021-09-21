@@ -7,7 +7,11 @@ libs.url_get_host = function (url) {
     hostName = hostName.replace("\r", "");
     return hostName.replace(/\.[A-z]+$/, "");
 };
-libs.url_slug_search = function (movieInfo, replacement) {
+libs.url_slug_search = function (movieInfo, replacement, isConcatYear) {
     if (replacement === void 0) { replacement = '-'; }
+    if (isConcatYear === void 0) { isConcatYear = false; }
+    if (isConcatYear) {
+        return slugify("" + movieInfo.title + replacement + movieInfo.year, { lower: true, replacement: replacement, remove: /[*+~.()'"!:?@]/g });
+    }
     return slugify(movieInfo.title, { lower: true, replacement: replacement, remove: /[*+~.()'"!:?@]/g });
 };

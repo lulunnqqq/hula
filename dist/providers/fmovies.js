@@ -55,13 +55,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     var type = parseSearch(item).find('.fdi-type').text();
                     libs.log({ title: title, href: href, year: year, type: type }, PROVIDER, 'SEARCH ITEM');
                     if (title && href) {
-                        if (libs.string_matching_title(movieInfo, title)) {
-                            if (movieInfo.type == 'movie' && type && type.toLowerCase() == 'movie' && movieInfo.year == year) {
-                                LINK_DETAIL = "" + DOMAIN + href;
-                            }
-                            else if (movieInfo.type == 'tv' && type && type.toLowerCase() == 'tv') {
-                                LINK_DETAIL = "" + DOMAIN + href;
-                            }
+                        if (libs.string_matching_title(movieInfo, title) && movieInfo.year == year) {
+                            LINK_DETAIL = "" + DOMAIN + href;
                         }
                     }
                 });

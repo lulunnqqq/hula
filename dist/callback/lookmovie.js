@@ -35,13 +35,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-callbacksEmbed["lookmovie"] = function (dataCallback, host, provider, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var parseCallback, parseDirect, directIndex;
+callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
+    var parseCallback, parseDirect, rank, directIndex;
     return __generator(this, function (_a) {
         parseCallback = JSON.parse(dataCallback);
         if ((parseCallback.responseURL.indexOf('/manifests/movies/json') != -1 || parseCallback.responseURL.indexOf('/manifests/shows/json') != -1) && parseCallback.responseText) {
             libs.log(parseCallback, provider, 'IFRAME CALLBACK');
             parseDirect = JSON.parse(parseCallback.responseText);
+            rank = 0;
             for (directIndex in parseDirect) {
                 if (directIndex == 'auto') {
                     continue;
@@ -49,12 +50,7 @@ callbacksEmbed["lookmovie"] = function (dataCallback, host, provider, callback, 
                 if (!parseDirect[directIndex]) {
                     continue;
                 }
-                callback({
-                    file: parseDirect[directIndex],
-                    quality: directIndex,
-                    host: host,
-                    provider: provider,
-                });
+                libs.embed_callback(parseDirect[directIndex], provider, host, directIndex, callback, ++rank);
             }
         }
         return [2];

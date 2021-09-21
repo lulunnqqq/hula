@@ -67,12 +67,7 @@ hosts["play.playm4u"] = function (url, movieInfo, provider, config, callback) { 
                     return [2];
                 }
                 libs.log({ headers: headers, body: body, domainGetDirect: domainGetDirect, playmeData: playmeData, directUrl: directUrl }, provider, 'PLAYDATA');
-                callback({
-                    file: directUrl,
-                    quality: 'Hls',
-                    host: HOST,
-                    provider: provider,
-                });
+                libs.embed_callback(directUrl, provider, HOST, 'Hls', callback);
                 return [2];
         }
     });

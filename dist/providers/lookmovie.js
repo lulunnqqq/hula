@@ -73,7 +73,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     if (!title) {
                         continue;
                     }
-                    if (movieInfo.type == 'movie' && year != movieInfo.year) {
+                    if (year != movieInfo.year) {
                         continue;
                     }
                     if (libs.string_matching_title(movieInfo, title)) {

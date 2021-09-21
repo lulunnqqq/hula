@@ -1,5 +1,10 @@
 libs.string_matching_title = function (movieInfo, titleSearch) {
-    return slugify(movieInfo.title, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g }) == slugify(titleSearch, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g });
+    var matching = slugify(movieInfo.title, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g }) == slugify(titleSearch, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g });
+    if (matching) {
+        return true;
+    }
+    var reg = new RegExp("^" + movieInfo.title + " *.+", 'gi');
+    return titleSearch.match(reg) ? true : false;
 };
 libs.string_get_season_tvshow = function (title) {
     var season = title.toLowerCase().match(/\- *season *([0-9]+)/i);
@@ -34,4 +39,11 @@ libs.string_atob = function (input) {
         buffer = chars.indexOf(buffer);
     }
     return output;
+};
+libs.string_provider = function (provider, rank) {
+    if (rank === void 0) { rank = 0; }
+    if (!rank) {
+        return "Server " + provider[0].toUpperCase();
+    }
+    return "Server " + provider[0].toUpperCase() + rank;
 };
