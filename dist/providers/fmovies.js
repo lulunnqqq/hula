@@ -159,7 +159,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 11:
                 _i++;
                 return [3, 8];
-            case 12: return [2];
+            case 12: return [2, true];
         }
     });
 }); };

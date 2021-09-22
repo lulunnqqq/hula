@@ -109,7 +109,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     }
                 });
-                return [2];
+                return [2, true];
         }
     });
 }); };
