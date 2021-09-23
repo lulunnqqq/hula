@@ -59,7 +59,7 @@ hosts["play.playm4u"] = function (url, movieInfo, provider, config, callback) { 
                 return [4, libs.request_post(domainGetDirect, headers, body)];
             case 1:
                 playmeData = _a.sent();
-                if (!playmeData.status || playmeData.status != 1) {
+                if (!playmeData.status || playmeData.status != 1 || playmeData.type == 1) {
                     return [2];
                 }
                 directUrl = playmeData.data ? playmeData.data : '';

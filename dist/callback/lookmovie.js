@@ -36,13 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var parseCallback, parseDirect, rank, directIndex;
+    var parseCallback, parseDirect, rank, sortDirect, directIndex, _i, sortDirect_1, sortItem;
     return __generator(this, function (_a) {
         parseCallback = JSON.parse(dataCallback);
         if ((parseCallback.responseURL.indexOf('/manifests/movies/json') != -1 || parseCallback.responseURL.indexOf('/manifests/shows/json') != -1) && parseCallback.responseText) {
             libs.log(parseCallback, provider, 'IFRAME CALLBACK');
             parseDirect = JSON.parse(parseCallback.responseText);
             rank = 0;
+            sortDirect = [];
             for (directIndex in parseDirect) {
                 if (directIndex == 'auto') {
                     continue;
@@ -50,7 +51,15 @@ callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, 
                 if (!parseDirect[directIndex]) {
                     continue;
                 }
-                libs.embed_callback(parseDirect[directIndex], provider, host, directIndex, callback, ++rank);
+                sortDirect.push({
+                    quality: directIndex,
+                    direct_url: parseDirect[directIndex],
+                });
+            }
+            sortDirect = _.orderBy(sortDirect, ['quality'], ['desc']);
+            for (_i = 0, sortDirect_1 = sortDirect; _i < sortDirect_1.length; _i++) {
+                sortItem = sortDirect_1[_i];
+                libs.embed_callback(sortItem.direct_url, provider, host, sortItem.quality, callback, ++rank);
             }
         }
         return [2];
