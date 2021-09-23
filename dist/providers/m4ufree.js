@@ -43,7 +43,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 PROVIDER = 'M4UFREE';
                 DOMAIN = "https://m4ufree.tv";
                 userAgent = libs.request_getRandomUserAgent();
-                urlSearch = DOMAIN + "/search/" + libs.url_slug_search(movieInfo, '-', true) + ".html";
+                urlSearch = DOMAIN + "/search/" + libs.url_slug_search(movieInfo, '-', true, 2) + ".html";
                 return [4, libs.request_get(urlSearch, {
                         'user-agent': userAgent,
                         origin: DOMAIN,
