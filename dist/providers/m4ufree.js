@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, csrfToken, LINK_DETAIL, parseTvDetail_1;
+    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, csrfToken, LINK_DETAIL, parseTvDetail_1, hasLinkTv_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -88,6 +88,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(LINK_DETAIL, {}, true)];
             case 2:
                 parseTvDetail_1 = _a.sent();
+                hasLinkTv_1 = false;
                 parseTvDetail_1('.episode').each(function (key, item) {
                     var id = parseTvDetail_1(item).attr('idepisode');
                     var epiLInk = parseTvDetail_1(item).attr('epilink');
@@ -98,8 +99,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     if (season == movieInfo.season && episode == movieInfo.episode) {
                         LINK_DETAIL = DOMAIN + "/tvshow/" + rowname + "-season-" + season + "-episode-" + episode + "-" + epiLInk + ".html";
                         libs.log(LINK_DETAIL, PROVIDER, 'LINK TV DETAIL');
+                        hasLinkTv_1 = true;
                     }
                 });
+                if (!hasLinkTv_1) {
+                    return [2];
+                }
                 _a.label = 3;
             case 3:
                 callback({
