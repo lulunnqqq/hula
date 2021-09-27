@@ -54,12 +54,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     var year = parseSearch(item).find('.fdi-item').first().text();
                     var type = parseSearch(item).find('.fdi-type').text();
                     libs.log({ title: title, href: href, year: year, type: type }, PROVIDER, 'SEARCH ITEM');
-                    if (title && href && !LINK_DETAIL) {
+                    if (title && href && !LINK_DETAIL && type) {
                         if (libs.string_matching_title(movieInfo, title)) {
-                            if (movieInfo.type == 'tv') {
+                            if (movieInfo.type == 'tv' && type.toLowerCase() == 'tv') {
                                 LINK_DETAIL = "" + DOMAIN + href;
                             }
-                            if (movieInfo.type == 'movie' && movieInfo.year == year) {
+                            if (movieInfo.type == 'movie' && type.toLowerCase() == 'movie' && movieInfo.year == year) {
                                 LINK_DETAIL = "" + DOMAIN + href;
                             }
                         }
