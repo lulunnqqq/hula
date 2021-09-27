@@ -120,8 +120,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseGetEpisode_1('.eps-item').each(function (key, item) {
                     var episode = parseGetEpisode_1(item).find('strong').text();
                     var episodeDataId = parseGetEpisode_1(item).attr('data-id');
+                    libs.log({ episode: episode, episodeDataId: episodeDataId }, PROVIDER, 'EPISODE INFO');
                     if (episode && episodeDataId) {
                         episode = episode.match(/([0-9.]+)/i);
+                        libs.log({ episode: episode }, PROVIDER, 'EPISODE PATTERN');
                         episode = episode ? episode[1] : 0;
                         if (episode == movieInfo.episode) {
                             episodeId_1 = episodeDataId;
