@@ -54,7 +54,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     var year = parseSearch(item).find('.fdi-item').first().text();
                     var type = parseSearch(item).find('.fdi-type').text();
                     libs.log({ title: title, href: href, year: year, type: type }, PROVIDER, 'SEARCH ITEM');
-                    if (title && href) {
+                    if (title && href && !LINK_DETAIL) {
                         if (libs.string_matching_title(movieInfo, title)) {
                             if (movieInfo.type == 'tv') {
                                 LINK_DETAIL = "" + DOMAIN + href;

@@ -76,7 +76,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     if (year != movieInfo.year) {
                         continue;
                     }
-                    if (libs.string_matching_title(movieInfo, title)) {
+                    if (libs.string_matching_title(movieInfo, title) && !LINK_DETAIL) {
                         LINK_DETAIL = slug;
                     }
                 }

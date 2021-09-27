@@ -62,8 +62,19 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         year = year ? year[1] : 0;
                         title = title.replace(/\( *[0-9]+ *\)/i, "").trim();
                         var href = parseSearch(itemSearch).find("a").attr("href");
+                        var parseYear = parseSearch(itemSearch).find('.jtip-top .jt-info').last().text();
+                        if (parseYear) {
+                            parseYear = parseYear.match(/([0-9]+)/i);
+                            parseYear = parseYear ? parseYear[1] : 0;
+                        }
+                        else {
+                            parseYear = 0;
+                        }
+                        if (parseYear > 0 && !year) {
+                            year = parseYear;
+                        }
                         console.log(title, year, href, "--------- M4uFREE SEARCH INFO ---------");
-                        if (libs.string_matching_title(movieInfo, title) && year == movieInfo.year) {
+                        if (libs.string_matching_title(movieInfo, title) && year == movieInfo.year && !LINK_DETAIL) {
                             LINK_DETAIL = href;
                         }
                     }
