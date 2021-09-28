@@ -101,8 +101,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     var season = parseGetSeason_1(item).text();
                     var seasonDataId = parseGetSeason_1(item).attr('data-id');
                     if (season && seasonDataId) {
-                        season = season.toLowerCase().replace('season', '').trim();
-                        if (season == movieInfo.season) {
+                        season = season.match(/([0-9.*]+)/i);
+                        season = season ? season[1] : 0;
+                        if (Number(season) == movieInfo.season) {
                             seasonId_1 = seasonDataId;
                         }
                     }
