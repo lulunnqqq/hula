@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_a.label) {
             case 0:
                 PROVIDER = 'MOVIESTREAM';
-                DOMAIN = "https://fmovies.app";
+                DOMAIN = "https://fmovies.ps";
                 urlSearch = DOMAIN + "/search/" + libs.url_slug_search(movieInfo);
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 1:

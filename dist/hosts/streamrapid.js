@@ -41,7 +41,7 @@ hosts["streamrapid"] = function (url, movieInfo, provider, config, callback) { r
         DOMAIN = 'https://streamrapid.ru.co';
         HOST = 'VIDCLOUD';
         headers = {
-            "referer": "https://fmovies.app"
+            "referer": "https://fmovies.ps"
         };
         callback({
             callback: {
