@@ -34,61 +34,53 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
-};
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, userAgent, urlSearchMovie, urlSearchTv, resultSearchMovieData, resultSearchTvShow, dataSearch, LINK_DETAIL, _i, dataSearch_1, searchItem, title, year, slug, parseDetailTv_1, scriptTv_1, tvInfo, _a, _b, seasonItem;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
+    var PROVIDER, DOMAIN, PROXY, userAgent, LINK_DETAIL, urlSearchMovie, urlSearchTvshow, parseSearch, parseDetailTv_1, scriptTv_1, tvInfo, _i, _a, seasonItem;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 PROVIDER = 'LOOKMOVIE';
                 DOMAIN = "https://lookmovie.io";
+                PROXY = "https://cors-anywhere.herokuapp.com/";
                 userAgent = libs.request_getRandomUserAgent();
-                urlSearchMovie = DOMAIN + "/api/v1/movies/do-search/?q=" + libs.url_slug_search(movieInfo, '%20');
-                urlSearchTv = DOMAIN + "/api/v1/shows/do-search/?q=" + libs.url_slug_search(movieInfo, '%20');
-                return [4, libs.request_get(urlSearchMovie, {})];
-            case 1:
-                resultSearchMovieData = _c.sent();
-                return [4, libs.request_get(urlSearchTv, {})];
-            case 2:
-                resultSearchTvShow = _c.sent();
-                libs.log({ urlSearchMovie: urlSearchMovie, urlSearchTv: urlSearchTv, resultSearchTvShow: resultSearchTvShow, resultSearchMovieData: resultSearchMovieData }, PROVIDER, 'SEARCH DATA');
-                if (movieInfo.type == 'movie' && !resultSearchMovieData.result) {
-                    return [2];
-                }
-                if (movieInfo.type == 'tv' && !resultSearchTvShow.result) {
-                    return [2];
-                }
-                dataSearch = __spreadArray(__spreadArray([], resultSearchMovieData.result), resultSearchTvShow.result);
                 LINK_DETAIL = '';
-                for (_i = 0, dataSearch_1 = dataSearch; _i < dataSearch_1.length; _i++) {
-                    searchItem = dataSearch_1[_i];
-                    title = searchItem.title;
-                    year = searchItem.year;
-                    slug = searchItem.slug;
-                    if (!title) {
-                        continue;
-                    }
-                    if (year != movieInfo.year) {
-                        continue;
-                    }
+                urlSearchMovie = DOMAIN + "/movies/search/?q=" + libs.url_slug_search(movieInfo, '%20');
+                urlSearchTvshow = DOMAIN + "/shows/search/?q=" + libs.url_slug_search(movieInfo, '%20');
+                parseSearch = null;
+                if (!(movieInfo.type == 'movie')) return [3, 2];
+                return [4, libs.request_get(urlSearchMovie, {}, true)];
+            case 1:
+                parseSearch = _b.sent();
+                return [3, 4];
+            case 2: return [4, libs.request_get(urlSearchTvshow, {}, true)];
+            case 3:
+                parseSearch = _b.sent();
+                _b.label = 4;
+            case 4:
+                libs.log({ length: parseSearch('.movie-item-style-2').length }, PROVIDER, 'SEARCH TOTAL');
+                parseSearch('.movie-item-style-2').each(function (key, item) {
+                    var title = parseSearch(item).find('.mv-item-infor a').text();
+                    var href = parseSearch(item).find('.mv-item-infor a').attr('href');
+                    var year = parseSearch(item).find('.year').text();
                     if (libs.string_matching_title(movieInfo, title) && !LINK_DETAIL) {
-                        LINK_DETAIL = slug;
+                        if (movieInfo.type == 'movie' && year == movieInfo.year) {
+                            LINK_DETAIL = href;
+                        }
+                        else if (movieInfo.type == 'tv') {
+                            LINK_DETAIL = href;
+                        }
                     }
-                }
+                });
                 libs.log(LINK_DETAIL, PROVIDER, 'LINK DETAIL');
                 if (!LINK_DETAIL) {
                     return [2];
                 }
-                LINK_DETAIL = DOMAIN + "/" + (movieInfo.type == 'movie' ? 'movies' : 'shows') + "/view/" + LINK_DETAIL;
-                if (!(movieInfo.type == 'tv')) return [3, 4];
+                LINK_DETAIL = "" + DOMAIN + LINK_DETAIL;
+                if (!(movieInfo.type == 'tv')) return [3, 6];
                 return [4, libs.request_get(LINK_DETAIL, {}, true)];
-            case 3:
-                parseDetailTv_1 = _c.sent();
+            case 5:
+                parseDetailTv_1 = _b.sent();
                 scriptTv_1 = '';
                 parseDetailTv_1('script').each(function (key, item) {
                     var scriptData = parseDetailTv_1(item).text();
@@ -108,15 +100,15 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!tvInfo.seasons) {
                     return [2];
                 }
-                for (_a = 0, _b = tvInfo.seasons; _a < _b.length; _a++) {
-                    seasonItem = _b[_a];
+                for (_i = 0, _a = tvInfo.seasons; _i < _a.length; _i++) {
+                    seasonItem = _a[_i];
                     if (seasonItem.season == movieInfo.season && seasonItem.episode == movieInfo.episode) {
                         LINK_DETAIL = LINK_DETAIL + ("#S" + movieInfo.season + "-E" + movieInfo.episode + "-" + seasonItem.id_episode);
                         break;
                     }
                 }
-                _c.label = 4;
-            case 4:
+                _b.label = 6;
+            case 6:
                 libs.log(LINK_DETAIL, PROVIDER, 'URL LINK DETAIL');
                 callback({
                     callback: {
