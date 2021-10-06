@@ -54,6 +54,9 @@ callbacksEmbed["vidcloud"] = function (dataCallback, provider, host, callback) {
             rank = 0;
             for (_i = 0, source3_1 = source3; _i < source3_1.length; _i++) {
                 item = source3_1[_i];
+                if (!item.file) {
+                    continue;
+                }
                 libs.embed_callback(item.file, provider, host, item.type, callback, ++rank, tracks);
             }
         }
