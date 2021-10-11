@@ -46,8 +46,8 @@ callbacksEmbed["vidcloud"] = function (dataCallback, provider, host, callback) {
         data = JSON.parse(dataCallback);
         if (data.responseURL.indexOf("getSources") != -1) {
             parse = JSON.parse(data.responseText);
-            source1 = parse['sources_1'] || [];
-            source2 = parse['sources_2'] || [];
+            source1 = parse['sources'] || [];
+            source2 = parse['sourcesBackup'] || [];
             source3 = __spreadArray(__spreadArray([], source1), source2);
             tracks = parse['tracks'] || [];
             libs.log({ source3: source3, tracks: tracks }, provider, 'SOURCES');
