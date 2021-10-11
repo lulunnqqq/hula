@@ -40,6 +40,7 @@ callbacksEmbed["m4ufree"] = function (dataCallback, provider, host, callback, me
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                libs.log(dataCallback, provider, 'dataCallback');
                 parseCallback = JSON.parse(dataCallback);
                 if (!(parseCallback.responseURL.indexOf('/ajax') != -1 && parseCallback.responseText)) return [3, 2];
                 parse = cheerio.load(parseCallback.responseText);
