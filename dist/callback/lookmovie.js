@@ -36,30 +36,45 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var parseCallback, parseDirect, rank, sortDirect, directIndex, _i, sortDirect_1, sortItem;
-    return __generator(this, function (_a) {
+    var parseCallback, parseDirect, rank, sortDirect, tracks, _i, _a, item, directIndex, _b, sortDirect_1, sortItem;
+    return __generator(this, function (_c) {
         parseCallback = JSON.parse(dataCallback);
-        if ((parseCallback.responseURL.indexOf('/manifests/movies/json') != -1 || parseCallback.responseURL.indexOf('/manifests/shows/json') != -1) && parseCallback.responseText) {
+        if ((parseCallback.responseURL.indexOf('security/episode-access') != -1 || parseCallback.responseURL.indexOf('security/movie-access') != -1) && parseCallback.responseText) {
             libs.log(parseCallback, provider, 'IFRAME CALLBACK');
             parseDirect = JSON.parse(parseCallback.responseText);
+            if (!parseDirect['streams']) {
+                return [2];
+            }
             rank = 0;
             sortDirect = [];
-            for (directIndex in parseDirect) {
+            tracks = [];
+            if (parseDirect['subtitles']) {
+                for (_i = 0, _a = parseDirect['subtitles']; _i < _a.length; _i++) {
+                    item = _a[_i];
+                    if (!item.file) {
+                        continue;
+                    }
+                    tracks.push({ file: "" + metadata.DOMAIN + item.file,
+                        label: item.language,
+                        kind: item.kind });
+                }
+            }
+            for (directIndex in parseDirect['streams']) {
                 if (directIndex == 'auto') {
                     continue;
                 }
-                if (!parseDirect[directIndex]) {
+                if (!parseDirect['streams'][directIndex]) {
                     continue;
                 }
                 sortDirect.push({
-                    quality: directIndex,
-                    direct_url: parseDirect[directIndex],
+                    quality: directIndex.replace('p', ''),
+                    direct_url: parseDirect['streams'][directIndex],
                 });
             }
             sortDirect = _.orderBy(sortDirect, ['quality'], ['desc']);
-            for (_i = 0, sortDirect_1 = sortDirect; _i < sortDirect_1.length; _i++) {
-                sortItem = sortDirect_1[_i];
-                libs.embed_callback(sortItem.direct_url, provider, host, sortItem.quality, callback, ++rank);
+            for (_b = 0, sortDirect_1 = sortDirect; _b < sortDirect_1.length; _b++) {
+                sortItem = sortDirect_1[_b];
+                libs.embed_callback(sortItem.direct_url, provider, host, sortItem.quality, callback, ++rank, tracks);
             }
         }
         return [2];
