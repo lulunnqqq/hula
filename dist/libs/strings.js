@@ -1,5 +1,5 @@
 libs.string_matching_title = function (movieInfo, titleSearch, regex) {
-    if (regex === void 0) { regex = false; }
+    if (regex === void 0) { regex = true; }
     var matching = slugify(movieInfo.title, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g }) == slugify(titleSearch, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g });
     if (matching) {
         return true;
