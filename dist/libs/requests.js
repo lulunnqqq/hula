@@ -120,15 +120,17 @@ libs.request_getRandomUserAgent = function () {
     var random = _.random(0, userAgent.length - 1);
     return userAgent[random];
 };
-libs.request_get = function (url, headers, isCheerio) {
+libs.request_get = function (url, headers, isCheerio, isRecursive, retry) {
     if (headers === void 0) { headers = {}; }
     if (isCheerio === void 0) { isCheerio = false; }
+    if (isRecursive === void 0) { isRecursive = false; }
+    if (retry === void 0) { retry = 1; }
     return __awaiter(_this, void 0, void 0, function () {
         var defaultHeaders, requestData, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 2, , 4]);
                     defaultHeaders = headers;
                     if (!defaultHeaders['user-agent']) {
                         defaultHeaders['user-agent'] = libs.request_getRandomUserAgent();
@@ -145,8 +147,14 @@ libs.request_get = function (url, headers, isCheerio) {
                 case 2:
                     e_1 = _a.sent();
                     console.log("error_request_get", e_1);
-                    return [2, ""];
-                case 3: return [2];
+                    if (!isRecursive || (isRecursive && retry <= 0)) {
+                        return [2, ""];
+                    }
+                    return [4, libs.request_get(url, headers, isCheerio, isRecursive, retry - 1)];
+                case 3:
+                    _a.sent();
+                    return [3, 4];
+                case 4: return [2];
             }
         });
     });
