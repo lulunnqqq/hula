@@ -54,7 +54,7 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                 rank = 0;
                 for (_i = 0, _a = dataEmbed.media.sources; _i < _a.length; _i++) {
                     embedItem = _a[_i];
-                    if (!embedItem.file) {
+                    if (!embedItem.file || embedItem.file.indexOf("vidstream") == -1) {
                         continue;
                     }
                     libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank);
