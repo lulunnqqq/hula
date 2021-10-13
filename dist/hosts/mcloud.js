@@ -47,7 +47,7 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                     }, false)];
             case 1:
                 dataEmbed = _b.sent();
-                libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed }, provider, 'DATA EMBED');
+                libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed, subs: config.subs }, provider, 'DATA EMBED');
                 if (!dataEmbed || !dataEmbed.success || !dataEmbed.media || !dataEmbed.media.sources) {
                     return [2];
                 }
@@ -57,7 +57,7 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                     if (!embedItem.file || embedItem.file.indexOf("vidstream") == -1) {
                         continue;
                     }
-                    libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank);
+                    libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : []);
                 }
                 return [2];
         }

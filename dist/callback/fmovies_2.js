@@ -54,7 +54,7 @@ callbacksEmbed["amoviestream_2"] = function (dataCallback, provider, host, callb
                 });
                 if (!embed) return [3, 2];
                 libs.log({ embed: embed }, provider, 'URL EMBED');
-                return [4, libs.embed_redirect(embed, '', metadata.movieInfo, provider, callback)];
+                return [4, libs.embed_redirect(embed, '', metadata.movieInfo, provider, callback, undefined, metadata.tracks ? metadata.tracks : [])];
             case 1:
                 _a.sent();
                 _a.label = 2;
