@@ -36,9 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var HOST, urlEmbed, dataEmbed, rank, _i, _a, embedItem;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var HOST, urlEmbed, dataEmbed, rank, _i, _a, embedItem, embedData, patternQuality, _b, patternQuality_1, patternItem, urlDirect;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
                 HOST = 'MCLOUD';
                 urlEmbed = url.replace('/embed/', '/info/');
@@ -46,20 +46,45 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                         referer: url
                     }, false)];
             case 1:
-                dataEmbed = _b.sent();
+                dataEmbed = _c.sent();
                 libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed, subs: config.subs }, provider, 'DATA EMBED');
                 if (!dataEmbed || !dataEmbed.success || !dataEmbed.media || !dataEmbed.media.sources) {
                     return [2];
                 }
                 rank = 0;
-                for (_i = 0, _a = dataEmbed.media.sources; _i < _a.length; _i++) {
-                    embedItem = _a[_i];
-                    if (!embedItem.file || embedItem.file.indexOf("vidstream") == -1) {
-                        continue;
-                    }
-                    libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : []);
+                _i = 0, _a = dataEmbed.media.sources;
+                _c.label = 2;
+            case 2:
+                if (!(_i < _a.length)) return [3, 5];
+                embedItem = _a[_i];
+                if (!embedItem.file || embedItem.file.indexOf("vidstream") == -1) {
+                    return [3, 4];
                 }
-                return [2];
+                return [4, libs.request_get(embedItem.file, {})];
+            case 3:
+                embedData = _c.sent();
+                patternQuality = embedData.match(/hls\/([0-9]+)\/[0-9]+\.m3u8/ig);
+                libs.log({ patternQuality: patternQuality }, provider, 'PATTERN QUALITY');
+                if (!patternQuality) {
+                    libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : []);
+                    return [3, 4];
+                }
+                for (_b = 0, patternQuality_1 = patternQuality; _b < patternQuality_1.length; _b++) {
+                    patternItem = patternQuality_1[_b];
+                    if (patternItem.indexOf('360') != -1 || patternItem.indexOf('480') != -1) {
+                        if (patternQuality.length > 2) {
+                            continue;
+                        }
+                    }
+                    urlDirect = embedItem.file.replace('list.m3u8#.mp4', patternItem);
+                    libs.log({ urlDirect: urlDirect }, provider, 'URL DIRECR REPLACE');
+                    libs.embed_callback(urlDirect, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : []);
+                }
+                _c.label = 4;
+            case 4:
+                _i++;
+                return [3, 2];
+            case 5: return [2];
         }
     });
 }); };
