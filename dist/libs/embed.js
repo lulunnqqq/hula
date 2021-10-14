@@ -85,7 +85,8 @@ libs.embed_callback = function (urlDirect, provider, host, quality, callback, ra
     callback({
         file: urlDirect,
         quality: quality,
-        host: 'Server',
+        host: host,
+        source: provider,
         provider: libs.string_provider(provider, rank),
         subs: subs
     });
