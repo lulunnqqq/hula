@@ -159,10 +159,36 @@ libs.request_get = function (url, headers, isCheerio, isRecursive, retry) {
         });
     });
 };
-libs.request_head = function (url, headers) {
+libs.request_status_code = function (url, headers) {
     if (headers === void 0) { headers = {}; }
     return __awaiter(_this, void 0, void 0, function () {
         var defaultHeaders, requestData, e_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    defaultHeaders = headers;
+                    if (!defaultHeaders['user-agent']) {
+                        defaultHeaders['user-agent'] = libs.request_getRandomUserAgent();
+                    }
+                    return [4, axiosS.get(url, {
+                            headers: defaultHeaders,
+                        })];
+                case 1:
+                    requestData = _a.sent();
+                    return [2, requestData.status];
+                case 2:
+                    e_2 = _a.sent();
+                    return [2, 404];
+                case 3: return [2];
+            }
+        });
+    });
+};
+libs.request_head = function (url, headers) {
+    if (headers === void 0) { headers = {}; }
+    return __awaiter(_this, void 0, void 0, function () {
+        var defaultHeaders, requestData, e_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -179,8 +205,8 @@ libs.request_head = function (url, headers) {
                     requestData = _a.sent();
                     return [2, requestData.headers];
                 case 2:
-                    e_2 = _a.sent();
-                    console.log("error_request_head", String(e_2));
+                    e_3 = _a.sent();
+                    console.log("error_request_head", String(e_3));
                     return [2, ""];
                 case 3: return [2];
             }
@@ -190,7 +216,7 @@ libs.request_head = function (url, headers) {
 libs.request_get_redirect_url = function (url, headers) {
     if (headers === void 0) { headers = {}; }
     return __awaiter(_this, void 0, void 0, function () {
-        var defaultHeaders, requestData, e_3;
+        var defaultHeaders, requestData, e_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -206,8 +232,8 @@ libs.request_get_redirect_url = function (url, headers) {
                     requestData = _a.sent();
                     return [2, requestData.request.responseURL];
                 case 2:
-                    e_3 = _a.sent();
-                    console.log("error_request_request_get_redirect_url", e_3);
+                    e_4 = _a.sent();
+                    console.log("error_request_request_get_redirect_url", e_4);
                     return [2, ""];
                 case 3: return [2];
             }
@@ -217,7 +243,7 @@ libs.request_get_redirect_url = function (url, headers) {
 libs.request_put = function (url, headers, body) {
     if (headers === void 0) { headers = {}; }
     return __awaiter(_this, void 0, void 0, function () {
-        var defaultHeaders, requestData, e_4;
+        var defaultHeaders, requestData, e_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -233,8 +259,8 @@ libs.request_put = function (url, headers, body) {
                     requestData = _a.sent();
                     return [2, requestData.data];
                 case 2:
-                    e_4 = _a.sent();
-                    console.log("error_request_put", e_4);
+                    e_5 = _a.sent();
+                    console.log("error_request_put", e_5);
                     return [2, ""];
                 case 3: return [2];
             }
@@ -244,7 +270,7 @@ libs.request_put = function (url, headers, body) {
 libs.request_post = function (url, headers, body, isCheerio) {
     if (headers === void 0) { headers = {}; }
     return __awaiter(_this, void 0, void 0, function () {
-        var defaultHeaders, requestData, e_5;
+        var defaultHeaders, requestData, e_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -263,8 +289,8 @@ libs.request_post = function (url, headers, body, isCheerio) {
                     }
                     return [2, requestData.data];
                 case 2:
-                    e_5 = _a.sent();
-                    console.log("error_request_post", e_5);
+                    e_6 = _a.sent();
+                    console.log("error_request_post", e_6);
                     return [2, ""];
                 case 3: return [2];
             }
