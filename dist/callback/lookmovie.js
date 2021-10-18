@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var parseCallback, parseDirect, rank, sortDirect, tracks, _i, _a, item, directIndex, _b, sortDirect_1, sortItem;
-    return __generator(this, function (_c) {
+    var parseCallback, parseDirect, rank, sortDirect, tracks, _i, _a, item, directIndex, sizeQuality;
+    return __generator(this, function (_b) {
         parseCallback = JSON.parse(dataCallback);
         if ((parseCallback.responseURL.indexOf('security/episode-access') != -1 || parseCallback.responseURL.indexOf('security/movie-access') != -1) && parseCallback.responseText) {
             libs.log(parseCallback, provider, 'IFRAME CALLBACK');
@@ -66,17 +66,19 @@ callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, 
                 if (!parseDirect['streams'][directIndex]) {
                     continue;
                 }
+                sizeQuality = directIndex.match(/([0-9]+)/i);
+                sizeQuality = sizeQuality ? Number(sizeQuality[1]) : 'HD';
                 sortDirect.push({
-                    quality: directIndex.replace('p', ''),
-                    direct_url: parseDirect['streams'][directIndex],
+                    quality: sizeQuality,
+                    file: parseDirect['streams'][directIndex],
                 });
             }
             sortDirect = _.orderBy(sortDirect, ['quality'], ['desc']);
-            libs.log({ tracks: tracks }, provider, 'TRACKS');
-            for (_b = 0, sortDirect_1 = sortDirect; _b < sortDirect_1.length; _b++) {
-                sortItem = sortDirect_1[_b];
-                libs.embed_callback(sortItem.direct_url, provider, host, sortItem.quality, callback, ++rank, tracks);
+            libs.log({ sortDirect: sortDirect, tracks: tracks }, provider, 'TRACKS');
+            if (sortDirect.length == 0) {
+                return [2];
             }
+            libs.embed_callback(sortDirect[0], provider, host, 'Hls', callback, ++rank, tracks, sortDirect);
         }
         return [2];
     });
