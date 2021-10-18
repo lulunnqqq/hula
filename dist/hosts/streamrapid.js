@@ -39,7 +39,7 @@ hosts["streamrapid"] = function (url, movieInfo, provider, config, callback) { r
     var DOMAIN, HOST, headers;
     return __generator(this, function (_a) {
         DOMAIN = 'https://streamrapid.ru.co';
-        HOST = 'VIDCLOUD';
+        HOST = 'Vidcloud';
         headers = {
             "referer": "https://fmovies.ps"
         };

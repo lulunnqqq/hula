@@ -36,11 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, PROXY, userAgent, LINK_DETAIL, urlSearchMovie, urlSearchTvshow, parseSearch, parseDetailTv_1, scriptTv_1, tvInfo, _i, _a, seasonItem;
+    var PROVIDER, HOST, DOMAIN, PROXY, userAgent, LINK_DETAIL, urlSearchMovie, urlSearchTvshow, parseSearch, parseDetailTv_1, scriptTv_1, tvInfo, _i, _a, seasonItem;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 PROVIDER = 'LOOKMOVIE';
+                HOST = 'LookMovie';
                 DOMAIN = "https://lookmovie.io";
                 PROXY = "https://cors-anywhere.herokuapp.com/";
                 userAgent = libs.request_getRandomUserAgent();
@@ -113,7 +114,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 callback({
                     callback: {
                         provider: PROVIDER,
-                        host: PROVIDER,
+                        host: HOST,
                         url: LINK_DETAIL,
                         headers: {
                             'user-agent': userAgent

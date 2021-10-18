@@ -72,6 +72,7 @@ callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, 
                 });
             }
             sortDirect = _.orderBy(sortDirect, ['quality'], ['desc']);
+            libs.log({ tracks: tracks }, provider, 'TRACKS');
             for (_b = 0, sortDirect_1 = sortDirect; _b < sortDirect_1.length; _b++) {
                 sortItem = sortDirect_1[_b];
                 libs.embed_callback(sortItem.direct_url, provider, host, sortItem.quality, callback, ++rank, tracks);

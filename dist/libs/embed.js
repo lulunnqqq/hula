@@ -80,14 +80,16 @@ libs.embed_parse_source = function (html) {
     eval(source);
     return parse;
 };
-libs.embed_callback = function (urlDirect, provider, host, quality, callback, rank, subs) {
+libs.embed_callback = function (urlDirect, provider, host, quality, callback, rank, subs, direct_quality) {
     if (subs === void 0) { subs = []; }
+    if (direct_quality === void 0) { direct_quality = []; }
     callback({
         file: urlDirect,
         quality: quality,
         host: host,
         source: provider,
         provider: libs.string_provider(provider, rank),
-        subs: subs
+        subs: subs,
+        direct_quality: direct_quality,
     });
 };
