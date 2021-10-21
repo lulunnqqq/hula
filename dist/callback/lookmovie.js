@@ -78,7 +78,7 @@ callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, 
             if (sortDirect.length == 0) {
                 return [2];
             }
-            libs.embed_callback(sortDirect[0], provider, host, 'Hls', callback, ++rank, tracks, sortDirect);
+            libs.embed_callback(sortDirect[0].file, provider, host, 'Hls', callback, ++rank, tracks, sortDirect);
         }
         return [2];
     });
