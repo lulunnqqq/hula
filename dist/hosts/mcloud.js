@@ -36,10 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var HOST, urlEmbed, dataEmbed, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect;
+    var DOMAIN, HOST, urlEmbed, dataEmbed, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
+                DOMAIN = 'https://mcloud.to';
                 HOST = 'MCloud';
                 urlEmbed = url.replace('/embed/', '/info/');
                 return [4, libs.request_get(urlEmbed, {
@@ -95,7 +96,14 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                         });
                     }
                 }
-                libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : [], directQuality);
+                libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : [], directQuality, {
+                    referer: DOMAIN,
+                    origin: DOMAIN,
+                    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36',
+                    'sec-fetch-dest': 'empty',
+                    'sec-fetch-mode': 'cors',
+                    'sec-fetch-site': 'cross-site',
+                });
                 _c.label = 4;
             case 4:
                 _i++;
