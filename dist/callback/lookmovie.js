@@ -39,6 +39,9 @@ callbacksEmbed["lookmovie"] = function (dataCallback, provider, host, callback, 
     var parseCallback, parseDirect, rank, sortDirect, tracks, _i, _a, item, directIndex, sizeQuality;
     return __generator(this, function (_b) {
         parseCallback = JSON.parse(dataCallback);
+        if (!parseCallback || !parseCallback.responseURL) {
+            return [2];
+        }
         if ((parseCallback.responseURL.indexOf('security/episode-access') != -1 || parseCallback.responseURL.indexOf('security/movie-access') != -1) && parseCallback.responseText) {
             libs.log(parseCallback, provider, 'IFRAME CALLBACK');
             parseDirect = JSON.parse(parseCallback.responseText);
