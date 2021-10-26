@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, HOST, DOMAIN, PROXY, userAgent, LINK_DETAIL, urlSearchMovie, urlSearchTvshow, parseSearch, parseDetailTv_1, scriptTv_1, tvInfo, _i, _a, seasonItem;
+    var PROVIDER, HOST, DOMAIN, PROXY, userAgent, LINK_DETAIL, urlSearchMovie, urlSearchTvshow, parseSearch, parseDetailTv_1, scriptTv_1, tvInfo, _i, _a, seasonItem, parseDetailMovie, linkRedirect;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -109,13 +109,22 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                 }
                 _b.label = 6;
-            case 6:
-                libs.log(LINK_DETAIL, PROVIDER, 'URL LINK DETAIL');
+            case 6: return [4, libs.request_get(LINK_DETAIL, {}, true)];
+            case 7:
+                parseDetailMovie = _b.sent();
+                linkRedirect = parseDetailMovie('.view-movie .container .round-button').attr('href');
+                if (!linkRedirect) {
+                    return [2];
+                }
+                libs.log({
+                    LINK_DETAIL: LINK_DETAIL,
+                    linkRedirect: linkRedirect
+                }, PROVIDER, 'URL LINK DETAIL');
                 callback({
                     callback: {
                         provider: PROVIDER,
                         host: HOST,
-                        url: LINK_DETAIL,
+                        url: linkRedirect,
                         headers: {
                             'user-agent': userAgent
                         },
