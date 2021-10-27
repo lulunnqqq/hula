@@ -79,9 +79,6 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                     patternItem = patternQuality_1[_b];
                     sizeQuality = patternItem.match(/([0-9]+)/i);
                     sizeQuality = sizeQuality ? sizeQuality[1] : 'HD';
-                    if (sizeQuality == '1080') {
-                        continue;
-                    }
                     if (embedItem.file.indexOf("list.m3u8#.mp4") != -1) {
                         urlDirect = embedItem.file.replace('list.m3u8#.mp4', patternItem);
                         libs.log({ urlDirect: urlDirect, sizeQuality: sizeQuality }, provider, 'URL DIRECR REPLACE');
