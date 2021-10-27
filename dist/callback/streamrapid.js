@@ -40,10 +40,16 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from) {
     return to;
 };
 var _this = this;
-callbacksEmbed["vidcloud"] = function (dataCallback, provider, host, callback) { return __awaiter(_this, void 0, void 0, function () {
+callbacksEmbed["vidcloud"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
     var data, parse, source1, source2, source3, tracks, rank, _i, source3_1, item;
     return __generator(this, function (_a) {
+        if (!dataCallback) {
+            return [2];
+        }
         data = JSON.parse(dataCallback);
+        if (!data.responseURL) {
+            return [2];
+        }
         if (data.responseURL.indexOf("getSources") != -1) {
             parse = JSON.parse(data.responseText);
             source1 = parse['sources'] || [];
