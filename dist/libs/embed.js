@@ -54,6 +54,7 @@ libs.embed_redirect = function (embed, quality, movieInfo, provider, callback, h
                 }
                 if (quality) {
                     libs.embed_callback(embed, provider, host ? host : hostname.toUpperCase(), '', callback);
+                    return [2];
                 }
                 if (hosts && hosts[hostname]) {
                     hosts[hostname](embed, movieInfo, provider, {
