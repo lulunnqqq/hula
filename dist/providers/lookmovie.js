@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, HOST, DOMAIN, PROXY, userAgent, LINK_DETAIL, urlSearchMovie, urlSearchTvshow, parseSearch, parseDetailTv_1, scriptTv_1, tvInfo, _i, _a, seasonItem, parseDetailMovie, linkRedirect;
+    var PROVIDER, HOST, DOMAIN, PROXY, userAgent, LINK_DETAIL, urlSearchMovie, urlSearchTvshow, parseSearch, parseDetailMovie, linkRedirect, parseDetailTv_1, scriptTv_1, tvInfo, _i, _a, seasonItem;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -78,9 +78,16 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 LINK_DETAIL = "" + DOMAIN + LINK_DETAIL;
-                if (!(movieInfo.type == 'tv')) return [3, 6];
                 return [4, libs.request_get(LINK_DETAIL, {}, true)];
             case 5:
+                parseDetailMovie = _b.sent();
+                linkRedirect = parseDetailMovie('.view-movie .container .round-button').attr('href');
+                if (!linkRedirect) {
+                    return [2];
+                }
+                if (!(movieInfo.type == 'tv')) return [3, 7];
+                return [4, libs.request_get(linkRedirect, {}, true)];
+            case 6:
                 parseDetailTv_1 = _b.sent();
                 scriptTv_1 = '';
                 parseDetailTv_1('script').each(function (key, item) {
@@ -104,18 +111,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 for (_i = 0, _a = tvInfo.seasons; _i < _a.length; _i++) {
                     seasonItem = _a[_i];
                     if (seasonItem.season == movieInfo.season && seasonItem.episode == movieInfo.episode) {
-                        LINK_DETAIL = LINK_DETAIL + ("#S" + movieInfo.season + "-E" + movieInfo.episode + "-" + seasonItem.id_episode);
+                        LINK_DETAIL = linkRedirect + ("#S" + movieInfo.season + "-E" + movieInfo.episode + "-" + seasonItem.id_episode);
                         break;
                     }
                 }
-                _b.label = 6;
-            case 6: return [4, libs.request_get(LINK_DETAIL, {}, true)];
+                _b.label = 7;
             case 7:
-                parseDetailMovie = _b.sent();
-                linkRedirect = parseDetailMovie('.view-movie .container .round-button').attr('href');
-                if (!linkRedirect) {
-                    return [2];
-                }
                 libs.log({
                     LINK_DETAIL: LINK_DETAIL,
                     linkRedirect: linkRedirect
@@ -124,7 +125,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     callback: {
                         provider: PROVIDER,
                         host: HOST,
-                        url: linkRedirect,
+                        url: LINK_DETAIL,
                         headers: {
                             'user-agent': userAgent
                         },
