@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["play.playm4u"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers, movieId, domainGetDirect, body, requestData, playmeData, directUrl;
+    var DOMAIN, HOST, headers, movieId, domainGetDirect, body, playmeData, directUrl;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -64,15 +64,8 @@ hosts["play.playm4u"] = function (url, movieInfo, provider, config, callback) { 
                     referrer: 'https://m4ufree.tv',
                     typeend: 'html'
                 });
-                return [4, fetch(domainGetDirect, {
-                        method: 'POST',
-                        headers: headers,
-                        body: body,
-                    })];
+                return [4, libs.request_post(domainGetDirect, headers, body)];
             case 1:
-                requestData = _a.sent();
-                return [4, requestData.json()];
-            case 2:
                 playmeData = _a.sent();
                 libs.log(playmeData, provider, 'PLAY ME DATA');
                 if (!playmeData.status || playmeData.status != 1 || playmeData.type == 1) {
