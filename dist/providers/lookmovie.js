@@ -85,6 +85,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!linkRedirect) {
                     return [2];
                 }
+                if (movieInfo.type == 'movie') {
+                    LINK_DETAIL = linkRedirect;
+                }
                 if (!(movieInfo.type == 'tv')) return [3, 7];
                 return [4, libs.request_get(linkRedirect, {}, true)];
             case 6:
