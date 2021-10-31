@@ -146,7 +146,7 @@ libs.request_get = function (url, headers, isCheerio, isRecursive, retry) {
                     return [2, requestData.data];
                 case 2:
                     e_1 = _a.sent();
-                    console.log("error_request_get", e_1);
+                    console.log("error_request_get", url, e_1);
                     if (!isRecursive || (isRecursive && retry <= 0)) {
                         return [2, ""];
                     }
@@ -206,7 +206,7 @@ libs.request_head = function (url, headers) {
                     return [2, requestData.headers];
                 case 2:
                     e_3 = _a.sent();
-                    console.log("error_request_head", String(e_3));
+                    console.log("error_request_head", url, String(e_3));
                     return [2, ""];
                 case 3: return [2];
             }
@@ -290,7 +290,7 @@ libs.request_post = function (url, headers, body, isCheerio) {
                     return [2, requestData.data];
                 case 2:
                     e_6 = _a.sent();
-                    console.log("error_request_post", e_6);
+                    console.log("error_request_post", { url: url, headers: headers, body: body }, e_6);
                     return [2, ""];
                 case 3: return [2];
             }
