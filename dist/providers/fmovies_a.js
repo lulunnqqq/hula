@@ -282,10 +282,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 parseMovieInfo_1 = cheerio.load(movieInfo_1.html);
-                libs.log({ length: parseMovieInfo_1('li').length }, PROVIDER, 'MOVIE LENGTH');
-                parseMovieInfo_1('li').each(function (key, item) {
-                    var href = parseMovieInfo_1(item).find('a').attr('href');
-                    var dataId = parseMovieInfo_1(item).find('a').attr('data-id');
+                libs.log({ length: parseMovieInfo_1('#episodes').length }, PROVIDER, 'MOVIE LENGTH');
+                parseMovieInfo_1('#episodes').each(function (key, item) {
+                    var href = parseMovieInfo_1(item).find('a.active').attr('href');
+                    var dataId = parseMovieInfo_1(item).find('div.server').attr('data-id');
                     if (dataId) {
                         SERVER_ID = dataId;
                     }
