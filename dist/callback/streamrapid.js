@@ -45,6 +45,7 @@ callbacksEmbed["vidcloud"] = function (dataCallback, provider, host, callback, m
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
+                libs.log({ dataCallback: dataCallback }, provider, 'DATACALLBACK');
                 if (!dataCallback) {
                     return [2];
                 }
