@@ -72,6 +72,9 @@ callbacksEmbed["vidcloud"] = function (dataCallback, provider, host, callback, m
                 if (item.file.indexOf('thedaywestream') !== -1) {
                     return [3, 3];
                 }
+                if (item.file.indexOf('birdsystem') !== -1) {
+                    return [3, 3];
+                }
                 return [4, libs.request_get(item.file, {})];
             case 2:
                 directSizes = _b.sent();
