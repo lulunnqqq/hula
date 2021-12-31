@@ -83,10 +83,12 @@ callbacksEmbed["vidcloud"] = function (dataCallback, provider, host, callback, m
                     patternItem = patternSize_1[_a];
                     sizeQuality = patternItem.match(/\/([0-9]+)\//i);
                     sizeQuality = sizeQuality ? sizeQuality[1] : 'HD';
-                    directQuality.push({
-                        file: patternItem,
-                        quality: sizeQuality
-                    });
+                    if (patternItem.indexOf('thedaywestream') === -1) {
+                        directQuality.push({
+                            file: patternItem,
+                            quality: sizeQuality
+                        });
+                    }
                 }
                 libs.log({ directQuality: directQuality }, provider, 'DIRECT QUALITY');
                 libs.embed_callback(item.file, provider, host, 'Hls', callback, ++rank, tracks, directQuality);
