@@ -35,25 +35,54 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-hosts["streamrapid"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers;
+source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
+    var PROVIDER, DOMAIN, urlSearch, parseSearch, filmIds, _i, filmIds_1, filmItem, urlEmbed, dataEmbed;
     return __generator(this, function (_a) {
-        DOMAIN = 'https://streamrapid.ru.co';
-        HOST = 'Vidcloud';
-        headers = {
-            "referer": url,
-            "user-agent": libs.request_getRandomUserAgent(),
-        };
-        callback({
-            callback: {
-                provider: provider,
-                host: HOST,
-                url: url,
-                headers: headers,
-                callback: callback,
-                beforeLoadScript: "var open = XMLHttpRequest.prototype.open;\n            XMLHttpRequest.prototype.open = function() {\n                this.addEventListener(\"load\", function() {\n                    var message = {\"status\" : this.status, \"responseURL\" : this.responseURL, \"responseText\": this.responseText, \"response\": this.response}\n                    \n                    window.ReactNativeWebView.postMessage(JSON.stringify(message));\n                });\n                open.apply(this, arguments);\n            };"
-            }
-        });
-        return [2];
+        switch (_a.label) {
+            case 0:
+                PROVIDER = 'ETOWEMBED';
+                DOMAIN = "https://www.2embed.ru";
+                urlSearch = '';
+                if (movieInfo.type == 'tv') {
+                    urlSearch = DOMAIN + "/embed/imdb/tv?id=" + movieInfo.imdb_id + "&s=" + movieInfo.season + "&e=" + movieInfo.episode;
+                }
+                else {
+                    urlSearch = DOMAIN + "/embed/imdb/movie?id=" + movieInfo.imdb_id;
+                }
+                libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
+                return [4, libs.request_get(urlSearch, {}, true)];
+            case 1:
+                parseSearch = _a.sent();
+                filmIds = [];
+                libs.log({ length: parseSearch('.item-server').length }, PROVIDER, 'PARSE SEARCH');
+                parseSearch('.item-server').each(function (key, item) {
+                    var serverIds = parseSearch(item).attr('data-id');
+                    if (serverIds) {
+                        filmIds.push(serverIds);
+                    }
+                });
+                libs.log({ filmIds: filmIds }, PROVIDER, 'FILM IDS');
+                _i = 0, filmIds_1 = filmIds;
+                _a.label = 2;
+            case 2:
+                if (!(_i < filmIds_1.length)) return [3, 6];
+                filmItem = filmIds_1[_i];
+                urlEmbed = DOMAIN + "/ajax/embed/play?id=" + filmItem;
+                return [4, libs.request_get(urlEmbed, {})];
+            case 3:
+                dataEmbed = _a.sent();
+                libs.log({ dataEmbed: dataEmbed }, PROVIDER, 'DATA EMBED');
+                if (!dataEmbed.link) {
+                    return [3, 5];
+                }
+                return [4, libs.embed_redirect(dataEmbed.link, '', movieInfo, PROVIDER, callback, undefined, [])];
+            case 4:
+                _a.sent();
+                _a.label = 5;
+            case 5:
+                _i++;
+                return [3, 2];
+            case 6: return [2, true];
+        }
     });
 }); };
