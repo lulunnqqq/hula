@@ -36,17 +36,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, urlEmbed, dataEmbed, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect;
+    var userAgent, headerEmbed, cookies, DOMAIN, HOST, urlEmbed, dataEmbed, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
+                userAgent = libs.request_getRandomUserAgent();
+                return [4, libs.request_head(url, {
+                        referer: url,
+                        'user-agent': userAgent,
+                    })];
+            case 1:
+                headerEmbed = _c.sent();
+                cookies = '';
+                if (headerEmbed['set-cookie'] && headerEmbed['set-cookie'].length > 0) {
+                    cookies = headerEmbed['set-cookie'][0];
+                }
+                libs.log({ cookies: cookies }, provider, 'EMBED COOKIE');
                 DOMAIN = 'https://mcloud.to';
                 HOST = 'MCloud';
                 urlEmbed = url.replace('/embed/', '/info/');
                 return [4, libs.request_get(urlEmbed, {
-                        referer: url
+                        referer: url,
+                        cookie: cookies,
+                        'user-agent': userAgent,
                     }, false)];
-            case 1:
+            case 2:
                 dataEmbed = _c.sent();
                 libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed, subs: config.subs }, provider, 'DATA EMBED');
                 if (!dataEmbed || !dataEmbed.success || !dataEmbed.media || !dataEmbed.media.sources) {
@@ -54,25 +68,28 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                 }
                 rank = 0;
                 _i = 0, _a = dataEmbed.media.sources;
-                _c.label = 2;
-            case 2:
-                if (!(_i < _a.length)) return [3, 5];
+                _c.label = 3;
+            case 3:
+                if (!(_i < _a.length)) return [3, 6];
                 embedItem = _a[_i];
                 if (!embedItem.file) {
-                    return [3, 4];
+                    return [3, 5];
                 }
-                if (!(embedItem.file.indexOf('vidstream') != -1 || embedItem.file.indexOf('mcloud.to') != -1)) return [3, 4];
-                return [4, libs.request_get(embedItem.file, {})];
-            case 3:
+                if (!(embedItem.file.indexOf('vidstream') != -1 || embedItem.file.indexOf('mcloud.to') != -1)) return [3, 5];
+                return [4, libs.request_get(embedItem.file, {
+                        referer: url,
+                        cookie: cookies,
+                    })];
+            case 4:
                 embedData = _c.sent();
                 if (!embedData) {
-                    return [3, 4];
+                    return [3, 5];
                 }
                 patternQuality = embedData.match(/hls\/([0-9]+)\/[0-9]+\.m3u8/ig);
                 libs.log({ patternQuality: patternQuality, file: embedItem.file }, provider, 'PATTERN QUALITY');
                 if (!patternQuality) {
                     libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : []);
-                    return [3, 4];
+                    return [3, 5];
                 }
                 directQuality = [];
                 for (_b = 0, patternQuality_1 = patternQuality; _b < patternQuality_1.length; _b++) {
@@ -104,11 +121,11 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                     'sec-fetch-mode': 'cors',
                     'sec-fetch-site': 'cross-site',
                 });
-                _c.label = 4;
-            case 4:
+                _c.label = 5;
+            case 5:
                 _i++;
-                return [3, 2];
-            case 5: return [2];
+                return [3, 3];
+            case 6: return [2];
         }
     });
 }); };

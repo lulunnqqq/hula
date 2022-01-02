@@ -96,3 +96,32 @@ libs.embed_callback = function (urlDirect, provider, host, quality, callback, ra
         headers: headers,
     });
 };
+libs.parse_size = function (file, provider, host, type, callback, rank, tracks) { return __awaiter(_this, void 0, void 0, function () {
+    var directSizes, patternSize, directQuality, _i, patternSize_1, patternItem, sizeQuality;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, libs.request_get(file, {})];
+            case 1:
+                directSizes = _a.sent();
+                patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
+                if (!patternSize) {
+                    libs.embed_callback(file, provider, host, item.type, callback, ++rank, tracks);
+                    return [2];
+                }
+                directQuality = [];
+                libs.log({ patternSize: patternSize }, provider, 'PATTERN SIZE');
+                for (_i = 0, patternSize_1 = patternSize; _i < patternSize_1.length; _i++) {
+                    patternItem = patternSize_1[_i];
+                    sizeQuality = patternItem.match(/\/([0-9]+)\//i);
+                    sizeQuality = sizeQuality ? sizeQuality[1] : 'HD';
+                    directQuality.push({
+                        file: patternItem,
+                        quality: sizeQuality
+                    });
+                }
+                libs.log({ directQuality: directQuality }, provider, 'DIRECT QUALITY');
+                libs.embed_callback(file, provider, host, 'Hls', callback, ++rank, tracks, directQuality);
+                return [2];
+        }
+    });
+}); };
