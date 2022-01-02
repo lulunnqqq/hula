@@ -267,8 +267,10 @@ libs.request_put = function (url, headers, body) {
         });
     });
 };
-libs.request_post = function (url, headers, body, isCheerio) {
+libs.request_post = function (url, headers, body, isCheerio, isUserAgentDefault) {
     if (headers === void 0) { headers = {}; }
+    if (isCheerio === void 0) { isCheerio = false; }
+    if (isUserAgentDefault === void 0) { isUserAgentDefault = true; }
     return __awaiter(_this, void 0, void 0, function () {
         var defaultHeaders, requestData, e_6;
         return __generator(this, function (_a) {
@@ -276,7 +278,7 @@ libs.request_post = function (url, headers, body, isCheerio) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     defaultHeaders = headers;
-                    if (!defaultHeaders['user-agent']) {
+                    if (!defaultHeaders['user-agent'] && isUserAgentDefault) {
                         defaultHeaders['user-agent'] = libs.request_getRandomUserAgent();
                     }
                     return [4, axiosS.post(url, body, {
