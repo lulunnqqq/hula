@@ -1,6 +1,7 @@
-libs.string_matching_title = function (movieInfo, titleSearch, regex) {
+libs.string_matching_title = function (movieInfo, titleSearch, regex, replacement) {
     if (regex === void 0) { regex = true; }
-    var matching = slugify(movieInfo.title, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g }) == slugify(titleSearch, { lower: true, replacement: '+', remove: /[*+~.()'"!:@]/g });
+    if (replacement === void 0) { replacement = '+'; }
+    var matching = slugify(movieInfo.title, { lower: true, replacement: replacement, remove: /[*+~.()'"!:@-]/g }) == slugify(titleSearch, { lower: true, replacement: replacement, remove: /[*+~.()'"!:@-]/g });
     if (matching) {
         return true;
     }
