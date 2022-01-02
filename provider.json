@@ -2,7 +2,6 @@
 	"providers": [
 		"dist/providers/fmovies.js",
 		"dist/providers/fmovies_a.js",
-		"dist/providers/lookmovie.js",	
 		"dist/providers/m4ufree.js"
 	]
 }
