@@ -209,8 +209,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 LINK_TV_1 = '';
                 if (tvInfo.html) {
                     parseTvInfo_1 = cheerio.load(tvInfo.html);
-                    libs.log({ length: parseTvInfo_1("a[data-kname=\"" + movieInfo.season + ":" + movieInfo.episode + "\"]").length }, PROVIDER, 'SEARCH TV');
-                    parseTvInfo_1("a[data-kname=\"" + movieInfo.season + ":" + movieInfo.episode + "\"]").each(function (key, item) {
+                    libs.log({ length: parseTvInfo_1("a[data-kname=\"" + movieInfo.season + "-" + movieInfo.episode + "\"]").length }, PROVIDER, 'SEARCH TV');
+                    parseTvInfo_1("a[data-kname=\"" + movieInfo.season + "-" + movieInfo.episode + "\"]").each(function (key, item) {
                         var href = parseTvInfo_1(item).attr('href');
                         var dataId = parseTvInfo_1(item).attr('data-id');
                         if (dataId) {
