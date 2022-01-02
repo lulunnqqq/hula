@@ -114,7 +114,7 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                     }
                 }
                 libs.embed_callback(embedItem.file, provider, HOST, 'Hls', callback, ++rank, config.subs ? config.subs : [], directQuality, {
-                    referer: DOMAIN,
+                    referer: url,
                     origin: DOMAIN,
                     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36',
                     'sec-fetch-dest': 'empty',
