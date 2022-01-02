@@ -44,17 +44,7 @@ hosts["play.playm4u"] = function (url, movieInfo, provider, config, callback) { 
                 HOST = 'PLAYM4U';
                 headers = {
                     'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    'origin': 'https://play.playm4u.xyz',
-                    Host: 'api-plhq.playm4u.xyz',
-                    accept: '*/*',
-                    'sec-ch-ua-mobile': '?0',
-                    'sec-fetch-site': 'same-site',
-                    'sec-fetch-mode': 'cors',
-                    'sec-fetch-dest': 'empty',
-                    'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
-                    'sec-ch-ua-platform': '"macOS"',
                     'referer': 'https://play.playm4u.xyz/',
-                    'accept-language': 'vi-VN,vi;q=0.9'
                 };
                 movieId = url.match(/v1\/([A-z0-9]+)/i);
                 movieId = movieId ? movieId[1] : '';
@@ -226,7 +216,7 @@ hosts["play.playm4u"] = function (url, movieInfo, provider, config, callback) { 
                 playmeData = _a.sent();
                 _a.label = 53;
             case 53:
-                libs.log(playmeData, provider, 'PLAY ME DATA');
+                libs.log({ domainGetDirect: domainGetDirect, headers: headers, body: body, playmeData: playmeData }, provider, 'PLAY ME DATA');
                 directUrl = playmeData.data && !Array.isArray(playmeData.data) ? playmeData.data : '';
                 if (!directUrl) {
                     return [2];

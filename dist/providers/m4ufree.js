@@ -174,6 +174,83 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseSearch = _a.sent();
                 _a.label = 23;
             case 23:
+                if (!!parseSearch) return [3, 25];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                        origin: DOMAIN,
+                        'x-requested-with': 'XMLHttpRequest',
+                        'te': 'trailers',
+                    }, true)];
+            case 24:
+                parseSearch = _a.sent();
+                _a.label = 25;
+            case 25:
+                if (!!parseSearch) return [3, 27];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                        origin: DOMAIN,
+                        'x-requested-with': 'XMLHttpRequest',
+                        'te': 'trailers',
+                    }, true)];
+            case 26:
+                parseSearch = _a.sent();
+                _a.label = 27;
+            case 27:
+                if (!!parseSearch) return [3, 29];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                        origin: DOMAIN,
+                        'x-requested-with': 'XMLHttpRequest',
+                        'te': 'trailers',
+                    }, true)];
+            case 28:
+                parseSearch = _a.sent();
+                _a.label = 29;
+            case 29:
+                if (!!parseSearch) return [3, 31];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                        origin: DOMAIN,
+                        'x-requested-with': 'XMLHttpRequest',
+                        'te': 'trailers',
+                    }, true)];
+            case 30:
+                parseSearch = _a.sent();
+                _a.label = 31;
+            case 31:
+                if (!!parseSearch) return [3, 33];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                        origin: DOMAIN,
+                        'x-requested-with': 'XMLHttpRequest',
+                        'te': 'trailers',
+                    }, true)];
+            case 32:
+                parseSearch = _a.sent();
+                _a.label = 33;
+            case 33:
+                if (!!parseSearch) return [3, 35];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                        origin: DOMAIN,
+                        'x-requested-with': 'XMLHttpRequest',
+                        'te': 'trailers',
+                    }, true)];
+            case 34:
+                parseSearch = _a.sent();
+                _a.label = 35;
+            case 35:
+                if (!!parseSearch) return [3, 37];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                        origin: DOMAIN,
+                        'x-requested-with': 'XMLHttpRequest',
+                        'te': 'trailers',
+                    }, true)];
+            case 36:
+                parseSearch = _a.sent();
+                _a.label = 37;
+            case 37:
                 LINK_DETAIL = "";
                 libs.log({ length: parseSearch("div.imagecover").length, urlSearch: urlSearch }, PROVIDER, 'SEARCH');
                 parseSearch("div.imagecover").each(function (keySearch, itemSearch) {
@@ -205,9 +282,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 LINK_DETAIL = DOMAIN + "/" + LINK_DETAIL;
-                if (!(movieInfo.type == "tv")) return [3, 25];
+                if (!(movieInfo.type == "tv")) return [3, 39];
                 return [4, libs.request_get(LINK_DETAIL, {}, true)];
-            case 24:
+            case 38:
                 parseTvDetail_1 = _a.sent();
                 hasLinkTv_1 = false;
                 parseTvDetail_1('.episode').each(function (key, item) {
@@ -226,8 +303,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!hasLinkTv_1) {
                     return [2];
                 }
-                _a.label = 25;
-            case 25:
+                _a.label = 39;
+            case 39:
                 callback({
                     callback: {
                         provider: PROVIDER,
