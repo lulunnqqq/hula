@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, csrfToken, LINK_DETAIL, parseTvDetail_1, hasLinkTv_1;
+    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, LINK_DETAIL, parseTvDetail_1, hasLinkTv_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -52,9 +52,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }, true)];
             case 1:
                 parseSearch = _a.sent();
-                csrfToken = parseSearch('meta[name=csrf-token]').attr('content');
                 LINK_DETAIL = "";
-                libs.log({ length: parseSearch("div.imagecover").length, urlSearch: urlSearch, csrfToken: csrfToken }, PROVIDER, 'SEARCH');
+                libs.log({ length: parseSearch("div.imagecover").length, urlSearch: urlSearch }, PROVIDER, 'SEARCH');
                 parseSearch("div.imagecover").each(function (keySearch, itemSearch) {
                     var title = parseSearch(itemSearch).find("a").attr("title");
                     if (title) {
