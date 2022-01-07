@@ -3,6 +3,7 @@
 		"dist/hosts/streamrapid.js",
 		"dist/hosts/playmezzz.js",
 		"dist/hosts/playm4u.js",
-		"dist/hosts/mcloud.js"
+		"dist/hosts/mcloud.js",
+		"dist/hosts/vidstream.js"
 	]
 }

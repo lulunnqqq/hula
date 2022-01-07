@@ -48,7 +48,11 @@ callbacksEmbed["amoviestream_2"] = function (dataCallback, provider, host, callb
                 embed = '';
                 parse('iframe').each(function (key, item) {
                     var urlEmbed = parse(item).attr('src');
+                    libs.log({ urlEmbed: urlEmbed }, provider, 'URL EMBED');
                     if (urlEmbed && urlEmbed.indexOf('mcloud') != -1) {
+                        embed = urlEmbed;
+                    }
+                    else if (urlEmbed && urlEmbed.indexOf('vidstream') != -1) {
                         embed = urlEmbed;
                     }
                 });
