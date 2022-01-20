@@ -5,7 +5,6 @@
 		"dist/libs/url.js",
 		"dist/libs/embed.js",
 		"dist/libs/strings.js",
-		"dist/libs/logging.js",
-		"dist/libs/sub.js"
+		"dist/libs/logging.js"
 	]
 }
