@@ -4,6 +4,7 @@
 		"dist/hosts/playmezzz.js",
 		"dist/hosts/playm4u.js",
 		"dist/hosts/mcloud.js",
-		"dist/hosts/vidstream.js"
+		"dist/hosts/vidstream.js",
+		"dist/hosts/rabbitstream.js"
 	]
 }

@@ -41,7 +41,7 @@ hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { 
         DOMAIN = 'https://rabbitstream.net';
         HOST = 'Rabbitstream';
         headers = {
-            "referer": url,
+            "referer": "https://fmovies.ps",
             "user-agent": libs.request_getRandomUserAgent(),
         };
         callback({
