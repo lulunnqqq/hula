@@ -38,10 +38,11 @@ var _this = this;
 hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
     var DOMAIN, HOST, headers;
     return __generator(this, function (_a) {
+        libs.log({ provider: provider }, provider, 'PROVIDER RABBIT');
         DOMAIN = 'https://rabbitstream.net';
         HOST = 'Rabbitstream';
         headers = {
-            "referer": "https://fmovies.ps",
+            "referer": provider == 'ETOWEMBED' ? 'https://www.2embed.ru/' : "https://fmovies.ps",
             "user-agent": libs.request_getRandomUserAgent(),
         };
         callback({
