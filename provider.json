@@ -1,10 +1,10 @@
 {
 	"providers": [
-		"dist/providers/twoembed.js",
 		"dist/providers/fmovies.js",
 		"dist/providers/fmovies_a.js",
 		"dist/providers/m4ufree.js",
 		"dist/providers/lookmovie.js",
-		"dist/providers/loklok.js"
+		"dist/providers/loklok.js",
+		"dist/providers/vumoo.js"	
 	]
 }
