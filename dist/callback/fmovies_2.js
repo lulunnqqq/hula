@@ -55,6 +55,9 @@ callbacksEmbed["amoviestream_2"] = function (dataCallback, provider, host, callb
                     else if (urlEmbed && urlEmbed.indexOf('vidstream') != -1) {
                         embed = urlEmbed;
                     }
+                    else if (urlEmbed && urlEmbed.indexOf('vizcloud2') != -1) {
+                        embed = urlEmbed;
+                    }
                 });
                 if (!embed) return [3, 2];
                 libs.log({ embed: embed }, provider, 'URL EMBED');
