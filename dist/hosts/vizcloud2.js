@@ -75,7 +75,7 @@ hosts["vizcloud2"] = function (url, movieInfo, provider, config, callback) { ret
                 if (!embedItem.file) {
                     return [3, 5];
                 }
-                if (!(embedItem.file.indexOf('vidstream') != -1 || embedItem.file.indexOf('mwen.vizcloud2') != -1)) return [3, 5];
+                if (!(embedItem.file.indexOf('vidstream') != -1 || embedItem.file.indexOf('vizcloud2') != -1)) return [3, 5];
                 return [4, libs.request_get(embedItem.file, {
                         referer: url,
                         cookie: cookies,
