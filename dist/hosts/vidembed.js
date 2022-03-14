@@ -114,6 +114,7 @@ hosts["vidembed"] = function (url, movieInfo, provider, config, callback) { retu
                         quality: label
                     });
                 }
+                sourceEmbed = _.orderBy(sourceEmbed, ['quality'], ['desc']);
                 parseTrack = decryptDataEmbed.track.tracks || [];
                 for (_b = 0, parseTrack_1 = parseTrack; _b < parseTrack_1.length; _b++) {
                     trackItem = parseTrack_1[_b];
