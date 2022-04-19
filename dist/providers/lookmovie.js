@@ -42,7 +42,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 0:
                 PROVIDER = 'LOOKMOVIE';
                 HOST = 'LookMovie';
-                DOMAIN = "https://lookmovie.io";
+                DOMAIN = "https://lookmovie2.to";
                 PROXY = "https://cors-anywhere.herokuapp.com/";
                 userAgent = libs.request_getRandomUserAgent();
                 LINK_DETAIL = '';
