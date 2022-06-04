@@ -5,6 +5,7 @@
 		"dist/providers/fsapi.js",
 		"dist/providers/fmovies.js",
 		"dist/providers/lookmovie.js",
-		"dist/providers/bflix.js"
+		"dist/providers/bflix.js",
+		"dist/providers/membed.js"
 	]
 }

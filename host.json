@@ -8,6 +8,7 @@
 		"dist/hosts/rabbitstream.js",
 		"dist/hosts/vizcloud2.js",
 		"dist/hosts/vidembed.js",
-		"dist/hosts/streamtape.js"
+		"dist/hosts/streamtape.js",
+		"dist/hosts/dood.js"
 	]
 }
