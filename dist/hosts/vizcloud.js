@@ -35,14 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var userAgent, DOMAIN, HOST, headers, secretKey, id, hashMovie, urlEmbed, dataEmbed, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect;
+hosts["vizcloud"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
+    var DOMAIN, HOST, headers, secretKey, id, hashMovie, urlEmbed, dataEmbed, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
-                userAgent = libs.request_getRandomUserAgent();
-                DOMAIN = 'https://mcloud.to';
-                HOST = 'MCloud';
+                DOMAIN = 'https://vizcloud.cloud';
+                HOST = 'Vidcloud';
                 headers = {
                     'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="102", "Google Chrome";v="102"',
                     'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -64,14 +63,14 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                 if (!id) {
                     return [2];
                 }
-                libs.log({ id: id }, provider, 'ID mcloud');
+                libs.log({ id: id }, provider, 'ID VIZCLOUD');
                 hashMovie = libs.string_encrypt_fmovies(libs.string_cipher_fmovies("kKFmwRXyLGHMNHl0", libs.string_encrypt_fmovies(id))).replace(/\//g, "_").replace(/=+$/, "");
-                libs.log({ hashMovie: hashMovie }, provider, 'HASH mcloud');
+                libs.log({ hashMovie: hashMovie }, provider, 'HASH VIZCLOUD');
                 urlEmbed = DOMAIN + "/mediainfo/" + hashMovie + "?key=" + secretKey;
                 return [4, libs.request_get(urlEmbed, headers, false)];
             case 1:
                 dataEmbed = _c.sent();
-                libs.log({ urlEmbed: urlEmbed, id: id, dataEmbed: dataEmbed, subs: config.subs, hashMovie: hashMovie, urlEmbed: urlEmbed }, provider, 'DATA EMBED mcloud');
+                libs.log({ urlEmbed: urlEmbed, id: id, dataEmbed: dataEmbed, subs: config.subs, hashMovie: hashMovie, urlEmbed: urlEmbed }, provider, 'DATA EMBED VIZCLOUD');
                 if (!dataEmbed || !dataEmbed.status || !dataEmbed.data || !dataEmbed.data.media || !dataEmbed.data.media.sources) {
                     return [2];
                 }

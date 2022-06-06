@@ -9,6 +9,7 @@
 		"dist/hosts/vizcloud2.js",
 		"dist/hosts/vidembed.js",
 		"dist/hosts/streamtape.js",
-		"dist/hosts/dood.js"
+		"dist/hosts/dood.js",
+		"dist/hosts/vizcloud.js"
 	]
 }

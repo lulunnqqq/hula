@@ -230,6 +230,9 @@ libs.request_get_redirect_url = function (url, headers) {
                         })];
                 case 1:
                     requestData = _a.sent();
+                    console.log({
+                        request: requestData.request,
+                    }, "data_request_request_get_redirect_url", e);
                     return [2, requestData.request.responseURL];
                 case 2:
                     e_4 = _a.sent();

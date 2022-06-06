@@ -52,3 +52,61 @@ libs.string_provider = function (provider, rank) {
     }
     return "Server " + provider[0].toUpperCase() + rank;
 };
+libs.string_encrypt_fmovies = function (input) {
+    var keytwo = "51wJ0FDq/UVCefLopEcmK3ni4WIQztMjZdSYOsbHr9R2h7PvxBGAuglaN8+kXT6y";
+    var output = '';
+    for (var i = 0; i < input.length; i += 3) {
+        var a = new Int32Array([-1, -1, -1, -1]);
+        a[0] = (input[i].charCodeAt() | 0) >> 2;
+        a[1] = (3 & (input[i].charCodeAt() | 0)) << 4;
+        if (input.length > (i + 1 | 0)) {
+            a[1] = a[1] | (input[i + 1 | 0].charCodeAt() | 0) >> 4;
+            a[2] = (15 & (input[i + 1 | 0].charCodeAt() | 0)) << 2;
+        }
+        if (input.length > (i + 2 | 0)) {
+            a[2] = a[2] | (input[i + 2 | 0].charCodeAt() | 0) >> 6;
+            a[3] = 63 & (input[i + 2 | 0].charCodeAt() | 0);
+        }
+        for (var y = 0; y !== a.length; ++y) {
+            var n = a[y];
+            if (n === -1) {
+                output += '=';
+            }
+            else {
+                if (0 <= n && n <= 63) {
+                    output += String.fromCharCode(keytwo[n].charCodeAt());
+                }
+            }
+        }
+    }
+    return output;
+};
+libs.string_cipher_fmovies = function (inputOne, inputTwo) {
+    var array = new Int32Array(256);
+    var tmp$_3;
+    tmp$_3 = array.length - 1 | 0;
+    for (var i = 0; i <= tmp$_3; i++) {
+        array[i] = i;
+    }
+    var arr = array;
+    var output = '';
+    var u = 0;
+    var r;
+    for (var a = 0; a !== arr.length; ++a) {
+        u = (u + arr[a] + (inputOne[a % inputOne.length].charCodeAt() | 0) | 0) % 256;
+        r = arr[a];
+        arr[a] = arr[u];
+        arr[u] = r;
+    }
+    u = 0;
+    var c = 0;
+    for (var a_1 = 0; a_1 < inputTwo.length; a_1++) {
+        c = (c + a_1) % 256;
+        u = (u + arr[c]) % 256;
+        r = arr[c];
+        arr[c] = arr[u];
+        arr[u] = r;
+        output += String.fromCharCode("" + ((inputTwo[a_1].charCodeAt() | 0) ^ arr[(arr[c] + arr[u] | 0) % 256]));
+    }
+    return output;
+};
