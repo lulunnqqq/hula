@@ -58,14 +58,14 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                     'Accept-Encoding': 'gzip, deflate, br',
                     'Accept-Language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5'
                 };
-                secretKey = 'vWal9S52iJwMql9q';
+                secretKey = 'xlR9IJIIGNCWbpAl';
                 id = url.match(/\/e\/([^\?]+)/i);
                 id = id ? id[1] : '';
                 if (!id) {
                     return [2];
                 }
                 libs.log({ id: id }, provider, 'ID mcloud');
-                hashMovie = libs.string_encrypt_fmovies(libs.string_cipher_fmovies("kKFmwRXyLGHMNHl0", libs.string_encrypt_fmovies(id))).replace(/\//g, "_").replace(/=+$/, "");
+                hashMovie = libs.string_encrypt_fmovies(libs.string_cipher_fmovies("gLr07ZurzGyrpPpR", libs.string_encrypt_fmovies(id))).replace(/\//g, "_").replace(/=+$/, "");
                 libs.log({ hashMovie: hashMovie }, provider, 'HASH mcloud');
                 urlEmbed = DOMAIN + "/mediainfo/" + hashMovie + "?key=" + secretKey;
                 return [4, libs.request_get(urlEmbed, headers, false)];
