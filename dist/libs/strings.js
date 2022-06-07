@@ -110,3 +110,10 @@ libs.string_cipher_fmovies = function (inputOne, inputTwo) {
     }
     return output;
 };
+libs.string_join_fmovies = function (_0x4a7250) {
+    for (var _0x1f5f88 = [], _0x40fc17 = 0; _0x40fc17 < _0x4a7250['length']; _0x40fc17++) {
+        var _0x2fcc8a = _0x4a7250["charCodeAt"](_0x40fc17);
+        _0x40fc17 % 5 == 0 ? _0x2fcc8a ^= 4 : _0x40fc17 % 5 == 1 ? _0x2fcc8a *= 4 : _0x40fc17 % 5 == 2 ? _0x2fcc8a ^= 3 : _0x40fc17 % 5 == 3 ? _0x2fcc8a ^= 4 : _0x40fc17 % 5 == 4 && (_0x2fcc8a *= 3), _0x1f5f88["push"](_0x2fcc8a);
+    }
+    return _0x1f5f88.join("-");
+};
