@@ -1,5 +1,6 @@
 {
 	"providers": [
+		"dist/providers/cineb.js",
 		"dist/providers/fmovies_a.js",
 		"dist/providers/vumoo.js",
 		"dist/providers/fsapi.js",
