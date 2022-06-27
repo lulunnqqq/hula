@@ -11,6 +11,7 @@
 		"dist/hosts/streamtape.js",
 		"dist/hosts/dood.js",
 		"dist/hosts/vizcloud.js",
-		"dist/hosts/mzzcloud.js"
+		"dist/hosts/mzzcloud.js",
+		"dist/hosts/streamlare.js"
 	]
 }
