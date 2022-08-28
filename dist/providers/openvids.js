@@ -50,7 +50,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }); }); };
                 handleVidCloud = function (code) { return __awaiter(_this, void 0, void 0, function () {
-                    var PROVIDER_EMBED, DOMAIN_MEMBED, urlEmbed, scriptData, secretKey, ivKey, decryptScriptData, scriptStringify, subScript, encryptScript, urlSources, parseSourceData, sourcesEmbed, parseSourceEmbed, totalSource, _i, totalSource_1, hlsItem;
+                    var PROVIDER_EMBED, DOMAIN_MEMBED, urlEmbed, parseUrlEmbed, scriptData, secretKey, ivKey, decryptScriptData, scriptStringify, subScript, encryptScript, urlSources, parseSourceData, sourcesEmbed, parseSourceEmbed, totalSource, _i, totalSource_1, hlsItem;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
@@ -60,8 +60,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 libs.log({
                                     urlEmbed: urlEmbed
                                 }, PROVIDER_EMBED, 'urlEmbed');
-                                scriptData = "+cMpZ3dTyUhMWJM8fysXScyg91DT7gWiOMJ30otPg7ib/9u7ZZ8Yb9Y3LVtVNvtcgjO21eQKHK967GdG7E6GC6kZlYn6JcBRHYDqvmKjc0h9yHjcbniR2GnPncrGniDMehLluDgxBCKbLtY8uVXfPDDEs6seQcZ7Dz+Rc6irnAG5qADX7s2pzplYTwzR0nUVhcwIJdZ9/OnekQELyIdEM5eglVv+ejuHcLVLd8c60WYm3Vmej4alNsMFQqY3E9sp";
+                                return [4, libs.request_get(urlEmbed, {}, true)];
+                            case 1:
+                                parseUrlEmbed = _a.sent();
+                                scriptData = parseUrlEmbed("script[data-name='crypto']").attr('data-value');
                                 libs.log({
+                                    parseUrlEmbed: parseUrlEmbed,
                                     scriptData: scriptData,
                                     urlEmbed: urlEmbed
                                 }, PROVIDER_EMBED, 'SCRIPT DATA');
@@ -84,7 +88,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 return [4, libs.request_get(urlSources, {
                                         'x-requested-with': 'XMLHttpRequest',
                                     })];
-                            case 1:
+                            case 2:
                                 parseSourceData = _a.sent();
                                 libs.log({
                                     parseSourceData: parseSourceData,
@@ -100,20 +104,20 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                     sourcesEmbed: sourcesEmbed,
                                 }, PROVIDER_EMBED, 'sourcesEmbed');
                                 parseSourceEmbed = JSON.parse(sourcesEmbed);
-                                totalSource = __spreadArray(__spreadArray([], (parseSourceEmbed.source || [])), (parseSourceEmbed.source_bk || []));
+                                totalSource = __spreadArray([], (parseSourceEmbed.source || []));
                                 _i = 0, totalSource_1 = totalSource;
-                                _a.label = 2;
-                            case 2:
-                                if (!(_i < totalSource_1.length)) return [3, 5];
+                                _a.label = 3;
+                            case 3:
+                                if (!(_i < totalSource_1.length)) return [3, 6];
                                 hlsItem = totalSource_1[_i];
                                 return [4, libs.embed_redirect(hlsItem.file, 'HLS', movieInfo, PROVIDER, callback, PROVIDER, parseSourceEmbed.track.tracks || [])];
-                            case 3:
-                                _a.sent();
-                                _a.label = 4;
                             case 4:
+                                _a.sent();
+                                _a.label = 5;
+                            case 5:
                                 _i++;
-                                return [3, 2];
-                            case 5: return [2];
+                                return [3, 3];
+                            case 6: return [2];
                         }
                     });
                 }); };
