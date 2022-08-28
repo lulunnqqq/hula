@@ -42,7 +42,7 @@ hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { 
         DOMAIN = 'https://rabbitstream.net';
         HOST = 'Rabbitstream';
         headers = {
-            "referer": provider == 'ETOWEMBED' ? 'https://www.2embed.ru/' : "https://fmovies.ps",
+            "referer": provider == 'GOKU' ? 'https://goku.to' : "https://fmovies.ps",
             "user-agent": libs.request_getRandomUserAgent(),
         };
         callback({
