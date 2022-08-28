@@ -35,37 +35,64 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-callbacksEmbed["amoviestream_2"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var data, parse, embed;
+source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
+    var PROVIDER, DOMAIN, urlSearch, parseSearch, parseEmbed, parseHls, hlsData, hls1, hls2, _i, hlsData_1, hlsItem;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                data = JSON.parse(dataCallback);
-                if (!data.html) {
+                PROVIDER = 'TVIDSRC';
+                DOMAIN = "https://v2.vidsrc.me";
+                urlSearch = '';
+                if (movieInfo.type == 'tv') {
+                    urlSearch = DOMAIN + "/embed/" + movieInfo.imdb_id + "/" + movieInfo.season + "-" + movieInfo.episode;
+                }
+                else {
+                    urlSearch = DOMAIN + "/embed/" + movieInfo.imdb_id;
+                }
+                libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
+                return [4, libs.request_get(urlSearch, {}, true)];
+            case 1:
+                parseSearch = _a.sent();
+                parseEmbed = parseSearch('#player_iframe').attr('src');
+                libs.log({ parseEmbed: parseEmbed }, PROVIDER, 'PARSE EMBED');
+                if (!parseEmbed) {
                     return [2];
                 }
-                parse = cheerio.load(data.html);
-                embed = '';
-                parse('iframe').each(function (key, item) {
-                    var urlEmbed = parse(item).attr('src');
-                    libs.log({ urlEmbed: urlEmbed }, provider, 'URL EMBED');
-                    if (urlEmbed && urlEmbed.indexOf('mcloud') != -1) {
-                        embed = urlEmbed;
-                    }
-                    else if (urlEmbed && urlEmbed.indexOf('vidstream') != -1) {
-                        embed = urlEmbed;
-                    }
-                    else if (urlEmbed && urlEmbed.indexOf('vizcloud2') != -1) {
-                        embed = urlEmbed;
-                    }
-                });
-                if (!embed) return [3, 2];
-                libs.log({ embed: embed }, provider, 'URL EMBED');
-                return [4, libs.embed_redirect(embed, '', metadata.movieInfo, provider, callback, undefined, metadata.tracks ? metadata.tracks : [])];
-            case 1:
+                if (_.startsWith(parseEmbed, '/')) {
+                    parseEmbed = "https:" + parseEmbed;
+                }
+                parseEmbed = parseEmbed.replace('https://source.vidsrc.me/source', 'https://vidsrc.stream/pro');
+                libs.log({
+                    parseEmbed: parseEmbed
+                }, PROVIDER, 'PARSE EMBED REPLACE');
+                return [4, libs.request_get(parseEmbed, {
+                        referer: 'https://source.vidsrc.me/'
+                    })];
+            case 2:
+                parseHls = _a.sent();
+                hlsData = [];
+                hls1 = parseHls.match(/hls\.loadSource\( *\"([^\"]+)/i);
+                if (hls1) {
+                    hlsData.push(hls1 ? hls1[1] : '');
+                }
+                hls2 = parseHls.match(/video\.setAttribute\(\"src\" *\, *\"([^\"]+)/i);
+                if (hls2) {
+                    hlsData.push(hls2 ? hls2[1] : '');
+                }
+                libs.log({ hlsData: hlsData }, PROVIDER, 'HLS DIRECT LINK');
+                _i = 0, hlsData_1 = hlsData;
+                _a.label = 3;
+            case 3:
+                if (!(_i < hlsData_1.length)) return [3, 6];
+                hlsItem = hlsData_1[_i];
+                return [4, libs.embed_redirect(hlsItem, 'HLS', movieInfo, PROVIDER, callback, PROVIDER)];
+            case 4:
                 _a.sent();
-                _a.label = 2;
-            case 2: return [2];
+                _a.label = 5;
+            case 5:
+                _i++;
+                return [3, 3];
+            case 6: return [2, true];
         }
     });
 }); };
