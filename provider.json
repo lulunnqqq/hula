@@ -5,7 +5,6 @@
 		"dist/providers/vumoo.js",
 		"dist/providers/fmovies.js",
 		"dist/providers/lookmovie.js",
-		"dist/providers/vidsrc.js",
 		"dist/providers/goku.js"
 	]
 }
