@@ -69,7 +69,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     LINK_DETAIL = 'https://fmovies.ps/movie/watch-wire-room-online-87096';
                 }
                 else if (movieInfo.title == 'The Lord of the Rings: The Rings of Power' && movieInfo.type == 'tv') {
-                    LINK_DETAIL = 'https://goku.to/series/watch-the-lord-of-the-rings-the-rings-of-power-87087';
+                    LINK_DETAIL = 'https://fmovies.ps/tv/watch-the-lord-of-the-rings-the-rings-of-power-online-87087';
                 }
                 libs.log(LINK_DETAIL, PROVIDER, "LINK DETAIL");
                 if (!LINK_DETAIL) {
