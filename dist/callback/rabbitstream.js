@@ -59,7 +59,7 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                 }
                 if (!(data.responseURL.indexOf("getSources") != -1)) return [3, 4];
                 decryptData = function (hash) {
-                    var secretKey = '01d022ac79e90464';
+                    var secretKey = '4e6ad345740988ca';
                     var decryptData = (crypto.AES.decrypt(hash, secretKey)).toString(crypto.enc.Utf8);
                     return JSON.parse(decryptData);
                 };
