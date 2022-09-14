@@ -34,14 +34,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var _this = this;
 callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var data, parse, source1, source2, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
+    var data, decryptData, parse, source1, source2, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -54,10 +58,15 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                     return [2];
                 }
                 if (!(data.responseURL.indexOf("getSources") != -1)) return [3, 4];
+                decryptData = function (hash) {
+                    var secretKey = '01d022ac79e90464';
+                    var decryptData = (crypto.AES.decrypt(hash, secretKey)).toString(crypto.enc.Utf8);
+                    return JSON.parse(decryptData);
+                };
                 parse = JSON.parse(data.responseText);
-                source1 = parse['sources'] || [];
-                source2 = parse['sourcesBackup'] || [];
-                source3 = __spreadArray(__spreadArray([], source1), source2);
+                source1 = decryptData(parse['sources']) || [];
+                source2 = decryptData(parse['sourcesBackup']) || [];
+                source3 = __spreadArray(__spreadArray([], source1, true), source2, true);
                 tracks = parse['tracks'] || [];
                 libs.log({ source3: source3, tracks: tracks }, provider, 'SOURCES');
                 rank = 0;
