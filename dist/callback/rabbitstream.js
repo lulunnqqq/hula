@@ -64,8 +64,8 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                     return JSON.parse(decryptData);
                 };
                 parse = JSON.parse(data.responseText);
-                source1 = decryptData(parse['sources']) || [];
-                source2 = decryptData(parse['sourcesBackup']) || [];
+                source1 = parse['sources'] || [];
+                source2 = parse['sourcesBackup'] || [];
                 source3 = __spreadArray(__spreadArray([], source1, true), source2, true);
                 tracks = parse['tracks'] || [];
                 libs.log({ source3: source3, tracks: tracks }, provider, 'SOURCES');
