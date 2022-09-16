@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["2embed"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers, parseEmbed, embed;
+    var DOMAIN, HOST, headers, parseEmbed, embed, requestData;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -60,7 +60,16 @@ hosts["2embed"] = function (url, movieInfo, provider, config, callback) { return
                 libs.log({
                     embed: embed
                 }, provider, 'EMBED VIDEO 1');
-                libs.embed_callback(embed, provider, HOST, 'Hls', callback);
+                return [4, fetch(embed, {
+                        redirect: 'manual',
+                    })];
+            case 2:
+                requestData = _a.sent();
+                libs.log({
+                    requestData: requestData.url,
+                    embed: embed,
+                }, provider, 'requestData');
+                libs.embed_callback(requestData.url, provider, HOST, 'Hls', callback);
                 return [2];
         }
     });
