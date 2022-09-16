@@ -12,7 +12,6 @@
 		"dist/hosts/dood.js",
 		"dist/hosts/vizcloud.js",
 		"dist/hosts/mzzcloud.js",
-		"dist/hosts/streamlare.js",
 		"dist/hosts/streamhub.js",
 		"dist/hosts/2embed.js"
 	]
