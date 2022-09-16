@@ -8,6 +8,7 @@
 		"dist/providers/vumoo.js",
 		"dist/providers/fmovies.js",
 		"dist/providers/lookmovie.js",
-		"dist/providers/goku.js"
+		"dist/providers/goku.js",
+		"dist/providers/afdah.js"	
 	]
 }
