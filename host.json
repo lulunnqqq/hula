@@ -13,7 +13,6 @@
 		"dist/hosts/vizcloud.js",
 		"dist/hosts/mzzcloud.js",
 		"dist/hosts/streamhub.js",
-		"dist/hosts/2embed.js",
-		"dist/hosts/hackplayer.js"
+		"dist/hosts/2embed.js"
 	]
 }
