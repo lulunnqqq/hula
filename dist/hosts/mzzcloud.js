@@ -42,7 +42,7 @@ hosts["mzzcloud"] = function (url, movieInfo, provider, config, callback) { retu
         DOMAIN = 'https://mzzcloud.life';
         HOST = 'Rabbitstream';
         headers = {
-            "referer": url,
+            "referer": "https://fmovies.ps/",
             "user-agent": libs.request_getRandomUserAgent(),
         };
         callback({

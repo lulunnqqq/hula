@@ -77,7 +77,7 @@ libs.embed_parse_source = function (html) {
     var source = html.match(/sources *\: *([^\]]+)/i);
     source = source ? source[1] + "]" : "[]";
     var parse = [];
-    source = "parse = " + source;
+    source = "parse = ".concat(source);
     eval(source);
     return parse;
 };

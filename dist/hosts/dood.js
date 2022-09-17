@@ -56,15 +56,15 @@ hosts["dood"] = function (url, movieInfo, provider, config, callback) { return _
                 if (!md5Token) {
                     return [2];
                 }
-                urlEmbed = "" + DOMAIN + md5Token;
+                urlEmbed = "".concat(DOMAIN).concat(md5Token);
                 return [4, libs.request_get(urlEmbed, {
                         Referer: url
                     })];
             case 2:
                 dataEmbed = _a.sent();
                 md5LastToken = md5Token.split('/');
-                dataEmbed = dataEmbed + "zUEJeL3mUN?token=" + md5LastToken[md5LastToken.length - 1];
-                libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed }, provider, 'dataEmbed');
+                dataEmbed = "".concat(dataEmbed, "zUEJeL3mUN?token=").concat(md5LastToken[md5LastToken.length - 1]);
+                libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed }, provider, 'DOOD_EMBED');
                 if (!_.startsWith(dataEmbed, 'https')) {
                     return [2];
                 }

@@ -57,7 +57,7 @@ hosts["vizcloud"] = function (url, movieInfo, provider, config, callback) { retu
                 libs.log({ id: id }, provider, 'ID VIZCLOUD');
                 hashMovie = libs.string_join_fmovies(libs.string_encrypt_fmovies(libs.string_cipher_fmovies("yLiqSRbm5p9ZSFva", libs.string_encrypt_fmovies(id))).replace(/\//g, "_").replace(/=+$/, ""));
                 libs.log({ hashMovie: hashMovie }, provider, 'HASH VIZCLOUD');
-                urlEmbed = DOMAIN + "/mediainfo/" + hashMovie + "?key=" + secretKey;
+                urlEmbed = "".concat(DOMAIN, "/mediainfo/").concat(hashMovie, "?key=").concat(secretKey);
                 return [4, libs.request_get(urlEmbed, headers, false)];
             case 1:
                 dataEmbed = _c.sent();

@@ -44,10 +44,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://v2.vidsrc.me";
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
-                    urlSearch = DOMAIN + "/embed/" + movieInfo.imdb_id + "/" + movieInfo.season + "-" + movieInfo.episode;
+                    urlSearch = "".concat(DOMAIN, "/embed/").concat(movieInfo.imdb_id, "/").concat(movieInfo.season, "-").concat(movieInfo.episode);
                 }
                 else {
-                    urlSearch = DOMAIN + "/embed/" + movieInfo.imdb_id;
+                    urlSearch = "".concat(DOMAIN, "/embed/").concat(movieInfo.imdb_id);
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
                 return [4, libs.request_get(urlSearch, {}, true)];
@@ -59,7 +59,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 if (_.startsWith(parseEmbed, '/')) {
-                    parseEmbed = "https:" + parseEmbed;
+                    parseEmbed = "https:".concat(parseEmbed);
                 }
                 parseEmbed = parseEmbed.replace('https://source.vidsrc.me/source', 'https://vidsrc.stream/pro');
                 libs.log({
@@ -85,7 +85,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 3:
                 if (!(_i < hlsData_1.length)) return [3, 6];
                 hlsItem = hlsData_1[_i];
-                return [4, libs.embed_redirect(hlsItem, 'HLS', movieInfo, PROVIDER, callback, PROVIDER)];
+                return [4, libs.embed_callback(hlsItem, PROVIDER, PROVIDER, 'HLS', callback, 1, [], [hlsItem], {
+                        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+                        origin: 'https://vidsrc.stream',
+                        referer: 'https://vidsrc.stream/',
+                    })];
             case 4:
                 _a.sent();
                 _a.label = 5;

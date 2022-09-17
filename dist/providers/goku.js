@@ -42,7 +42,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 0:
                 PROVIDER = 'GOKU';
                 DOMAIN = "https://goku.to";
-                urlSearch = DOMAIN + "/search?keyword=" + libs.url_slug_search(movieInfo, '+');
+                urlSearch = "".concat(DOMAIN, "/search?keyword=").concat(libs.url_slug_search(movieInfo, '+'));
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 1:
                 parseSearch = _b.sent();
@@ -57,10 +57,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     if (title && href && !LINK_DETAIL) {
                         if (libs.string_matching_title(movieInfo, title)) {
                             if (movieInfo.type == 'tv' && type.toLowerCase() == 'tv') {
-                                LINK_DETAIL = "" + DOMAIN + href;
+                                LINK_DETAIL = "".concat(DOMAIN).concat(href);
                             }
                             if (movieInfo.type == 'movie' && (!type || type.toLowerCase() == 'movie') && movieInfo.year == year) {
-                                LINK_DETAIL = "" + DOMAIN + href;
+                                LINK_DETAIL = "".concat(DOMAIN).concat(href);
                             }
                         }
                     }
@@ -105,7 +105,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [3, 6];
             case 3:
                 if (!(movieInfo.type == 'tv')) return [3, 6];
-                urlSeason = DOMAIN + "/ajax/movie/seasons/" + tvshowFilmId;
+                urlSeason = "".concat(DOMAIN, "/ajax/movie/seasons/").concat(tvshowFilmId);
                 return [4, libs.request_get(urlSeason, {}, true)];
             case 4:
                 parseSeasonData_1 = _b.sent();
@@ -132,7 +132,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!seasonId_1) {
                     return [2];
                 }
-                urlEpisode = DOMAIN + "/ajax/movie/season/episodes/" + seasonId_1;
+                urlEpisode = "".concat(DOMAIN, "/ajax/movie/season/episodes/").concat(seasonId_1);
                 return [4, libs.request_get(urlEpisode, {}, true)];
             case 5:
                 parseEpisodeData_1 = _b.sent();
@@ -162,7 +162,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 serverId = episodeId_1;
                 _b.label = 6;
             case 6:
-                urlServerId = DOMAIN + "/ajax/movie/episode/servers/" + serverId;
+                urlServerId = "".concat(DOMAIN, "/ajax/movie/episode/servers/").concat(serverId);
                 return [4, libs.request_get(urlServerId, {}, true)];
             case 7:
                 parseServerId = _b.sent();
@@ -183,7 +183,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 8:
                 if (!(_i < serverIds_1.length)) return [3, 11];
                 id = serverIds_1[_i];
-                urlGetEmbed = DOMAIN + "/ajax/movie/episode/server/sources/" + id;
+                urlGetEmbed = "".concat(DOMAIN, "/ajax/movie/episode/server/sources/").concat(id);
                 return [4, libs.request_get(urlGetEmbed, {})];
             case 9:
                 dataEmbed = _b.sent();

@@ -34,10 +34,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
@@ -56,7 +60,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             case 0:
                                 PROVIDER_EMBED = 'MEMBED';
                                 DOMAIN_MEMBED = 'https://membed.net';
-                                urlEmbed = DOMAIN_MEMBED + "/streaming.php?id=" + code;
+                                urlEmbed = "".concat(DOMAIN_MEMBED, "/streaming.php?id=").concat(code);
                                 libs.log({
                                     urlEmbed: urlEmbed
                                 }, PROVIDER_EMBED, 'urlEmbed');
@@ -84,7 +88,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 libs.log({
                                     encryptScript: encryptScript,
                                 }, PROVIDER_EMBED, 'ENCRYPT_DATA');
-                                urlSources = DOMAIN_MEMBED + "/encrypt-ajax.php?id=" + encryptScript + "&alias=" + subScript;
+                                urlSources = "".concat(DOMAIN_MEMBED, "/encrypt-ajax.php?id=").concat(encryptScript, "&alias=").concat(subScript);
                                 return [4, libs.request_get(urlSources, {
                                         'x-requested-with': 'XMLHttpRequest',
                                     })];
@@ -104,7 +108,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                     sourcesEmbed: sourcesEmbed,
                                 }, PROVIDER_EMBED, 'sourcesEmbed');
                                 parseSourceEmbed = JSON.parse(sourcesEmbed);
-                                totalSource = __spreadArray([], (parseSourceEmbed.source || []));
+                                totalSource = __spreadArray([], (parseSourceEmbed.source || []), true);
                                 _i = 0, totalSource_1 = totalSource;
                                 _a.label = 3;
                             case 3:
@@ -125,10 +129,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://openvids.io";
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
-                    urlSearch = DOMAIN + "/api/servers.json?imdb=" + movieInfo.imdb_id + "-" + movieInfo.season + "-" + movieInfo.episode;
+                    urlSearch = "".concat(DOMAIN, "/api/servers.json?imdb=").concat(movieInfo.imdb_id, "-").concat(movieInfo.season, "-").concat(movieInfo.episode);
                 }
                 else {
-                    urlSearch = DOMAIN + "/api/servers.json?imdb=" + movieInfo.imdb_id;
+                    urlSearch = "".concat(DOMAIN, "/api/servers.json?imdb=").concat(movieInfo.imdb_id);
                 }
                 headers = {
                     authority: 'openvids.io',

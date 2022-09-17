@@ -58,7 +58,7 @@ hosts["streamlare"] = function (url, movieInfo, provider, config, callback) { re
                 body = {
                     id: id
                 };
-                return [4, libs.request_post(DOMAIN + "/api/video/stream/get", headers, body)];
+                return [4, libs.request_post("".concat(DOMAIN, "/api/video/stream/get"), headers, body)];
             case 1:
                 result = _a.sent();
                 if (!result.status || result.status != 'success') {
