@@ -60,8 +60,10 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                 if (!(data.responseURL.indexOf("getSources") != -1)) return [3, 4];
                 decryptData = function (hash) {
                     var resultSecretKey = yield libs.request_get("https://raw.githubusercontent.com/BlipBlob/blabflow/main/keys.json");
+                    libs.log(resultSecretKey, provider, 'resultSecretKey');
                     var secretKey = resultSecretKey.key;
                     var decryptData = (crypto.AES.decrypt(hash, secretKey)).toString(crypto.enc.Utf8);
+                    libs.log(decryptData, provider, 'decryptData');
                     return JSON.parse(decryptData);
                 };
                 parse = JSON.parse(data.responseText);
