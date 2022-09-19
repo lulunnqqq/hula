@@ -59,13 +59,14 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                 }
                 if (!(data.responseURL.indexOf("getSources") != -1)) return [3, 4];
                 decryptData = function (hash) {
-                    var secretKey = 'd82d4a16424e7e83';
+                    var resultSecretKey = yield libs.request_get("https://raw.githubusercontent.com/BlipBlob/blabflow/main/keys.json");
+                    var secretKey = resultSecretKey.key;
                     var decryptData = (crypto.AES.decrypt(hash, secretKey)).toString(crypto.enc.Utf8);
                     return JSON.parse(decryptData);
                 };
                 parse = JSON.parse(data.responseText);
-                source1 = parse['sources'] || [];
-                source2 = parse['sourcesBackup'] || [];
+                source1 = decryptData(parse['sources']) || [];
+                source2 = decryptData(parse['sourcesBackup']) || [];
                 source3 = __spreadArray(__spreadArray([], source1, true), source2, true);
                 tracks = parse['tracks'] || [];
                 libs.log({ source3: source3, tracks: tracks }, provider, 'SOURCES');
