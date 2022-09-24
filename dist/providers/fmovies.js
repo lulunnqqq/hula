@@ -36,10 +36,82 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, LINK_DETAIL, filmId, serverIds, apiUrlEmbed, parseEmbedServer_1, apiUrlGetSeason, parseGetSeason_1, seasonId_1, apiUrlGetEpisode, episodeId_1, parseGetEpisode_1, urlGetEmbedTv, parseEmbedTv_1, apiGetLinkEmbed, _i, serverIds_1, serverIdItem, getLinkEmbedData;
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+    var md5Token, selfhost, PROVIDER, DOMAIN, urlSearch, parseSearch, LINK_DETAIL, filmId, serverIds, apiUrlEmbed, parseEmbedServer_1, apiUrlGetSeason, parseGetSeason_1, seasonId_1, apiUrlGetEpisode, episodeId_1, parseGetEpisode_1, urlGetEmbedTv, parseEmbedTv_1, apiGetLinkEmbed, _i, serverIds_1, serverIdItem, getLinkEmbedData;
+    var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                md5Token = function (name) {
+                    return String(crypto.MD5(name).toString());
+                };
+                selfhost = function () { return __awaiter(_this, void 0, void 0, function () {
+                    function encryptDesCbcPkcs7Padding(message, key, ivWords) {
+                        var keyWords = crypto.enc.Utf8.parse(key);
+                        console.log({
+                            keyWords: keyWords
+                        }, "HASH keyWords");
+                        var encrypted = crypto.DES.encrypt(message, key, { iv: ivWords });
+                        console.log({
+                            encrypted: encrypted
+                        }, "HASH encrypted");
+                        return crypto.enc.Base64.stringify(encrypted.ciphertext);
+                    }
+                    var timestamp, query, key, iv, ip, appKey, appId, apiUrl, hashQuery, getVerify, body, encodedWord, encoded, body, searchData;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                timestamp = Date.now();
+                                query = "{\"childmode\": 1, \"app_version\": 11.5, \"appid\": \"com.tdo.showbox\", \"module\": \"Home_list_type_v2\", \"channel\": \"Website\", \"page\": 1, \"lang\": \"en\", \"type\": \"all\", \"pagelimit\": \"10\", \"expired_date\": ".concat(timestamp, ", \"platform\": \"Android\"}");
+                                key = "123d6cedf626dy54233aa1w6";
+                                iv = "wEiphTn";
+                                ip = 'https://152.32.149.160';
+                                appKey = "moviebox";
+                                appId = 'com.tdo.showbox';
+                                apiUrl = "".concat(ip, "/api/api_client/index/");
+                                hashQuery = encryptDesCbcPkcs7Padding(query, appKey, key);
+                                console.log({
+                                    hashQuery: hashQuery,
+                                    abc: md5Token(appKey)
+                                }, "HASH QUERY");
+                                getVerify = function (str1, str2, str3) {
+                                    return md5Token("".concat(md5Token(str2)).concat(str3).concat(str1));
+                                };
+                                body = "{\"app_key\": \"".concat(md5Token(appKey), "\", \"verify\": \"").concat(getVerify(hashQuery, appKey, key), "\", \"encrypt_data\": \"").concat(hashQuery, "\"}");
+                                encodedWord = crypto.enc.Utf8.parse(body);
+                                encoded = crypto.enc.Base64.stringify(encodedWord);
+                                console.log({
+                                    encoded: encoded
+                                }, 'BASE64 ENCODE NEW SOURCE');
+                                body = qs.stringify({
+                                    data: encoded,
+                                    appid: 27,
+                                    platform: "android",
+                                    version: 129,
+                                    medium: "Website&token".concat(makeid(31))
+                                });
+                                return [4, libs.request_post(apiUrl, {
+                                        'Platform': "android",
+                                        "Accept": "charset=utf-8",
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    }, body)];
+                            case 1:
+                                searchData = _a.sent();
+                                console.log({
+                                    searchData: searchData
+                                }, 'SEARCH DATA NEW SOURCE');
+                                return [2];
+                        }
+                    });
+                }); };
                 PROVIDER = 'FMOVIES';
                 DOMAIN = "https://fmovies.ps";
                 urlSearch = "".concat(DOMAIN, "/search/").concat(libs.url_slug_search(movieInfo));

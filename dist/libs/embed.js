@@ -125,13 +125,14 @@ libs.parse_size = function (file, provider, host, type, callback, rank, tracks) 
         }
     });
 }); };
-libs.embed_fmovies_id = function (hash) { return __awaiter(_this, void 0, void 0, function () {
-    var resultSecretKey, secretKey, decryptData;
+libs.embed_fmovies_id = function (hash, dynamicKey, headers) { return __awaiter(_this, void 0, void 0, function () {
+    var resultSecretKey, secretKey, decryptData, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 libs.log({
-                    hash: hash
+                    hash: hash,
                 }, 'HASH EMBED FMOVIES');
                 if (Array.isArray(hash)) {
                     return [2, hash];
@@ -139,14 +140,21 @@ libs.embed_fmovies_id = function (hash) { return __awaiter(_this, void 0, void 0
                 return [4, libs.request_get("https://raw.githubusercontent.com/BlipBlob/blabflow/main/keys.json")];
             case 1:
                 resultSecretKey = _a.sent();
-                libs.log(resultSecretKey, 'resultSecretKey');
-                secretKey = resultSecretKey.key;
+                secretKey = "".concat(resultSecretKey.key).concat(dynamicKey);
+                libs.log({
+                    secretKey: secretKey
+                }, 'SECRET DECRYPT DATA FMOVIES');
                 decryptData = (crypto.AES.decrypt(hash, secretKey)).toString(crypto.enc.Utf8);
                 libs.log({
                     decryptData: decryptData,
                     secretKey: secretKey
                 }, 'EMBED DECRYPT DATA FMOVIES');
                 return [2, JSON.parse(decryptData)];
+            case 2:
+                e_1 = _a.sent();
+                console.log(e_1, 'errorDecrypt');
+                return [3, 3];
+            case 3: return [2, ''];
         }
     });
 }); };
