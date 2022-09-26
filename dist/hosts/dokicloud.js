@@ -94,14 +94,26 @@ hosts["dokicloud"] = function (url, movieInfo, provider, config, callback) { ret
                 cookieHeader = _b.sent();
                 setCookie = cookieHeader.headers['set-cookie'];
                 libs.log({
+                    a: cookieHeader.data,
+                    headers: cookieHeader.headers,
                     setCookie: setCookie
-                }, provider, 'SET COOKIE DOKI');
+                }, provider, 'SET COOKIE RABBIT');
+                dynamicKey = '';
                 if (!setCookie) {
+                    dynamicKey = cookieHeader.data.match(/dynamicKey *\= *\'([A-z0-9]+)/i);
+                    dynamicKey = dynamicKey ? dynamicKey[1] : '';
+                }
+                else {
+                    setCookie = setCookie[0];
+                    dynamicKey = setCookie.match(/dynamicKey\=([A-z0-9]+)/i);
+                    dynamicKey = dynamicKey ? dynamicKey[1] : '';
+                }
+                libs.log({
+                    dynamicKey: dynamicKey,
+                }, provider, 'DYNAMIC KEY');
+                if (!dynamicKey) {
                     return [2];
                 }
-                setCookie = setCookie[0];
-                dynamicKey = setCookie.match(/dynamicKey\=([A-z0-9]+)/i);
-                dynamicKey = dynamicKey ? dynamicKey[1] : '';
                 urlDirect = "".concat(DOMAIN, "/ajax/embed-4/getSources?id=").concat(id);
                 return [4, libs.request_get(urlDirect, __assign(__assign({}, headers), { 'x-requested-with': 'XMLHttpRequest' }))];
             case 2:
