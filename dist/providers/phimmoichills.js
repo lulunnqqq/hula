@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, lang, filmInfo_1, urlSearch, titleSlug_1, parseSearch_1, LINK_DETAIL_1, parseTv_1, linkFirstEpisode, LINK_DETAIL_TV_1, parseDetailTv, id, urlAjaxDetail, headerRequest, body, parseDetail, filmId, directUrl1, directUrl2, directUrl3, e_1;
+    var PROVIDER, DOMAIN, lang, filmInfo_1, urlSearch, titleSlug_1, parseSearch_1, LINK_DETAIL_1, parseTv_1, linkFirstEpisode, LINK_DETAIL_TV_1, parseDetailTv, id, urlAjaxDetail, headerRequest, body, parseDetail, filmId, directUrl1, directUrl2, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -189,8 +189,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.embed_callback(directUrl1, PROVIDER, PROVIDER, 'Hls', callback, 1, [], []);
                 directUrl2 = "https://dash.megacdn.xyz/raw/".concat(filmId, "/index.m3u8");
                 libs.embed_callback(directUrl2, PROVIDER, PROVIDER, 'Hls', callback, 1, [], []);
-                directUrl3 = "https://dash.megacdn.xyz/dast/".concat(filmId, "/index.m3u8");
-                libs.embed_callback(directUrl3, PROVIDER, PROVIDER, 'Hls', callback, 1, [], []);
                 return [2, true];
             case 12:
                 e_1 = _a.sent();
