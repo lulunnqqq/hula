@@ -1,5 +1,6 @@
 {
 	"providers": [
+		"dist/providers/phimmoichills.js",
 		"dist/providers/cinecalidad.js",
 		"dist/providers/allmovieforyou.js",
 		"dist/providers/cineb.js",
