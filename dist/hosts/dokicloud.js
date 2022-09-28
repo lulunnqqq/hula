@@ -1,14 +1,3 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -45,133 +34,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 var _this = this;
 hosts["dokicloud"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers, id, cookieHeader, setCookie, dynamicKey, urlDirect, parseDirect, source1, source2, source3, tracks, rank, _i, source1_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                libs.log({ provider: provider }, provider, 'PROVIDER');
-                DOMAIN = 'https://dokicloud.one';
-                HOST = 'DOKICLOUD';
-                headers = {
-                    authority: 'dokicloud.one',
-                    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                    'accept-language': 'en-US,en;q=0.9',
-                    'cache-control': 'max-age=0',
-                    'referer': url,
-                    'sec-ch-ua': '"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"',
-                    'sec-ch-ua-mobile': '?0',
-                    'sec-ch-ua-platform': '"macOS"',
-                    'sec-fetch-dest': 'document',
-                    'sec-fetch-mode': 'navigate',
-                    'sec-fetch-site': 'cross-site',
-                    'sec-fetch-user': '?1',
-                    'upgrade-insecure-requests': 1,
-                    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
-                };
-                id = url.match(/embed\-[0-9]+\/([A-z0-9]+)/);
-                id = id ? id[1] : '';
-                libs.log({
-                    id: id
-                }, HOST, 'ID');
-                if (!id) {
-                    return [2];
-                }
-                return [4, axiosS.get(url, {
-                        headers: headers
-                    })];
-            case 1:
-                cookieHeader = _b.sent();
-                setCookie = cookieHeader.headers['set-cookie'];
-                libs.log({
-                    a: cookieHeader.data,
-                    headers: cookieHeader.headers,
-                    setCookie: setCookie
-                }, provider, 'SET COOKIE RABBIT');
-                dynamicKey = '';
-                if (!setCookie) {
-                    dynamicKey = cookieHeader.data.match(/dynamicKey *\= *\'([A-z0-9]+)/i);
-                    dynamicKey = dynamicKey ? dynamicKey[1] : '';
-                }
-                else {
-                    setCookie = setCookie[0];
-                    dynamicKey = setCookie.match(/dynamicKey\=([A-z0-9]+)/i);
-                    dynamicKey = dynamicKey ? dynamicKey[1] : '';
-                }
-                libs.log({
-                    dynamicKey: dynamicKey,
-                }, provider, 'DYNAMIC KEY');
-                if (!dynamicKey) {
-                    return [2];
-                }
-                urlDirect = "".concat(DOMAIN, "/ajax/embed-4/getSources?id=").concat(id);
-                return [4, libs.request_get(urlDirect, __assign(__assign({}, headers), { 'x-requested-with': 'XMLHttpRequest' }))];
-            case 2:
-                parseDirect = _b.sent();
-                libs.log({
-                    parseDirect: parseDirect
-                }, HOST, "PARSE DIRECT");
-                return [4, libs.embed_fmovies_id(parseDirect['sources'], dynamicKey, headers)];
-            case 3:
-                source1 = (_b.sent()) || [];
-                libs.log({ source1: source1, tracks: tracks }, HOST, 'SOURCES_1');
-                return [4, libs.embed_fmovies_id(parseDirect['sourcesBackup'], dynamicKey, headers)];
-            case 4:
-                source2 = (_b.sent()) || [];
-                source3 = __spreadArray(__spreadArray([], source1, true), source2, true);
-                tracks = parseDirect['tracks'] || [];
-                libs.log({ source3: source3, tracks: tracks }, HOST, 'SOURCES');
-                rank = 0;
-                _i = 0, source1_1 = source1;
-                _b.label = 5;
-            case 5:
-                if (!(_i < source1_1.length)) return [3, 8];
-                item = source1_1[_i];
-                if (!item.file) {
-                    return [3, 7];
-                }
-                if (item.file.indexOf('thedaywestream') !== -1) {
-                    return [3, 7];
-                }
-                if (item.file.indexOf('birdsystem') !== -1) {
-                    return [3, 7];
-                }
-                return [4, libs.request_get(item.file, {})];
-            case 6:
-                directSizes = _b.sent();
-                patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
-                if (!patternSize) {
-                    libs.embed_callback(item.file, provider, host, item.type, callback, ++rank, tracks);
-                    return [3, 7];
-                }
-                directQuality = [];
-                libs.log({ patternSize: patternSize }, provider, 'PATTERN SIZE');
-                for (_a = 0, patternSize_1 = patternSize; _a < patternSize_1.length; _a++) {
-                    patternItem = patternSize_1[_a];
-                    sizeQuality = patternItem.match(/\/([0-9]+)\//i);
-                    sizeQuality = sizeQuality ? sizeQuality[1] : 'HD';
-                    directQuality.push({
-                        file: patternItem,
-                        quality: sizeQuality
-                    });
-                }
-                libs.log({ directQuality: directQuality }, provider, 'DIRECT QUALITY');
-                libs.embed_callback(item.file, provider, HOST, 'Hls', callback, ++rank, tracks, directQuality);
-                _b.label = 7;
-            case 7:
-                _i++;
-                return [3, 5];
-            case 8: return [2];
-        }
+    var DOMAIN, HOST, headers;
+    return __generator(this, function (_a) {
+        libs.log({ provider: provider }, provider, 'PROVIDER');
+        DOMAIN = 'https://dokicloud.one';
+        HOST = 'DOKICLOUD';
+        headers = {
+            'referer': 'https://fmovies.ps'
+        };
+        callback({
+            callback: {
+                provider: provider,
+                host: HOST,
+                url: url,
+                headers: headers,
+                callback: callback,
+                beforeLoadScript: "var open = XMLHttpRequest.prototype.open;\n            XMLHttpRequest.prototype.open = function() {\n                this.addEventListener(\"load\", function() {\n                    var message = {\"status\" : this.status, \"responseURL\" : this.responseURL, \"responseText\": this.responseText, \"response\": this.response}\n                    \n                    window.ReactNativeWebView.postMessage(JSON.stringify(message));\n                });\n                open.apply(this, arguments);\n            };"
+            }
+        });
+        return [2];
     });
 }); };

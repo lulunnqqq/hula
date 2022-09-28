@@ -45,56 +45,70 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 var _this = this;
 callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var data, resultSecretKey_1, decryptData, parse, source1, source2, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
+    var data, sid, decryptData, parse, source1, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
+                libs.log(dataCallback, provider, 'DATA CALLBACK');
                 if (!dataCallback) {
                     return [2];
                 }
-                libs.log(dataCallback, provider, 'DATA CALLBACK');
                 data = JSON.parse(dataCallback);
                 if (!data.responseURL) {
                     return [2];
                 }
-                if (!(data.responseURL.indexOf("getSources") != -1)) return [3, 5];
-                return [4, libs.request_get("https://raw.githubusercontent.com/BlipBlob/blabflow/main/keys.json")];
-            case 1:
-                resultSecretKey_1 = _b.sent();
-                libs.log(resultSecretKey_1, provider, 'resultSecretKey');
+                if (data.responseText.indexOf('40{') != -1) {
+                    sid = data.responseText.match(/sid *\" *\: *\"([^\"]+)/i);
+                    sid = sid ? sid[1] : '';
+                    libs.log({
+                        sid: sid
+                    }, provider, 'SIDDDDDD');
+                    if (sid) {
+                        metadata.sid = sid;
+                    }
+                }
+                if (!(data.responseText.indexOf("getSources") != -1)) return [3, 4];
                 decryptData = function (hash) {
-                    var secretKey = resultSecretKey_1.key;
-                    var decryptData = (crypto.AES.decrypt(hash, secretKey)).toString(crypto.enc.Utf8);
+                    libs.log({
+                        metadata: metadata
+                    }, provider, 'METADATA SID');
+                    var decryptData = (crypto.AES.decrypt(hash, metadata.sid)).toString(crypto.enc.Utf8);
+                    libs.log({
+                        decryptData: decryptData
+                    }, provider, 'decryptData');
                     return JSON.parse(decryptData);
                 };
-                parse = JSON.parse(data.responseText);
-                source1 = decryptData(parse['sources']) || [];
-                source2 = decryptData(parse['sourcesBackup']) || [];
-                source3 = __spreadArray(__spreadArray([], source1, true), source2, true);
-                tracks = parse['tracks'] || [];
+                parse = JSON.parse(data.responseText.replace('42[', '['));
+                libs.log({
+                    parse: parse,
+                    metadata: metadata,
+                }, provider, 'PARSE GET SOURCE');
+                source1 = decryptData(parse[1]['sources']) || [];
+                source3 = __spreadArray([], source1, true);
+                tracks = parse[1]['tracks'] || [];
                 libs.log({ source3: source3, tracks: tracks }, provider, 'SOURCES');
                 rank = 0;
                 _i = 0, source3_1 = source3;
-                _b.label = 2;
-            case 2:
-                if (!(_i < source3_1.length)) return [3, 5];
+                _b.label = 1;
+            case 1:
+                if (!(_i < source3_1.length)) return [3, 4];
                 item = source3_1[_i];
                 if (!item.file) {
-                    return [3, 4];
+                    return [3, 3];
                 }
                 if (item.file.indexOf('thedaywestream') !== -1) {
-                    return [3, 4];
+                    return [3, 3];
                 }
                 if (item.file.indexOf('birdsystem') !== -1) {
-                    return [3, 4];
+                    return [3, 3];
                 }
                 return [4, libs.request_get(item.file, {})];
-            case 3:
+            case 2:
                 directSizes = _b.sent();
                 patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
                 if (!patternSize) {
                     libs.embed_callback(item.file, provider, host, item.type, callback, ++rank, tracks);
-                    return [3, 4];
+                    return [3, 3];
                 }
                 directQuality = [];
                 libs.log({ patternSize: patternSize }, provider, 'PATTERN SIZE');
@@ -109,11 +123,11 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                 }
                 libs.log({ directQuality: directQuality }, provider, 'DIRECT QUALITY');
                 libs.embed_callback(item.file, provider, host, 'Hls', callback, ++rank, tracks, directQuality);
-                _b.label = 4;
-            case 4:
+                _b.label = 3;
+            case 3:
                 _i++;
-                return [3, 2];
-            case 5: return [2];
+                return [3, 1];
+            case 4: return [2];
         }
     });
 }); };
