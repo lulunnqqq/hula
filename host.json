@@ -14,6 +14,7 @@
 		"dist/hosts/streamhub.js",
 		"dist/hosts/dokicloud.js",
 		"dist/hosts/pelisplay.js",
-		"dist/hosts/fembedHd.js"
+		"dist/hosts/fembedHd.js",
+		"dist/hosts/vanfem.js"
 	]
 }

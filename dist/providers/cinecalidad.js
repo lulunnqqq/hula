@@ -114,6 +114,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     }
                 });
+                libs.log({
+                    embeds: embeds
+                }, PROVIDER, 'EMBEDS');
                 _i = 0, embeds_1 = embeds;
                 _a.label = 7;
             case 7:
