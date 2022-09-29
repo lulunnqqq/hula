@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, htmlSearch, sources, sourceItem, source, parse, length_1, i, file, dataStream, idStream, errorStream_1;
+    var PROVIDER, DOMAIN, urlSearch, htmlSearch, sources, sourceItem, source, parse, length_1, i, file;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -61,7 +61,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 sourceItem = 1;
                 _a.label = 2;
             case 2:
-                if (!(sourceItem < sources.length)) return [3, 14];
+                if (!(sourceItem < sources.length)) return [3, 7];
                 source = sources[sourceItem] ? "".concat(sources[sourceItem], ";").replace('});', '') : '[]';
                 libs.log({ source: source }, PROVIDER, 'SOURCE');
                 parse = [];
@@ -72,62 +72,24 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 i = 0;
                 _a.label = 3;
             case 3:
-                if (!(i < length_1)) return [3, 13];
+                if (!(i < length_1)) return [3, 6];
                 file = parse[i].file;
                 if (file && _.startsWith(file, '/')) {
                     file = "https:".concat(file);
                 }
                 libs.log({ file: file }, PROVIDER, 'FILE');
-                if (!file) return [3, 12];
-                if (!(file.indexOf('adfuck') !== -1)) return [3, 10];
-                _a.label = 4;
-            case 4:
-                _a.trys.push([4, 8, , 9]);
-                return [4, fetch(file, {
-                        redirect: 'manual'
-                    })];
-            case 5:
-                dataStream = _a.sent();
-                return [4, dataStream.text()];
-            case 6:
-                dataStream = _a.sent();
-                libs.log({
-                    dataStream: dataStream
-                }, PROVIDER, 'DATA STREAM');
-                idStream = dataStream.match(/([A-z0-9]+\.m3u8)/i);
-                idStream = idStream ? idStream[1] : '';
-                libs.log({
-                    idStream: idStream
-                }, PROVIDER, 'ID STREAM');
-                if (!idStream) {
-                    return [3, 12];
-                }
-                file = file.replace(/\/s\/.*.m3u8/i, "/s/".concat(idStream));
-                libs.log({
-                    file: file
-                }, PROVIDER, 'FILE ROOT');
+                if (!file) return [3, 5];
                 return [4, libs.embed_redirect(file, 'hls', movieInfo, PROVIDER, callback, undefined, [])];
-            case 7:
+            case 4:
                 _a.sent();
-                return [3, 9];
-            case 8:
-                errorStream_1 = _a.sent();
-                libs.log({
-                    errorStream: errorStream_1
-                }, PROVIDER, 'ERROR_STREAM');
-                return [3, 12];
-            case 9: return [3, 12];
-            case 10: return [4, libs.embed_redirect(file, 'hls', movieInfo, PROVIDER, callback, undefined, [])];
-            case 11:
-                _a.sent();
-                _a.label = 12;
-            case 12:
+                _a.label = 5;
+            case 5:
                 i++;
                 return [3, 3];
-            case 13:
+            case 6:
                 sourceItem++;
                 return [3, 2];
-            case 14: return [2];
+            case 7: return [2];
         }
     });
 }); };
