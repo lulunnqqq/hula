@@ -8,7 +8,6 @@
 	"dist/providers/fmovies.js",
 	"dist/providers/lookmovie.js",
 	"dist/providers/goku.js",
-	"dist/providers/afdah.js",
-	"dist/providers/theflix.js"	
+	"dist/providers/afdah.js"
 	]
 }
