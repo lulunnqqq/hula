@@ -54,7 +54,7 @@ hosts["dokicloud"] = function (url, movieInfo, provider, config, callback) { ret
         headers = {
             'referer': 'https://fmovies.ps'
         };
-        id = url.match(/embed\-[0-9]+\-v2\/([A-z0-9]+)/);
+        id = url.match(/embed\-[0-9]+\/([A-z0-9]+)/);
         id = id ? id[1] : '';
         libs.log({
             id: id

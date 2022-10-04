@@ -51,7 +51,7 @@ hosts["mzzcloud"] = function (url, movieInfo, provider, config, callback) { retu
         libs.log({ provider: provider }, provider, 'PROVIDER');
         DOMAIN = 'https://mzzcloud.life';
         HOST = 'Mzzcloud';
-        id = url.match(/embed\-[0-9]+\-v2\/([A-z0-9]+)/);
+        id = url.match(/embed\-[0-9]+\/([A-z0-9]+)/);
         id = id ? id[1] : '';
         libs.log({
             id: id
