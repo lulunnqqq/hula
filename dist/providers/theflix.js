@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, LINK_DETAIL, videoId, searchInfo, parseSearchInfo, mainListData, _i, mainListData_1, mainItem, title, releaseDate, year, href, videoMovieId, parseTvDetail, parseTvDetailScript, parseTvInfo, urlDirectData, parseIframe, directUrl, headers;
+    var PROVIDER, DOMAIN, urlSearch, parseSearch, LINK_DETAIL, videoId, searchInfo, parseSearchInfo, mainListData, _i, mainListData_1, mainItem, title, releaseDate, year, href, videoMovieId, parseTvDetail, parseTvDetailScript, parseTvInfo, urlDirectData, headers, parseIframe, directUrl;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -104,8 +104,13 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.log({
                     urlDirectData: urlDirectData
                 }, PROVIDER, "URL DIRECT");
+                headers = {
+                    'Host': 'theflixvd.b-cdn.net',
+                    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+                    'referer': 'https://theflix.to/',
+                };
                 return [4, libs.request_get(urlDirectData, {
-                        Cookie: "theflix.ipiid=6320b59054023c11feb17fa7;"
+                        Cookie: "theflix.ipiid=6320b59054023c11feb17fa7;",
                     })];
             case 4:
                 parseIframe = _a.sent();
@@ -117,21 +122,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!directUrl) {
                     return [2];
                 }
-                headers = {
-                    'Host': 'theflixvd.b-cdn.net',
-                    'sec-ch-ua': '"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"',
-                    'dnt': '1',
-                    'sec-ch-ua-mobile': '?0',
-                    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-                    'sec-ch-ua-platform': '"macOS"',
-                    'accept': '*/*',
-                    'sec-fetch-site': 'cross-site',
-                    'sec-fetch-mode': 'no-cors',
-                    'sec-fetch-dest': 'video',
-                    'referer': 'https://theflix.to/',
-                    'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-                    'if-range': 'Tue, 23 Aug 2022 02:30:41 GMT'
-                };
                 libs.embed_callback(directUrl, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [], headers);
                 return [2, true];
         }
