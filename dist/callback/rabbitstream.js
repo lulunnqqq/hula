@@ -34,18 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 var _this = this;
 callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var data, sid, decryptData, parse, source1, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
+    var data, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -54,38 +45,11 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                     return [2];
                 }
                 data = JSON.parse(dataCallback);
-                if (!data.responseURL) {
-                    return [2];
-                }
-                if (data.responseText.indexOf('40{') != -1) {
-                    sid = data.responseText.match(/sid *\" *\: *\"([^\"]+)/i);
-                    sid = sid ? sid[1] : '';
-                    libs.log({
-                        sid: sid
-                    }, provider, 'SIDDDDDD');
-                    if (sid) {
-                        metadata.sid = sid;
-                    }
-                }
-                if (!(data.responseText.indexOf("getSources") != -1)) return [3, 4];
-                decryptData = function (hash) {
-                    libs.log({
-                        metadata: metadata
-                    }, provider, 'METADATA SID');
-                    var decryptData = (crypto.AES.decrypt(hash, metadata.sid)).toString(crypto.enc.Utf8);
-                    libs.log({
-                        decryptData: decryptData
-                    }, provider, 'decryptData');
-                    return JSON.parse(decryptData);
-                };
-                parse = JSON.parse(data.responseText.replace('42[', '['));
                 libs.log({
-                    parse: parse,
-                    metadata: metadata,
+                    data: data
                 }, provider, 'PARSE GET SOURCE');
-                source1 = decryptData(parse[1]['sources']) || [];
-                source3 = __spreadArray([], source1, true);
-                tracks = parse[1]['tracks'] || [];
+                source3 = data['sources'] || [];
+                tracks = data['tracks'] || [];
                 libs.log({ source3: source3, tracks: tracks }, provider, 'SOURCES');
                 rank = 0;
                 _i = 0, source3_1 = source3;
@@ -94,12 +58,6 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                 if (!(_i < source3_1.length)) return [3, 4];
                 item = source3_1[_i];
                 if (!item.file) {
-                    return [3, 3];
-                }
-                if (item.file.indexOf('thedaywestream') !== -1) {
-                    return [3, 3];
-                }
-                if (item.file.indexOf('birdsystem') !== -1) {
                     return [3, 3];
                 }
                 return [4, libs.request_get(item.file, {})];
