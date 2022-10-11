@@ -40,7 +40,7 @@ hosts["dokicloud"] = function (url, movieInfo, provider, config, callback) { ret
     return __generator(this, function (_a) {
         libs.log({ provider: provider }, provider, 'PROVIDER');
         DOMAIN = 'https://dokicloud.one';
-        HOST = 'DOKICLOUD';
+        HOST = 'Rabbitstream';
         headers = {
             'referer': 'https://fmovies.ps'
         };

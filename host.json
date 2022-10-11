@@ -2,12 +2,11 @@
 	"hosts": [	
 		
 		"dist/hosts/streamlare.js",
-		"dist/hosts/streamrapid.js",
+"dist/hosts/streamrapid.js",
 "dist/hosts/playmezzz.js",
 "dist/hosts/playm4u.js",
 "dist/hosts/mcloud.js",
 "dist/hosts/vidstream.js",
-"dist/hosts/rabbitstream.js",
 "dist/hosts/vizcloud2.js",
 "dist/hosts/vidembed.js",
 "dist/hosts/streamtape.js",
