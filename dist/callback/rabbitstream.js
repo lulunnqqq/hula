@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callback, metadata) { return __awaiter(_this, void 0, void 0, function () {
-    var data, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, _a, patternSize_1, patternItem, sizeQuality;
+    var data, source3, tracks, rank, _i, source3_1, item, directSizes, patternSize, directQuality, firstFile, _a, patternSize_1, patternItem, sizeQuality;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -70,17 +70,21 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                 }
                 directQuality = [];
                 libs.log({ patternSize: patternSize }, provider, 'PATTERN SIZE');
+                firstFile = '';
                 for (_a = 0, patternSize_1 = patternSize; _a < patternSize_1.length; _a++) {
                     patternItem = patternSize_1[_a];
                     sizeQuality = patternItem.match(/\/([0-9]+)\//i);
                     sizeQuality = sizeQuality ? sizeQuality[1] : 'HD';
+                    if (!firstFile) {
+                        firstFile = patternItem;
+                    }
                     directQuality.push({
                         file: patternItem,
                         quality: sizeQuality
                     });
                 }
                 libs.log({ directQuality: directQuality }, provider, 'DIRECT QUALITY');
-                libs.embed_callback(item.file, provider, host, 'Hls', callback, ++rank, tracks, directQuality);
+                libs.embed_callback(firstFile, provider, host, 'Hls', callback, ++rank, tracks, directQuality);
                 _b.label = 3;
             case 3:
                 _i++;
