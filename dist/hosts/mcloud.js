@@ -43,7 +43,6 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
         HOST = 'MCloud';
         headers = {
             'Referer': "https://fmovies.to/",
-            'Host': 'mcloud.to',
             'user-agent': libs.request_getRandomUserAgent()
         };
         callback({
