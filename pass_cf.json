@@ -1,0 +1,10 @@
+{
+    "prefix": "TOKEN_",
+    "sources": [
+        {
+            "name": "SecretLink",
+            "url": "https://secretlink.xyz",
+            "key": ["cf_clearance"]
+        }
+    ]
+}
