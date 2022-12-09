@@ -137,10 +137,10 @@ libs.embed_fmovies_id = function (hash, headers) { return __awaiter(_this, void 
                 if (Array.isArray(hash)) {
                     return [2, hash];
                 }
-                return [4, libs.request_get("https://raw.githubusercontent.com/BlipBlob/blabflow/main/keys.json")];
+                return [4, libs.request_get("https://raw.githubusercontent.com/consumet/rapidclown/main/key.txt")];
             case 1:
                 resultSecretKey = _a.sent();
-                secretKey = "".concat(resultSecretKey.key);
+                secretKey = "".concat(resultSecretKey);
                 libs.log({
                     secretKey: secretKey
                 }, 'SECRET DECRYPT DATA FMOVIES');
