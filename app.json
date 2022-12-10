@@ -19,5 +19,12 @@
       "contents3": "Update more source.",
       "force_update": true,
       "isUpdate": true
-    }
+    },
+    "timeout_priority_source": 10,
+    "host_priority": [
+      "Rabbitstream",
+      "MCloud",
+      "PTOWEMBED",
+      "NAFDAH"
+    ]
   }
