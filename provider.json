@@ -1,5 +1,6 @@
 {
 	"providers": [			
+		"dist/providers/uniquestream.js",
 		"dist/providers/series9.js",
 		"dist/providers/flixhq.js",
 		"dist/providers/st.js",
