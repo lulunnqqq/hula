@@ -15,6 +15,7 @@
 		"dist/providers/afdah.js",
 		"dist/providers/fa.js",
 		"dist/providers/svetacdn.js",
-		"dist/providers/vidsrc.js"
+		"dist/providers/vidsrc.js",
+		"dist/providers/hdmoviebox.js"
 	]
 }
