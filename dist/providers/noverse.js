@@ -68,9 +68,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         if (link && link.indexOf('.mkv') != -1 && movieInfo.platform && movieInfo.platform == 'android') {
                             directUrl_1.push({ quality: quality, file: link });
                         }
-                        if (link && link.indexOf('.mp4') != -1) {
-                            directUrl_1.push({ quality: quality, file: link });
-                        }
                     });
                 }
                 else {
@@ -90,10 +87,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                     var quality = link.match(/\.([0-9]+)p\./i);
                                     quality = quality ? Number(quality[1]) : 720;
                                     libs.log({ quality: quality, link: link }, PROVIDER, 'QUALITY');
-                                    if (link && link.indexOf('.mkv') != -1 && movieInfo.platform && movieInfo.platform == 'ios') {
-                                        directUrl_1.push({ quality: quality, file: link });
-                                    }
-                                    if (link && link.indexOf('.mp4') != -1) {
+                                    if (link && link.indexOf('.mkv') != -1 && movieInfo.platform && movieInfo.platform == 'android') {
                                         directUrl_1.push({ quality: quality, file: link });
                                     }
                                 }
