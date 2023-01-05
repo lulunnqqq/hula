@@ -17,6 +17,7 @@
 "dist/providers/svetacdn.js",
 "dist/providers/vidsrc.js",
 "dist/providers/hdmoviebox.js",
-"dist/providers/xmovies.js"
+"dist/providers/xmovies.js",
+"dist/providers/noverse.js"
 	]
 }
