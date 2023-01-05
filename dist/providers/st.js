@@ -106,7 +106,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 libs.log({
                                     data: data
                                 }, PROVIDER, 'DATA QUERY API');
-                                return [4, libs.request_post('http://152.32.149.160/api/api_client/index/', headers_1, data)];
+                                return [4, libs.request_post('https://showbox.shegu.net/api/api_client/index/', headers_1, data)];
                             case 1:
                                 parseData = _a.sent();
                                 return [2, parseData];
