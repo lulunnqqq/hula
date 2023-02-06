@@ -18,6 +18,7 @@
 "dist/providers/vidsrc.js",
 "dist/providers/hdmoviebox.js",
 "dist/providers/xmovies.js",
-"dist/providers/noverse.js"
+"dist/providers/noverse.js",
+"dist/providers/uniquestream.js"
 	]
 }
