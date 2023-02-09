@@ -51,7 +51,7 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
                 return [4, libs.request_get(subParse)];
             case 1:
                 subs = _a.sent();
-                libs.log({ fSub: fSub }, HOST, 'SUBTITLE');
+                libs.log({ subs: subs }, HOST, 'SUBTITLE');
                 _a.label = 2;
             case 2:
                 headers = {
