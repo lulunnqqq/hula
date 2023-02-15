@@ -1,8 +1,8 @@
 {
   "notification": {
     "url": "https://github.com/hdoonline/hdonline/releases/download/rl/hdo-betav2.0.9.apk",
-    "title": "Alert",
-    "contents": "<p>- Due the app has been removed from Store, please DO NOT removed it to use the app in the future<br />- Due the app has been removed from Store, please DO NOT removed it to use the app in the future</p>"
+    "title": "Welcome!",
+    "contents": "<p>- Due the app has been removed from Store, please DO NOT removed it to use the app in the future 😀 😃<br />- Due the app has been removed from Store, please DO NOT removed it to use the app in the future 🤶🏼 🧑🏼‍🎄</p>"
   },
   "update_release": {
     "build": 100,
