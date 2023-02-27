@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, exist_1, decode, lang, filmInfo_1, urlSearch, parseSearch_1, LINK_DETAIL_1, parseDetail_1, filmIds_2, dataFav, dataId, timestamp, urlGetHash, headersHash, hashData, _i, filmIds_1, filmItem, body, resultHash, _a, hashData_1, hashItem, decryptData, parseDirect, directQuality, _b, parseDirect_1, parseDirectItem, quality, urlDirect, requestData, e_1;
+    var PROVIDER, DOMAIN, exist_1, decode, lang, filmInfo_1, urlSearch, parseSearch_1, LINK_DETAIL_1, parseDetail_1, filmIds_2, dataFav, dataId, timestamp, urlGetHash, headersHash, hashData, _i, filmIds_1, filmItem, body, resultHash, directQuality, _a, hashData_1, hashItem, decryptData, parseDirect, _b, parseDirect_1, parseDirectItem, quality, urlDirect, requestData, e_1;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -44,7 +44,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://rezka.ag";
                 _c.label = 1;
             case 1:
-                _c.trys.push([1, 19, , 20]);
+                _c.trys.push([1, 18, , 19]);
                 exist_1 = function (x) {
                     return x != null && typeof (x) != 'undefined' && x != 'undefined';
                 };
@@ -224,20 +224,20 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.log({
                     hashData: hashData
                 }, PROVIDER, 'HASH DATA');
+                directQuality = [];
                 _a = 0, hashData_1 = hashData;
                 _c.label = 12;
             case 12:
-                if (!(_a < hashData_1.length)) return [3, 18];
+                if (!(_a < hashData_1.length)) return [3, 17];
                 hashItem = hashData_1[_a];
                 decryptData = decode(hashItem);
                 libs.log({
                     decryptData: decryptData
                 }, PROVIDER, 'DECRYPT DATA');
                 if (!decryptData) {
-                    return [3, 17];
+                    return [3, 16];
                 }
                 parseDirect = decryptData.split(',');
-                directQuality = [];
                 _b = 0, parseDirect_1 = parseDirect;
                 _c.label = 13;
             case 13:
@@ -269,21 +269,21 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _b++;
                 return [3, 13];
             case 16:
+                _a++;
+                return [3, 12];
+            case 17:
                 directQuality = _.orderBy(directQuality, ['quality'], ['desc']);
+                directQuality = _.uniqBy(directQuality, 'quality');
                 libs.log({
                     directQuality: directQuality
                 }, PROVIDER, 'directQuality');
                 libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality);
-                _c.label = 17;
-            case 17:
-                _a++;
-                return [3, 12];
-            case 18: return [2, true];
-            case 19:
+                return [2, true];
+            case 18:
                 e_1 = _c.sent();
                 libs.log(e_1, PROVIDER, 'ERROR GET');
                 return [2];
-            case 20: return [2];
+            case 19: return [2];
         }
     });
 }); };
