@@ -44,7 +44,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://rezka.ag";
                 _c.label = 1;
             case 1:
-                _c.trys.push([1, 18, , 19]);
+                _c.trys.push([1, 19, , 20]);
                 exist_1 = function (x) {
                     return x != null && typeof (x) != 'undefined' && x != 'undefined';
                 };
@@ -179,6 +179,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 8:
                 if (!(_i < filmIds_1.length)) return [3, 11];
                 filmItem = filmIds_1[_i];
+                if (filmItem.data_trans_id != '238') {
+                    return [3, 10];
+                }
                 body = {};
                 if (movieInfo.type == 'movie') {
                     body = {
@@ -224,14 +227,14 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _a = 0, hashData_1 = hashData;
                 _c.label = 12;
             case 12:
-                if (!(_a < hashData_1.length)) return [3, 17];
+                if (!(_a < hashData_1.length)) return [3, 18];
                 hashItem = hashData_1[_a];
                 decryptData = decode(hashItem);
                 libs.log({
                     decryptData: decryptData
                 }, PROVIDER, 'DECRYPT DATA');
                 if (!decryptData) {
-                    return [3, 16];
+                    return [3, 17];
                 }
                 parseDirect = decryptData.split(',');
                 directQuality = [];
@@ -257,23 +260,30 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     requestData: requestData
                 }, PROVIDER, 'REQUEST_DATA');
                 urlDirect = requestData.url;
-                libs.embed_callback(urlDirect, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{
-                        file: urlDirect,
-                        quality: Number(quality)
-                    }]);
+                directQuality.push({
+                    file: urlDirect,
+                    quality: Number(quality),
+                });
                 _c.label = 15;
             case 15:
                 _b++;
                 return [3, 13];
             case 16:
+                directQuality = _.orderBy(directQuality, ['quality'], ['desc']);
+                libs.log({
+                    directQuality: directQuality
+                }, PROVIDER, 'directQuality');
+                libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality);
+                _c.label = 17;
+            case 17:
                 _a++;
                 return [3, 12];
-            case 17: return [2, true];
-            case 18:
+            case 18: return [2, true];
+            case 19:
                 e_1 = _c.sent();
                 libs.log(e_1, PROVIDER, 'ERROR GET');
                 return [2];
-            case 19: return [2];
+            case 20: return [2];
         }
     });
 }); };
