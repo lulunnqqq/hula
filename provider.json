@@ -1,6 +1,5 @@
 {
 	"providers": [			
-		"dist/providers/m4ufree.js",
 		"dist/providers/rezka.js",
 		"dist/providers/gomovies.js",
 		"dist/providers/gammovies.js",
