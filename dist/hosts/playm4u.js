@@ -43,10 +43,18 @@ hosts["play.playm4u"] = function (url, movieInfo, provider, config, callback) { 
                 DOMAIN = 'https://play.playm4u.xyz';
                 HOST = 'PLAYM4U';
                 headers = {
-                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    'accept-encoding': 'gzip, deflate, br',
+                    authority: 'api-plhq.playm4u.xyz',
                     accept: '*/*',
-                    'referer': 'https://play.playm4u.xyz/',
+                    'accept-language': 'en-US,en;q=0.9',
+                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'origin': 'https://play.playm4u.xyz',
+                    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+                    'sec-ch-ua-mobile': '?0',
+                    'sec-ch-ua-platform': '"macOS"',
+                    'sec-fetch-dest': 'empty',
+                    'sec-fetch-mode': 'cors',
+                    'sec-fetch-site': 'same-site',
+                    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1660.14'
                 };
                 _a.label = 1;
             case 1:
