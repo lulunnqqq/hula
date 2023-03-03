@@ -1,9 +1,10 @@
 {
   "notification": {
     "url": "https://t.me/+HMlgAGWThNpkMjg1",
-    "title": "Join Us.",
-    "contents": "<p>Come and be a part of our Telegram community. You can find the latest infomation and enjoy with friends.</p>",
+    "title": "In case you don't know.",
+    "contents": "<p>The iOS version has been released. Grab it now.</p>",
+    "btn_title": "See More",
     "show": true,
-    "key": "NOTI_1.2"
+    "key": "NOTI_1.3"
   }
 }
