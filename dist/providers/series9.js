@@ -40,7 +40,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                PROVIDER = 'USERIES9';
+                PROVIDER = 'IEmbedSmashy';
                 DOMAIN = "https://series9.la";
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
