@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_b.label) {
             case 0:
                 PROVIDER = 'WatchOnline';
-                DOMAIN = "https://watchonline.ag";
+                DOMAIN = "https://dev.watchonline.ag";
                 urlSearch = "".concat(DOMAIN, "/movies/search/?like=").concat(libs.url_slug_search(movieInfo, '%20'));
                 if (movieInfo.type == 'tv') {
                     urlSearch = "".concat(DOMAIN, "/shows/search/?like=").concat(libs.url_slug_search(movieInfo, '%20'));
