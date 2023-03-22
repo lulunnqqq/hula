@@ -22,5 +22,8 @@
     "contents3": "Update more source.",
     "force_update": true,
     "isUpdate": true
+  },
+  "app_player_config": {
+    "player_version_build": 1
   }
 }
