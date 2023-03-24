@@ -11,6 +11,6 @@
     "isUpdate": false
   },
   "ads_config" : {
-    "show": true
+    "show": false
   }
 }
