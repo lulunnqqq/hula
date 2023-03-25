@@ -24,6 +24,7 @@
     "isUpdate": true
   },
   "app_player_config": {
-    "player_version_build": 1
+    "player_version_build": 2,
+    "force_player": true
   }
 }
