@@ -79,6 +79,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 'upgrade-insecure-requests': '1',
                 'user-agent': movieInfo.platform == 'android' ? 'Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Mobile Safari/537.36' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.0.0'
             };
+            libs.log({ movieInfo: movieInfo }, PROVIDER, 'MOVIEINFO_SOAP');
             callback({
                 callback: {
                     provider: PROVIDER,
