@@ -71,7 +71,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 'accept-language': 'en-US,en;q=0.9',
                 'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
                 'sec-ch-ua-mobile': '?0',
-                'sec-ch-ua-platform': movieInfo.platform == 'android' ? "\"Android\"" : "\"macOS\"",
+                'sec-ch-ua-platform': "\"Android\"",
                 'sec-fetch-dest': 'document',
                 'sec-fetch-mode': 'navigate',
                 'sec-fetch-site': 'none',
