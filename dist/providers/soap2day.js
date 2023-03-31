@@ -45,7 +45,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
                 "sec-ch-ua": "\"Chromium\";v=\"112\", \"Microsoft Edge\";v=\"112\", \"Not:A-Brand\";v=\"99\"",
                 "sec-ch-ua-mobile": "?0",
-                "sec-ch-ua-platform": movieInfo.platform == 'android' ? "\"Android\"" : "\"macOS\"",
                 "sec-fetch-dest": "empty",
                 "sec-fetch-mode": "cors",
                 "sec-fetch-site": "same-origin",
