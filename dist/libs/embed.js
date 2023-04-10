@@ -416,7 +416,7 @@ libs.embed_fmovies_id = function (hash, headers, embedUrl) { return __awaiter(_t
                 if (Array.isArray(hash)) {
                     return [2, hash];
                 }
-                return [4, libs.request_get("https://raw.githubusercontent.com/consumet/rapidclown/main/key.txt")];
+                return [4, libs.request_get("https://github.com/enimax-anime/key/blob/e4/key.txt")];
             case 2:
                 secretKey = _a.sent();
                 return [3, 4];
