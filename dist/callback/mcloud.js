@@ -56,7 +56,9 @@ callbacksEmbed["mcloud"] = function (dataCallback, provider, host, callback, met
                     return [2];
                 }
                 urlEmbed = "https://mcloud.to/".concat(endpoint);
-                return [4, libs.request_get(urlEmbed)];
+                return [4, libs.request_get(urlEmbed, {
+                        Referer: metadata.url_webview,
+                    })];
             case 1:
                 dataEmbed = _c.sent();
                 libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed }, provider, 'DATA EMBED mcloud');
