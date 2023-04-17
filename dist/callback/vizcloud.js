@@ -61,7 +61,7 @@ callbacksEmbed["vizcloud"] = function (dataCallback, provider, host, callback, m
                     })];
             case 1:
                 dataEmbed = _c.sent();
-                libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed }, provider, 'DATA EMBED mcloud');
+                libs.log({ urlEmbed: urlEmbed, dataEmbed: dataEmbed }, provider, 'DATA EMBED');
                 if (!dataEmbed || !dataEmbed.data) {
                     return [2];
                 }
@@ -149,7 +149,7 @@ callbacksEmbed["vizcloud"] = function (dataCallback, provider, host, callback, m
                 e_1 = _c.sent();
                 libs.log({
                     e: e_1
-                }, provider, 'ERROR MCLOUD');
+                }, provider, 'ERROR');
                 return [3, 7];
             case 7: return [2];
         }
