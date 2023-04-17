@@ -2,6 +2,7 @@
   "ads_config": {
     "init_ads": "admob"
   },
+  "is_review": true,
   "tmdb_apikey": {
     "ios_key": "63cbd7bb8ca53a31817a418b2cfb7e6a",
     "android_key": "63cbd7bb8ca53a31817a418b2cfb7e6a"
