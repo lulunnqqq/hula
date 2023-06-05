@@ -1,5 +1,6 @@
 {
 	"providers": [				
+		"dist/providers/uniquestream.js",
 		"dist/providers/smashystream.js",
 		"dist/providers/gomovies.js",
 		"dist/providers/yesmovies.js",
