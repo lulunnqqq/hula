@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_a.label) {
             case 0:
                 PROVIDER = 'RALLMOVIEFORYOU';
-                DOMAIN = "https://allmoviesforyou.net";
+                DOMAIN = "https://allmovies.gg";
                 urlSearch = "".concat(DOMAIN, "/?s=").concat(libs.url_slug_search(movieInfo, '+'));
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 1:

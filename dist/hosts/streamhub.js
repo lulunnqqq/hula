@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["streamhub"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers, parseEmbed, scriptEval, unpack, source;
+    var DOMAIN, HOST, headers, parseEmbed, scriptEval, unpack, source, parseDirect, directUrl;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -45,7 +45,7 @@ hosts["streamhub"] = function (url, movieInfo, provider, config, callback) { ret
                 headers = {
                     'content-type': 'application/json;charset=UTF-8'
                 };
-                return [4, libs.request_get(url, {}, true)];
+                return [4, libs.request_get(url.trim(), {}, true)];
             case 1:
                 parseEmbed = _a.sent();
                 scriptEval = '';
@@ -70,7 +70,16 @@ hosts["streamhub"] = function (url, movieInfo, provider, config, callback) { ret
                 if (!source) {
                     return [2];
                 }
-                libs.embed_callback(source, provider, HOST, 'Hls', callback);
+                return [4, libs.request_get(source, {})];
+            case 2:
+                parseDirect = _a.sent();
+                directUrl = parseDirect.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
+                directUrl = directUrl ? directUrl[0] : "";
+                libs.log({ directUrl: directUrl }, HOST, "DIRECT URl");
+                if (!directUrl) {
+                    return [2];
+                }
+                libs.embed_callback(directUrl, provider, HOST, 'Hls', callback);
                 return [2];
         }
     });
