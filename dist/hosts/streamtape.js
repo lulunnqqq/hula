@@ -36,36 +36,58 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["streamtape"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers, htmlDetail, parseHtmlDetail, videoDataUri;
+    var DOMAIN, HOST, headers, htmlDetail, parseHtmlDetail, videoDataUri, dataEmbed, e_1, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 DOMAIN = 'https://streamtape.com';
                 HOST = 'Streamtape';
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 7, , 8]);
                 headers = {
                     "referer": url,
                     "user-agent": libs.request_getRandomUserAgent(),
                 };
                 return [4, libs.request_get(url, headers, false)];
-            case 1:
+            case 2:
                 htmlDetail = _a.sent();
-                parseHtmlDetail = htmlDetail.match(/'robotlink'\)\.innerHTML = '(.+?)'\+ \('(.+?)'\)/i);
-                libs.log({ parseHtmlDetail: parseHtmlDetail }, provider, 'parseHtmlDetail');
+                parseHtmlDetail = htmlDetail.match(/document\.getElementById\(\'norobotlink\'\)\.innerHTML \= \'([^\']+)\' *\+ *\(\'([^\']+)/i);
                 if (!parseHtmlDetail) {
                     return [2];
                 }
-                parseHtmlDetail = "https:".concat(parseHtmlDetail[1]).concat(parseHtmlDetail[2].substring(3));
-                videoDataUri = parseHtmlDetail;
+                videoDataUri = parseHtmlDetail[1] + parseHtmlDetail[2].substring(1).substring(2);
                 if (!videoDataUri) {
                     return [2];
                 }
+                if (_.startsWith(videoDataUri, "/")) {
+                    videoDataUri = "https:".concat(videoDataUri);
+                }
                 libs.log({ videoDataUri: videoDataUri }, provider, 'videoDataUri');
-                if (!videoDataUri) return [3, 3];
-                return [4, libs.embed_redirect(videoDataUri, 'hls', movieInfo, provider, callback, undefined, [])];
-            case 2:
-                _a.sent();
                 _a.label = 3;
-            case 3: return [2];
+            case 3:
+                _a.trys.push([3, 5, , 6]);
+                return [4, fetch(videoDataUri, {
+                        redirect: 'manual',
+                        method: 'HEAD'
+                    })];
+            case 4:
+                dataEmbed = _a.sent();
+                libs.log({ redirect_url: dataEmbed.url }, provider, "DATA EMBED URL");
+                if (dataEmbed.url && dataEmbed.url.indexOf("tapecontent") != -1) {
+                    libs.embed_redirect(dataEmbed.url, 'hls', movieInfo, provider, callback, undefined, []);
+                }
+                return [3, 6];
+            case 5:
+                e_1 = _a.sent();
+                libs.log({ error: e_1 }, provider, "REDIRECT URL");
+                return [3, 6];
+            case 6: return [3, 8];
+            case 7:
+                e_2 = _a.sent();
+                libs.log({ e: e_2 }, HOST, "ERROR");
+                return [3, 8];
+            case 8: return [2];
         }
     });
 }); };
