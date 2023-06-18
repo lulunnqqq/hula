@@ -63,14 +63,17 @@ hosts["streamtape"] = function (url, movieInfo, provider, config, callback) { re
                 if (_.startsWith(videoDataUri, "/")) {
                     videoDataUri = "https:".concat(videoDataUri);
                 }
-                videoDataUri = videoDataUri.replace(".com", ".to");
                 libs.log({ videoDataUri: videoDataUri }, provider, 'videoDataUri');
                 _a.label = 3;
             case 3:
                 _a.trys.push([3, 5, , 6]);
                 return [4, fetch(videoDataUri, {
                         redirect: 'manual',
-                        method: 'HEAD'
+                        method: 'HEAD',
+                        headers: {
+                            "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36",
+                            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                        }
                     })];
             case 4:
                 dataEmbed = _a.sent();
