@@ -63,6 +63,7 @@ hosts["streamtape"] = function (url, movieInfo, provider, config, callback) { re
                 if (_.startsWith(videoDataUri, "/")) {
                     videoDataUri = "https:".concat(videoDataUri);
                 }
+                videoDataUri = videoDataUri.replace(".com", ".to");
                 libs.log({ videoDataUri: videoDataUri }, provider, 'videoDataUri');
                 _a.label = 3;
             case 3:
