@@ -44,7 +44,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://api.xcine.info";
                 _f.label = 1;
             case 1:
-                _f.trys.push([1, 7, , 8]);
+                _f.trys.push([1, 3, , 4]);
                 urlSearch = "https://api.xcine.info/data/search/?lang=1&keyword=".concat(movieInfo.title.replace(/\+/ig, ""));
                 return [4, libs.request_get(urlSearch, {})];
             case 2:
@@ -82,24 +82,16 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!embeds.length) {
                     return [2];
                 }
-                _e = 0, embeds_1 = embeds;
-                _f.label = 3;
+                for (_e = 0, embeds_1 = embeds; _e < embeds_1.length; _e++) {
+                    item = embeds_1[_e];
+                    libs.embed_redirect(item, '', movieInfo, PROVIDER, callback, '');
+                }
+                return [3, 4];
             case 3:
-                if (!(_e < embeds_1.length)) return [3, 6];
-                item = embeds_1[_e];
-                return [4, libs.embed_redirect(item, '', movieInfo, PROVIDER, callback, '')];
-            case 4:
-                _f.sent();
-                _f.label = 5;
-            case 5:
-                _e++;
-                return [3, 3];
-            case 6: return [3, 8];
-            case 7:
                 e_1 = _f.sent();
                 libs.log({ e: e_1 }, PROVIDER, 'ERROR CATCH');
-                return [3, 8];
-            case 8: return [2, true];
+                return [3, 4];
+            case 4: return [2, true];
         }
     });
 }); };
