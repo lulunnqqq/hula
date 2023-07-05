@@ -1,6 +1,5 @@
 {
 	"providers": [				
-		"dist/providers/xcine.js",
 "dist/providers/allmovieforyou.js",
 "dist/providers/onemar.js",
 "dist/providers/idflix.js",
