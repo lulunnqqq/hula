@@ -372,7 +372,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!tvId) {
                     return [2];
                 }
-                episodeInfoUrl = "".concat(DOMAIN, "/ajax/episode/list/").concat(tvId, "?vrf=").concat(gen(tvId));
+                episodeInfoUrl = "".concat(DOMAIN, "/ajax/episode/list/").concat(tvId, "?vrf=").concat(genMovie(tvId));
                 return [4, libs.request_get(episodeInfoUrl, headers, false)];
             case 3:
                 episodeRes = _b.sent();
@@ -386,7 +386,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!dataId) {
                     return [2];
                 }
-                return [4, libs.request_get("".concat(DOMAIN, "/ajax/server/list/").concat(dataId, "?vrf=").concat(gen(dataId)), headers, false)];
+                return [4, libs.request_get("".concat(DOMAIN, "/ajax/server/list/").concat(dataId, "?vrf=").concat(genMovie(dataId)), headers, false)];
             case 4:
                 serverData = _b.sent();
                 if (serverData.status != 200) {
@@ -409,7 +409,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 5:
                 if (!(_i < serverIds_1.length)) return [3, 9];
                 idItem = serverIds_1[_i];
-                embedUrl = "".concat(DOMAIN, "/ajax/server/").concat(idItem, "?vrf=").concat(gen(idItem));
+                embedUrl = "".concat(DOMAIN, "/ajax/server/").concat(idItem, "?vrf=").concat(genMovie(idItem));
                 return [4, libs.request_get(embedUrl, headers, false)];
             case 6:
                 embedData = _b.sent();
