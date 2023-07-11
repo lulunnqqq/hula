@@ -1,5 +1,6 @@
 {
 	"providers": [				
+"dist/providers/gomovies.js",
 "dist/providers/allmovieforyou.js",
 "dist/providers/onemar.js",
 "dist/providers/idflix.js",
