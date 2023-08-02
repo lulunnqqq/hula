@@ -2,7 +2,6 @@
 	"providers": [				
 		"dist/providers/fmovies.js",
 		"dist/providers/fa.js",
-		"dist/providers/xcine.js",
 		"dist/providers/gomovies.js",
 		"dist/providers/allmovieforyou.js",
 		"dist/providers/onemar.js",
