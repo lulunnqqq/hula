@@ -98,7 +98,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }(t));
     }
     function genMovie(t) {
-        var e = "rzyKmquwICPaYFkU";
+        var e = "FWsfu0KQd9vxYGNB";
         return t = encodeURIComponent(""["concat"](t)), t = hash_j(e, t), t = (0, hash_o_1)(t), hash_O(t);
     }
     var PROVIDER, DOMAIN, userAgent, LINK_DETAIL, KEY, ENCRYPT_KEY, gen, decode, b, a, rc4, encode, headers, urlSearch, parseSearch, LINK_TV_DETAIL, parseTvDetail, tvId, episodeInfoUrl, episodeRes, parseEpisodeData, dataId, serverData, parseServerData_1, serverIds_3, _i, serverIds_1, idItem, embedUrl, embedData, directData, decodeUrl, parseMovieDetail, movieId, movieInfoUrl, movieInfoRes, parseMovieInfo, dataId, serverData, parseServerData_2, serverIds_4, _a, serverIds_2, idItem, embedUrl, embedData, directData, decodeUrl;
