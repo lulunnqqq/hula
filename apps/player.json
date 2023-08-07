@@ -13,5 +13,5 @@
   "ads_config" : {
     "show": true
   },
-  "ads_init" : "applovin"
+  "ads_init" : "admob"
 }
