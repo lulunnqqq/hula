@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, id, urlDirect, body, headers, directData, parseDirectData, pattern, qualityUrl, match, resolution, url_1, parseSolution, quality, e_1;
+    var DOMAIN, HOST, id, urlDirect, body, headers, directData, parseDirectData, directQualityData, qualityData, qualityUrl, key, quality, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -71,22 +71,23 @@ hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { re
                 return [4, libs.request_get(directData.videoSource)];
             case 3:
                 parseDirectData = _a.sent();
-                libs.log({ parseDirectData: parseDirectData }, provider, "parseDirectData");
-                pattern = /#EXT-X-STREAM-INF:BANDWIDTH=\d+,\s*RESOLUTION=([0-9x]+)\s*\n(https?:\/\/[^\s]+)/g;
+                directQualityData = parseDirectData.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
+                qualityData = parseDirectData.match(/NAME\=\"([0-9]+)/ig);
+                libs.log({ directQualityData: directQualityData, qualityData: qualityData }, HOST, "QUALITY DATA");
                 qualityUrl = [];
-                match = void 0;
-                while ((match = pattern.exec(parseDirectData)) !== null) {
-                    resolution = match[1];
-                    url_1 = match[2];
-                    parseSolution = resolution.split("x");
-                    quality = parseSolution.length > 1 ? parseInt(parseSolution[1]) : 720;
+                for (key in directQualityData) {
+                    quality = 720;
+                    if (qualityData[key]) {
+                        quality = qualityData[key].match(/([0-9]+)/i);
+                        quality = quality ? Number(quality[1]) : 720;
+                    }
                     qualityUrl.push({
-                        file: url_1,
+                        file: directQualityData[key],
                         quality: quality
                     });
                 }
-                libs.log({ qualityUrl: qualityUrl }, provider, "Quality URL");
-                if (!qualityUrl.length) {
+                libs.log({ qualityUrl: qualityUrl }, HOST, "QUALITY URL");
+                if (qualityUrl.length == 0) {
                     return [2];
                 }
                 qualityUrl = _.orderBy(qualityUrl, ['quality'], ['desc']);
