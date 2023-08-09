@@ -43,7 +43,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 currentDate = "".concat(libs.date_getCurrentDate(), "_").concat(libs.date_getCurrentHour());
                 keyCache = "FILMXY_".concat(currentDate);
                 userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36';
-                PROVIDER = 'EFilmXy';
+                PROVIDER = 'BFilmXy';
                 DOMAIN = "https://www.filmxy.vip";
                 libs.log({ keyCache: keyCache }, PROVIDER, 'KEY CACHE');
                 _a.label = 1;
