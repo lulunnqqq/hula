@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_a.label) {
             case 0:
                 PROVIDER = 'DIdFlix';
-                DOMAIN = "https://77.105.142.75";
+                DOMAIN = "https://tv.idlixprime.com";
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 5, , 6]);

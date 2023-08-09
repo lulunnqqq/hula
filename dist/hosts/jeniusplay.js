@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, id, urlDirect, body, headers, directData, e_1;
+    var DOMAIN, HOST, id, urlDirect, body, headers, directData, parseDirectData, pattern, qualityUrl, match, resolution, url_1, parseSolution, quality, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -44,7 +44,7 @@ hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { re
                 HOST = 'jeniusplay';
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 3, , 4]);
+                _a.trys.push([1, 4, , 5]);
                 id = url.match(/\/video\/([A-z0-9]+)/i);
                 id = id ? id[1] : "";
                 libs.log({ id: id }, HOST, "ID");
@@ -54,12 +54,12 @@ hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { re
                 urlDirect = "".concat(DOMAIN, "/player/index.php?data=").concat(id, "&do=getVideo");
                 body = qs.stringify({
                     hash: id,
-                    r: "https://77.105.142.75/"
+                    r: "https://tv.idlixprime.com"
                 });
                 headers = {
                     'Content-type': "application/x-www-form-urlencoded; charset=UTF-8",
                     Origin: DOMAIN,
-                    "X-Requested-With": "XMLHttpRequest"
+                    "X-Requested-With": "XMLHttpRequest",
                 };
                 return [4, libs.request_post(urlDirect, headers, body)];
             case 2:
@@ -68,13 +68,35 @@ hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { re
                 if (!directData.videoSource) {
                     return [2];
                 }
-                libs.embed_callback(directData.videoSource, provider, HOST, 'Hls', callback, 1, [], [{ file: directData.videoSource, quality: 1080 }]);
-                return [3, 4];
+                return [4, libs.request_get(directData.videoSource)];
             case 3:
+                parseDirectData = _a.sent();
+                libs.log({ parseDirectData: parseDirectData }, provider, "parseDirectData");
+                pattern = /#EXT-X-STREAM-INF:BANDWIDTH=\d+,\s*RESOLUTION=([0-9x]+)\s*\n(https?:\/\/[^\s]+)/g;
+                qualityUrl = [];
+                match = void 0;
+                while ((match = pattern.exec(parseDirectData)) !== null) {
+                    resolution = match[1];
+                    url_1 = match[2];
+                    parseSolution = resolution.split("x");
+                    quality = parseSolution.length > 1 ? parseInt(parseSolution[1]) : 720;
+                    qualityUrl.push({
+                        file: url_1,
+                        quality: quality
+                    });
+                }
+                libs.log({ qualityUrl: qualityUrl }, provider, "Quality URL");
+                if (!qualityUrl.length) {
+                    return [2];
+                }
+                qualityUrl = _.orderBy(qualityUrl, ['quality'], ['desc']);
+                libs.embed_callback(qualityUrl[0].file, provider, HOST, 'Hls', callback, 1, [], qualityUrl);
+                return [3, 5];
+            case 4:
                 e_1 = _a.sent();
                 libs.log({ e: e_1 }, HOST, "ERROR");
-                return [3, 4];
-            case 4: return [2];
+                return [3, 5];
+            case 5: return [2];
         }
     });
 }); };
