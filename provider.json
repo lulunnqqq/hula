@@ -17,7 +17,6 @@
 		"dist/providers/vumoo.js",
 		"dist/providers/vidsrc.js",
 		"dist/providers/hdmoviebox.js",
-		"dist/providers/xmovies.js",
 		"dist/providers/m4ufree.js"
 	]
 }
