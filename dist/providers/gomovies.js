@@ -39,10 +39,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     function decryptGomoviesJson(str, key) {
         if (key === void 0) { key = "123"; }
         var b = "";
-        var k = "98";
         for (var i = 0; i < str.length;) {
-            for (var j = 0; (j < k.toString().length && i < str.length); j++, i++) {
-                b += String.fromCharCode(str[i].charCodeAt(0) ^ k.toString()[j].charCodeAt(0));
+            for (var j = 0; (j < key.toString().length && i < str.length); j++, i++) {
+                b += String.fromCharCode(str[i].charCodeAt(0) ^ key.toString()[j].charCodeAt(0));
             }
         }
         return b;
