@@ -36,7 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, parseEmbed, parseHls, hlsData, hls1, hls2, _i, hlsData_1, hlsItem;
+    function deobfstr(_0x1dbe96, _0x1ddb3a) {
+        _0x1ddb3a = _0x1ddb3a['toString']();
+        var _0x4c518c = '';
+        for (var _0x2f1b4f = 0x0; _0x2f1b4f < _0x1dbe96['length']; _0x2f1b4f += 0x2) {
+            var _0xee7ec2 = _0x1dbe96['substr'](_0x2f1b4f, 0x2);
+            _0x4c518c += String['fromCharCode'](parseInt(_0xee7ec2, 0x10) ^ _0x1ddb3a['charCodeAt'](_0x2f1b4f / 0x2 % _0x1ddb3a['length']));
+        }
+        return _0x4c518c;
+    }
+    var PROVIDER, DOMAIN, urlSearch, parseSearch, parseEmbed, hashEmbed, htmlHashEmbed, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -61,41 +70,62 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (_.startsWith(parseEmbed, '/')) {
                     parseEmbed = "https:".concat(parseEmbed);
                 }
+                hashEmbed = parseEmbed;
+                return [4, libs.request_get(hashEmbed, {
+                        referer: 'https://v2.vidsrc.me/'
+                    })];
+            case 2:
+                htmlHashEmbed = _a.sent();
                 parseEmbed = parseEmbed.replace('https://rcp.vidsrc.me/rcp', 'https://v2.vidsrc.me/srcrcp');
                 libs.log({
                     parseEmbed: parseEmbed
                 }, PROVIDER, 'PARSE EMBED REPLACE');
-                return [4, libs.request_get(parseEmbed, {
-                        referer: 'https://v2.vidsrc.me/'
+                id = htmlHashEmbed.match(/data\-i\=\"([^\"]+)/i);
+                id = id ? id[1] : '';
+                hash = htmlHashEmbed.match(/data\-h\=\"([^\"]+)/i);
+                hash = hash ? hash[1] : '';
+                libs.log({ hash: hash, id: id }, PROVIDER, 'HLS');
+                if (!id || !hash) {
+                    return [2];
+                }
+                refererDirect = deobfstr(hash, id);
+                libs.log({ refererDirect: refererDirect }, PROVIDER, 'refererDirect');
+                if (!refererDirect) {
+                    return [2];
+                }
+                if (_.startsWith(refererDirect, '/')) {
+                    refererDirect = 'https:' + refererDirect;
+                }
+                return [4, fetch(refererDirect, {
+                        headers: {
+                            Referer: 'https://v2.vidsrc.me/'
+                        },
+                        redirect: 'manual',
+                        method: 'HEAD'
                     })];
-            case 2:
-                parseHls = _a.sent();
-                hlsData = [];
-                hls1 = parseHls.match(/hls\.loadSource\( *\"([^\"]+)/i);
-                if (hls1) {
-                    hlsData.push(hls1 ? hls1[1] : '');
-                }
-                hls2 = parseHls.match(/video\.setAttribute\(\"src\" *\, *\"([^\"]+)/i);
-                if (hls2) {
-                    hlsData.push(hls2 ? hls2[1] : '');
-                }
-                libs.log({ hlsData: hlsData }, PROVIDER, 'HLS DIRECT LINK');
-                _i = 0, hlsData_1 = hlsData;
-                _a.label = 3;
             case 3:
-                if (!(_i < hlsData_1.length)) return [3, 6];
-                hlsItem = hlsData_1[_i];
-                return [4, libs.embed_callback(hlsItem, PROVIDER, PROVIDER, 'HLS', callback, 1, [], [{ file: hlsItem, quality: 1080 }], {
-                        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
-                        referer: 'https://vidsrc.stream/',
-                    })];
+                fetchHeader = _a.sent();
+                libs.log({ fetchHeader: fetchHeader }, PROVIDER, 'fetchHeader');
+                streamUrl = fetchHeader.url;
+                libs.log({ streamUrl: streamUrl }, PROVIDER, 'STREAM URL');
+                if (!streamUrl) {
+                    return [2];
+                }
+                return [4, libs.request_get(streamUrl, {
+                        Referer: 'https://v2.vidsrc.me/'
+                    }, false)];
             case 4:
-                _a.sent();
-                _a.label = 5;
-            case 5:
-                _i++;
-                return [3, 3];
-            case 6: return [2, true];
+                parseStream = _a.sent();
+                hls = parseStream.match(/var *hls_url *\= *\"([^\"]+)/i);
+                hls = hls ? hls[1] : '';
+                libs.log({ hls: hls }, PROVIDER, "HLS");
+                if (!hls) {
+                    return [2];
+                }
+                libs.embed_callback(hls, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: hls, quality: 1080 }], {
+                    Referer: streamUrl,
+                });
+                return [2, true];
         }
     });
 }); };
