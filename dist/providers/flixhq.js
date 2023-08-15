@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_f.label) {
             case 0:
                 PROVIDER = 'LFLIXHQ';
-                DOMAIN = "https://consumet-railway.justchill.tv";
+                DOMAIN = "https://pleasedontspam.justchill.tv";
                 headers = {};
                 urlSearch = "".concat(DOMAIN, "/movies/flixhq/").concat(libs.url_slug_search(movieInfo, '+'));
                 return [4, libs.request_get(urlSearch, headers)];
