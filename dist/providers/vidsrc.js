@@ -45,12 +45,13 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }
         return _0x4c518c;
     }
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, parseEmbed, hashEmbed, htmlHashEmbed, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls;
+    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, parseEmbed, hashEmbed, htmlHashEmbed, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 PROVIDER = 'RVIDSRC';
                 DOMAIN = "https://v2.vidsrc.me";
+                userAgent = libs.request_getRandomUserAgent();
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
                     urlSearch = "".concat(DOMAIN, "/embed/").concat(movieInfo.imdb_id, "/").concat(movieInfo.season, "-").concat(movieInfo.episode);
@@ -59,7 +60,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     urlSearch = "".concat(DOMAIN, "/embed/").concat(movieInfo.imdb_id);
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
-                return [4, libs.request_get(urlSearch, {}, true)];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                    }, true)];
             case 1:
                 parseSearch = _a.sent();
                 parseEmbed = parseSearch('#player_iframe').attr('src');
@@ -72,7 +75,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 hashEmbed = parseEmbed;
                 return [4, libs.request_get(hashEmbed, {
-                        referer: 'https://v2.vidsrc.me/'
+                        referer: 'https://v2.vidsrc.me/',
+                        'user-agent': userAgent,
                     })];
             case 2:
                 htmlHashEmbed = _a.sent();
@@ -98,7 +102,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 return [4, fetch(refererDirect, {
                         headers: {
-                            Referer: 'https://v2.vidsrc.me/'
+                            Referer: 'https://v2.vidsrc.me/',
+                            'user-agent': userAgent,
                         },
                         redirect: 'manual',
                         method: 'HEAD'
@@ -112,7 +117,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 return [4, libs.request_get(streamUrl, {
-                        Referer: 'https://v2.vidsrc.me/'
+                        Referer: 'https://v2.vidsrc.me/',
+                        'user-agent': userAgent,
                     }, false)];
             case 4:
                 parseStream = _a.sent();
