@@ -75,7 +75,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 hashEmbed = parseEmbed;
                 return [4, libs.request_get(hashEmbed, {
-                        referer: 'https://v2.vidsrc.me/',
+                        referer: parseEmbed,
                         'user-agent': userAgent,
                     })];
             case 2:
@@ -102,7 +102,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 return [4, fetch(refererDirect, {
                         headers: {
-                            Referer: 'https://v2.vidsrc.me/',
+                            Referer: hashEmbed,
                             'user-agent': userAgent,
                         },
                         redirect: 'manual',
@@ -117,8 +117,17 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 return [4, libs.request_get(streamUrl, {
-                        Referer: 'https://v2.vidsrc.me/',
+                        Referer: refererDirect,
                         'user-agent': userAgent,
+                        Host: 'vidsrc.stream',
+                        'Connection': 'keep-alive',
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                        'Sec-Fetch-Site': 'cross-site',
+                        'Sec-Fetch-Mode': 'navigate',
+                        'Sec-Fetch-Dest': 'iframe',
+                        'Sec-Fetch-User': '?1',
+                        'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
+                        'Accept-Language': 'en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7'
                     }, false)];
             case 4:
                 parseStream = _a.sent();
@@ -130,6 +139,19 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 libs.embed_callback(hls, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: hls, quality: 1080 }], {
                     Referer: streamUrl,
+                    'User-Agent': userAgent,
+                    Host: 'sd.putgate.org',
+                    Connection: 'keep-alive',
+                    'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
+                    DNT: '1',
+                    'sec-ch-ua-mobile': '?0',
+                    'sec-ch-ua-platform': '"macOS"',
+                    Accept: '*/*',
+                    Origin: 'https://vidsrc.stream',
+                    'Sec-Fetch-Site': 'cross-site',
+                    'Sec-Fetch-Mode': 'cors',
+                    'Sec-Fetch-Dest': 'empty',
+                    'Accept-Language': 'en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7'
                 });
                 return [2, true];
         }
