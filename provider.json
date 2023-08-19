@@ -17,6 +17,7 @@
 		"dist/providers/cineb.js",
 		"dist/providers/vumoo.js",
 		"dist/providers/m4ufree.js",
-		"dist/providers/vidsrc.js"
+		"dist/providers/vidsrc.js",
+		"dist/providers/blackvid.js"
 	]
 }
