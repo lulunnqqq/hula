@@ -45,7 +45,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }
         return _0x4c518c;
     }
-    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, parseEmbed, parseHls, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls, domainEmbed;
+    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, parseEmbed, parseHls, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls, setPass, parseSetPass, domainEmbed;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -130,12 +130,20 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseStream = _a.sent();
                 hls = parseStream.match(/var *hls_url *\= *\"([^\"]+)/i);
                 hls = hls ? hls[1] : '';
-                libs.log({ hls: hls, streamUrl: streamUrl }, PROVIDER, "HLS");
+                setPass = parseStream.match(/(tm[0-9]+p.vidsrc.stream\/set_pass.php\?[A-z0-9\=]+)/i);
+                setPass = setPass ? setPass[1] : '';
+                libs.log({ hls: hls, streamUrl: streamUrl, setPass: setPass }, PROVIDER, "HLS");
                 if (!hls) {
                     return [2];
                 }
+                setPass = "https://".concat(setPass);
+                return [4, libs.request_get(setPass, {
+                        Referer: streamUrl
+                    })];
+            case 5:
+                parseSetPass = _a.sent();
                 domainEmbed = libs.url_extractHostname(hls);
-                libs.log({ domainEmbed: domainEmbed }, PROVIDER, "DOMAIN EMBED");
+                libs.log({ domainEmbed: domainEmbed, parseSetPass: parseSetPass }, PROVIDER, "DOMAIN EMBED");
                 libs.embed_callback(hls, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: hls, quality: 1080 }], {
                     Referer: streamUrl,
                     'User-Agent': userAgent,
