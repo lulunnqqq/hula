@@ -45,7 +45,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }
         return _0x4c518c;
     }
-    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, parseEmbed, hashEmbed, htmlHashEmbed, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls;
+    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, parseEmbed, parseHls, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls, domainEmbed;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -73,20 +73,17 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (_.startsWith(parseEmbed, '/')) {
                     parseEmbed = "https:".concat(parseEmbed);
                 }
-                hashEmbed = parseEmbed;
-                return [4, libs.request_get(hashEmbed, {
-                        referer: parseEmbed,
-                        'user-agent': userAgent,
-                    })];
-            case 2:
-                htmlHashEmbed = _a.sent();
-                parseEmbed = parseEmbed.replace('https://rcp.vidsrc.me/rcp', 'https://v2.vidsrc.me/srcrcp');
                 libs.log({
                     parseEmbed: parseEmbed
                 }, PROVIDER, 'PARSE EMBED REPLACE');
-                id = htmlHashEmbed.match(/data\-i\=\"([^\"]+)/i);
+                return [4, libs.request_get(parseEmbed, {
+                        referer: urlSearch
+                    })];
+            case 2:
+                parseHls = _a.sent();
+                id = parseHls.match(/data\-i\=\"([^\"]+)/i);
                 id = id ? id[1] : '';
-                hash = htmlHashEmbed.match(/data\-h\=\"([^\"]+)/i);
+                hash = parseHls.match(/data\-h\=\"([^\"]+)/i);
                 hash = hash ? hash[1] : '';
                 libs.log({ hash: hash, id: id }, PROVIDER, 'HLS');
                 if (!id || !hash) {
@@ -102,7 +99,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 return [4, fetch(refererDirect, {
                         headers: {
-                            Referer: hashEmbed,
+                            Referer: parseEmbed,
                             'user-agent': userAgent,
                         },
                         redirect: 'manual',
@@ -133,21 +130,22 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseStream = _a.sent();
                 hls = parseStream.match(/var *hls_url *\= *\"([^\"]+)/i);
                 hls = hls ? hls[1] : '';
-                libs.log({ hls: hls }, PROVIDER, "HLS");
+                libs.log({ hls: hls, streamUrl: streamUrl }, PROVIDER, "HLS");
                 if (!hls) {
                     return [2];
                 }
+                domainEmbed = libs.url_extractHostname(hls);
+                libs.log({ domainEmbed: domainEmbed }, PROVIDER, "DOMAIN EMBED");
                 libs.embed_callback(hls, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: hls, quality: 1080 }], {
                     Referer: streamUrl,
                     'User-Agent': userAgent,
-                    Host: 'sd.putgate.org',
+                    Host: domainEmbed,
                     Connection: 'keep-alive',
                     'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
                     DNT: '1',
                     'sec-ch-ua-mobile': '?0',
                     'sec-ch-ua-platform': '"macOS"',
                     Accept: '*/*',
-                    Origin: 'https://vidsrc.stream',
                     'Sec-Fetch-Site': 'cross-site',
                     'Sec-Fetch-Mode': 'cors',
                     'Sec-Fetch-Dest': 'empty',
