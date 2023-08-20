@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, unpack, sources, parseSource, _i, _a, item, quality, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality, e_1;
+    var PROVIDER, DOMAIN, urlSearch, urlReferer, parseSearch, unpack, sources, parseSource, _i, _a, item, quality, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality, e_1;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -49,7 +49,13 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (movieInfo.type == 'tv') {
                     urlSearch = "".concat(DOMAIN, "/js/blackvid.js?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
-                return [4, libs.request_get(urlSearch, {})];
+                urlReferer = "".concat(DOMAIN, "/embed?tmdb=").concat(movieInfo.tmdb_id);
+                if (movieInfo.type == 'tv') {
+                    urlReferer = "".concat(DOMAIN, "/embed?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
+                }
+                return [4, libs.request_get(urlSearch, {
+                        Referer: urlReferer,
+                    })];
             case 2:
                 parseSearch = _c.sent();
                 libs.log({ parseSearch: parseSearch }, PROVIDER, 'SEARCH DATA');
