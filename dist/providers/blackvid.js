@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, urlReferer, parseSearch, unpack, sources, parseSource, _i, _a, item, quality, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality, e_1;
+    var PROVIDER, DOMAIN, userAgent, urlSearch, urlReferer, parseSearch, unpack, sources, parseSource, _i, _a, item, quality, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality, e_1;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -45,6 +45,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _c.label = 1;
             case 1:
                 _c.trys.push([1, 8, , 9]);
+                userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36';
                 urlSearch = "".concat(DOMAIN, "/js/blackvid.js?tmdb=").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
                     urlSearch = "".concat(DOMAIN, "/js/blackvid.js?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
@@ -55,10 +56,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 return [4, libs.request_get(urlSearch, {
                         Referer: urlReferer,
+                        'user-agent': userAgent,
                     })];
             case 2:
                 parseSearch = _c.sent();
-                libs.log({ parseSearch: parseSearch }, PROVIDER, 'SEARCH DATA');
+                libs.log({ parseSearch: parseSearch, urlReferer: urlReferer, urlSearch: urlSearch }, PROVIDER, 'SEARCH DATA');
                 unpack = libs.string_unpack(parseSearch);
                 libs.log({
                     unpack: unpack,
