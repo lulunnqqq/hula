@@ -45,10 +45,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }
         return _0x4c518c;
     }
-    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, parseEmbed, parseHls, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls, setPass, parseSetPass, domainEmbed;
+    var PROVIDER, DOMAIN, userAgent, urlSearch, parseSearch, parseEmbed, parseHls, id, hash, refererDirect, fetchHeader, streamUrl, parseStream, hls, setPass, parseSetPass, domainEmbed, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 6, , 7]);
                 PROVIDER = 'RVIDSRC';
                 DOMAIN = "https://v2.vidsrc.me";
                 userAgent = libs.request_getRandomUserAgent();
@@ -160,6 +161,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     'Accept-Language': 'en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7'
                 });
                 return [2, true];
+            case 6:
+                e_1 = _a.sent();
+                return [3, 7];
+            case 7: return [2];
         }
     });
 }); };

@@ -36,18 +36,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, unpack, sources, parseSource, _i, _a, item, quality, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality;
+    var PROVIDER, DOMAIN, urlSearch, parseSearch, unpack, sources, parseSource, _i, _a, item, quality, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality, e_1;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
                 PROVIDER = 'ZBlackVid';
                 DOMAIN = "https://blackvid.space";
+                _c.label = 1;
+            case 1:
+                _c.trys.push([1, 8, , 9]);
                 urlSearch = "".concat(DOMAIN, "/js/blackvid.js?tmdb=").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
                     urlSearch = "".concat(DOMAIN, "/js/blackvid.js?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
                 return [4, libs.request_get(urlSearch, {})];
-            case 1:
+            case 2:
                 parseSearch = _c.sent();
                 libs.log({ parseSearch: parseSearch }, PROVIDER, 'SEARCH DATA');
                 unpack = libs.string_unpack(parseSearch);
@@ -62,20 +65,20 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseSource = JSON.parse(sources);
                 libs.log({ parseSource: parseSource.a }, PROVIDER, 'PARSE SOURCE');
                 _i = 0, _a = parseSource.a;
-                _c.label = 2;
-            case 2:
-                if (!(_i < _a.length)) return [3, 6];
+                _c.label = 3;
+            case 3:
+                if (!(_i < _a.length)) return [3, 7];
                 item = _a[_i];
                 libs.log({ item: item }, PROVIDER, 'ITEM');
                 quality = item.quality.match(/([0-9]+)/i);
                 quality = quality ? Number(quality[1]) : 1080;
-                if (!(item.url.indexOf('playlist.m3u8') != -1)) return [3, 4];
+                if (!(item.url.indexOf('playlist.m3u8') != -1)) return [3, 5];
                 return [4, libs.request_get(item.url, {})];
-            case 3:
+            case 4:
                 directSizes = _c.sent();
                 patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
                 if (!patternSize) {
-                    return [3, 5];
+                    return [3, 6];
                 }
                 directQuality = [];
                 libs.log({ patternSize: patternSize }, PROVIDER, 'PATTERN SIZE');
@@ -93,18 +96,22 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     });
                 }
                 if (!directQuality.length) {
-                    return [3, 5];
+                    return [3, 6];
                 }
                 libs.log({ directQuality: directQuality }, PROVIDER, 'DIRECT QUALITY');
                 libs.embed_callback(item.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality);
-                return [3, 5];
-            case 4:
-                libs.embed_callback(item.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: item.url, quality: quality }]);
-                _c.label = 5;
+                return [3, 6];
             case 5:
+                libs.embed_callback(item.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: item.url, quality: quality }]);
+                _c.label = 6;
+            case 6:
                 _i++;
-                return [3, 2];
-            case 6: return [2];
+                return [3, 3];
+            case 7: return [3, 9];
+            case 8:
+                e_1 = _c.sent();
+                return [3, 9];
+            case 9: return [2];
         }
     });
 }); };
