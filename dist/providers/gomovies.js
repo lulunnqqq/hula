@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
     function decryptGomoviesJson(str, key) {
-        if (key === void 0) { key = 111; }
+        if (key === void 0) { key = 118; }
         var b = "";
         for (var i = 0; i < str.length;) {
             for (var j = 0; (j < key.toString().length && i < str.length); j++, i++) {
