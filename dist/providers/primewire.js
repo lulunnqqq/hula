@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    function decryptGomoviesJson(str, key) {
-        if (key === void 0) { key = 119; }
+    function decryptGomoviesJson(str) {
+        key = dKey_1;
         var b = "";
         for (var i = 0; i < str.length;) {
             for (var j = 0; (j < key.toString().length && i < str.length); j++, i++) {
@@ -46,7 +46,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }
         return b;
     }
-    var PROVIDER, DOMAIN, urlSearch, parseSearch_1, LINK_DETAIL_1, LINK_TV_DETAIL_1, parseTvDetail_1, htmlDetail, sKey, serverEndpoint, cookieDetail, urlServer, cookieDatas, item, parseCookieData, headers, htmlServer, parseServer_1, servers_2, directQuality, qualities, _i, servers_1, item, urlGetIframe, dataIframe, encode, parseEncode, parseFirstEncode, _a, qualities_1, qualityItem, urlReplace, e_1;
+    var PROVIDER, DOMAIN, urlSearch, parseSearch_1, LINK_DETAIL_1, LINK_TV_DETAIL_1, parseTvDetail_1, htmlDetail, sKey, serverEndpoint, cookieDetail, urlServer, cookieDatas, item, parseCookieData, headers, htmlServer, parseServer_1, servers_2, evalData, evalData, unpacker, dKey_1, directQuality, qualities, _i, servers_1, item, urlGetIframe, dataIframe, encode, parseEncode, parseFirstEncode, _a, qualities_1, qualityItem, urlReplace, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -144,6 +144,18 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 htmlServer = _b.sent();
                 parseServer_1 = cheerio.load(htmlServer);
                 servers_2 = [];
+                evalData = htmlServer.match(/eval\(function\(p,a,c,k,e,.*\)\)/i);
+                evalData = evalData ? evalData[0] : '';
+                if (!evalData) {
+                    return [2];
+                }
+                unpacker = libs.string_unpacker_v2(evalData);
+                dKey_1 = unpacker.match(/\( *key *\=([A-z0-9]+)/i);
+                dKey_1 = dKey_1 ? dKey_1[1] : '';
+                libs.log({ dKey: dKey_1 }, PROVIDER, 'DKEY');
+                if (!dKey_1) {
+                    return [2];
+                }
                 libs.log({ length: parseServer_1('.JCsLCBlQBF').length }, PROVIDER, 'SERVER LENGTH');
                 parseServer_1('.JCsLCBlQBF').each(function (key, item) {
                     var serverName = parseServer_1(item).attr('data-value');
