@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    function decryptGomoviesJson(str, key) {
-        if (key === void 0) { key = 119; }
+    function decryptGomoviesJson(str) {
+        key = dKey_1;
         var b = "";
         for (var i = 0; i < str.length;) {
             for (var j = 0; (j < key.toString().length && i < str.length); j++, i++) {
@@ -46,7 +46,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }
         return b;
     }
-    var PROVIDER, DOMAIN, urlSearch, LINK_DETAIL_1, parseSearch_1, LINK_TV_DETAIL, parseTv, hrefTv, parseDetail, cookieData, serverData, serverUrl, cookieStr, index, parseServer_1, iframeUrls_2, qualities, directQuality, _i, iframeUrls_1, iframeItem, parseIframe, encode, parseEncode, parseFirstEncode, _a, qualities_1, qualityItem, urlReplace, e_1;
+    var PROVIDER, DOMAIN, urlSearch, LINK_DETAIL_1, parseSearch_1, LINK_TV_DETAIL, parseTv, hrefTv, htmlDetail, sKey, serverEndpoint, cookieDetail, urlServer, cookieDatas, item, parseCookieData, headers, htmlServer, parseServer_1, servers_2, evalData, evalData, unpacker, dKey_1, directQuality, qualities, _i, servers_1, item, urlGetIframe, dataIframe, encode, parseEncode, parseFirstEncode, _a, qualities_1, qualityItem, urlReplace, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -55,7 +55,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 urlSearch = "".concat(DOMAIN, "/search/").concat(libs.url_slug_search(movieInfo, '%20'));
                 _b.label = 1;
             case 1:
-                _b.trys.push([1, 14, , 15]);
+                _b.trys.push([1, 13, , 14]);
                 LINK_DETAIL_1 = '';
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 2:
@@ -106,63 +106,77 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.cookies_clearAll()];
             case 5:
                 _b.sent();
-                return [4, libs.request_get(LINK_DETAIL_1, {}, false)];
+                return [4, libs.request_get(LINK_DETAIL_1, {})];
             case 6:
-                parseDetail = _b.sent();
+                htmlDetail = _b.sent();
+                sKey = htmlDetail.match(/key *\: *\'([^\']+)/i);
+                sKey = sKey ? sKey[1] : '';
+                serverEndpoint = htmlDetail.match(/\/user\/servers\/([^\']+)/i);
+                serverEndpoint = serverEndpoint ? serverEndpoint[1] : '';
                 return [4, libs.cookies_get(LINK_DETAIL_1)];
             case 7:
-                cookieData = _b.sent();
-                return [4, libs.cookies_clearAll()];
-            case 8:
-                _b.sent();
-                libs.log({ cookieData: cookieData }, PROVIDER, "COOKIE DATA");
-                serverData = parseDetail.match(/var *url *\= *\'([^\']+)/i);
-                serverData = serverData ? serverData[1] : '';
-                libs.log({ serverData: serverData }, PROVIDER, 'SERVER DATA');
-                if (!serverData) {
+                cookieDetail = _b.sent();
+                libs.log({ sKey: sKey, serverEndpoint: serverEndpoint, cookieDetail: cookieDetail }, PROVIDER, 'SEVER DETAIL ENDPOINT');
+                if (!sKey || !serverEndpoint) {
                     return [2];
                 }
-                serverUrl = "".concat(DOMAIN).concat(serverData);
-                cookieStr = "";
-                for (index in cookieData) {
-                    cookieStr += "".concat(index, "=").concat(cookieData[index]['value']);
+                urlServer = "".concat(DOMAIN, "/user/servers/").concat(serverEndpoint);
+                cookieDatas = [];
+                for (item in cookieDetail) {
+                    cookieDatas.push("".concat(item, "=").concat(cookieDetail[item]['value']));
                 }
-                libs.log({ cookieStr: cookieStr }, PROVIDER, 'COOKIESTR');
-                return [4, libs.request_get(serverUrl, {
-                        cookie: cookieStr,
-                        referer: LINK_DETAIL_1,
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }, true)];
-            case 9:
-                parseServer_1 = _b.sent();
-                iframeUrls_2 = [];
-                parseServer_1('ul li').each(function (key, item) {
-                    var server = parseServer_1(item).attr('data-value');
-                    var iframeUrl = "".concat(LINK_DETAIL_1, "?server=").concat(server, "&_=").concat(Date.now());
-                    iframeUrls_2.push(iframeUrl);
+                parseCookieData = cookieDatas.join('; ');
+                libs.log({
+                    parseCookieData: parseCookieData
+                }, PROVIDER, 'PARSE COOKIE DATA');
+                headers = {
+                    'Cookie': parseCookieData
+                };
+                return [4, libs.request_get(urlServer, headers)];
+            case 8:
+                htmlServer = _b.sent();
+                parseServer_1 = cheerio.load(htmlServer);
+                servers_2 = [];
+                evalData = htmlServer.match(/eval\(function\(p,a,c,k,e,.*\)\)/i);
+                evalData = evalData ? evalData[0] : '';
+                if (!evalData) {
+                    return [2];
+                }
+                unpacker = libs.string_unpacker_v2(evalData);
+                dKey_1 = unpacker.match(/\( *key *\=([A-z0-9]+)/i);
+                dKey_1 = dKey_1 ? dKey_1[1] : '';
+                libs.log({ dKey: dKey_1 }, PROVIDER, 'DKEY');
+                if (!dKey_1) {
+                    return [2];
+                }
+                libs.log({ length: parseServer_1('.g_UavKPbNLcryInFccDwClQrzR').length }, PROVIDER, 'SERVER LENGTH');
+                parseServer_1('.g_UavKPbNLcryInFccDwClQrzR').each(function (key, item) {
+                    var serverName = parseServer_1(item).attr('data-value');
+                    if (serverName) {
+                        servers_2.push(serverName);
+                    }
                 });
-                libs.log({ iframeUrls: iframeUrls_2 }, PROVIDER, "iframeUrls");
-                qualities = [2160, 1440, 1080, 720, 480, 360];
                 directQuality = [];
-                _i = 0, iframeUrls_1 = iframeUrls_2;
-                _b.label = 10;
-            case 10:
-                if (!(_i < iframeUrls_1.length)) return [3, 13];
-                iframeItem = iframeUrls_1[_i];
-                return [4, libs.request_get(iframeItem, {
-                        cookie: cookieStr,
-                        referer: LINK_DETAIL_1,
-                        'X-Requested-With': 'XMLHttpRequest'
+                qualities = [2160, 1440, 1080, 720, 480, 360];
+                _i = 0, servers_1 = servers_2;
+                _b.label = 9;
+            case 9:
+                if (!(_i < servers_1.length)) return [3, 12];
+                item = servers_1[_i];
+                urlGetIframe = "".concat(LINK_DETAIL_1, "?server=").concat(item, "&_=").concat(Date.now());
+                return [4, libs.request_get(urlGetIframe, {
+                        Cookie: parseCookieData,
+                        'x-requested-with': 'XMLHttpRequest'
                     })];
-            case 11:
-                parseIframe = _b.sent();
-                encode = decryptGomoviesJson(libs.string_atob(parseIframe));
+            case 10:
+                dataIframe = _b.sent();
+                encode = decryptGomoviesJson(libs.string_atob(dataIframe));
                 libs.log({ encode: encode }, PROVIDER, "decryptGomoviesJson");
                 parseEncode = JSON.parse("{\"a\": ".concat(encode, "}"));
                 libs.log({ parseEncode: parseEncode }, PROVIDER, 'ENCODE');
                 parseFirstEncode = parseEncode['a'][0];
                 if (!parseFirstEncode) {
-                    return [3, 12];
+                    return [3, 11];
                 }
                 libs.log(parseFirstEncode, PROVIDER, 'PARSE FIRST ENCODE');
                 for (_a = 0, qualities_1 = qualities; _a < qualities_1.length; _a++) {
@@ -178,22 +192,22 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         });
                     }
                 }
-                _b.label = 12;
-            case 12:
+                _b.label = 11;
+            case 11:
                 _i++;
-                return [3, 10];
-            case 13:
+                return [3, 9];
+            case 12:
                 directQuality = _.orderBy(directQuality, ['quality'], ['desc']);
                 libs.log({ directQuality: directQuality }, PROVIDER, 'directQuality');
                 if (directQuality.length) {
                     libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality, {});
                 }
-                return [3, 15];
-            case 14:
+                return [3, 14];
+            case 13:
                 e_1 = _b.sent();
                 libs.log({ e: e_1 }, PROVIDER, 'ERROR');
-                return [3, 15];
-            case 15: return [2];
+                return [3, 14];
+            case 14: return [2];
         }
     });
 }); };
