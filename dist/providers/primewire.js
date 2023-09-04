@@ -40,8 +40,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         key = dKey_1;
         var b = "";
         for (var i = 0; i < str.length;) {
-            for (var j = 0; (j < key.toString().length && i < str.length); j++, i++) {
-                b += String.fromCharCode(str[i].charCodeAt(0) ^ key.toString()[j].charCodeAt(0));
+            for (var j = 0; (j < "111".toString().length && i < str.length); j++, i++) {
+                b += String.fromCharCode(str[i].charCodeAt(0) ^ "111".toString()[j].charCodeAt(0));
             }
         }
         return b;
