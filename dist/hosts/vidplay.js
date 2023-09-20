@@ -55,7 +55,7 @@ hosts["vidplay"] = function (url, movieInfo, provider, config, callback) { retur
                 _a.label = 2;
             case 2:
                 headers = {
-                    'Referer': "https://fmovies.to/",
+                    'Referer': "https://fmoviesz.to/",
                     'user-agent': libs.request_getRandomUserAgent()
                 };
                 callback({
