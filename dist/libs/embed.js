@@ -77,10 +77,11 @@ libs.embed_redirect = function (embed, quality, movieInfo, provider, callback, h
                         }, callback);
                         return [2];
                     }
-                    return [4, libs.request_head(embed, {})];
+                    return [4, libs.request_head(embed, headers)];
                 case 1:
                     headersData = _a.sent();
                     contentLength = headersData['content-length'];
+                    libs.log({ contentLength: contentLength }, 'CONTENT_LENGTH');
                     if (contentLength > 100000000) {
                         libs.embed_callback(embed, provider, host ? host : hostname.toUpperCase(), '', callback, 1, subs, [], headers);
                     }
