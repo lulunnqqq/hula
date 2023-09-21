@@ -114,7 +114,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!hlsUrl) {
                     return [2];
                 }
-                return [4, libs.embed_redirect(hlsUrl, '', movieInfo, PROVIDER, callback, undefined, [])];
+                return [4, libs.embed_redirect(hlsUrl, '', movieInfo, PROVIDER, callback, undefined, [], {}, {
+                        Referer: "https://w1.moviesapi.club/",
+                        Origin: "https://w1.moviesapi.club",
+                        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+                    })];
             case 4:
                 _a.sent();
                 return [3, 6];
