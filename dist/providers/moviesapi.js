@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var CryptoJSAesJson, PROVIDER, DOMAIN, urlSearch, parseSeach, iframeUrl, parseDetail, hashData, sKey, decryptData, hlsUrl, e_1;
+    var CryptoJSAesJson, PROVIDER, DOMAIN, urlSearch, parseSeach, iframeUrl, parseDetail, hashData, sKey, decryptData, hlsUrl, parseDirect, parseQuality, directQuality, newDomain, _i, parseQuality_1, item, quality, direct, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -114,13 +114,38 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!hlsUrl) {
                     return [2];
                 }
-                return [4, libs.embed_redirect(hlsUrl, '', movieInfo, PROVIDER, callback, undefined, [], {}, {
+                return [4, libs.request_get(hlsUrl, {
                         Referer: "https://w1.moviesapi.club/",
                         Origin: "https://w1.moviesapi.club",
                         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
                     })];
             case 4:
-                _a.sent();
+                parseDirect = _a.sent();
+                parseQuality = parseDirect.match(/[0-9]+.m3u8.*/ig);
+                directQuality = [];
+                newDomain = hlsUrl.replace(/video\.m3u8.*/i, '');
+                libs.log({ parseDirect: parseDirect, parseQuality: parseQuality, newDomain: newDomain }, PROVIDER, 'PARSE QUALITY');
+                for (_i = 0, parseQuality_1 = parseQuality; _i < parseQuality_1.length; _i++) {
+                    item = parseQuality_1[_i];
+                    libs.log({ item: item }, PROVIDER, "ITEM PARSE");
+                    quality = item.match(/([0-9]+).m3u8/i);
+                    quality = quality ? Number(quality[1]) : '720';
+                    direct = "".concat(newDomain).concat(item);
+                    directQuality.push({
+                        quality: quality,
+                        file: direct
+                    });
+                }
+                libs.log({ directQuality: directQuality }, PROVIDER, 'DIRECT URL');
+                if (!directQuality.length) {
+                    return [2];
+                }
+                directQuality = _.orderBy(directQuality, ['quality'], ['desc']);
+                libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality, {
+                    Referer: "https://w1.moviesapi.club/",
+                    Origin: "https://w1.moviesapi.club",
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+                });
                 return [3, 6];
             case 5:
                 e_1 = _a.sent();
