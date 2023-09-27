@@ -1,5 +1,6 @@
 {
 	"providers": [
+		"dist/providers/putactor.js",
 		"dist/providers/dbgo.js",
 		"dist/providers/2now.js",
 		"dist/providers/flixhq.js",
@@ -10,7 +11,6 @@
 		"dist/providers/allmovieforyou.js",
 		"dist/providers/onemar.js",
 		"dist/providers/idflix.js",
-		"dist/providers/dreamfilmsw.js",
 		"dist/providers/uniquestream.js",
 		"dist/providers/smashystream.js",
 		"dist/providers/rezka.js",
@@ -20,9 +20,6 @@
 		"dist/providers/vumoo.js",
 		"dist/providers/m4ufree.js",
 		"dist/providers/vidsrc.js",
-		"dist/providers/blackvid.js",
-		"dist/providers/jump1.js",
-		"dist/providers/primewire.js",
 		"dist/providers/vidsrcto.js",
 		"dist/providers/moviesapi.js"
 	]
