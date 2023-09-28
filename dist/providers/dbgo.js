@@ -190,6 +190,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     urlDirect = parseDirectItem.replace(/^\[[^\]]+\]/i, '');
                     urlDirect = urlDirect.split(' or ');
                     urlDirect = urlDirect[0].trim();
+                    urlDirect = urlDirect.replace("stream.voidboost.cc", "sparta.stream.voidboost.cc");
                     libs.log({
                         urlDirect: urlDirect,
                         quality: quality
