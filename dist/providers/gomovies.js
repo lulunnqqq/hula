@@ -40,18 +40,18 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         key = dKey_1;
         var b = "";
         for (var i = 0; i < str.length;) {
-            for (var j = 0; (j < "111".toString().length && i < str.length); j++, i++) {
-                b += String.fromCharCode(str[i].charCodeAt(0) ^ "111".toString()[j].charCodeAt(0));
+            for (var j = 0; (j < eKey_1.toString().length && i < str.length); j++, i++) {
+                b += String.fromCharCode(str[i].charCodeAt(0) ^ eKey_1.toString()[j].charCodeAt(0));
             }
         }
         return b;
     }
-    var PROVIDER, DOMAIN, urlSearch, LINK_DETAIL_1, parseSearch_1, LINK_TV_DETAIL, parseTv, hrefTv, htmlDetail, sKey, serverEndpoint, cookieDetail, urlServer, cookieDatas, item, parseCookieData, headers, htmlServer, parseServer_1, servers_2, evalData, evalData, unpacker, dKey_1, directQuality, qualities, _i, servers_1, item, urlGetIframe, dataIframe, encode, parseEncode, parseFirstEncode, _a, qualities_1, qualityItem, urlReplace, e_1;
+    var PROVIDER, DOMAIN, urlSearch, LINK_DETAIL_1, parseSearch_1, LINK_TV_DETAIL, parseTv, hrefTv, htmlDetail, sKey, serverEndpoint, cookieDetail, urlServer, cookieDatas, item, parseCookieData, headers, htmlServer, parseServer_1, servers_2, evalData, evalData, unpacker, dKey_1, eKey_1, directQuality, qualities, _i, servers_1, item, urlGetIframe, dataIframe, atobIframe, encode, parseEncode, parseFirstEncode, _a, qualities_1, qualityItem, urlReplace, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 PROVIDER = 'EGoMovies';
-                DOMAIN = "https://gomovies-online.com";
+                DOMAIN = "https://gomovies-online.cam";
                 urlSearch = "".concat(DOMAIN, "/search/").concat(libs.url_slug_search(movieInfo, '%20'));
                 _b.label = 1;
             case 1:
@@ -60,8 +60,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 2:
                 parseSearch_1 = _b.sent();
-                libs.log({ length: parseSearch_1('div._gory div.g_yFsxmKnYLvpKDTrdbizeYMWy').length }, PROVIDER, 'SEARCH LENGTH');
-                parseSearch_1('div._gory div.g_yFsxmKnYLvpKDTrdbizeYMWy').each(function (key, item) {
+                libs.log({ length: parseSearch_1('div._sHEtclpQfvc div._smQamBQsETb').length }, PROVIDER, 'SEARCH LENGTH');
+                parseSearch_1('div._sHEtclpQfvc div._smQamBQsETb').each(function (key, item) {
                     var title = parseSearch_1(item).attr('data-filmname');
                     var year = parseSearch_1(item).attr('data-year');
                     var herf = parseSearch_1(item).find('a').attr('href');
@@ -89,7 +89,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(LINK_DETAIL_1, {}, true)];
             case 3:
                 parseTv = _b.sent();
-                hrefTv = parseTv("div#g_MXOzFGouZrOAUioXjpddqkZK a:nth-child(".concat(movieInfo.episode, ")")).attr('href');
+                hrefTv = parseTv("div._smGdwUYyTtP a:nth-child(".concat(movieInfo.episode, ")")).attr('href');
                 libs.log({ hrefTv: hrefTv }, PROVIDER, 'HREF TV');
                 if (hrefTv) {
                     LINK_TV_DETAIL = "".concat(DOMAIN).concat(hrefTv);
@@ -145,12 +145,14 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 unpacker = libs.string_unpacker_v2(evalData);
                 dKey_1 = unpacker.match(/\( *key *\=([A-z0-9]+)/i);
                 dKey_1 = dKey_1 ? dKey_1[1] : '';
-                libs.log({ dKey: dKey_1 }, PROVIDER, 'DKEY');
-                if (!dKey_1) {
+                eKey_1 = unpacker.match(/j *\< *\"([^\"]+)/i);
+                eKey_1 = eKey_1 ? eKey_1[1] : "";
+                libs.log({ dKey: dKey_1, eKey: eKey_1 }, PROVIDER, 'DKEY');
+                if (!dKey_1 || !eKey_1) {
                     return [2];
                 }
-                libs.log({ length: parseServer_1('.g_UavKPbNLcryInFccDwClQrzR').length }, PROVIDER, 'SERVER LENGTH');
-                parseServer_1('.g_UavKPbNLcryInFccDwClQrzR').each(function (key, item) {
+                libs.log({ length: parseServer_1('._sagnziBWakb').length }, PROVIDER, 'SERVER LENGTH');
+                parseServer_1('._sagnziBWakb').each(function (key, item) {
                     var serverName = parseServer_1(item).attr('data-value');
                     if (serverName) {
                         servers_2.push(serverName);
@@ -170,7 +172,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     })];
             case 10:
                 dataIframe = _b.sent();
-                encode = decryptGomoviesJson(libs.string_atob(dataIframe));
+                atobIframe = libs.string_atob("ShNRUEFRWVAQC0VARFQeE0dbVEYQCxMOVVhEEVJeUEJBDG0QXF5WUF0fWVRTVVRAbRMMbV8SERESDVkGEVJeUEJBDG0QXF5WUF0fRVhGXVRuExFBRUheVAxuE0FTVVVbX1YIEQEJbRMMclBCRVJaUA1uHlkGD21cDW0dVVhED21cDVVbRxFRXVBBQgxuE1xdVVBeHFNdVUhuEw9uXxESEREOV15AXBFbVQxuE0FeUEhXQxxRUEFGUllTbRMSUFJGWF5cDG0QbR5FUEVRWRxfXkdbVG0dW15aXxxFWFJZHFJaUEFGVEMfBW0dYHABfXdmQgIfXl9eWF9XHFddQxxUQ1RXH1lGXF0NQlRAR1RADEJXQ0dXQ24AF1BfQQptDAAECAUCAAYFAQkLAQJuExFfVEVaXlUPbRNCXkJGbRMSXl9BRFNfWEUPbRNXR1RcRR9CQ1REVF9GdVRUUEReRRkbCmFeUEhXQx9AVFJTQVJaUGJHU1xbRRkWGRcRAQILChJCXVBLVEMfUlBCRVJaUBcRAQILChgeEUVaWEIbCkNXRURAXxFUUF1BVApuEw9uXw1bX0FHRRFGSEFXDG0QWVhWVVRcbRMSX1BfVAxuE25RQkNUHFdAXl9GVF9WbRMSR1BeRFQPbRNrAnBKYmd/SWBkVnZ5WlZAdnkCSVNVQnpWS1YcV3JnUn1bXW0dc2JoRnd1AXZ7YGBBcFwGe3JjDAxuEw8SERESDUJGSF1XD21cERESERESERERQV1TSFRAHFJTQUVRWVASWFxVbV8SERESERESEUpuXxESERESERESERESEVVbQkFeUEgIEVNeXlJZCm1cERESERESERESERESXFBAVlhcCxEDAUFKEVBHRV4JbV8SERESERESERESERFQXkNWVEMfQ1BWWERBCxEHQUkJbV8SERESERESEUxuXxESERESERESElxdVVBeblNeXlJZER9fXlVTXRxWWFBeXlYSH1xdVVBeHFddXkVXQxEcVm5Ed3ZRXFRVX2F2aFh2aVdcXUBZZWZfYnVJbV9uRRESERESERESQVBWVVhcVgsSAAFCSREAAUFKERBbXEFdQ0VTX0UJbV9uRRESERESERESV15cRRxBWEtXCxEDBUFKERBbXEFdQ0VTX0UJbV8SERESERESEUxuXxESEREObR5BRUheVA9uXxESEREOQRFRXVBBQgxuE1xdVVBeblVXQlJuExFBRUheVAxuE1xTQ1ZbXxxQXkVGXlwIEQBAVFwJbRMMbV8SERESERESEXVHVBFGXhFBSEJGVFwSXkdXQ11dUFUeEUhdRBFcVFRWEUVdEVRcRVRAEUVaVBFBVFJHQ1hGSBFRXlVXEUVdEUJGUENGEUZTRVJaWF9VEUVaVBFEWFVXXhESEREObR5CD21cERESEQ1WWEcSQkVLXVQPFlVbQkFeUEgIEV9dX1QJFhFbVQxuE19dX2NXUlBCRVJaUG0QDw1uHlVbRw9uXxESEREOVVhEEVJeUEJBDG0QV15AXBxVQ15HQRFUWFReVRxRWVRRWlJTQVJaUFxdVVReSFhbHFJTQUVRWVASQ1RDRFhAVFVuEw9uX21cDVhfVhFbVQxuE1JaVFJZUlBCUllTXF5WVF1LWFgfUlBCRVJaUBxbXFBVVG0QEUJAUgxuE20dQlhGVG0dUlBCRVJaUA5EDAcGVwlTCVBXBAIGBgVuExFTXUUPbRNuEw8SDVhcQURGEUVLQVQPbRNGVElGbRMSWFUPbRNRWVRRWlJTQVJaUFxdVVReSFhbHFJTQUVRWVBuExFRXVBBQgxuE1ddQ1wfUl5cRUNdXW0QEV9TXFQPbRNRWVRRWnJTQVJaUHxdVVReaFhbalJTQUVRWVBvbRMMbV9uXw1WWEcSUl1TQkIPbRNaVF1CHFNeXlJZbRMMDW0dVVhED21cDW0dVVhEDxESEREOVVhEEVJeUEJBDG0QXF5WUF0fV15dRVRAbRMSQkVLXVQPbRNCUFVWWF9VCxEDBEFKEQEJbRMMbV8SERESERESEQ1WWEcSUl1TQkIPbRNUXkNfblZAXkRCEUJHU1xbRW0QD21cERESERESERESERESDVVbRxFRXVBBQgxuE1ZtR3d1UlxXVl9idWhbdWlUX11DWmVlXGJ2bRMSXl9RXVhRWgxuE1REVF9GH0FAVEdXX0V2VFdTRF1GGRgJYV1TSFRAH0NXUlBCUllTYkRQXFhGGRUaFhJCXVBLVEMfUlBCRVJaUBYbHRFGWVhBGApAVEVHQ18SV1BeQlQJbRMMYkRQXFhGDW0dVVhED21cERESERESEREObR5WWEcMbV8SERESDW0dVVhED21cERESEQ1uHlddQ1wMDW0dVVhEDxNP");
+                libs.log({ atobIframe: atobIframe }, PROVIDER, "ATOB IFRAME");
+                encode = decryptGomoviesJson(atobIframe);
                 libs.log({ encode: encode }, PROVIDER, "decryptGomoviesJson");
                 parseEncode = JSON.parse("{\"a\": ".concat(encode, "}"));
                 libs.log({ parseEncode: parseEncode }, PROVIDER, 'ENCODE');
