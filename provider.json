@@ -1,5 +1,6 @@
 {
-	"providers": [
+	"providers": [	
+		"dist/providers/susflix.js",
 		"dist/providers/lookmovie.js",
 		"dist/providers/dbgo.js",
 		"dist/providers/2now.js",
