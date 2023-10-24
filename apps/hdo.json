@@ -15,11 +15,11 @@
     "android_key": "8d6d91941230817f7807d643736e8a49"
   },
   "update_release": {
-    "version": "3.4",
-    "url": "https://github.com/hdoonline/hdonline/releases/download/v2.0.18/hdo-2.0.18.apk",
-    "contents1": "Remove ads in detail when use external player.",
-    "contents2": "Improvement and stability.",
-    "contents3": "Update more source.",
+    "version": "3.9",
+    "url": "https://github.com/hdoonline/hdonline/releases/download/v2.0.19/hdo-2.0.19.apk",
+    "contents1": "Improvement and stability.",
+    "contents2": "Update more source.",
+    "contents3": "",
     "force_update": false,
     "isUpdate": true
   },
