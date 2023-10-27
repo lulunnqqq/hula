@@ -1,11 +1,11 @@
 {
   "notification": {
     "url": "https://hdo.app/howtotv.html",
-    "title": "Hot New",
-    "contents": "<p>Hot!!! Android TV new version has available right now.</p>",
-    "btn_title": "See more",
+    "title": "New Broadcast channel",
+    "contents": "<p>Join our new broadcast channel for latest news.</p>",
+    "btn_title": "Join Us",
     "show": true,
-    "key": "NOTI_1.5"
+    "key": "NOTI_1.6"
   },
   "ads_config": {
     "init_ads": "admob"
