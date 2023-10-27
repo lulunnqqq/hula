@@ -20,7 +20,7 @@
     "contents1": "Improvement and stability.",
     "contents2": "Update more source.",
     "contents3": "",
-    "force_update": false,
+    "force_update": true,
     "isUpdate": true
   },
   "app_player_config": {
