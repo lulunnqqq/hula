@@ -95,11 +95,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 return [4, libs.request_get(iframeUrl, {
-                        Referer: urlSearch
+                        Referer: "https://ww1.moviesapi.club/"
                     })];
             case 3:
                 parseDetail = _a.sent();
-                hashData = parseDetail.match(/JScript *\= *\'([^\']+)/i);
+                hashData = parseDetail.match(/JScripts *\= *\'([^\']+)/i);
                 hashData = hashData ? hashData[1] : '';
                 libs.log({ hashData: hashData }, PROVIDER, 'HASH DATA');
                 if (!hashData) {
@@ -123,7 +123,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 scriptIFrame_1 = scriptIFrame_1.replace(');1abc', ';');
                 libs.log({ scriptIFrame: scriptIFrame_1 }, PROVIDER, 'PARSE SCRIPT IFRAME');
                 eval(scriptIFrame_1);
-                sKey = result.match(/JScript\, *\'([^\']+)/i);
+                sKey = result.match(/JScripts\, *\'([^\']+)/i);
                 sKey = sKey ? sKey[1] : '';
                 libs.log({ result: result, sKey: sKey }, PROVIDER, 'PARSE RESULT');
                 decryptData = CryptoJSAesJson.decrypt(hashData, sKey);
