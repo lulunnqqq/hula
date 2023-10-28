@@ -41,7 +41,7 @@ hosts["mcloud"] = function (url, movieInfo, provider, config, callback) { return
         switch (_a.label) {
             case 0:
                 userAgent = libs.request_getRandomUserAgent();
-                DOMAIN = 'https://mcloud.to';
+                DOMAIN = 'https://mcloud.bz';
                 HOST = 'MCloud';
                 subParse = url.match(/\?sub\.info\=([^\&]+)/i);
                 subParse = subParse ? decodeURIComponent(subParse[1]) : '';
