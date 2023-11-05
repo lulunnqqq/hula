@@ -1,5 +1,7 @@
 {
 	"providers": [	
+		
+		"dist/providers/remotestream.js",
 		"dist/providers/susflix.js",
 		"dist/providers/lookmovie.js",
 		"dist/providers/dbgo.js",
