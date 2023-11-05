@@ -16,6 +16,7 @@
 		"dist/providers/m4ufree.js",
 		"dist/providers/vidsrcto.js",
 		"dist/providers/moviesapi.js",
-		"dist/providers/gomovies.js"
+		"dist/providers/gomovies.js",
+		"dist/providers/streamflix.js"
 	]
 }
