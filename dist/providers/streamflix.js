@@ -92,7 +92,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (DETAIL_HREF.indexOf('.mkv') != -1) {
                     return [2];
                 }
-                DETAIL_HREF = "https://watchfree.blob.core.windows.net/watchfree" + DETAIL_HREF;
+                DETAIL_HREF = "https://watchfree.blob.core.windows.net/watchfree" + DETAIL_HREF.replace(/ /g, '%20');
                 libs.log({ DETAIL_HREF: DETAIL_HREF }, PROVIDER, 'DETAIL HREF');
                 return [4, libs.request_get(DETAIL_HREF, {}, false)];
             case 3:
