@@ -6,9 +6,9 @@
     "force_update": true
   },
   "app_player_config": {
-    "player_apk_url": "https://github.com/hdoonline/player/releases/download/v1.0.14/mediaon-1.0.14.apk",
-    "player_version_build": 13,
+    "player_apk_url": "https://github.com/hdoonline/player/releases/download/v1.0.17/mediaon-1.0.17.apk",
+    "player_version_build": 17,
     "player_is_install_force": false,
-    "force_player": false
+    "force_player": true
   }
 }
