@@ -9,6 +9,6 @@
     "player_apk_url": "https://github.com/hdoonline/player/releases/download/v1.0.17/mediaon-1.0.17.apk",
     "player_version_build": 17,
     "player_is_install_force": false,
-    "force_player": true
+    "force_player": false
   }
 }
