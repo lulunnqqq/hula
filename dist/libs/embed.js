@@ -419,7 +419,7 @@ libs.embed_fmovies_id = function (hash, headers, embedUrl) { return __awaiter(_t
                 if (Array.isArray(hash)) {
                     return [2, hash];
                 }
-                return [4, libs.request_get("https://raw.githubusercontent.com/enimax-anime/key/e4/key.txt")];
+                return [4, libs.request_get("https://raw.githubusercontent.com/theonlymo/keys/e1/key")];
             case 2:
                 secretKey = _a.sent();
                 encryptedURLTemp = hash.split("");
