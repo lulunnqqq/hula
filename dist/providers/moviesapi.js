@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var CryptoJSAesJson, PROVIDER, DOMAIN, urlSearch, parseSeach, iframeUrl, parseDetail, hashData, cParseDetail_1, scriptIFrame_1, result, sKey, decryptData, hlsUrl, parseDirect, parseQuality, directQuality, newDomain, _i, parseQuality_1, item, quality, direct, e_1;
+    var CryptoJSAesJson, PROVIDER, DOMAIN, urlSearch, parseSeach, iframeUrl, parseDetail, hashData, sKey, decryptData, hlsUrl, parseDirect, parseQuality, directQuality, newDomain, _i, parseQuality_1, item, quality, direct, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -114,27 +114,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!hashData) {
                     return [2];
                 }
-                cParseDetail_1 = cheerio.load(parseDetail);
-                scriptIFrame_1 = '';
-                cParseDetail_1('script').each(function (key, item) {
-                    var evalScript = cParseDetail_1(item).text();
-                    if (evalScript.indexOf('eval(') != -1) {
-                        scriptIFrame_1 = evalScript;
-                    }
-                });
-                libs.log({ scriptIFrame: scriptIFrame_1 }, PROVIDER, 'SCRIPT IFRAME');
-                if (!scriptIFrame_1) {
-                    return [2];
-                }
-                result = '';
-                scriptIFrame_1 = scriptIFrame_1.replace('eval(', 'result = ');
-                scriptIFrame_1 = scriptIFrame_1 + '1abc';
-                scriptIFrame_1 = scriptIFrame_1.replace(');1abc', ';');
-                libs.log({ scriptIFrame: scriptIFrame_1 }, PROVIDER, 'PARSE SCRIPT IFRAME');
-                eval(scriptIFrame_1);
-                sKey = result.match(/JScript\, *\'([^\']+)/i);
-                sKey = sKey ? sKey[1] : '';
-                libs.log({ result: result, sKey: sKey }, PROVIDER, 'PARSE RESULT');
+                sKey = "tSIsE8FgpRkv3QQQ";
                 decryptData = CryptoJSAesJson.decrypt(hashData, sKey);
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
                 hlsUrl = decryptData.match(/\"file\" *\: *\"([^\"]+)/i);
