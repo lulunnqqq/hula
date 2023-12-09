@@ -13,7 +13,7 @@
   "ads_config" : {
     "show_start": true,
     "show": true,
-    "session_time": 60
+    "session_time": 120
   },
   "ads_init" : "admob"
 }
