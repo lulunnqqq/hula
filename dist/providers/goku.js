@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_c.label) {
             case 0:
                 PROVIDER = 'GOKU';
-                DOMAIN = "https://goku.to";
+                DOMAIN = "https://goku.sx";
                 urlSearch = "".concat(DOMAIN, "/search?keyword=").concat(libs.url_slug_search(movieInfo, '+'));
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 1:
