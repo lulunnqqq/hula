@@ -114,7 +114,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!hashData) {
                     return [2];
                 }
-                sKey = "tSIsE8FgpRkv3QQQ";
+                sKey = "1ftYriZmgY8qS0i";
                 decryptData = CryptoJSAesJson.decrypt(hashData, sKey);
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
                 hlsUrl = decryptData.match(/\"file\" *\: *\"([^\"]+)/i);
@@ -125,6 +125,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 return [4, libs.request_get(hlsUrl, {
                         Origin: "https://w1.moviesapi.club",
+                        Referer: "https://w1.moviesapi.club/",
                         "user-ugent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
                         "Sec-Fetch-Dest": "empty",
                         "Sec-Fetch-Mode": "cors",
