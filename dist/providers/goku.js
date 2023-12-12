@@ -40,7 +40,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
-                PROVIDER = 'FGOKU';
+                PROVIDER = 'GOKU';
                 DOMAIN = "https://goku.sx";
                 urlSearch = "".concat(DOMAIN, "/search?keyword=").concat(libs.url_slug_search(movieInfo, '+'));
                 return [4, libs.request_get(urlSearch, {}, true)];
