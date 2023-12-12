@@ -1,5 +1,6 @@
 {
 	"providers": [	
+		"dist/providers/streamflix.js",
 		"dist/providers/fmovies.js",
 		"dist/providers/goku.js",
 		"dist/providers/remotestream.js",
