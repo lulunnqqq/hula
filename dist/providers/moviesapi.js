@@ -75,7 +75,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://moviesapi.club";
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 5, , 6]);
+                _a.trys.push([1, 6, , 7]);
                 urlSearch = "";
                 if (movieInfo.type == 'movie') {
                     urlSearch = "".concat(DOMAIN, "/movie/").concat(movieInfo.tmdb_id);
@@ -86,7 +86,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.log({ urlSearch: urlSearch }, PROVIDER, "URL SEARCH");
                 return [4, libs.request_get(urlSearch, {
                         Referer: "https://pressplay.top/",
-                        "user-ugent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
                         "Sec-Fetch-Dest": "empty",
                         "Sec-Fetch-Mode": "cors",
                         "Sec-Fetch-Site": "cross-site"
@@ -101,20 +101,23 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(iframeUrl, {
                         Referer: "https://moviesapi.club/",
                         Origin: "https://w1.moviesapi.club",
-                        "user-ugent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
                         "Sec-Fetch-Dest": "empty",
                         "Sec-Fetch-Mode": "cors",
                         "Sec-Fetch-Site": "cross-site"
                     })];
             case 3:
                 parseDetail = _a.sent();
-                hashData = parseDetail.match(/JScript *\= *\'([^\']+)/i);
+                hashData = parseDetail.match(/JScripts *\= *\'([^\']+)/i);
                 hashData = hashData ? hashData[1] : '';
                 libs.log({ hashData: hashData }, PROVIDER, 'HASH DATA');
                 if (!hashData) {
                     return [2];
                 }
-                sKey = "1ftYriZmgY8qS0i";
+                return [4, libs.request_get("https://raw.githubusercontent.com/Sofie99/Resources/main/chillix_key.json")];
+            case 4:
+                sKey = _a.sent();
+                libs.log({ sKey: sKey }, PROVIDER, 'SKEY1');
                 decryptData = CryptoJSAesJson.decrypt(hashData, sKey);
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
                 hlsUrl = decryptData.match(/\"file\" *\: *\"([^\"]+)/i);
@@ -126,13 +129,14 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(hlsUrl, {
                         Origin: "https://w1.moviesapi.club",
                         Referer: "https://w1.moviesapi.club/",
-                        "user-ugent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
                         "Sec-Fetch-Dest": "empty",
                         "Sec-Fetch-Mode": "cors",
                         "Sec-Fetch-Site": "cross-site"
                     })];
-            case 4:
+            case 5:
                 parseDirect = _a.sent();
+                libs.log({ parseDirect: parseDirect }, PROVIDER, "DATA DIRECT");
                 parseQuality = parseDirect.match(/[0-9]+.m3u8.*/ig);
                 directQuality = [];
                 newDomain = hlsUrl.replace(/video\.m3u8.*/i, '');
@@ -161,12 +165,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     "Sec-Fetch-Mode": "cors",
                     "Sec-Fetch-Site": "cross-site"
                 });
-                return [3, 6];
-            case 5:
+                return [3, 7];
+            case 6:
                 e_1 = _a.sent();
                 libs.log(e_1, PROVIDER, 'ERROR');
-                return [3, 6];
-            case 6: return [2, true];
+                return [3, 7];
+            case 7: return [2, true];
         }
     });
 }); };
