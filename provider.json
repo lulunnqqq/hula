@@ -1,5 +1,6 @@
 {
 	"providers": [	
+		"dist/providers/idflix.js",
 		"dist/providers/vidsrc.js",
 		"dist/providers/febbox.js",
 		"dist/providers/emovies.js",
