@@ -419,7 +419,7 @@ libs.embed_fmovies_id = function (hash, headers, embedUrl) { return __awaiter(_t
                 if (Array.isArray(hash)) {
                     return [2, hash];
                 }
-                return [4, libs.request_get("https://raw.githubusercontent.com/Claudemirovsky/keys/e4/key")];
+                return [4, libs.request_get("https://raw.githubusercontent.com/theonlymo/keys/e4/key")];
             case 2:
                 secretKey = _a.sent();
                 encryptedURLTemp = hash.split("");
@@ -444,6 +444,9 @@ libs.embed_fmovies_id = function (hash, headers, embedUrl) { return __awaiter(_t
                 return [3, 4];
             case 4:
                 try {
+                    if (!encryptedURL) {
+                        return [2, ''];
+                    }
                     libs.log({
                         secretKey: secretKey,
                         hash: hash,
