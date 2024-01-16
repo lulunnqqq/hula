@@ -1,5 +1,6 @@
 {
 	"providers": [	
+		"dist/providers/gomovies.js",
 		"dist/providers/vidsrc.js",
 		"dist/providers/febbox.js",
 		"dist/providers/fmovies.js",
