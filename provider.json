@@ -1,6 +1,6 @@
 {
 	"providers": [	
-		"dist/providers/emovies.js",
+		"dist/providers/streamflix.js",
 		"dist/providers/idflix.js",
 		"dist/providers/2now.js",
 		"dist/providers/gomovies.js",
