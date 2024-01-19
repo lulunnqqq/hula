@@ -47,10 +47,9 @@ callbacksEmbed["playm4u"] = function (dataCallback, provider, host, callback, me
                 return [2];
             }
             data = JSON.parse(dataCallback);
-            if (data.responseURL.indexOf('playmoviekh.click/api/playiframe') === -1) {
-                return [2];
-            }
+            libs.log({ data: data }, provider, 'parseResponseText');
             parseResponseText = JSON.parse(data.responseText);
+            libs.log({ parseResponseText: parseResponseText }, provider, 'parseResponseText');
             if (parseResponseText.type != 'url-m3u8') {
                 return [2];
             }
