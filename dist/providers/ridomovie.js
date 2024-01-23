@@ -40,7 +40,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
-                PROVIDER = 'RIDOMOVIE';
+                PROVIDER = 'LRIDOMOVIE';
                 DOMAIN = "https://ridomovies.tv";
                 _d.label = 1;
             case 1:
