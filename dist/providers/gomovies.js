@@ -168,7 +168,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 unpacker = libs.string_unpacker_v2(evalData);
-                dKey = unpacker.match(/\( *key *\=([A-z0-9]+)/i);
+                dKey = unpacker.match(/response\.asdkh\(([A-z0-9]+)/i);
                 dKey = dKey ? dKey[1] : '';
                 libs.log({ dKey: dKey }, PROVIDER, 'D KEY');
                 qualities = [2160, 1440, 1080, 720, 480, 360];
