@@ -1,11 +1,7 @@
 {
 	"providers": [	
-		"dist/providers/ridomovie.js",
 		"dist/providers/streamflix.js",
-		"dist/providers/idflix.js",
 		"dist/providers/2now.js",
-		"dist/providers/gomovies.js",
-		"dist/providers/vidsrc.js",
 		"dist/providers/fmovies.js",
 		"dist/providers/goku.js",
 		"dist/providers/remotestream.js",
