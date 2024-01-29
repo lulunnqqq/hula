@@ -1,22 +1,17 @@
 {
 	"providers": [	
-		"dist/providers/cinematv.js",
 		"dist/providers/ridomovie.js",
 		"dist/providers/streamflix.js",
 		"dist/providers/idflix.js",
 		"dist/providers/2now.js",
 		"dist/providers/gomovies.js",
 		"dist/providers/vidsrc.js",
-		"dist/providers/febbox.js",
 		"dist/providers/fmovies.js",
 		"dist/providers/goku.js",
 		"dist/providers/remotestream.js",
-		"dist/providers/dbgo.js",
 		"dist/providers/2now.js",
 		"dist/providers/fa.js",
 		"dist/providers/smashystream.js",
-		"dist/providers/st.js",
-		"dist/providers/vumoo.js",
 		"dist/providers/moviesapi.js"
 	]
 }
