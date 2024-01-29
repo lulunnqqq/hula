@@ -2,7 +2,6 @@
 	"providers": [	
 		"dist/providers/cinematv.js",
 		"dist/providers/ridomovie.js",
-		"dist/providers/m4ufree.js",
 		"dist/providers/streamflix.js",
 		"dist/providers/idflix.js",
 		"dist/providers/2now.js",
