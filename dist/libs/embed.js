@@ -422,10 +422,10 @@ libs.embed_fmovies_id = function (hash, headers, embedUrl) { return __awaiter(_t
                 return [4, libs.request_get("https://keys4.fun")];
             case 2:
                 secretKey = _a.sent();
-                secretKey = secretKey.rabbitstream.keys;
+                secretKey = secretKey.rabbitstream.keys.key;
                 libs.log({ secretKey: secretKey }, 'KEY EMBED FMOVIES');
                 encryptedURLTemp = hash.split("");
-                secretKey = libs.string_btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(secretKey))));
+                // secretKey = libs.string_btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(secretKey))));
                 encryptedURL = encryptedURLTemp.join('');
                 return [3, 4];
             case 3:
