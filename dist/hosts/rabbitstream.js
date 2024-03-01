@@ -56,7 +56,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 var _this = this;
 hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers, id, urlDirect, parseDirect, source1, source2, source3, parseTrack, tracks, _i, parseTrack_1, trackItem, lang, parseLang, rank, _a, source1_1, item, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality;
+    var DOMAIN, HOST, headers, id, v, h, b, urlDirect, parseDirect, source1, source2, source3, parseTrack, tracks, _i, parseTrack_1, trackItem, lang, parseLang, rank, _a, source1_1, item, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -64,7 +64,8 @@ hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { 
                 DOMAIN = 'https://rabbitstream.net';
                 HOST = 'Rabbitstream';
                 headers = {
-                    'referer': 'https://fmovies.ps'
+                    'referer': 'https://fmovies.ps',
+                    'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0",
                 };
                 id = url.match(/embed\-[0-9]+\/([A-z0-9]+)/);
                 id = id ? id[1] : '';
@@ -74,19 +75,26 @@ hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { 
                 if (!id) {
                     return [2];
                 }
-                urlDirect = "".concat(DOMAIN, "/ajax/embed-4/getSources?id=").concat(id);
-                return [4, libs.request_get(urlDirect, __assign(__assign({}, headers), { 'x-requested-with': 'XMLHttpRequest' }))];
+                return [4, libs.request_get("https://keys4.fun")];
             case 1:
+                secretKey = _c.sent();
+                secretKey = secretKey.rabbitstream.keys;
+                v = secretKey.v;
+                h = secretKey.h;
+                b = secretKey.b;
+                urlDirect = "".concat(DOMAIN, "/ajax/v2/embed-4/getSources?id=").concat(id, "&v=").concat(v, "&h=").concat(h, "&b=").concat(b);
+                return [4, libs.request_get(urlDirect, __assign(__assign({}, headers), { 'x-requested-with': 'XMLHttpRequest' }))];
+            case 2:
                 parseDirect = _c.sent();
                 libs.log({
                     parseDirect: parseDirect
                 }, HOST, "PARSE DIRECT");
                 return [4, libs.embed_fmovies_id(parseDirect['sources'], headers, url)];
-            case 2:
+            case 3:
                 source1 = (_c.sent()) || [];
                 libs.log({ source1: source1, tracks: tracks }, HOST, 'SOURCES_1');
                 return [4, libs.embed_fmovies_id(parseDirect['sourcesBackup'], headers, url)];
-            case 3:
+            case 4:
                 source2 = (_c.sent()) || [];
                 source3 = __spreadArray(__spreadArray([], source1, true), source2, true);
                 parseTrack = parseDirect['tracks'] || [];
@@ -112,26 +120,26 @@ hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { 
                 libs.log({ source3: source3, tracks: tracks }, HOST, 'SOURCES_TRACK');
                 rank = 0;
                 _a = 0, source1_1 = source1;
-                _c.label = 4;
-            case 4:
-                if (!(_a < source1_1.length)) return [3, 7];
+                _c.label = 5;
+            case 5:
+                if (!(_a < source1_1.length)) return [3, 8];
                 item = source1_1[_a];
                 if (!item.file) {
-                    return [3, 6];
+                    return [3, 7];
                 }
                 if (item.file.indexOf('thedaywestream') !== -1) {
-                    return [3, 6];
+                    return [3, 7];
                 }
                 if (item.file.indexOf('birdsystem') !== -1) {
-                    return [3, 6];
+                    return [3, 7];
                 }
                 return [4, libs.request_get(item.file, {})];
-            case 5:
+            case 6:
                 directSizes = _c.sent();
                 patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
                 if (!patternSize) {
                     libs.embed_callback(item.file, provider, host, item.type, callback, ++rank, tracks);
-                    return [3, 6];
+                    return [3, 7];
                 }
                 directQuality = [];
                 libs.log({ patternSize: patternSize }, provider, 'PATTERN SIZE');
@@ -149,15 +157,15 @@ hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { 
                     });
                 }
                 if (!directQuality.length) {
-                    return [3, 6];
+                    return [3, 7];
                 }
                 libs.log({ directQuality: directQuality }, provider, 'DIRECT QUALITY');
                 libs.embed_callback(item.file, provider, HOST, 'Hls', callback, ++rank, tracks, directQuality);
-                _c.label = 6;
-            case 6:
+                _c.label = 7;
+            case 7:
                 _a++;
-                return [3, 4];
-            case 7: return [2];
+                return [3, 5];
+            case 8: return [2];
         }
     });
 }); };
