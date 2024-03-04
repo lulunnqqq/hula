@@ -134,7 +134,7 @@ hosts["vidplay"] = function (url, movieInfo, provider, config, callback) { retur
                 patternQuality = embedData.match(/hls\/([0-9]+)\/[0-9]+\.m3u8/ig);
                 libs.log({ patternQuality: patternQuality, file: embedItem.file }, provider, 'PATTERN QUALITY');
                 if (!patternQuality) {
-                    libs.embed_callback(embedItem.file, provider, provider, 'Hls', callback, ++rank, config.subs ? config.subs : []);
+                    libs.embed_callback(embedItem.file, provider, provider, 'Hls', callback, ++rank, config.subs ? config.subs : [], [{ file: embedItem.file, quality: 1080 }]);
                     return [3, 9];
                 }
                 directQuality = [];
