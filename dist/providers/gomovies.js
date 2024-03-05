@@ -168,11 +168,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 unpacker = libs.string_unpacker_v2(evalData);
-                dKey = unpacker.match(/\(atob\(response\)\, *([A-z0-9]+)/i);
+                dKey = unpacker.match(/\(response *\, *\"*([A-z0-9]+)/i);
                 dKey = dKey ? dKey[1] : '';
                 libs.log({ unpacker: unpacker }, PROVIDER, 'unpacker');
                 if (!dKey) {
-                    dKey = unpacker.match(/\( *key *\=([A-z0-9]+)/i);
+                    dKey = unpacker.match(/string *\, *key *\=\"*([A-z0-9]+)/i);
                     dKey = dKey ? dKey[1] : '';
                     libs.log({ dKey: dKey }, PROVIDER, 'D KEY');
                     if (!dKey) {
