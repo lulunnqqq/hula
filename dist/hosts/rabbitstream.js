@@ -1,14 +1,3 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -45,127 +34,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 var _this = this;
 hosts["rabbitstream"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, headers, id, v, h, b, urlDirect, parseDirect, source1, source2, source3, parseTrack, tracks, _i, parseTrack_1, trackItem, lang, parseLang, rank, _a, source1_1, item, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
-            case 0:
-                libs.log({ provider: provider }, provider, 'PROVIDER');
-                DOMAIN = 'https://rabbitstream.net';
-                HOST = 'Rabbitstream';
-                headers = {
-                    'referer': 'https://fmovies.ps',
-                    'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0",
-                };
-                id = url.match(/embed\-[0-9]+\/([A-z0-9]+)/);
-                id = id ? id[1] : '';
-                libs.log({
-                    id: id
-                }, HOST, 'ID');
-                if (!id) {
-                    return [2];
-                }
-                return [4, libs.request_get("https://keys4.fun")];
-            case 1:
-                secretKey = _c.sent();
-                secretKey = secretKey.rabbitstream.keys;
-                v = secretKey.v;
-                h = secretKey.h;
-                b = secretKey.b;
-                urlDirect = "".concat(DOMAIN, "/ajax/v2/embed-4/getSources?id=").concat(id, "&v=").concat(v, "&h=").concat(h, "&b=").concat(b);
-                return [4, libs.request_get(urlDirect, __assign(__assign({}, headers), { 'x-requested-with': 'XMLHttpRequest' }))];
-            case 2:
-                parseDirect = _c.sent();
-                libs.log({
-                    parseDirect: parseDirect
-                }, HOST, "PARSE DIRECT");
-                return [4, libs.embed_fmovies_id(parseDirect['sources'], headers, url)];
-            case 3:
-                source1 = (_c.sent()) || [];
-                libs.log({ source1: source1, tracks: tracks }, HOST, 'SOURCES_1');
-                return [4, libs.embed_fmovies_id(parseDirect['sourcesBackup'], headers, url)];
-            case 4:
-                source2 = (_c.sent()) || [];
-                source3 = __spreadArray(__spreadArray([], source1, true), source2, true);
-                parseTrack = parseDirect['tracks'] || [];
-                tracks = [];
-                for (_i = 0, parseTrack_1 = parseTrack; _i < parseTrack_1.length; _i++) {
-                    trackItem = parseTrack_1[_i];
-                    lang = trackItem.label;
-                    if (!lang) {
-                        continue;
-                    }
-                    libs.log({ lang: lang, trackItem: trackItem }, HOST, "TRACK ITEM");
-                    parseLang = lang.match(/([A-z0-9]+)/i);
-                    parseLang = parseLang ? parseLang[1].trim() : '';
-                    if (!parseLang) {
-                        continue;
-                    }
-                    tracks.push({
-                        file: trackItem.file,
-                        kind: 'captions',
-                        label: parseLang
-                    });
-                }
-                libs.log({ source3: source3, tracks: tracks }, HOST, 'SOURCES_TRACK');
-                rank = 0;
-                _a = 0, source1_1 = source1;
-                _c.label = 5;
-            case 5:
-                if (!(_a < source1_1.length)) return [3, 8];
-                item = source1_1[_a];
-                if (!item.file) {
-                    return [3, 7];
-                }
-                if (item.file.indexOf('thedaywestream') !== -1) {
-                    return [3, 7];
-                }
-                if (item.file.indexOf('birdsystem') !== -1) {
-                    return [3, 7];
-                }
-                return [4, libs.request_get(item.file, {})];
-            case 6:
-                directSizes = _c.sent();
-                patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
-                if (!patternSize) {
-                    libs.embed_callback(item.file, provider, host, item.type, callback, ++rank, tracks);
-                    return [3, 7];
-                }
-                directQuality = [];
-                libs.log({ patternSize: patternSize }, provider, 'PATTERN SIZE');
-                for (_b = 0, patternSize_1 = patternSize; _b < patternSize_1.length; _b++) {
-                    patternItem = patternSize_1[_b];
-                    sizeQuality = patternItem.match(/\/([0-9]+)\//i);
-                    sizeQuality = sizeQuality ? sizeQuality[1] : 'HD';
-                    if (patternItem.indexOf('feetcdn.com:2223') != -1 && movieInfo.platform && movieInfo.platform == 'android') {
-                        libs.log({ patternItem: patternItem, movieInfo: movieInfo }, provider, 'ignorePattern');
-                        continue;
-                    }
-                    directQuality.push({
-                        file: patternItem,
-                        quality: sizeQuality
-                    });
-                }
-                if (!directQuality.length) {
-                    return [3, 7];
-                }
-                libs.log({ directQuality: directQuality }, provider, 'DIRECT QUALITY');
-                libs.embed_callback(item.file, provider, HOST, 'Hls', callback, ++rank, tracks, directQuality);
-                _c.label = 7;
-            case 7:
-                _a++;
-                return [3, 5];
-            case 8: return [2];
-        }
+    var DOMAIN, HOST, headers;
+    return __generator(this, function (_a) {
+        libs.log({ provider: provider }, provider, 'PROVIDER');
+        DOMAIN = 'https://rabbitstream.net';
+        HOST = 'Rabbitstream';
+        headers = {
+            'referer': 'https://fmovies.ps',
+            'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0",
+        };
+        libs.log({ url: url }, provider, 'URL');
+        callback({
+            callback: {
+                provider: provider,
+                host: HOST,
+                url: url,
+                headers: headers,
+                callback: callback,
+                metadata: {
+                    url_webview: url,
+                    domain: DOMAIN,
+                    s: 0,
+                },
+                beforeLoadScript: "\n        \n            var open = XMLHttpRequest.prototype.open;\n            XMLHttpRequest.prototype.open = function() {\n                CryptoJS.AES.decrypt = (hash, key) => {\n                    window.ReactNativeWebView.postMessage(JSON.stringify({hash, key}));\n                }\n                open.apply(this, arguments);\n            }; \n            ",
+                metadata: {},
+            }
+        });
+        return [2];
     });
 }); };
