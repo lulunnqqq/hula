@@ -130,7 +130,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                     urlSearch: urlSearch
                                 }, PROVIDER, 'URL SEARCH');
                                 return [4, libs.request_get(urlSearch, {
-                                        Referer: movieInfo.type == 'tv' ? "".concat(DOMAIN, "/video1.php?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode) : "".concat(DOMAIN, "/video1.php?tmdb=").concat(movieInfo.tmdb_id)
+                                        Referer: "https://player.smashy.stream/"
                                     })];
                             case 1:
                                 parseDetail = _c.sent();
@@ -148,7 +148,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 if (!decodeFile) {
                                     return [3, 4];
                                 }
-                                if (decodeFile.indexOf('playlist.m3u8') == -1) {
+                                if (decodeFile.indexOf('.m3u8') == -1) {
                                     return [3, 4];
                                 }
                                 return [4, libs.request_get(decodeFile, {})];
@@ -198,7 +198,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     lastTxt = parsetxt[parsetxt.length - 1];
                     href = item.url;
                     libs.log({ item: item, href: href, parsetxt: parsetxt, lastTxt: lastTxt }, PROVIDER, "INFO");
-                    if (lastTxt.toLowerCase() == 'f') {
+                    if (lastTxt.toLowerCase() == 'fmd') {
                         video1(href);
                     }
                 }
