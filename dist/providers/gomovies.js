@@ -172,6 +172,14 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 dKey = dKey ? dKey[1] : '';
                 libs.log({ unpacker: unpacker }, PROVIDER, 'unpacker');
                 if (!dKey) {
+                    dKey = unpacker.match(/j *\< *\" *([A-z0-9]+)/i);
+                    dKey = dKey ? dKey[1] : '';
+                    libs.log({ dKey: dKey }, PROVIDER, 'D KEY');
+                    if (!dKey) {
+                        return [2];
+                    }
+                }
+                if (!dKey) {
                     dKey = unpacker.match(/string *\, *key *\=\"*([A-z0-9]+)/i);
                     dKey = dKey ? dKey[1] : '';
                     libs.log({ dKey: dKey }, PROVIDER, 'D KEY');
