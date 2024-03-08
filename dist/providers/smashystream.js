@@ -198,7 +198,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     lastTxt = parsetxt[parsetxt.length - 1];
                     href = item.url;
                     libs.log({ item: item, href: href, parsetxt: parsetxt, lastTxt: lastTxt }, PROVIDER, "INFO");
-                    if (lastTxt.toLowerCase() == 'fmd') {
+                    if (lastTxt.toLowerCase() == 'fmd' || lastTxt.toLowerCase() == 'o' || lastTxt.toLowerCase() == 'f') {
                         video1(href);
                     }
                 }
