@@ -191,7 +191,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!dKey) {
                     return [2];
                 }
-                qualities = [2160, 1440, 1080, 720, 480, 360];
+                qualities = [360];
                 _i = 0, servers_1 = servers_2;
                 _b.label = 9;
             case 9:
