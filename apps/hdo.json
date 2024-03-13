@@ -37,7 +37,7 @@
     "version_build": 1,
     "is_force": false,
     "app_name": "Drama Player",
-    "is_ab_testing": true
+    "is_ab_testing": false
   },
   "data": [
     {
