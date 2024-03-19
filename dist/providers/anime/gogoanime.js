@@ -45,9 +45,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 10, , 11]);
-                urlSearch = "".concat(DOMAIN, "/search.html?keyword=one%20piece");
-                movieInfo.year = 1999;
-                movieInfo.title = "One Piece";
+                urlSearch = "".concat(DOMAIN, "/search.html?keyword=").concat(libs.url_slug_search(movieInfo, "%20"));
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 2:
                 parseSearch_1 = _a.sent();
