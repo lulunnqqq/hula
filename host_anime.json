@@ -1,5 +1,6 @@
 {
 	"hosts": [	
-	"dist/hosts/embtaku.js"
+	"dist/hosts/embtaku.js",
+	"dist/hosts/megacloud.js"
 	]
 }

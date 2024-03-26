@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, e_1;
+    var PROVIDER, DOMAIN, urlSearch, parseSearch_1, LINK_DETAIL_1, id, detailID, urlEpisode, dataDetail, parseDetail_1, episodeID_1, episodeServer, serverIDs_2, dataEpisode, parseEpisode_1, _i, serverIDs_1, serverID, urlServer, dataServer, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -44,17 +44,98 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://hianime.to";
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 3, , 4]);
-                urlSearch = "".concat(DOMAIN, "/search.html?keyword=").concat(libs.url_slug_search(movieInfo, "%20"));
+                _a.trys.push([1, 10, , 11]);
+                urlSearch = "".concat(DOMAIN, "/search?keyword=").concat(libs.url_slug_search(movieInfo, "+"));
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 2:
-                parseSearch = _a.sent();
-                return [3, 4];
+                parseSearch_1 = _a.sent();
+                LINK_DETAIL_1 = "";
+                parseSearch_1(".flw-item").each(function (key, item) {
+                    var title = parseSearch_1(item).find(".film-name").text();
+                    var type = parseSearch_1(item).find('.fd-infor .fdi-item').text();
+                    var href = parseSearch_1(item).find(".film-poster a.film-poster-ahref").attr("href");
+                    if (title && href && libs.string_matching_title(movieInfo, title)) {
+                        LINK_DETAIL_1 = href;
+                    }
+                });
+                libs.log({ LINK_DETAIL: LINK_DETAIL_1 }, PROVIDER, "LINK_DETAIL");
+                if (!LINK_DETAIL_1) {
+                    return [2];
+                }
+                if (_.startsWith(LINK_DETAIL_1, "/")) {
+                    LINK_DETAIL_1 = "".concat(DOMAIN).concat(LINK_DETAIL_1);
+                }
+                id = LINK_DETAIL_1.match(/watch\/(.*)/i);
+                id = id ? id[1] : "";
+                libs.log({ id: id }, PROVIDER, "id");
+                if (!id) {
+                    return [2];
+                }
+                detailID = id.match(/([0-9]+$)/i);
+                detailID = detailID ? detailID[1] : "";
+                libs.log({ detailID: detailID }, PROVIDER, "detailID");
+                if (!detailID) {
+                    return [2];
+                }
+                urlEpisode = "".concat(DOMAIN, "/ajax/v2/episode/list/").concat(detailID);
+                return [4, libs.request_get(urlEpisode, {})];
             case 3:
+                dataDetail = _a.sent();
+                parseDetail_1 = cheerio.load(dataDetail.html);
+                episodeID_1 = "";
+                parseDetail_1('.ssl-item').each(function (key, item) {
+                    var dataId = parseDetail_1(item).attr("data-id");
+                    var episode = parseDetail_1(item).attr('data-number');
+                    if (episode == movieInfo.episode) {
+                        episodeID_1 = dataId;
+                    }
+                });
+                libs.log({ episodeID: episodeID_1 }, PROVIDER, "episodeID");
+                if (!episodeID_1) {
+                    return [2];
+                }
+                episodeServer = "".concat(DOMAIN, "/ajax/v2/episode/servers?episodeId=").concat(episodeID_1);
+                serverIDs_2 = [];
+                return [4, libs.request_get(episodeServer, {})];
+            case 4:
+                dataEpisode = _a.sent();
+                parseEpisode_1 = cheerio.load(dataEpisode.html);
+                parseEpisode_1(".server-item").each(function (key, item) {
+                    var id = parseEpisode_1(item).attr("data-id");
+                    if (id) {
+                        serverIDs_2.push(id);
+                    }
+                });
+                libs.log({ serverIDs: serverIDs_2 }, PROVIDER, "serverIDs");
+                if (!serverIDs_2) {
+                    return [2];
+                }
+                _i = 0, serverIDs_1 = serverIDs_2;
+                _a.label = 5;
+            case 5:
+                if (!(_i < serverIDs_1.length)) return [3, 9];
+                serverID = serverIDs_1[_i];
+                urlServer = "".concat(DOMAIN, "/ajax/v2/episode/sources?id=").concat(serverID);
+                return [4, libs.request_get(urlServer, {})];
+            case 6:
+                dataServer = _a.sent();
+                libs.log({ dataServer: dataServer }, PROVIDER, "dataServer");
+                if (!dataServer || !dataServer.link) {
+                    return [3, 8];
+                }
+                return [4, libs.embed_redirect(dataServer.link, '', movieInfo, PROVIDER, callback, '')];
+            case 7:
+                _a.sent();
+                _a.label = 8;
+            case 8:
+                _i++;
+                return [3, 5];
+            case 9: return [3, 11];
+            case 10:
                 e_1 = _a.sent();
                 libs.log({ e: e_1 }, PROVIDER, 'ERROR');
-                return [3, 4];
-            case 4: return [2, true];
+                return [3, 11];
+            case 11: return [2, true];
         }
     });
 }); };
