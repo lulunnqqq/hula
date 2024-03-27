@@ -54,7 +54,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     var title = parseSearch_1(item).find(".film-name").text();
                     var type = parseSearch_1(item).find('.fd-infor .fdi-item').text();
                     var href = parseSearch_1(item).find(".film-poster a.film-poster-ahref").attr("href");
-                    if (title && href && libs.string_matching_title(movieInfo, title)) {
+                    if (title && href && libs.string_matching_title(movieInfo, title, false) && !LINK_DETAIL_1) {
                         LINK_DETAIL_1 = href;
                     }
                 });

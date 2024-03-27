@@ -52,10 +52,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 LINK_DETAIL_1 = "";
                 parseSearch_1(".flw-item").each(function (key, item) {
                     var title = parseSearch_1(item).find(".film-name").text();
-                    var type = parseSearch_1(item).find('.fd-infor .fdi-item').text();
                     var href = parseSearch_1(item).find(".film-poster a.film-poster-ahref").attr("href");
-                    libs.log({ title: title, type: type, href: href }, PROVIDER, "LINK_DETAIL INFO");
-                    if (title && href && libs.string_matching_title(movieInfo, title) && !LINK_DETAIL_1) {
+                    libs.log({ title: title, href: href, matching: libs.string_matching_title(movieInfo, title, false) }, PROVIDER, "LINK_DETAIL INFO");
+                    if (title && href && libs.string_matching_title(movieInfo, title, false) && !LINK_DETAIL_1) {
                         LINK_DETAIL_1 = href;
                     }
                 });
@@ -83,11 +82,13 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 3:
                 dataDetail = _a.sent();
                 parseDetail_1 = cheerio.load(dataDetail.html);
+                libs.log({ detailID: detailID, html: dataDetail.html }, PROVIDER, "urlEpisode, dataDetail");
                 episodeID_1 = "";
                 parseDetail_1('.ep-item').each(function (key, item) {
                     var dataId = parseDetail_1(item).attr("data-id");
                     var episode = parseDetail_1(item).attr('data-number');
-                    if (episode == movieInfo.episode) {
+                    libs.log({ dataId: dataId, episode: episode }, PROVIDER, "dataId, episode");
+                    if (episode == movieInfo.episode && !episodeID_1) {
                         episodeID_1 = dataId;
                     }
                 });
