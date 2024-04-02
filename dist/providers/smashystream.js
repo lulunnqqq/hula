@@ -122,9 +122,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return "";
                 };
                 video1 = function (urlSearch) { return __awaiter(_this, void 0, void 0, function () {
-                    var parseDetail, _i, _a, file, decodeFile, directSizes, patternSize, directQuality, _b, patternSize_1, patternItem, sizeQuality;
-                    return __generator(this, function (_c) {
-                        switch (_c.label) {
+                    var parseDetail, subs, parseTitles, _i, parseTitles_1, subItem, lang, parseSub, _a, _b, file, decodeFile, directSizes, patternSize, directQuality, _c, patternSize_1, patternItem, sizeQuality;
+                    return __generator(this, function (_d) {
+                        switch (_d.label) {
                             case 0:
                                 libs.log({
                                     urlSearch: urlSearch
@@ -133,17 +133,34 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                         Referer: "https://player.smashy.stream/"
                                     })];
                             case 1:
-                                parseDetail = _c.sent();
+                                parseDetail = _d.sent();
                                 libs.log({ parseDetail: parseDetail }, PROVIDER, 'PARSE DETAIL VIDEO 1');
                                 if (!parseDetail.sourceUrls) {
                                     return [2];
                                 }
-                                _i = 0, _a = parseDetail.sourceUrls;
-                                _c.label = 2;
+                                subs = [];
+                                try {
+                                    parseTitles = parseDetail.subtitles.split(",");
+                                    for (_i = 0, parseTitles_1 = parseTitles; _i < parseTitles_1.length; _i++) {
+                                        subItem = parseTitles_1[_i];
+                                        lang = subItem.match(/\[([^\]]+)/i);
+                                        lang = lang ? lang[1] : '';
+                                        parseSub = subItem.replace(/\[[A-z0-9]+\]/i, "").trim();
+                                        subs.push({
+                                            file: parseSub,
+                                            label: lang,
+                                            kind: "captions"
+                                        });
+                                    }
+                                }
+                                catch (e) { }
+                                libs.log({ subs: subs }, PROVIDER, 'SUBS');
+                                _a = 0, _b = parseDetail.sourceUrls;
+                                _d.label = 2;
                             case 2:
-                                if (!(_i < _a.length)) return [3, 5];
-                                file = _a[_i];
-                                decodeFile = e(file);
+                                if (!(_a < _b.length)) return [3, 5];
+                                file = _b[_a];
+                                decodeFile = file;
                                 libs.log({ decodeFile: decodeFile }, PROVIDER, 'DECODE FILE');
                                 if (!decodeFile) {
                                     return [3, 4];
@@ -153,17 +170,17 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 }
                                 return [4, libs.request_get(decodeFile, {})];
                             case 3:
-                                directSizes = _c.sent();
+                                directSizes = _d.sent();
                                 patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
                                 libs.log({ patternSize: patternSize }, PROVIDER, 'PATTERN SIZE');
                                 if (!patternSize) {
-                                    libs.embed_callback(decodeFile, PROVIDER, PROVIDER, 'hls', callback, 1, []);
+                                    libs.embed_callback(decodeFile, PROVIDER, PROVIDER, 'hls', callback, 1, subs);
                                     return [3, 4];
                                 }
                                 directQuality = [];
                                 libs.log({ patternSize: patternSize }, PROVIDER, 'PATTERN SIZE');
-                                for (_b = 0, patternSize_1 = patternSize; _b < patternSize_1.length; _b++) {
-                                    patternItem = patternSize_1[_b];
+                                for (_c = 0, patternSize_1 = patternSize; _c < patternSize_1.length; _c++) {
+                                    patternItem = patternSize_1[_c];
                                     sizeQuality = patternItem.match(/\/([0-9]+)\//i);
                                     sizeQuality = sizeQuality ? Number(sizeQuality[1]) : 720;
                                     directQuality.push({
@@ -176,23 +193,24 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 }
                                 directQuality = _.orderBy(directQuality, ['quality'], ['desc']);
                                 libs.log({ directQuality: directQuality }, PROVIDER, 'DIRECT QUALITY');
-                                libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality);
-                                _c.label = 4;
+                                libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, subs, directQuality);
+                                _d.label = 4;
                             case 4:
-                                _i++;
+                                _a++;
                                 return [3, 2];
                             case 5: return [2];
                         }
                     });
                 }); };
-                urlSearch = "".concat(DOMAIN, "/data.php?tmdb=").concat(movieInfo.tmdb_id);
+                urlSearch = "".concat(DOMAIN, "/data?tmdb=").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/data.php?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
+                    urlSearch = "".concat(DOMAIN, "/data?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
+                libs.log({ urlSearch: urlSearch }, PROVIDER, "URL SEARCH");
                 return [4, libs.request_get(urlSearch, {})];
             case 1:
                 parseSearch = _b.sent();
-                for (_i = 0, _a = parseSearch.url_array; _i < _a.length; _i++) {
+                for (_i = 0, _a = parseSearch.urls; _i < _a.length; _i++) {
                     item = _a[_i];
                     parsetxt = item.name.trim().split(" ");
                     lastTxt = parsetxt[parsetxt.length - 1];
