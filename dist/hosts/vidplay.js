@@ -40,7 +40,7 @@ hosts["c8365730d4"] = function (url, movieInfo, provider, config, callback) { re
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                DOMAIN = 'https://vidplay.online';
+                DOMAIN = 'https://c8365730d4.nl';
                 HOST = 'Vidplay';
                 subParse = url.match(/\&sub\.info\=([^\&]+)/i);
                 subParse = subParse ? decodeURIComponent(subParse[1]) : '';
