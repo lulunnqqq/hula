@@ -146,6 +146,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                         lang = subItem.match(/\[([^\]]+)/i);
                                         lang = lang ? lang[1] : '';
                                         parseSub = subItem.replace(/\[[A-z0-9]+\]/i, "").trim();
+                                        if (!lang || !parseSub) {
+                                            continue;
+                                        }
                                         subs.push({
                                             file: parseSub,
                                             label: lang,
@@ -160,7 +163,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             case 2:
                                 if (!(_a < _b.length)) return [3, 5];
                                 file = _b[_a];
-                                decodeFile = file;
+                                decodeFile = e(file);
                                 libs.log({ decodeFile: decodeFile }, PROVIDER, 'DECODE FILE');
                                 if (!decodeFile) {
                                     return [3, 4];
@@ -202,15 +205,15 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     });
                 }); };
-                urlSearch = "".concat(DOMAIN, "/data?tmdb=").concat(movieInfo.tmdb_id);
+                urlSearch = "".concat(DOMAIN, "/data.php?tmdb=").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/data?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
+                    urlSearch = "".concat(DOMAIN, "/data.php?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, "URL SEARCH");
                 return [4, libs.request_get(urlSearch, {})];
             case 1:
                 parseSearch = _b.sent();
-                for (_i = 0, _a = parseSearch.urls; _i < _a.length; _i++) {
+                for (_i = 0, _a = parseSearch.url_array; _i < _a.length; _i++) {
                     item = _a[_i];
                     parsetxt = item.name.trim().split(" ");
                     lastTxt = parsetxt[parsetxt.length - 1];
