@@ -102,6 +102,13 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseEpisode_1 = cheerio.load(dataEpisode.html);
                 parseEpisode_1(".server-item").each(function (key, item) {
                     var id = parseEpisode_1(item).attr("data-id");
+                    var type = parseEpisode_1(item).attr("data-type");
+                    if (id) {
+                        serverIDs_2.push({
+                            id: id,
+                            type: type,
+                        });
+                    }
                     if (id) {
                         serverIDs_2.push(id);
                     }
@@ -115,7 +122,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 5:
                 if (!(_i < serverIDs_1.length)) return [3, 9];
                 serverID = serverIDs_1[_i];
-                urlServer = "".concat(DOMAIN, "/ajax/v2/episode/sources?id=").concat(serverID);
+                urlServer = "".concat(DOMAIN, "/ajax/v2/episode/sources?id=").concat(serverID.id);
                 return [4, libs.request_get(urlServer, {})];
             case 6:
                 dataServer = _a.sent();
@@ -123,7 +130,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!dataServer || !dataServer.link) {
                     return [3, 8];
                 }
-                return [4, libs.embed_redirect(dataServer.link, '', movieInfo, PROVIDER, callback, '')];
+                return [4, libs.embed_redirect(dataServer.link, '', movieInfo, PROVIDER, callback, '', [], {
+                        type: serverID.type ? serverID.type.toUpperCase() : "SUB"
+                    })];
             case 7:
                 _a.sent();
                 _a.label = 8;

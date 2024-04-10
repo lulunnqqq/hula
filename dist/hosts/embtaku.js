@@ -101,6 +101,7 @@ hosts["embtaku"] = function (url, movieInfo, provider, config, callback) { retur
                     fileQuality.push({
                         file: directUrl,
                         quality: size,
+                        type: config.options.type || "",
                     });
                 }
                 libs.log({ fileQuality: fileQuality }, HOST, "FILE QUALITY");

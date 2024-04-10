@@ -112,7 +112,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 6:
                 if (!(_i < embeds_1.length)) return [3, 9];
                 item = embeds_1[_i];
-                return [4, libs.embed_redirect(item, '', movieInfo, PROVIDER, callback, '')];
+                return [4, libs.embed_redirect(item, '', movieInfo, PROVIDER, callback, '', [], {
+                        type: "SUB"
+                    })];
             case 7:
                 _a.sent();
                 _a.label = 8;
