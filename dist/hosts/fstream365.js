@@ -158,7 +158,7 @@ hosts["fstream365"] = function (url, movieInfo, provider, config, callback) { re
                     if (!item.file) {
                         continue;
                     }
-                    libs.embed_callback(item.file, provider, HOST, 'Hls', callback, 1, [], [{ file: item.file, quality: 1080 }], headers_1);
+                    libs.embed_callback(item.file, provider, HOST, 'Hls', callback, 1, item.tracks, [{ file: item.file, quality: 1080 }], headers_1);
                 }
                 return [3, 5];
             case 4:
