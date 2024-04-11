@@ -130,6 +130,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                     urlSearch: urlSearch
                                 }, PROVIDER, 'URL SEARCH');
                                 return [4, libs.request_get(urlSearch, {
+                                        'Sec-Fetch-Site': "cross-site",
                                         Referer: "https://player.smashy.stream/"
                                     })];
                             case 1:
