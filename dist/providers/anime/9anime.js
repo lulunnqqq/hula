@@ -40,7 +40,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                PROVIDER = '9Anime - Anime';
+                PROVIDER = 'I9Anime - Anime';
                 DOMAIN = "https://9animetv.to";
                 _a.label = 1;
             case 1:
