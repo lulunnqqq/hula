@@ -49,12 +49,14 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 2:
                 parseSearch_1 = _a.sent();
+                libs.log({ urlSearch: urlSearch }, PROVIDER, "URL SEARCH");
                 LINK_DETAIL_1 = "";
                 parseSearch_1(".flw-item").each(function (key, item) {
                     var title = parseSearch_1(item).find(".film-name").text();
                     var type = parseSearch_1(item).find('.fd-infor .fdi-item').text();
                     var href = parseSearch_1(item).find(".film-poster a.film-poster-ahref").attr("href");
-                    if (title && href && libs.string_matching_title(movieInfo, title, false) && !LINK_DETAIL_1) {
+                    libs.log({ title: title, type: type, href: href, matching: libs.string_matching_title(movieInfo, title, false, "") }, PROVIDER, "LINK_DETAIL INFO");
+                    if (title && href && libs.string_matching_title(movieInfo, title, false, "") && !LINK_DETAIL_1) {
                         LINK_DETAIL_1 = href;
                     }
                 });
