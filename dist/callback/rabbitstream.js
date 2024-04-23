@@ -74,6 +74,9 @@ callbacksEmbed["rabbitstream"] = function (dataCallback, provider, host, callbac
                 return [4, libs.request_get(item.file, {})];
             case 3:
                 directSizes = _b.sent();
+                if (!directSizes) {
+                    return [2];
+                }
                 patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
                 if (!patternSize) {
                     libs.embed_callback(item.file, provider, host, item.type, callback, ++rank, tracks);
