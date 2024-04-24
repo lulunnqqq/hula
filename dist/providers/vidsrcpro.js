@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, urlSearch, htmlSearch, textSearch, decodeHash, hash, parseHash, _i, parseHash_1, item, urlDirect, dataDirect, tracks, _a, _b, itemTrack, label, e_1;
+    var PROVIDER, DOMAIN, headers, urlSearch, htmlSearch, textSearch, decodeHash, hash, parseHash, _i, parseHash_1, item, urlDirect, dataDirect, tracks, _a, _b, itemTrack, label, q, endpoint, urlDirect, e_1;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -105,7 +105,16 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 catch (etrack) { }
                 libs.log({ tracks: tracks }, PROVIDER, 'TRACKS');
-                libs.embed_callback(dataDirect.source, PROVIDER, PROVIDER, 'Hls', callback, 1, tracks, [{ file: dataDirect.source, quality: 1080 }], headers);
+                q = dataDirect.source.match(/\?base\=([A-z0-9.]+)/i);
+                q = q ? q[1] : "";
+                endpoint = dataDirect.source.match(/proxy\/viper([A-z0-9_/.]+\.m3u8)/i);
+                endpoint = endpoint ? endpoint[1] : "";
+                libs.log({ q: q, endpoint: endpoint }, PROVIDER, 'Q AND ENDPOINT');
+                if (!q || !endpoint) {
+                    return [3, 6];
+                }
+                urlDirect = "https://".concat(q).concat(endpoint);
+                libs.embed_callback(urlDirect, PROVIDER, PROVIDER, 'Hls', callback, 1, tracks, [{ file: urlDirect, quality: 1080 }], headers);
                 _c.label = 6;
             case 6:
                 _i++;
