@@ -1,6 +1,5 @@
 {
 	"providers": [	
-		"dist/providers/fmovies.js",
 		"dist/providers/vidsrcpro.js",
 		"dist/providers/nites.js",
 		"dist/providers/uniquestream.js",
