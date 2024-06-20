@@ -222,9 +222,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     });
                 }); };
-                urlSearch = "".concat(DOMAIN, "/dataa.php?tmdb=").concat(movieInfo.tmdb_id);
+                urlSearch = "".concat(DOMAIN, "/dataaa.php?tmdb=").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/dataa.php?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
+                    urlSearch = "".concat(DOMAIN, "/dataaa.php?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, "URL SEARCH");
                 return [4, libs.request_get(urlSearch, {})];
