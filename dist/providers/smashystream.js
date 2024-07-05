@@ -13,7 +13,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -106,7 +106,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 e = function (x) {
                     var a = x.substr(2);
                     var v = {
-                        "bk0": "SFL\/dU7B\/Dlx", "bk1": "0ca\/BVoI\/NS9", "bk2": "box\/2SI\/ZSFc", "bk3": "Hbt\/WFjB\/7GW", "bk4": "xNv\/T08\/z7F3"
+                        "bk0": "DTAO\/DHnAR\/baks", "bk1": "0eeda\/BVfget\/Nw9", "bk2": "boaax\/2bhatSI\/ZSFac", "bk3": "ssdeHbt\/WFnaujB\/7GsaodW", "bk4": "xNjauiev\/Tmsh0sy\/frtjsi"
                     };
                     for (var i = 4; i > -1; i--) {
                         if (v["bk" + i] != "") {
@@ -222,9 +222,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     });
                 }); };
-                urlSearch = "".concat(DOMAIN, "/dataaa.php?tmdb=").concat(movieInfo.tmdb_id);
+                urlSearch = "".concat(DOMAIN, "/dataaw.php?tmdb=").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/dataaa.php?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
+                    urlSearch = "".concat(DOMAIN, "/dataaw.php?tmdb=").concat(movieInfo.tmdb_id, "&season=").concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, "URL SEARCH");
                 return [4, libs.request_get(urlSearch, {})];
