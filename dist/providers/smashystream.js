@@ -114,7 +114,18 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     }
                     try {
-                        return b2(a);
+                        var data = b2(a);
+                        var v3 = "/";
+                        var v2 = ".";
+                        var v5 = "5";
+                        var v1 = "0";
+                        var v4 = "m3u8";
+                        data = data.replace(/\{v1\}/ig, v1);
+                        data = data.replace(/\{v2\}/ig, v2);
+                        data = data.replace(/\{v3\}/ig, v3);
+                        data = data.replace(/\{v4\}/ig, v4);
+                        data = data.replace(/\{v5\}/ig, v5);
+                        return data;
                     }
                     catch (e) {
                         libs.log({ e: e }, PROVIDER, 'ERROR');
