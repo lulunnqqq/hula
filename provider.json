@@ -1,7 +1,7 @@
 {
 	"providers": [	
-		"dist/providers/fa.js",
-		"dist/providers/fmovies.js",
+"dist/providers/fa.js",
+"dist/providers/fmovies.js",
 "dist/providers/vidsrcpro.js",
 "dist/providers/uniquestream.js",
 "dist/providers/emovies.js",
@@ -11,6 +11,7 @@
 "dist/providers/2now.js",
 "dist/providers/smashystream.js",
 "dist/providers/moviesapi.js",
-"dist/providers/catflix.js"
+"dist/providers/catflix.js",
+"dist/providers/idflix.js"
 	]
 }
