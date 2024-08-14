@@ -44,7 +44,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_b.label) {
             case 0:
                 PROVIDER = 'AMOVIESTREAM_2';
-                DOMAIN = "https://fboxz.to";
+                DOMAIN = "https://cinezone.to";
                 userAgent = {};
                 LINK_DETAIL = '';
                 i1 = function (t) {
@@ -206,20 +206,21 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
                 libs.log({ length: parseSearch('.item').length }, PROVIDER, 'LENGTH SEARCH INFO');
                 parseSearch('.item').each(function (key, item) {
-                    var title = parseSearch(item).find('a').text();
-                    var year = parseSearch(item).find('.meta').find('span').first().html();
-                    year = year ? year.match(/([0-9]+)/i) : 0;
+                    var title = parseSearch(item).find('.info a.title').text();
+                    var spanInfo = parseSearch(item).find('.sub-info').find('span').first().html();
+                    var year = spanInfo ? spanInfo.match(/([0-9]+)/i) : 0;
                     year = year ? year[1] : 0;
-                    var href = parseSearch(item).find('a').attr('href');
-                    var typeFilm = parseSearch(item).find('.type').text();
+                    var href = parseSearch(item).find('.info a.title').attr('href');
+                    var season = spanInfo ? spanInfo.match(/ss *([0-9]+)/i) : 0;
+                    season = season ? Number(season[1]) : 0;
                     var type = 'tv';
-                    if (typeFilm && typeFilm.toLowerCase() == 'movie') {
+                    if (season == 0) {
                         type = 'movie';
                     }
-                    libs.log({ title: title, year: year, href: href, type: type }, PROVIDER, 'MOVIE INFO');
+                    libs.log({ title: title, year: year, href: href, type: type, season: season, spanInfo: spanInfo }, PROVIDER, 'MOVIE INFO');
                     if (title && href && !LINK_DETAIL && type) {
                         if (libs.string_matching_title(movieInfo, title.trim(), false)) {
-                            if (movieInfo.type == 'tv' && type.toLowerCase() == 'tv' && movieInfo.year == year) {
+                            if (movieInfo.type == 'tv' && type.toLowerCase() == 'tv') {
                                 LINK_DETAIL = "".concat(DOMAIN).concat(href);
                             }
                             if (movieInfo.type == 'movie' && type.toLowerCase() == 'movie' && movieInfo.year == year) {
@@ -237,7 +238,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(LINK_TV_DETAIL, headers, true)];
             case 3:
                 parseTvDetail = _b.sent();
-                tvId = parseTvDetail('div.watch').attr('data-id');
+                tvId = parseTvDetail('div.watch-wrap').attr('data-id');
                 libs.log({ tvId: tvId, LINK_TV_DETAIL: LINK_TV_DETAIL }, PROVIDER, 'TVID');
                 if (!tvId) {
                     return [2];
@@ -264,7 +265,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 parseServerData_1 = cheerio.load(serverData.result);
                 serverIds_3 = [];
-                parseServerData_1('li').each(function (key, item) {
+                parseServerData_1('span').each(function (key, item) {
                     var id = parseServerData_1(item).attr('data-link-id');
                     if (id) {
                         serverIds_3.push(id);
@@ -304,7 +305,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 11: return [4, libs.request_get(LINK_DETAIL, headers, true)];
             case 12:
                 parseMovieDetail = _b.sent();
-                movieId = parseMovieDetail('div.watch').attr('data-id');
+                movieId = parseMovieDetail('div.watch-wrap').attr('data-id');
                 libs.log({ movieId: movieId }, PROVIDER, 'MOVIEID');
                 if (!movieId) {
                     return [2];
@@ -318,7 +319,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 parseMovieInfo = cheerio.load(movieInfoRes.result);
-                dataId = parseMovieInfo(".episodes li a[title=\"".concat(1, "\"]")).attr('data-id');
+                dataId = parseMovieInfo(".episodes li a[data-num=\"".concat(1, "\"]")).attr('data-id');
                 libs.log({ dataId: dataId }, PROVIDER, 'DATA ID');
                 if (!dataId) {
                     return [2];
@@ -326,12 +327,13 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get("".concat(DOMAIN, "/ajax/server/list/").concat(dataId, "?vrf=").concat(genCodeNew(dataId)), headers, false)];
             case 14:
                 serverData = _b.sent();
+                libs.log({ serverData: serverData }, PROVIDER, 'SERVER DATA');
                 if (serverData.status != 200) {
                     return [2];
                 }
                 parseServerData_2 = cheerio.load(serverData.result);
                 serverIds_4 = [];
-                parseServerData_2('li').each(function (key, item) {
+                parseServerData_2('span').each(function (key, item) {
                     var id = parseServerData_2(item).attr('data-link-id');
                     if (id) {
                         serverIds_4.push(id);
