@@ -77,7 +77,41 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
         var out = libs.string_btoa(e).replace(/\//g, "_").replace(/\+/g, '-');
         return out;
     }
-    var DOMAIN, HOST, PARSEDOMAIN, subParse, t, subs, headers, embed_enc, get_keys, h_enc, embed_dec, id, stream, playlist, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect, e_1;
+    function _0x64802e(_0x5cf48e, _0x2c4055) {
+        var _0x25bb5e = [];
+        var _0x75e1c = 0;
+        var _0x42f028 = 0;
+        var _0x55312d;
+        var _0xf52ad3 = "";
+        for (_0x42f028 = 0; _0x42f028 < 256; _0x42f028++) {
+            _0x25bb5e[_0x42f028] = _0x42f028;
+        }
+        for (_0x42f028 = 0; _0x42f028 < 256; _0x42f028++) {
+            _0x75e1c = (_0x75e1c + _0x25bb5e[_0x42f028] + _0x5cf48e.charCodeAt(_0x42f028 % _0x5cf48e.length)) % 256;
+            _0x55312d = _0x25bb5e[_0x42f028];
+            _0x25bb5e[_0x42f028] = _0x25bb5e[_0x75e1c];
+            _0x25bb5e[_0x75e1c] = _0x55312d;
+        }
+        _0x42f028 = 0;
+        for (var _0x28ab3a = _0x75e1c = 0; _0x28ab3a < _0x2c4055.length; _0x28ab3a++) {
+            _0x42f028 = (_0x42f028 + 1) % 256;
+            _0x75e1c = (_0x75e1c + _0x25bb5e[_0x42f028]) % 256;
+            _0x55312d = _0x25bb5e[_0x42f028];
+            _0x25bb5e[_0x42f028] = _0x25bb5e[_0x75e1c];
+            _0x25bb5e[_0x75e1c] = _0x55312d;
+            _0xf52ad3 += String.fromCharCode(_0x2c4055.charCodeAt(_0x28ab3a) ^ _0x25bb5e[(_0x25bb5e[_0x42f028] + _0x25bb5e[_0x75e1c]) % 256]);
+        }
+        return _0xf52ad3;
+    }
+    function _0x32df35(_0x358076, _0x4796ca, _0x2f37d2) {
+        var _0x37d225 = _0x4796ca.length;
+        var _0x1d2dda = {};
+        while (_0x37d225-- && (_0x1d2dda[_0x4796ca[_0x37d225]] = _0x2f37d2[_0x37d225] || "")) {
+            ;
+        }
+        return _0x358076.split("").map(function (_0x39e617) { return _0x1d2dda[_0x39e617] || _0x39e617; }).join("");
+    }
+    var DOMAIN, HOST, PARSEDOMAIN, subParse, t, subs, headers, embed_enc, get_keys, h_enc, embed_dec, embed_enc_2, h_enc_2, embed_dec_2, id, stream, playlist, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect, e_1;
     var _this = this;
     return __generator(this, function (_c) {
         switch (_c.label) {
@@ -149,6 +183,24 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                         }
                     });
                 }); };
+                embed_enc_2 = function (embed_id) {
+                    var _0xa8a16f;
+                    _0xa8a16f = _0x32df35(_0xa8a16f = ("" + libs.string_btoa(_0x64802e("V4pBzCPyMSwqx", _0xa8a16f = "" + (_0xa8a16f = embed_id)))).replace(/\//g, "_").replace(/\+/g, "-"), "4pj" + "V" + "I6otnvx" + "W", "Ip64xWVntvoj");
+                    _0xa8a16f = ("" + libs.string_btoa(_0x64802e("eLWogkrHstP", _0xa8a16f = _0x32df35(_0xa8a16f = _0xa8a16f.split("").reverse().join(""), "kHWPSL5RKG9Ei8Q", "REG859WSLiQkKHP")))).replace(/\//g, "_").replace(/\+/g, "-");
+                    _0xa8a16f = ("" + libs.string_btoa(_0x64802e("bpPVcKMFJXq", _0xa8a16f = _0xa8a16f.split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
+                    _0xa8a16f = ("" + libs.string_btoa(_0xa8a16f = (_0xa8a16f = _0x32df35(_0xa8a16f, "VtravPeTH34OUog", "Oea" + "Trt4" + "H3o" + "Vgv" + "P" + "U")).split("").reverse().join(""))).replace(/\//g, "_").replace(/\+/g, "-");
+                    return _0xa8a16f;
+                };
+                h_enc_2 = function (embed_id) {
+                    return libs.string_btoa(_0x64802e("BvxAphQAmWO9BIJ8", embed_id));
+                };
+                embed_dec_2 = function (data) {
+                    var _0x3510d5 = libs.string_atob(("" + (_0x3510d5 = "" + (_0x3510d5 = data))).replace(/_/g, "/").replace(/-/g, "+"));
+                    _0x3510d5 = _0x64802e("bpPVcKMFJXq", libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), "Oea" + "Trt4" + "H3o" + "Vgv" + "P" + "U", "VtravPeTH34OUog"))).replace(/_/g, "/").replace(/-/g, "+")));
+                    _0x3510d5 = _0x32df35(_0x3510d5 = _0x64802e("eLWogkrHstP", libs.string_atob(("" + (_0x3510d5 = _0x3510d5.split("").reverse().join(""))).replace(/_/g, "/").replace(/-/g, "+"))), "REG859WSLiQkKHP", "kHWPSL5RKG9Ei8Q");
+                    _0x3510d5 = _0x64802e("V4pBzCPyMSwqx", libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), "Ip64xWVntvoj", "4pj" + "V" + "I6otnvx" + "W"))).replace(/_/g, "/").replace(/-/g, "+")));
+                    return _0x3510d5;
+                };
                 id = url.match(/\/e\/([^\?]+)/i);
                 id = id ? id[1] : '';
                 if (!id) {
@@ -161,21 +213,15 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                             case 0:
                                 search = url.replace("".concat(DOMAIN, "/e/").concat(id), "");
                                 embed_id = id;
-                                return [4, h_enc(embed_id)];
-                            case 1:
-                                h = _a.sent();
-                                return [4, embed_enc(embed_id)];
-                            case 2:
-                                hash = _a.sent();
+                                h = h_enc_2(embed_id);
+                                hash = embed_enc_2(embed_id);
                                 mediainfo_url = "".concat(DOMAIN, "/mediainfo/").concat(hash).concat(search, "&ads=0&h=").concat(encodeURIComponent(h));
                                 return [4, fetch(mediainfo_url)];
-                            case 3: return [4, (_a.sent()).json()];
-                            case 4:
+                            case 1: return [4, (_a.sent()).json()];
+                            case 2:
                                 resp = _a.sent();
                                 libs.log({ mediainfo_url: mediainfo_url, hash: hash, resp: resp }, HOST, 'MEDIAINFO URL');
-                                return [4, embed_dec(resp['result'])];
-                            case 5:
-                                playlist = (_a.sent()).replace(/\\\//g, "/");
+                                playlist = (embed_dec_2(resp['result'])).replace(/\\\//g, "/");
                                 return [2, JSON.parse(playlist)];
                         }
                     });
