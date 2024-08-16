@@ -111,7 +111,7 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
         }
         return _0x358076.split("").map(function (_0x39e617) { return _0x1d2dda[_0x39e617] || _0x39e617; }).join("");
     }
-    var DOMAIN, HOST, PARSEDOMAIN, subParse, t, subs, headers, embed_enc, get_keys, h_enc, embed_dec, embed_enc_2, h_enc_2, embed_dec_2, id, stream, playlist, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect, e_1;
+    var DOMAIN, HOST, PARSEDOMAIN, subParse, t, subs, headers, embed_enc, get_keys_1, h_enc, embed_dec, embed_enc_2_1, h_enc_2_1, embed_dec_2_1, id_1, stream, playlist, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect, e_1, e1_1;
     var _this = this;
     return __generator(this, function (_c) {
         switch (_c.label) {
@@ -119,19 +119,22 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                 DOMAIN = 'https://vid2faf.site';
                 HOST = 'Vidplay';
                 PARSEDOMAIN = "vid2faf.site";
+                _c.label = 1;
+            case 1:
+                _c.trys.push([1, 11, , 12]);
                 subParse = url.match(/\&sub\.info\=([^\&]+)/i);
                 subParse = subParse ? decodeURIComponent(subParse[1]) : '';
                 t = url.match(/\?t\=([^\&]+)/i);
                 t = t ? t[1] : '';
                 libs.log({ subParse: subParse, t: t }, HOST, 'SUBPARSE');
                 subs = [];
-                if (!subParse) return [3, 2];
+                if (!subParse) return [3, 3];
                 return [4, libs.request_get(subParse)];
-            case 1:
+            case 2:
                 subs = _c.sent();
                 libs.log({ subs: subs }, HOST, 'SUBTITLE');
-                _c.label = 2;
-            case 2:
+                _c.label = 3;
+            case 3:
                 headers = {
                     'Referer': url,
                     'user-agent': libs.request_getRandomUserAgent()
@@ -140,14 +143,14 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                     var keys;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4, get_keys(PARSEDOMAIN)];
+                            case 0: return [4, get_keys_1(PARSEDOMAIN)];
                             case 1:
                                 keys = _a.sent();
                                 return [2, general_enc(keys[0], inp)];
                         }
                     });
                 }); };
-                get_keys = function (host) { return __awaiter(_this, void 0, void 0, function () {
+                get_keys_1 = function (host) { return __awaiter(_this, void 0, void 0, function () {
                     var keys;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
@@ -163,7 +166,7 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                     var keys;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4, get_keys(PARSEDOMAIN)];
+                            case 0: return [4, get_keys_1(PARSEDOMAIN)];
                             case 1:
                                 keys = _a.sent();
                                 return [2, general_enc(keys[1], inp)];
@@ -176,14 +179,14 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                         switch (_a.label) {
                             case 0:
                                 libs.log({ inp: inp }, HOST, 'EMBED DECODED');
-                                return [4, get_keys(PARSEDOMAIN)];
+                                return [4, get_keys_1(PARSEDOMAIN)];
                             case 1:
                                 keys = _a.sent();
                                 return [2, general_dec(keys[2], inp)];
                         }
                     });
                 }); };
-                embed_enc_2 = function (embed_id) {
+                embed_enc_2_1 = function (embed_id) {
                     var _0xa8a16f;
                     _0xa8a16f = _0x32df35(_0xa8a16f = ("" + libs.string_btoa(_0x64802e("V4pBzCPyMSwqx", _0xa8a16f = "" + (_0xa8a16f = embed_id)))).replace(/\//g, "_").replace(/\+/g, "-"), "4pj" + "V" + "I6otnvx" + "W", "Ip64xWVntvoj");
                     _0xa8a16f = ("" + libs.string_btoa(_0x64802e("eLWogkrHstP", _0xa8a16f = _0x32df35(_0xa8a16f = _0xa8a16f.split("").reverse().join(""), "kHWPSL5RKG9Ei8Q", "REG859WSLiQkKHP")))).replace(/\//g, "_").replace(/\+/g, "-");
@@ -191,19 +194,19 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                     _0xa8a16f = ("" + libs.string_btoa(_0xa8a16f = (_0xa8a16f = _0x32df35(_0xa8a16f, "VtravPeTH34OUog", "Oea" + "Trt4" + "H3o" + "Vgv" + "P" + "U")).split("").reverse().join(""))).replace(/\//g, "_").replace(/\+/g, "-");
                     return _0xa8a16f;
                 };
-                h_enc_2 = function (embed_id) {
+                h_enc_2_1 = function (embed_id) {
                     return libs.string_btoa(_0x64802e("BvxAphQAmWO9BIJ8", embed_id));
                 };
-                embed_dec_2 = function (data) {
+                embed_dec_2_1 = function (data) {
                     var _0x3510d5 = libs.string_atob(("" + (_0x3510d5 = "" + (_0x3510d5 = data))).replace(/_/g, "/").replace(/-/g, "+"));
                     _0x3510d5 = _0x64802e("bpPVcKMFJXq", libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), "Oea" + "Trt4" + "H3o" + "Vgv" + "P" + "U", "VtravPeTH34OUog"))).replace(/_/g, "/").replace(/-/g, "+")));
                     _0x3510d5 = _0x32df35(_0x3510d5 = _0x64802e("eLWogkrHstP", libs.string_atob(("" + (_0x3510d5 = _0x3510d5.split("").reverse().join(""))).replace(/_/g, "/").replace(/-/g, "+"))), "REG859WSLiQkKHP", "kHWPSL5RKG9Ei8Q");
                     _0x3510d5 = _0x64802e("V4pBzCPyMSwqx", libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), "Ip64xWVntvoj", "4pj" + "V" + "I6otnvx" + "W"))).replace(/_/g, "/").replace(/-/g, "+")));
                     return _0x3510d5;
                 };
-                id = url.match(/\/e\/([^\?]+)/i);
-                id = id ? id[1] : '';
-                if (!id) {
+                id_1 = url.match(/\/e\/([^\?]+)/i);
+                id_1 = id_1 ? id_1[1] : '';
+                if (!id_1) {
                     return [2];
                 }
                 stream = function (url) { return __awaiter(_this, void 0, void 0, function () {
@@ -211,51 +214,51 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                search = url.replace("".concat(DOMAIN, "/e/").concat(id), "");
-                                embed_id = id;
-                                h = h_enc_2(embed_id);
-                                hash = embed_enc_2(embed_id);
+                                search = url.replace("".concat(DOMAIN, "/e/").concat(id_1), "");
+                                embed_id = id_1;
+                                h = h_enc_2_1(embed_id);
+                                hash = embed_enc_2_1(embed_id);
                                 mediainfo_url = "".concat(DOMAIN, "/mediainfo/").concat(hash).concat(search, "&ads=0&h=").concat(encodeURIComponent(h));
                                 return [4, fetch(mediainfo_url)];
                             case 1: return [4, (_a.sent()).json()];
                             case 2:
                                 resp = _a.sent();
                                 libs.log({ mediainfo_url: mediainfo_url, hash: hash, resp: resp }, HOST, 'MEDIAINFO URL');
-                                playlist = (embed_dec_2(resp['result'])).replace(/\\\//g, "/");
+                                playlist = (embed_dec_2_1(resp['result'])).replace(/\\\//g, "/");
                                 return [2, JSON.parse(playlist)];
                         }
                     });
                 }); };
                 return [4, stream(url)];
-            case 3:
+            case 4:
                 playlist = _c.sent();
                 libs.log({ playlist: playlist }, HOST, 'PLAYLIST');
                 rank = 0;
                 _i = 0, _a = playlist.sources;
-                _c.label = 4;
-            case 4:
-                if (!(_i < _a.length)) return [3, 9];
-                embedItem = _a[_i];
                 _c.label = 5;
             case 5:
-                _c.trys.push([5, 7, , 8]);
+                if (!(_i < _a.length)) return [3, 10];
+                embedItem = _a[_i];
+                _c.label = 6;
+            case 6:
+                _c.trys.push([6, 8, , 9]);
                 if (!embedItem.file) {
-                    return [3, 8];
+                    return [3, 9];
                 }
                 return [4, libs.request_get(embedItem.file, headers)];
-            case 6:
+            case 7:
                 embedData = _c.sent();
                 libs.log({
                     embedData: embedData
                 }, provider, 'EMBED PARSE DATA');
                 if (!embedData) {
-                    return [3, 8];
+                    return [3, 9];
                 }
                 patternQuality = embedData.match(/hls\/([0-9]+)\/[0-9]+\.m3u8/ig);
                 libs.log({ patternQuality: patternQuality, file: embedItem.file }, provider, 'PATTERN QUALITY');
                 if (!patternQuality) {
                     libs.embed_callback(embedItem.file, provider, provider, 'Hls', callback, ++rank, config.subs ? config.subs : [], [{ file: embedItem.file, quality: 1080 }]);
-                    return [3, 8];
+                    return [3, 9];
                 }
                 directQuality = [];
                 for (_b = 0, patternQuality_1 = patternQuality; _b < patternQuality_1.length; _b++) {
@@ -292,15 +295,20 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                     is_end_webview: true,
                     url_webview: metadata.url_webview || ''
                 });
-                return [3, 8];
-            case 7:
+                return [3, 9];
+            case 8:
                 e_1 = _c.sent();
                 libs.log({ e: e_1 }, provider, "ERROR LOOP");
-                return [3, 8];
-            case 8:
+                return [3, 9];
+            case 9:
                 _i++;
-                return [3, 4];
-            case 9: return [2];
+                return [3, 5];
+            case 10: return [3, 12];
+            case 11:
+                e1_1 = _c.sent();
+                libs.log({ e1: e1_1 }, HOST, "ERROR");
+                return [3, 12];
+            case 12: return [2];
         }
     });
 }); };
