@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
     function c(t) {
-        return ""["concat"]((2199 + -1789 + -410, i1)(t))["replace"](/\//g, "_")["replace"](/\+/g, "-");
+        return ""["concat"]((2199 + -1789 + -410, i1_1)(t))["replace"](/\//g, "_")["replace"](/\+/g, "-");
     }
     function _0x4e1570(_0xe62397, _0x33513e, _0x54486c) {
         var _0x4f5745 = _0x33513e.length;
@@ -87,7 +87,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         _0x4dd662 = _0x4e1570(_0x4dd662 = (_0x4dd662 = _0xb23638("hAGMmLFnoa0", libs.string_atob(("" + _0x4dd662).replace(/_/g, "/").replace(/-/g, "+")))).split("").reverse().join(""), "56kC8jyGoXTAa1J", "5j6Ak1GJaTy8XoC");
         return _0x4dd662;
     }
-    var PROVIDER, DOMAIN, userAgent, LINK_DETAIL, i1, O, genMovie, u, decodeRes, decodeRes_1, keys, genCodeNew, headers, urlSearch, parseSearch, LINK_TV_DETAIL, parseTvDetail, tvId, episodeInfoUrl, episodeRes, parseEpisodeData, dataId, serverData, parseServerData_1, serverIds_3, _i, serverIds_1, idItem, embedUrl, embedData, directData, decodeUrl, parseMovieDetail, movieId, movieInfoUrl, movieInfoRes, parseMovieInfo, dataId, serverData, parseServerData_2, serverIds_4, _a, serverIds_2, idItem, embedUrl, embedData, directData, decodeUrl;
+    var PROVIDER, DOMAIN, userAgent, LINK_DETAIL, i1_1, O_1, genMovie, u_1, decodeRes_3, decodeRes_1, keys_1, genCodeNew, headers, urlSearch, parseSearch_1, LINK_TV_DETAIL, parseTvDetail, tvId, episodeInfoUrl, episodeRes, parseEpisodeData, dataId, serverData, parseServerData_1, serverIds_3, _i, serverIds_1, idItem, embedUrl, embedData, directData, decodeUrl, parseMovieDetail, movieId, movieInfoUrl, movieInfoRes, parseMovieInfo, dataId, serverData, parseServerData_2, serverIds_4, _a, serverIds_2, idItem, embedUrl, embedData, directData, decodeUrl, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -95,7 +95,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://cinezone.to";
                 userAgent = {};
                 LINK_DETAIL = '';
-                i1 = function (t) {
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 21, , 22]);
+                i1_1 = function (t) {
                     for (t = ""["concat"](t), r = -1 * -4109 + -1361 * 2 + -1387; r < t["length"]; r++)
                         if (1 * -1682 + 461 * 11 + 2 * -1567 < t["charCodeAt"](r))
                             return null;
@@ -110,7 +113,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                     return i;
                 };
-                O = function (t, n) {
+                O_1 = function (t, n) {
                     for (var o, u = [], s = 851 + -9067 + 8216, e = "", h = 17 * 436 + 4374 + -11786; h < 1 * -6784 + -4832 * 1 + 11872; h++)
                         u[h] = h;
                     for (h = -8335 + -717 + -4 * -2263; h < 1 * 8247 + -1754 + -9 * 693; h++)
@@ -136,9 +139,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 -1 * 2421 + 1 * 2383 + 38 ? u = -6749 + 619 * -10 + -19 * -681 : o % i == 3 * -866 + 7139 + -51 * 89 ? u -= -53 * 29 + 9682 * 1 + 479 * -17 : o % i == 5542 + 1 * -6217 + 679 || o % i == -105 * -10 + 1811 + 1 * -2854 ? u += 7027 * -1 + 51 * -57 + -1242 * -8 : o % i == 9287 * -1 + -21 * -391 + -2 * -538 ? u += -66 + 4891 + 1 * -4821 : s["mmGxz"](o, i) == 7229 + -1914 + 177 * -30 || o % i == 2671 + 9693 + -12358 * 1 ? u -= -137 * 38 + -4 * -2042 + 34 * -87 : o % i == 2872 * -3 + -166 * -59 + -1177 ? u += -1796 + -9187 + 3662 * 3 : o % i == -3829 * 1 + -7326 + 1594 * 7 && (u += -7109 + -9975 + 17089), r += String["fromCharCode"](u);
                             }
                             return r;
-                        }(c(O("VmSazcydpguRBnhG", t)));
+                        }(c(O_1("VmSazcydpguRBnhG", t)));
                 };
-                u = function (t) {
+                u_1 = function (t) {
                     var c = {
                         QdvsY: function (t, n) {
                             return t == n;
@@ -162,21 +165,21 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         u = (u <<= 3896 + 1633 * -2 + -104 * 6) | (r = t[e], (r = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"["indexOf"](r)) < 9541 + -752 + -17 * 517 ? void (-109 * 1 + 1802 + 1 * -1693) : r), 7344 + 17 * 125 + 9445 * -1 === (s += 13 * 691 + -592 * -15 + -17857) && (o = (o = (o += String["fromCharCode"]((19012171 + 12170 * 1516 + -20750211 & u) >> 4808 + 23 * -384 + 4040)) + String["fromCharCode"]((47 * -1378 + 80921 + 49125 & u) >> 5843 + -344 * 13 + 1 * -1363)) + String["fromCharCode"]((-6913 + -9482 * -1 + -2314 & u)), u = s = -190 * -28 + 5743 * 1 + 299 * -37);
                     return -4877 + 2050 * 4 + -3311 === s ? (u >>= -5268 + -7159 * -1 + -1887, o += String["fromCharCode"](u)) : 44 * 65 + 492 + -3334 === s && (u >>= -9224 + 5853 * -1 + -17 * -887, o = (o += String["fromCharCode"]((-18277 + -73892 + 157449 & u) >> -2606 * 2 + -7 * -1417 + 37 * -127)) + String["fromCharCode"](9423 + 3 * 239 + 5 * -1977 & u)), o;
                 };
-                decodeRes = function (t) {
-                    return t = (1007 + 679 * -10 + 5783, u)(""["concat"](t)["replace"](/_/g, "/")["replace"](/-/g, "+")), t = O("8z5Ag5wgagfsOuhz", t), t;
+                decodeRes_3 = function (t) {
+                    return t = (1007 + 679 * -10 + 5783, u_1)(""["concat"](t)["replace"](/_/g, "/")["replace"](/-/g, "+")), t = O_1("8z5Ag5wgagfsOuhz", t), t;
                 };
                 decodeRes_1 = function (t) {
-                    return (decodeRes(t));
+                    return (decodeRes_3(t));
                 };
                 return [4, libs.request_get("https://raw.githubusercontent.com/giammirove/videogatherer/main/src/keys.json")];
-            case 1:
-                keys = _b.sent();
-                keys = keys["watchseriesx.to"][1] || "";
+            case 2:
+                keys_1 = _b.sent();
+                keys_1 = keys_1["watchseriesx.to"][1] || "";
                 genCodeNew = function (id) {
                     var n;
                     function D() {
                         var t = [arguments];
-                        t[5] = keys;
+                        t[5] = keys_1;
                         t[1] = encodeURIComponent("" + t[0][0]);
                         t[1] = Z(t[5], t[1]);
                         t[1] = function () {
@@ -249,16 +252,16 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 };
                 urlSearch = "".concat(DOMAIN, "/filter?keyword=").concat(movieInfo.title.trim().replace(/ /g, '+'));
                 return [4, libs.request_get(urlSearch, headers, true)];
-            case 2:
-                parseSearch = _b.sent();
+            case 3:
+                parseSearch_1 = _b.sent();
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
-                libs.log({ length: parseSearch('.item').length }, PROVIDER, 'LENGTH SEARCH INFO');
-                parseSearch('.item').each(function (key, item) {
-                    var title = parseSearch(item).find('.info a.title').text();
-                    var spanInfo = parseSearch(item).find('.sub-info').find('span').first().html();
+                libs.log({ length: parseSearch_1('.item').length }, PROVIDER, 'LENGTH SEARCH INFO');
+                parseSearch_1('.item').each(function (key, item) {
+                    var title = parseSearch_1(item).find('.info a.title').text();
+                    var spanInfo = parseSearch_1(item).find('.sub-info').find('span').first().html();
                     var year = spanInfo ? spanInfo.match(/([0-9]+)/i) : 0;
                     year = year ? year[1] : 0;
-                    var href = parseSearch(item).find('.info a.title').attr('href');
+                    var href = parseSearch_1(item).find('.info a.title').attr('href');
                     var season = spanInfo ? spanInfo.match(/ss *([0-9]+)/i) : 0;
                     season = season ? Number(season[1]) : 0;
                     var type = 'tv';
@@ -281,10 +284,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!LINK_DETAIL) {
                     return [2];
                 }
-                if (!(movieInfo.type == 'tv')) return [3, 11];
+                if (!(movieInfo.type == 'tv')) return [3, 12];
                 LINK_TV_DETAIL = "".concat(LINK_DETAIL, "/").concat(movieInfo.season, "-").concat(movieInfo.episode);
                 return [4, libs.request_get(LINK_TV_DETAIL, headers, true)];
-            case 3:
+            case 4:
                 parseTvDetail = _b.sent();
                 tvId = parseTvDetail('div.watch-wrap').attr('data-id');
                 libs.log({ tvId: tvId, LINK_TV_DETAIL: LINK_TV_DETAIL }, PROVIDER, 'TVID');
@@ -293,7 +296,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 episodeInfoUrl = "".concat(DOMAIN, "/ajax/episode/list/").concat(tvId, "?vrf=").concat(genCodeNewV2(tvId));
                 return [4, libs.request_get(episodeInfoUrl, headers, false)];
-            case 4:
+            case 5:
                 episodeRes = _b.sent();
                 libs.log({ episodeRes: episodeRes, episodeInfoUrl: episodeInfoUrl }, PROVIDER, 'EPISODE RES');
                 if (episodeRes.status != 200) {
@@ -306,7 +309,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 return [4, libs.request_get("".concat(DOMAIN, "/ajax/server/list/").concat(dataId, "?vrf=").concat(genCodeNewV2(dataId)), headers, false)];
-            case 5:
+            case 6:
                 serverData = _b.sent();
                 if (serverData.status != 200) {
                     return [2];
@@ -324,34 +327,34 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 _i = 0, serverIds_1 = serverIds_3;
-                _b.label = 6;
-            case 6:
-                if (!(_i < serverIds_1.length)) return [3, 10];
+                _b.label = 7;
+            case 7:
+                if (!(_i < serverIds_1.length)) return [3, 11];
                 idItem = serverIds_1[_i];
                 embedUrl = "".concat(DOMAIN, "/ajax/server/").concat(idItem, "?vrf=").concat(genCodeNewV2(idItem));
                 return [4, libs.request_get(embedUrl, headers, false)];
-            case 7:
+            case 8:
                 embedData = _b.sent();
                 libs.log({ embedData: embedData }, PROVIDER, 'EMBED DATA');
                 if (embedData.status != 200) {
-                    return [3, 9];
+                    return [3, 10];
                 }
                 directData = embedData.result.url;
                 if (!directData) {
-                    return [3, 9];
+                    return [3, 10];
                 }
                 decodeUrl = decodeRes_2(directData);
                 libs.log({ decodeUrl: decodeURIComponent(decodeUrl) }, PROVIDER, 'DECODE URL');
                 return [4, libs.embed_redirect(decodeURIComponent(decodeUrl), '', movieInfo, PROVIDER, callback, undefined, [])];
-            case 8:
-                _b.sent();
-                _b.label = 9;
             case 9:
+                _b.sent();
+                _b.label = 10;
+            case 10:
                 _i++;
-                return [3, 6];
-            case 10: return [3, 19];
-            case 11: return [4, libs.request_get(LINK_DETAIL, headers, true)];
-            case 12:
+                return [3, 7];
+            case 11: return [3, 20];
+            case 12: return [4, libs.request_get(LINK_DETAIL, headers, true)];
+            case 13:
                 parseMovieDetail = _b.sent();
                 movieId = parseMovieDetail('div.watch-wrap').attr('data-id');
                 libs.log({ movieId: movieId }, PROVIDER, 'MOVIEID');
@@ -360,7 +363,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 movieInfoUrl = "".concat(DOMAIN, "/ajax/episode/list/").concat(movieId, "?vrf=").concat(genCodeNewV2(movieId));
                 return [4, libs.request_get(movieInfoUrl, headers, false)];
-            case 13:
+            case 14:
                 movieInfoRes = _b.sent();
                 libs.log({ movieInfoRes: movieInfoRes, movieInfoUrl: movieInfoUrl }, PROVIDER, 'MOVIE RES');
                 if (movieInfoRes.status != 200) {
@@ -373,7 +376,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 return [4, libs.request_get("".concat(DOMAIN, "/ajax/server/list/").concat(dataId, "?vrf=").concat(genCodeNewV2(dataId)), headers, false)];
-            case 14:
+            case 15:
                 serverData = _b.sent();
                 libs.log({ serverData: serverData }, PROVIDER, 'SERVER DATA');
                 if (serverData.status != 200) {
@@ -388,34 +391,39 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                 });
                 _a = 0, serverIds_2 = serverIds_4;
-                _b.label = 15;
-            case 15:
-                if (!(_a < serverIds_2.length)) return [3, 19];
+                _b.label = 16;
+            case 16:
+                if (!(_a < serverIds_2.length)) return [3, 20];
                 idItem = serverIds_2[_a];
                 embedUrl = "".concat(DOMAIN, "/ajax/server/").concat(idItem, "?vrf=").concat(genCodeNewV2(idItem));
                 return [4, libs.request_get(embedUrl, headers, false)];
-            case 16:
+            case 17:
                 embedData = _b.sent();
                 libs.log({ embedData: embedData }, PROVIDER, 'EMBED DATA');
                 if (embedData.status != 200) {
-                    return [3, 18];
+                    return [3, 19];
                 }
                 directData = embedData.result.url;
                 if (!directData) {
-                    return [3, 18];
+                    return [3, 19];
                 }
                 decodeUrl = decodeRes_2(directData);
                 libs.log({ decodeUrl: decodeURIComponent(decodeUrl) }, PROVIDER, 'DECODE URL');
                 return [4, libs.embed_redirect(decodeURIComponent(decodeUrl), '', movieInfo, PROVIDER, callback, undefined, [])];
-            case 17:
-                _b.sent();
-                _b.label = 18;
             case 18:
-                _a++;
-                return [3, 15];
+                _b.sent();
+                _b.label = 19;
             case 19:
+                _a++;
+                return [3, 16];
+            case 20:
                 ;
-                return [2, true];
+                return [3, 22];
+            case 21:
+                e_1 = _b.sent();
+                libs.log({ e: e_1 }, PROVIDER, 'ERROR');
+                return [3, 22];
+            case 22: return [2, true];
         }
     });
 }); };
