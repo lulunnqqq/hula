@@ -74,17 +74,17 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         return _0x267043;
     }
     function genCodeNewV2(_0x221e04) {
-        _0x221e04 = ("" + libs.string_btoa(_0xb23638("hAGMmLFnoa0", _0x221e04 = (_0x221e04 = _0x4e1570(_0x221e04 = "" + _0x221e04, "5j6Ak1GJaTy8XoC", "56kC8jyGoXTAa1J")).split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
-        _0x221e04 = ("" + libs.string_btoa(_0xb23638("oUHxby23izOI5", _0x221e04 = (_0x221e04 = _0x4e1570(_0x221e04, "PUoVzgdK5FLZt", "FVogUPtKzdZL5")).split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
-        _0x221e04 = ("" + libs.string_btoa(_0xb23638("tX6D4K8mPrq3V", _0x221e04 = (_0x221e04 = _0x4e1570(_0x221e04, "PEQmieNvWhrOX", "OEehvmXQrWiPN")).split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
+        _0x221e04 = ("" + libs.string_btoa(_0xb23638(keys_1[2], _0x221e04 = (_0x221e04 = _0x4e1570(_0x221e04 = "" + _0x221e04, keys_1[0], keys_1[1])).split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
+        _0x221e04 = ("" + libs.string_btoa(_0xb23638(keys_1[5], _0x221e04 = (_0x221e04 = _0x4e1570(_0x221e04, keys_1[3], keys_1[4])).split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
+        _0x221e04 = ("" + libs.string_btoa(_0xb23638(keys_1[8], _0x221e04 = (_0x221e04 = _0x4e1570(_0x221e04, keys_1[6], keys_1[7])).split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
         return _0x221e04 = ("" + libs.string_btoa(_0x221e04)).replace(/\//g, "_").replace(/\+/g, "-");
     }
     function decodeRes_2(result) {
         var _0x4dd662 = "";
         _0x4dd662 = libs.string_atob(("" + (_0x4dd662 = "" + (_0x4dd662 = result))).replace(/_/g, "/").replace(/-/g, "+"));
-        _0x4dd662 = _0x4e1570(_0x4dd662 = (_0x4dd662 = _0xb23638("tX6D4K8mPrq3V", libs.string_atob(("" + _0x4dd662).replace(/_/g, "/").replace(/-/g, "+")))).split("").reverse().join(""), "OEehvmXQrWiPN", "PEQmieNvWhrOX");
-        _0x4dd662 = _0x4e1570(_0x4dd662 = (_0x4dd662 = _0xb23638("oUHxby23izOI5", libs.string_atob(("" + _0x4dd662).replace(/_/g, "/").replace(/-/g, "+")))).split("").reverse().join(""), "FVogUPtKzdZL5", "PUoVzgdK5FLZt");
-        _0x4dd662 = _0x4e1570(_0x4dd662 = (_0x4dd662 = _0xb23638("hAGMmLFnoa0", libs.string_atob(("" + _0x4dd662).replace(/_/g, "/").replace(/-/g, "+")))).split("").reverse().join(""), "56kC8jyGoXTAa1J", "5j6Ak1GJaTy8XoC");
+        _0x4dd662 = _0x4e1570(_0x4dd662 = (_0x4dd662 = _0xb23638(keys_1[8], libs.string_atob(("" + _0x4dd662).replace(/_/g, "/").replace(/-/g, "+")))).split("").reverse().join(""), keys_1[7], keys_1[6]);
+        _0x4dd662 = _0x4e1570(_0x4dd662 = (_0x4dd662 = _0xb23638(keys_1[5], libs.string_atob(("" + _0x4dd662).replace(/_/g, "/").replace(/-/g, "+")))).split("").reverse().join(""), keys_1[4], keys_1[3]);
+        _0x4dd662 = _0x4e1570(_0x4dd662 = (_0x4dd662 = _0xb23638("hAGMmLFnoa0", libs.string_atob(("" + _0x4dd662).replace(/_/g, "/").replace(/-/g, "+")))).split("").reverse().join(""), keys_1[1], keys_1[0]);
         return _0x4dd662;
     }
     var PROVIDER, DOMAIN, userAgent, LINK_DETAIL, i1_1, O_1, genMovie, u_1, decodeRes_3, decodeRes_1, keys_1, genCodeNew, headers, urlSearch, parseSearch_1, LINK_TV_DETAIL, parseTvDetail, tvId, episodeInfoUrl, episodeRes, parseEpisodeData, dataId, serverData, parseServerData_1, serverIds_3, _i, serverIds_1, idItem, embedUrl, embedData, directData, decodeUrl, parseMovieDetail, movieId, movieInfoUrl, movieInfoRes, parseMovieInfo, dataId, serverData, parseServerData_2, serverIds_4, _a, serverIds_2, idItem, embedUrl, embedData, directData, decodeUrl, e_1;
@@ -174,7 +174,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get("https://raw.githubusercontent.com/giammirove/videogatherer/main/src/keys.json")];
             case 2:
                 keys_1 = _b.sent();
-                keys_1 = keys_1["watchseriesx.to"][1] || "";
+                keys_1 = keys_1["watchseriesx.to"] || [];
                 genCodeNew = function (id) {
                     var n;
                     function D() {

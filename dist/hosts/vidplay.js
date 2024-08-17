@@ -111,7 +111,7 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
         }
         return _0x358076.split("").map(function (_0x39e617) { return _0x1d2dda[_0x39e617] || _0x39e617; }).join("");
     }
-    var DOMAIN, HOST, PARSEDOMAIN, subParse, t, subs, headers, embed_enc, get_keys_1, h_enc, embed_dec, embed_enc_2_1, h_enc_2_1, embed_dec_2_1, id_1, stream, playlist, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect, e_1, e1_1;
+    var DOMAIN, HOST, PARSEDOMAIN, subParse, t, subs, headers, embed_enc, get_keys_1, h_enc, embed_dec, keys_1, embed_enc_2_1, h_enc_2_1, embed_dec_2_1, id_1, stream, playlist, rank, _i, _a, embedItem, embedData, patternQuality, directQuality, _b, patternQuality_1, patternItem, sizeQuality, urlDirect, urlDirect, e_1, e1_1;
     var _this = this;
     return __generator(this, function (_c) {
         switch (_c.label) {
@@ -121,7 +121,7 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                 PARSEDOMAIN = "vid2faf.site";
                 _c.label = 1;
             case 1:
-                _c.trys.push([1, 11, , 12]);
+                _c.trys.push([1, 12, , 13]);
                 subParse = url.match(/\&sub\.info\=([^\&]+)/i);
                 subParse = subParse ? decodeURIComponent(subParse[1]) : '';
                 t = url.match(/\?t\=([^\&]+)/i);
@@ -186,22 +186,26 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                         }
                     });
                 }); };
+                return [4, libs.request_get("https://raw.githubusercontent.com/giammirove/videogatherer/main/src/keys.json")];
+            case 4:
+                keys_1 = _c.sent();
+                keys_1 = keys_1["vid2faf.site"] || [];
                 embed_enc_2_1 = function (embed_id) {
                     var _0xa8a16f;
-                    _0xa8a16f = _0x32df35(_0xa8a16f = ("" + libs.string_btoa(_0x64802e("V4pBzCPyMSwqx", _0xa8a16f = "" + (_0xa8a16f = embed_id)))).replace(/\//g, "_").replace(/\+/g, "-"), "4pj" + "V" + "I6otnvx" + "W", "Ip64xWVntvoj");
-                    _0xa8a16f = ("" + libs.string_btoa(_0x64802e("eLWogkrHstP", _0xa8a16f = _0x32df35(_0xa8a16f = _0xa8a16f.split("").reverse().join(""), "kHWPSL5RKG9Ei8Q", "REG859WSLiQkKHP")))).replace(/\//g, "_").replace(/\+/g, "-");
-                    _0xa8a16f = ("" + libs.string_btoa(_0x64802e("bpPVcKMFJXq", _0xa8a16f = _0xa8a16f.split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
-                    _0xa8a16f = ("" + libs.string_btoa(_0xa8a16f = (_0xa8a16f = _0x32df35(_0xa8a16f, "VtravPeTH34OUog", "Oea" + "Trt4" + "H3o" + "Vgv" + "P" + "U")).split("").reverse().join(""))).replace(/\//g, "_").replace(/\+/g, "-");
+                    _0xa8a16f = _0x32df35(_0xa8a16f = ("" + libs.string_btoa(_0x64802e(keys_1[0], _0xa8a16f = "" + (_0xa8a16f = embed_id)))).replace(/\//g, "_").replace(/\+/g, "-"), keys_1[1], keys_1[2]);
+                    _0xa8a16f = ("" + libs.string_btoa(_0x64802e(keys_1[5], _0xa8a16f = _0x32df35(_0xa8a16f = _0xa8a16f.split("").reverse().join(""), keys_1[3], keys_1[4])))).replace(/\//g, "_").replace(/\+/g, "-");
+                    _0xa8a16f = ("" + libs.string_btoa(_0x64802e(keys_1[6], _0xa8a16f = _0xa8a16f.split("").reverse().join("")))).replace(/\//g, "_").replace(/\+/g, "-");
+                    _0xa8a16f = ("" + libs.string_btoa(_0xa8a16f = (_0xa8a16f = _0x32df35(_0xa8a16f, keys_1[7], keys_1[8])).split("").reverse().join(""))).replace(/\//g, "_").replace(/\+/g, "-");
                     return _0xa8a16f;
                 };
                 h_enc_2_1 = function (embed_id) {
-                    return libs.string_btoa(_0x64802e("BvxAphQAmWO9BIJ8", embed_id));
+                    return libs.string_btoa(_0x64802e(keys_1[9], embed_id));
                 };
                 embed_dec_2_1 = function (data) {
                     var _0x3510d5 = libs.string_atob(("" + (_0x3510d5 = "" + (_0x3510d5 = data))).replace(/_/g, "/").replace(/-/g, "+"));
-                    _0x3510d5 = _0x64802e("bpPVcKMFJXq", libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), "Oea" + "Trt4" + "H3o" + "Vgv" + "P" + "U", "VtravPeTH34OUog"))).replace(/_/g, "/").replace(/-/g, "+")));
-                    _0x3510d5 = _0x32df35(_0x3510d5 = _0x64802e("eLWogkrHstP", libs.string_atob(("" + (_0x3510d5 = _0x3510d5.split("").reverse().join(""))).replace(/_/g, "/").replace(/-/g, "+"))), "REG859WSLiQkKHP", "kHWPSL5RKG9Ei8Q");
-                    _0x3510d5 = _0x64802e("V4pBzCPyMSwqx", libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), "Ip64xWVntvoj", "4pj" + "V" + "I6otnvx" + "W"))).replace(/_/g, "/").replace(/-/g, "+")));
+                    _0x3510d5 = _0x64802e(keys_1[6], libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), keys_1[8], keys_1[7]))).replace(/_/g, "/").replace(/-/g, "+")));
+                    _0x3510d5 = _0x32df35(_0x3510d5 = _0x64802e(keys_1[5], libs.string_atob(("" + (_0x3510d5 = _0x3510d5.split("").reverse().join(""))).replace(/_/g, "/").replace(/-/g, "+"))), keys_1[4], keys_1[3]);
+                    _0x3510d5 = _0x64802e(keys_1[0], libs.string_atob(("" + (_0x3510d5 = _0x32df35(_0x3510d5 = _0x3510d5.split("").reverse().join(""), keys_1[2], keys_1[1]))).replace(/_/g, "/").replace(/-/g, "+")));
                     return _0x3510d5;
                 };
                 id_1 = url.match(/\/e\/([^\?]+)/i);
@@ -230,35 +234,35 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                     });
                 }); };
                 return [4, stream(url)];
-            case 4:
+            case 5:
                 playlist = _c.sent();
                 libs.log({ playlist: playlist }, HOST, 'PLAYLIST');
                 rank = 0;
                 _i = 0, _a = playlist.sources;
-                _c.label = 5;
-            case 5:
-                if (!(_i < _a.length)) return [3, 10];
-                embedItem = _a[_i];
                 _c.label = 6;
             case 6:
-                _c.trys.push([6, 8, , 9]);
+                if (!(_i < _a.length)) return [3, 11];
+                embedItem = _a[_i];
+                _c.label = 7;
+            case 7:
+                _c.trys.push([7, 9, , 10]);
                 if (!embedItem.file) {
-                    return [3, 9];
+                    return [3, 10];
                 }
                 return [4, libs.request_get(embedItem.file, headers)];
-            case 7:
+            case 8:
                 embedData = _c.sent();
                 libs.log({
                     embedData: embedData
                 }, provider, 'EMBED PARSE DATA');
                 if (!embedData) {
-                    return [3, 9];
+                    return [3, 10];
                 }
                 patternQuality = embedData.match(/hls\/([0-9]+)\/[0-9]+\.m3u8/ig);
                 libs.log({ patternQuality: patternQuality, file: embedItem.file }, provider, 'PATTERN QUALITY');
                 if (!patternQuality) {
                     libs.embed_callback(embedItem.file, provider, provider, 'Hls', callback, ++rank, config.subs ? config.subs : [], [{ file: embedItem.file, quality: 1080 }]);
-                    return [3, 9];
+                    return [3, 10];
                 }
                 directQuality = [];
                 for (_b = 0, patternQuality_1 = patternQuality; _b < patternQuality_1.length; _b++) {
@@ -295,20 +299,20 @@ hosts["vid2faf"] = function (url, movieInfo, provider, config, callback) { retur
                     is_end_webview: true,
                     url_webview: metadata.url_webview || ''
                 });
-                return [3, 9];
-            case 8:
+                return [3, 10];
+            case 9:
                 e_1 = _c.sent();
                 libs.log({ e: e_1 }, provider, "ERROR LOOP");
-                return [3, 9];
-            case 9:
+                return [3, 10];
+            case 10:
                 _i++;
-                return [3, 5];
-            case 10: return [3, 12];
-            case 11:
+                return [3, 6];
+            case 11: return [3, 13];
+            case 12:
                 e1_1 = _c.sent();
                 libs.log({ e1: e1_1 }, HOST, "ERROR");
-                return [3, 12];
-            case 12: return [2];
+                return [3, 13];
+            case 13: return [2];
         }
     });
 }); };
