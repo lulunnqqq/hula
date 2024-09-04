@@ -1,5 +1,6 @@
 {
 	"providers": [	
+		"dist/providers/vidsrcvip.js",
 		"dist/providers/rivestream.js",
 		"dist/providers/vidsrcuk.js",
 		"dist/providers/fa.js",
