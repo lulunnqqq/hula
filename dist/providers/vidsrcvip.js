@@ -60,7 +60,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _e.label = 1;
             case 1:
                 _e.trys.push([1, 9, , 10]);
-                urlIco = "".concat(DOMAIN, "/statics/icon/jihccab.ico");
+                urlIco = "".concat(DOMAIN, "/statics/icon/fdfddf.ico");
                 sources = ["nova", "hydrax"];
                 urlSources = [];
                 for (_i = 0, sources_1 = sources; _i < sources_1.length; _i++) {
@@ -96,7 +96,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(item2.file, {})];
             case 5:
                 directSizes = _e.sent();
+                libs.log({ directSizes: directSizes }, PROVIDER, 'DIRECT SIZES');
                 patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
+                libs.log({ patternSize: patternSize }, PROVIDER, 'PATTERN SIZE');
                 if (!patternSize) {
                     return [3, 6];
                 }
