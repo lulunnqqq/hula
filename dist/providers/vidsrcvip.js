@@ -98,7 +98,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 directSizes = _e.sent();
                 patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
                 if (!patternSize) {
-                    libs.embed_callback(item2.file, PROVIDER, PROVIDER, item2.type, callback, 1, tracks);
                     return [3, 6];
                 }
                 directQuality = [];
