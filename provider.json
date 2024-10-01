@@ -1,7 +1,6 @@
 {
 	"providers": [	
-		"dist/providers/nepu.js",
-		"dist/providers/2embedcc.js",
+"dist/providers/2embedcc.js",
 "dist/providers/vidsrcvip.js",
 "dist/providers/rivestream.js",
 "dist/providers/vidsrcuk.js",
@@ -14,7 +13,6 @@
 "dist/providers/2now.js",
 "dist/providers/gomovies.js",
 "dist/providers/2now.js",
-"dist/providers/smashystream.js",
 "dist/providers/moviesapi.js",
 "dist/providers/catflix.js",
 "dist/providers/idflix.js"
