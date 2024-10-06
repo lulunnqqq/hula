@@ -1,6 +1,5 @@
 {
 	"providers": [	
-
 "dist/providers/soaper.js",
 "dist/providers/vidsrc.js",
 "dist/providers/2embedcc.js",
@@ -15,6 +14,7 @@
 "dist/providers/2now.js",
 "dist/providers/moviesapi.js",
 "dist/providers/catflix.js",
-"dist/providers/idflix.js"
+"dist/providers/idflix.js",
+"dist/providers/smashystream.js"
 	]
 }
