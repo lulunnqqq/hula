@@ -14,7 +14,6 @@
 "dist/providers/2now.js",
 "dist/providers/moviesapi.js",
 "dist/providers/catflix.js",
-"dist/providers/idflix.js",
-"dist/providers/smashystream.js"
+"dist/providers/idflix.js"
 	]
 }
