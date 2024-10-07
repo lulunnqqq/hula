@@ -1,6 +1,6 @@
 {
-	"providers": [	
-		"dist/providers/soaper.js",
+	"providers": [
+"dist/providers/vidsrccc.js",
 "dist/providers/vidsrc.js",
 "dist/providers/2embedcc.js",
 "dist/providers/vidsrcvip.js",
