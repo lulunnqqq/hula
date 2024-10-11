@@ -1,5 +1,6 @@
 {
 	"providers": [
+"dist/providers/vidlink.js",
 "dist/providers/vidsrccc.js",
 "dist/providers/vidsrc.js",
 "dist/providers/2embedcc.js",
