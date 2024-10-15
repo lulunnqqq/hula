@@ -65,7 +65,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     }
     function enc(input) {
         var key = "I,T,V,u,N,I,J,2,u,w,R,T,G,n,X,A,U,r,X,W";
-        return encodeURIComponent(libs.string_btoa(libs.string_btoa(rc4(key, input))));
+        return libs.string_btoa(libs.string_btoa(rc4(key, input)));
     }
     var PROVIDER, DOMAIN, headers, vrf, urlHash, resHash, _i, _a, item, urlDirect, resDirect, e_1;
     return __generator(this, function (_b) {
@@ -81,7 +81,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 7, , 8]);
-                vrf = encodeURIComponent(enc("".concat(movieInfo.tmdb_id)));
+                vrf = enc("".concat(movieInfo.tmdb_id));
                 urlHash = "".concat(DOMAIN, "/api/episodes/").concat(movieInfo.tmdb_id, "/servers?id=").concat(movieInfo.tmdb_id, "&type=").concat(movieInfo.type, "&isMobile=false&vrf=").concat(vrf);
                 if (movieInfo.type == 'tv') {
                     urlHash += "&season=".concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
