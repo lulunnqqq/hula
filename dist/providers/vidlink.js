@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, hash, urlSearch, dataSearch, textSearch, decrypt, e_1;
+    var PROVIDER, DOMAIN, headers, urlEmbed, parseEmbed_1, scripts_2, KEY, _i, scripts_1, item, scriptData, textData, matchKey, hash, urlSearch, dataSearch, textSearch, decrypt, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -49,9 +49,51 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 };
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 6, , 7]);
-                return [4, libs.request_get("https://aquariumtv.app/encrypt?id=".concat(movieInfo.tmdb_id))];
+                _a.trys.push([1, 12, , 13]);
+                urlEmbed = "".concat(DOMAIN, "/movie/").concat(movieInfo.tmdb_id);
+                if (movieInfo.type == "tv") {
+                    urlEmbed = "".concat(DOMAIN, "/tv/").concat(movieInfo.tmdb_id, "/").concat(movieInfo.season, "/").concat(movieInfo.episode);
+                }
+                libs.log({ urlEmbed: urlEmbed }, PROVIDER, 'URL EMBED');
+                return [4, libs.request_get(urlEmbed, {}, true)];
             case 2:
+                parseEmbed_1 = _a.sent();
+                scripts_2 = [];
+                parseEmbed_1("script").each(function (key, item) {
+                    var scriptData = parseEmbed_1(item).attr("src");
+                    if (scriptData && scriptData.indexOf("/page-") != -1) {
+                        scripts_2.push("".concat(DOMAIN).concat(scriptData));
+                    }
+                });
+                libs.log({ scripts: scripts_2 }, PROVIDER, "SCRIPT");
+                KEY = "";
+                _i = 0, scripts_1 = scripts_2;
+                _a.label = 3;
+            case 3:
+                if (!(_i < scripts_1.length)) return [3, 7];
+                item = scripts_1[_i];
+                return [4, fetch(item)];
+            case 4:
+                scriptData = _a.sent();
+                return [4, scriptData.text()];
+            case 5:
+                textData = _a.sent();
+                matchKey = textData.match(/\, *i *\= *\"([^\"]+)/i);
+                matchKey = matchKey ? matchKey[1] : "";
+                if (matchKey) {
+                    KEY = matchKey;
+                }
+                _a.label = 6;
+            case 6:
+                _i++;
+                return [3, 3];
+            case 7:
+                libs.log({ KEY: KEY }, PROVIDER, "KEY");
+                if (!KEY) {
+                    return [2];
+                }
+                return [4, libs.request_get("https://aquariumtv.app/encrypt?id=".concat(movieInfo.tmdb_id, "&key=").concat(KEY))];
+            case 8:
                 hash = _a.sent();
                 libs.log({ hash: hash }, PROVIDER, "HASH");
                 if (!hash) {
@@ -68,17 +110,17 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, fetch(urlSearch, {
                         headers: headers
                     })];
-            case 3:
+            case 9:
                 dataSearch = _a.sent();
                 return [4, dataSearch.text()];
-            case 4:
+            case 10:
                 textSearch = _a.sent();
                 libs.log({ textSearch: textSearch }, PROVIDER, 'TEXT SEARCH');
                 if (!textSearch) {
                     return [2];
                 }
-                return [4, libs.request_get("https://aquariumtv.app/decrypt?data=".concat(textSearch))];
-            case 5:
+                return [4, libs.request_get("https://aquariumtv.app/decrypt?data=".concat(textSearch, "&key=").concat(KEY))];
+            case 11:
                 decrypt = _a.sent();
                 libs.log({ decrypt: decrypt }, PROVIDER, 'DECRYPT');
                 if (!decrypt) {
@@ -88,12 +130,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 libs.embed_callback(decrypt.stream.playlist, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ "file": decrypt.stream.playlist, "quality": 1080 }], headers);
-                return [3, 7];
-            case 6:
+                return [3, 13];
+            case 12:
                 e_1 = _a.sent();
                 libs.log({ e: e_1 }, PROVIDER, "ERROR");
-                return [3, 7];
-            case 7: return [2];
+                return [3, 13];
+            case 13: return [2];
         }
     });
 }); };
