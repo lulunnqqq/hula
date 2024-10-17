@@ -36,20 +36,44 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, urlEmbed, parseEmbed_1, scripts_2, KEY, _i, scripts_1, item, scriptData, textData, matchKey, hash, urlSearch, dataSearch, textSearch, decrypt, e_1;
+    var PROVIDER, DOMAIN, headers, decryptjs, urlEmbed, parseEmbed_1, scripts_2, KEY, KEY2, _i, scripts_1, item, scriptData, textData, matchKey, matchKey2, hash, urlSearch, dataSearch, textSearch, decrypt, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 PROVIDER = 'MVidlink';
                 DOMAIN = "https://vidlink.pro";
                 headers = {
-                    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                     'Referer': "https://vidlink.pro/",
                     'Origin': DOMAIN,
                 };
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 12, , 13]);
+                decryptjs = function (e, t) {
+                    var n = JSON.parse(e);
+                    libs.log({ n: n }, PROVIDER, "N");
+                    var a = cryptoS.enc.Hex.parse(n.s);
+                    var i = cryptoS.enc.Hex.parse(n.iv);
+                    var s = cryptoS.PBKDF2(t, a, {
+                        keySize: 8,
+                        iterations: 1000
+                    });
+                    var c = cryptoS.lib.CipherParams.create({
+                        ciphertext: cryptoS.enc.Base64.parse(n.ct)
+                    });
+                    var b = cryptoS.AES.decrypt(c, s, {
+                        iv: i,
+                        padding: cryptoS.pad.Pkcs7,
+                        mode: cryptoS.mode.CBC
+                    }).toString(cryptoS.enc.Utf8);
+                    libs.log({ b: b }, PROVIDER, "B");
+                    return JSON.parse(cryptoS.AES.decrypt(c, s, {
+                        iv: i,
+                        padding: cryptoS.pad.Pkcs7,
+                        mode: cryptoS.mode.CBC
+                    }).toString(cryptoS.enc.Utf8));
+                };
                 urlEmbed = "".concat(DOMAIN, "/movie/").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == "tv") {
                     urlEmbed = "".concat(DOMAIN, "/tv/").concat(movieInfo.tmdb_id, "/").concat(movieInfo.season, "/").concat(movieInfo.episode);
@@ -67,6 +91,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 });
                 libs.log({ scripts: scripts_2 }, PROVIDER, "SCRIPT");
                 KEY = "";
+                KEY2 = "";
                 _i = 0, scripts_1 = scripts_2;
                 _a.label = 3;
             case 3:
@@ -83,13 +108,18 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (matchKey) {
                     KEY = matchKey;
                 }
+                matchKey2 = textData.match(/\.toString\(\) *\, *\"([^\"]+)/i);
+                matchKey2 = matchKey2 ? matchKey2[1] : "";
+                if (matchKey2) {
+                    KEY2 = matchKey2;
+                }
                 _a.label = 6;
             case 6:
                 _i++;
                 return [3, 3];
             case 7:
-                libs.log({ KEY: KEY }, PROVIDER, "KEY");
-                if (!KEY) {
+                libs.log({ KEY: KEY, KEY2: KEY2 }, PROVIDER, "KEY");
+                if (!KEY || !KEY2) {
                     return [2];
                 }
                 return [4, libs.request_get("https://aquariumtv.app/encrypt?id=".concat(movieInfo.tmdb_id, "&key=").concat(KEY))];
@@ -101,10 +131,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/api/tv/").concat(hash, "/").concat(movieInfo.season, "/").concat(movieInfo.episode, "?multiLang=0");
+                    urlSearch = "".concat(DOMAIN, "/api/e/tv/").concat(hash, "/").concat(movieInfo.season, "/").concat(movieInfo.episode, "?multiLang=0");
                 }
                 else {
-                    urlSearch = "".concat(DOMAIN, "/api/movie/").concat(hash, "?multiLang=0");
+                    urlSearch = "".concat(DOMAIN, "/api/e/movie/").concat(hash, "?multiLang=0");
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URLSEARCH');
                 return [4, fetch(urlSearch, {
@@ -115,11 +145,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, dataSearch.text()];
             case 10:
                 textSearch = _a.sent();
+                textSearch = libs.string_base64_encode(textSearch);
                 libs.log({ textSearch: textSearch }, PROVIDER, 'TEXT SEARCH');
                 if (!textSearch) {
                     return [2];
                 }
-                return [4, libs.request_get("https://aquariumtv.app/decrypt?data=".concat(textSearch, "&key=").concat(KEY))];
+                return [4, libs.request_get("https://aquariumtv.app/decrypt?data=".concat(textSearch, "&key1=").concat(KEY2, "&key2=").concat(KEY))];
             case 11:
                 decrypt = _a.sent();
                 libs.log({ decrypt: decrypt }, PROVIDER, 'DECRYPT');
