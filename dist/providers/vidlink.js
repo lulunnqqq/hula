@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, decryptjs, urlEmbed, parseEmbed_1, scripts_2, KEY, KEY2, _i, scripts_1, item, scriptData, textData, matchKey, matchKey2, hash, urlSearch, dataSearch, textSearch, decrypt, e_1;
+    var PROVIDER, DOMAIN, headers, decryptjs, urlEmbed, parseEmbed_1, scripts_2, KEY, KEY2, keyEndpoint, _i, scripts_1, item, scriptData, textData, matchKey, matchKey2, matchEndpoint, hash, urlSearch, dataSearch, textSearch, decrypt, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -92,6 +92,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.log({ scripts: scripts_2 }, PROVIDER, "SCRIPT");
                 KEY = "";
                 KEY2 = "";
+                keyEndpoint = "";
                 _i = 0, scripts_1 = scripts_2;
                 _a.label = 3;
             case 3:
@@ -113,13 +114,18 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (matchKey2) {
                     KEY2 = matchKey2;
                 }
+                matchEndpoint = textData.match(/\/api\/([A-z]+)\/[A-z]+\//i);
+                matchEndpoint = matchEndpoint ? matchEndpoint[1] : "";
+                if (matchEndpoint) {
+                    keyEndpoint = matchEndpoint;
+                }
                 _a.label = 6;
             case 6:
                 _i++;
                 return [3, 3];
             case 7:
-                libs.log({ KEY: KEY, KEY2: KEY2 }, PROVIDER, "KEY");
-                if (!KEY || !KEY2) {
+                libs.log({ KEY: KEY, KEY2: KEY2, keyEndpoint: keyEndpoint }, PROVIDER, "KEY");
+                if (!KEY || !KEY2 || !keyEndpoint) {
                     return [2];
                 }
                 return [4, libs.request_get("https://aquariumtv.app/encrypt?id=".concat(movieInfo.tmdb_id, "&key=").concat(KEY))];
@@ -131,10 +137,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/api/m/tv/").concat(hash, "/").concat(movieInfo.season, "/").concat(movieInfo.episode, "?multiLang=0");
+                    urlSearch = "".concat(DOMAIN, "/api/").concat(keyEndpoint, "/tv/").concat(hash, "/").concat(movieInfo.season, "/").concat(movieInfo.episode, "?multiLang=0");
                 }
                 else {
-                    urlSearch = "".concat(DOMAIN, "/api/m/movie/").concat(hash, "?multiLang=0");
+                    urlSearch = "".concat(DOMAIN, "/api/").concat(keyEndpoint, "/movie/").concat(hash, "?multiLang=0");
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URLSEARCH');
                 return [4, fetch(urlSearch, {
