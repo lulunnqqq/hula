@@ -131,10 +131,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/api/s/tv/").concat(hash, "/").concat(movieInfo.season, "/").concat(movieInfo.episode, "?multiLang=0");
+                    urlSearch = "".concat(DOMAIN, "/api/m/tv/").concat(hash, "/").concat(movieInfo.season, "/").concat(movieInfo.episode, "?multiLang=0");
                 }
                 else {
-                    urlSearch = "".concat(DOMAIN, "/api/s/movie/").concat(hash, "?multiLang=0");
+                    urlSearch = "".concat(DOMAIN, "/api/m/movie/").concat(hash, "?multiLang=0");
                 }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URLSEARCH');
                 return [4, fetch(urlSearch, {
