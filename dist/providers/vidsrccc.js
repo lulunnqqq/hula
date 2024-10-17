@@ -64,7 +64,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         return decrypted;
     }
     function enc(input) {
-        var key = "I,T,V,u,N,I,J,2,u,w,R,T,G,n,X,A,U,r,X,W";
+        var key = "BCwZFCsLYWbz2ONSzAYN";
         return libs.string_btoa(libs.string_btoa(rc4(key, input)));
     }
     var PROVIDER, DOMAIN, headers, vrf, urlHash, resHash, _i, _a, item, urlDirect, resDirect, e_1;
