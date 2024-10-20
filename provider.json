@@ -1,5 +1,6 @@
 {
 	"providers": [
+"dist/providers/yesmovies.js",
 "dist/providers/vidlink.js",
 "dist/providers/vidsrccc.js",
 "dist/providers/vidsrc.js",
