@@ -125,7 +125,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                PROVIDER = 'Yesmovies';
+                PROVIDER = 'IYesMovies';
                 DOMAIN = "https://ww.yesmovies.ag";
                 headers = {
                     "referer": DOMAIN,
