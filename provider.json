@@ -1,6 +1,5 @@
 {
 	"providers": [
-"dist/providers/hdmovie2.js",
 "dist/providers/vidsrcpro.js",
 "dist/providers/whvx.js",
 "dist/providers/vidsrcnl.js",
