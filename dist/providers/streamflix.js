@@ -13,7 +13,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -36,44 +36,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, domainAPI, parseAPI, tracks, sources, _i, _a, item, _b, _c, item, e_1;
-    return __generator(this, function (_d) {
-        switch (_d.label) {
+    var PROVIDER, DOMAIN, key, xorEncryptDecrypt_1, generateVRF, domainAPI, vrf, parseAPI, _i, _a, item, e_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 PROVIDER = 'UStreamflix';
                 DOMAIN = "https://watch.streamflix.one";
-                _d.label = 1;
+                _b.label = 1;
             case 1:
-                _d.trys.push([1, 3, , 4]);
-                domainAPI = "https://prod-4-us.justbinge.lol/api/sources/".concat(movieInfo.tmdb_id);
+                _b.trys.push([1, 3, , 4]);
+                key = "M6mV3KZOa4Kt53FsHijMMxdVBpMScfMv";
+                xorEncryptDecrypt_1 = function (r, t) {
+                    var e = Array.from(r, function (n) { return n.charCodeAt(0); });
+                    var o = Array.from(t, function (n) { return n.charCodeAt(0); }).map(function (n, d) { return n ^ e[d % e.length]; });
+                    return String.fromCharCode.apply(String, o);
+                };
+                generateVRF = function (r, t) {
+                    var e = decodeURIComponent(t);
+                    var a = xorEncryptDecrypt_1(r, e);
+                    return encodeURIComponent(libs.string_btoa(a));
+                };
+                domainAPI = "https://vidsrc.rip/api/source/streamflix/flixhq/".concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
                     domainAPI += "/".concat(movieInfo.season, "/").concat(movieInfo.episode);
                 }
-                domainAPI += "?server=1";
-                libs.log({ domainAPI: domainAPI }, PROVIDER, 'DOMAIN API');
+                vrf = generateVRF(key, domainAPI);
+                domainAPI += "?vrf=".concat(vrf);
+                libs.log({ domainAPI: domainAPI, vrf: vrf }, PROVIDER, 'DOMAIN API');
                 return [4, libs.request_get(domainAPI, {}, false)];
             case 2:
-                parseAPI = _d.sent();
+                parseAPI = _b.sent();
                 libs.log({ parseAPI: parseAPI }, PROVIDER, 'PARSE API');
                 if (!parseAPI.sources) {
                     return [2];
                 }
-                tracks = [];
-                sources = [];
-                for (_i = 0, _a = parseAPI.captions; _i < _a.length; _i++) {
+                for (_i = 0, _a = parseAPI.sources; _i < _a.length; _i++) {
                     item = _a[_i];
-                    tracks.push(item);
-                }
-                for (_b = 0, _c = parseAPI.sources; _b < _c.length; _b++) {
-                    item = _c[_b];
-                    if (!item.url) {
+                    if (!item.file) {
                         continue;
                     }
-                    libs.embed_callback(item.url, PROVIDER, PROVIDER, 'Hls', callback, 1, tracks, [{ file: item.url, quality: 1080 }]);
+                    libs.embed_callback(item.file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: item.file, quality: 1080 }]);
                 }
                 return [3, 4];
             case 3:
-                e_1 = _d.sent();
+                e_1 = _b.sent();
                 libs.log({ e: e_1 }, PROVIDER, 'ERROR');
                 return [3, 4];
             case 4: return [2];
