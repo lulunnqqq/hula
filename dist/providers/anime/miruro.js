@@ -42,13 +42,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 0:
                 PROVIDER = 'Miruro - Anime';
                 DOMAIN = "https://gamma.miruro.tv";
-                movieInfo = {
-                    "title": "One Piece",
-                    "type": "anime",
-                    "episode": 1,
-                    "season": 1,
-                    "year": 1999
-                };
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
