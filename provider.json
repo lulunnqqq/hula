@@ -1,10 +1,10 @@
 {
 	"providers": [
+		"dist/providers/vidlink.js",
 		"dist/providers/tomautoembed.js",
 "dist/providers/streamflix.js",
 "dist/providers/vidsrcpro.js",
 "dist/providers/whvx.js",
-"dist/providers/vidsrcnl.js",
 "dist/providers/ymovies.js",
 "dist/providers/yesmovies.js",
 "dist/providers/vidlink.js",
