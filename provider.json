@@ -1,5 +1,6 @@
 {
 	"providers": [
+		"dist/providers/rivestream.js",
 		"dist/providers/vidlink.js",
 "dist/providers/tomautoembed.js",
 "dist/providers/streamflix.js",
