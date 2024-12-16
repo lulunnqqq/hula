@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, HOST, id, body, headers, directData, e_1;
+    var DOMAIN, HOST, id, urlDirect, body, headers, directData, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -45,12 +45,13 @@ hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { re
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                id = url.match(/data\=([A-z0-9]+)/i);
+                id = url.match(/\/video\/([A-z0-9]+)/i);
                 id = id ? id[1] : "";
                 libs.log({ id: id }, HOST, "ID");
                 if (!id) {
                     return [2];
                 }
+                urlDirect = "".concat(DOMAIN, "/player/index.php?data=").concat(id, "&do=getVideo");
                 body = qs.stringify({
                     hash: id,
                     r: "https://tv4.idlix.asia/"
@@ -61,7 +62,7 @@ hosts["jeniusplay"] = function (url, movieInfo, provider, config, callback) { re
                     "Referer": "https://tv4.idlix.asia/",
                     "X-Requested-With": "XMLHttpRequest",
                 };
-                return [4, libs.request_post("".concat(url, "&do=getVideo"), headers, body)];
+                return [4, libs.request_post(urlDirect, headers, body)];
             case 2:
                 directData = _a.sent();
                 libs.log({ directData: directData, body: body }, HOST, "DIRECT DATA REQUEST");
