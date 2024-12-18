@@ -36,15 +36,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 subs.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, slug, headers, body, dataSearch, urlGetSub, _i, _a, item, linkDetail, title, lang, subID, episode, slugGetSub, body_1, dataSub, token, urlDownload, ID, _b, dataSearch_1, item, urlDetail, URL_DETAIL_1, parseDetail_1, numSeason_1, sourceSubs_2, parseSub_1, res, _c, sourceSubs_1, item, parseSub_2, id, urlDownload, e_1;
-    return __generator(this, function (_d) {
-        switch (_d.label) {
+    var PROVIDER, DOMAIN, slug, headers, body, dataSearch, urlGetSub, _i, _a, item, linkDetail, title, arrLang, lang, subID, episode, slugGetSub, body_1, dataSub, token, newBody, newDataSub, urlDownload, e_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 PROVIDER = "SubSource";
                 DOMAIN = "https://subsource.net";
-                _d.label = 1;
+                _b.label = 1;
             case 1:
-                _d.trys.push([1, 9, , 10]);
+                _b.trys.push([1, 12, , 13]);
                 slug = "".concat(libs.url_slug_search(movieInfo, "-"), "-").concat(movieInfo.year);
                 if (movieInfo.type == "tv") {
                     slug = "".concat(libs.url_slug_search(movieInfo, "-"));
@@ -56,32 +56,48 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 if (movieInfo.type == "tv") {
                     body.season = "season-".concat(movieInfo.season);
                 }
-                libs.log({ body: body }, PROVIDER, "== BODY ==");
                 return [4, libs.request_post("https://api.subsource.net/api/getMovie", headers, body, false)];
             case 2:
-                dataSearch = _d.sent();
-                libs.log({ dataSearch: dataSearch }, PROVIDER, "== DATA SEARCH ==");
+                dataSearch = _b.sent();
+                libs.log({ body: body, dataSearch: dataSearch }, PROVIDER, "== DATA SEARCH ==");
+                if (!!dataSearch.success) return [3, 4];
+                if (movieInfo.type == "tv") {
+                    body = {
+                        langs: [],
+                        movieName: "".concat(libs.url_slug_search(movieInfo, "-"), "-").concat(movieInfo.year),
+                        season: "season-".concat(movieInfo.season),
+                    };
+                }
+                return [4, libs.request_post("https://api.subsource.net/api/getMovie", headers, body, false)];
+            case 3:
+                dataSearch = _b.sent();
+                libs.log({ body: body, dataSearch: dataSearch }, PROVIDER, "== NEW DATA SEARCH ==");
                 if (!dataSearch.success) {
                     return [2];
                 }
+                _b.label = 4;
+            case 4:
                 urlGetSub = "https://api.subsource.net/api/getSub";
                 _i = 0, _a = dataSearch.subs;
-                _d.label = 3;
-            case 3:
-                if (!(_i < _a.length)) return [3, 6];
+                _b.label = 5;
+            case 5:
+                if (!(_i < _a.length)) return [3, 11];
                 item = _a[_i];
                 linkDetail = item.fullLink;
                 title = item.releaseName;
-                lang = item.lang;
+                arrLang = item.lang.split("/");
+                lang = arrLang[0];
                 subID = item.subId;
-                libs.log({ linkDetail: linkDetail, title: title, lang: lang, subID: subID }, PROVIDER, "SUB");
                 if (!linkDetail || !title || !lang) {
-                    return [3, 5];
+                    return [3, 10];
+                }
+                if (movieInfo.lang.toLowerCase().indexOf(lang.toLowerCase()) == -1) {
+                    return [3, 10];
                 }
                 if (movieInfo.type == "tv") {
                     episode = "S".concat(movieInfo.season < 10 ? "0" + movieInfo.season : movieInfo.season, "E").concat(movieInfo.episode < 10 ? "0" + movieInfo.episode : movieInfo.episode);
                     if (title.indexOf(episode) == -1) {
-                        return [3, 5];
+                        return [3, 10];
                     }
                 }
                 linkDetail = "".concat(DOMAIN).concat(linkDetail);
@@ -89,15 +105,35 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 if (movieInfo.type == "tv") {
                     slugGetSub = "".concat(slug, "-season-").concat(movieInfo.season);
                 }
-                body_1 = { movie: slugGetSub, lang: lang.toLowerCase(), id: subID };
+                body_1 = {
+                    movie: slugGetSub,
+                    lang: lang.toLowerCase(),
+                    id: subID,
+                };
                 return [4, libs.request_post(urlGetSub, headers, body_1, false)];
-            case 4:
-                dataSub = _d.sent();
+            case 6:
+                dataSub = _b.sent();
                 libs.log({ dataSub: dataSub, body: body_1, urlGetSub: urlGetSub }, PROVIDER, "== DATA SUB ==");
                 token = dataSub.sub.downloadToken;
+                if (!!token) return [3, 9];
+                if (!(movieInfo.type == "tv")) return [3, 8];
+                newBody = {
+                    movie: "".concat(slugGetSub, "-").concat(movieInfo.year),
+                    lang: lang.toLowerCase(),
+                    id: subID,
+                };
+                return [4, libs.request_post(urlGetSub, headers, newBody, false)];
+            case 7:
+                newDataSub = _b.sent();
+                libs.log({ dataSub: newDataSub, body: newBody, urlGetSub: urlGetSub }, PROVIDER, "== NEWDATA SUB ==");
+                token = newDataSub.sub.downloadToken;
+                _b.label = 8;
+            case 8:
                 if (!token) {
-                    return [3, 5];
+                    return [3, 10];
                 }
+                _b.label = 9;
+            case 9:
                 urlDownload = "https://api.subsource.net/api/downloadSub/".concat(token);
                 libs.log({ urlDownload: urlDownload }, PROVIDER, "== URL DOWNLOAD ==");
                 callback({
@@ -106,80 +142,16 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                     label: lang,
                     type: "download",
                 });
-                _d.label = 5;
-            case 5:
+                _b.label = 10;
+            case 10:
                 _i++;
-                return [3, 3];
-            case 6: return [2];
-            case 7:
-                parseDetail_1 = _d.sent();
-                numSeason_1 = 0;
-                parseDetail_1("#search_results").each(function (key, item) {
-                    var findSeason = parseDetail_1(item).find("#season-".concat(movieInfo.season)).length;
-                    if (findSeason) {
-                        numSeason_1 = movieInfo.season;
-                    }
-                    if (numSeason_1 == movieInfo.season) {
-                        var episodeNumber = parseDetail_1(item)
-                            .find("span[itemprop=\"episodeNumber\"]")
-                            .text();
-                        if (episodeNumber == movieInfo.episode) {
-                            var urlDetail_1 = parseDetail_1(item)
-                                .find("span[itemprop=\"url\"]")
-                                .attr("href");
-                            if (urlDetail_1 && !URL_DETAIL_1) {
-                                URL_DETAIL_1 = "".concat(DOMAIN).concat(urlDetail_1);
-                            }
-                        }
-                    }
-                });
-                libs.log({ URL_DETAIL: URL_DETAIL_1 }, PROVIDER, "URL_DETAIL");
-                if (!URL_DETAIL_1) {
-                    return [2];
-                }
-                sourceSubs_2 = [];
-                return [4, libs.request_get(URL_DETAIL_1, {}, true)];
-            case 8:
-                parseSub_1 = _d.sent();
-                parseSub_1("#search_results tr.change").each(function (key, item) {
-                    var link = parseSub_1(item).find("td a.bnone").attr("href");
-                    var lang = parseSub_1(item)
-                        .find("td.center")
-                        .first()
-                        .find("a")
-                        .attr("title");
-                    libs.log({ link: link, lang: lang }, PROVIDER, "SUBS");
-                    if (link && lang) {
-                        link = "".concat(DOMAIN).concat(link);
-                        sourceSubs_2.push({
-                            lang: lang,
-                            link: link,
-                        });
-                    }
-                });
-                libs.log({ sourceSubs: sourceSubs_2 }, PROVIDER, "SOURCE SUBS");
-                if (!sourceSubs_2.length) {
-                    return [2];
-                }
-                res = [];
-                for (_c = 0, sourceSubs_1 = sourceSubs_2; _c < sourceSubs_1.length; _c++) {
-                    item = sourceSubs_1[_c];
-                    parseSub_2 = item.link.split("/");
-                    id = parseSub_2[parseSub_2.length - 1];
-                    urlDownload = "https://dl.opensubtitles.org/en/download/sub/".concat(id);
-                    callback({
-                        provider: PROVIDER,
-                        url: item.link,
-                        lang: item.lang,
-                        type: "download",
-                    });
-                }
-                return [3, 10];
-            case 9:
-                e_1 = _d.sent();
+                return [3, 5];
+            case 11: return [2];
+            case 12:
+                e_1 = _b.sent();
                 libs.log({ e: e_1 }, PROVIDER, "ERROR");
-                return [3, 10];
-            case 10: return [2, true];
+                return [3, 13];
+            case 13: return [2, true];
         }
     });
 }); };
