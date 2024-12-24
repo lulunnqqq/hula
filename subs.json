@@ -1,4 +1,3 @@
 {
-	"subs": [
-	]
+  "subs": ["dist/subs/subsource.js"]
 }
