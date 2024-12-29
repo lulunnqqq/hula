@@ -1,3 +1,6 @@
 {
-  "subs": ["dist/subs/subsource.js"]
+  "subs": [
+    "dist/subs/opensubtitles.js",
+    "dist/subs/subsource.js"
+  ]
 }
