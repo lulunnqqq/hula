@@ -128,10 +128,10 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                     id = parseSub_2[parseSub_2.length - 2];
                     urlDownload = "https://dl.opensubtitles.org/en/download/sub/".concat(id);
                     callback({
-                        provider: PROVIDER,
-                        url: urlDownload,
-                        lang: item.lang,
-                        "type": "download"
+                        file: urlDownload,
+                        kind: "Captions",
+                        label: item.lang,
+                        type: "download",
                     });
                 }
                 return [3, 8];
