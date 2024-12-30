@@ -120,7 +120,7 @@ libs.embed_callback = function (urlDirect, provider, host, quality, callback, ra
     if (subs.length > 0) {
         for (var _i = 0, subs_1 = subs; _i < subs_1.length; _i++) {
             var item = subs_1[_i];
-            var type = "";
+            var type = "office";
             if (item.file.indexOf(".srt") == -1 && item.file.indexOf(".vtt") == -1) {
                 type = "download";
             }
