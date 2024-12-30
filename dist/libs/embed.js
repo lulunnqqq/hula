@@ -116,7 +116,24 @@ libs.embed_callback = function (urlDirect, provider, host, quality, callback, ra
     if (direct_quality === void 0) { direct_quality = []; }
     if (headers === void 0) { headers = {}; }
     if (options === void 0) { options = {}; }
-    callback(__assign({ file: urlDirect, quality: quality, host: host, source: provider, provider: libs.string_provider(provider, rank), subs: subs, direct_quality: direct_quality, headers: headers }, options));
+    var parseSubs = [];
+    if (subs.length > 0) {
+        for (var _i = 0, subs_1 = subs; _i < subs_1.length; _i++) {
+            var item = subs_1[_i];
+            var type = "";
+            if (item.file.indexOf(".srt") == -1 && item.file.indexOf(".vtt") == -1) {
+                type = "download";
+            }
+            parseSubs.push({
+                file: item.file,
+                kind: 'captions',
+                label: item.label,
+                type: type,
+            });
+        }
+        console.log({ subs: subs }, "SUBDATAPARSE");
+    }
+    callback(__assign({ file: urlDirect, quality: quality, host: host, source: provider, provider: libs.string_provider(provider, rank), subs: parseSubs, direct_quality: direct_quality, headers: headers }, options));
 };
 libs.parse_size = function (file, provider, host, type, callback, rank, tracks) { return __awaiter(_this, void 0, void 0, function () {
     var directSizes, patternSize, directQuality, _i, patternSize_1, patternItem, sizeQuality;
