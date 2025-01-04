@@ -1,5 +1,6 @@
 {
   "subs": [
+    "dist/subs/tvsubtitles.js",
     "dist/subs/subdl.js",
     "dist/subs/subsource.js"
   ]
