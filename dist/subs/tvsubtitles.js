@@ -116,7 +116,7 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 callback({
                     file: downloadSubLangUrl,
                     kind: "Captions",
-                    label: lang,
+                    label: lang.charAt(0).toUpperCase() + lang.slice(1),
                     type: "download",
                 });
                 return [3, 8];
