@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 subs.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, headerSearch, bodySearch, parseSearch_1, LINK_DETAIL_1, parseDetail_1, parseEpisode_1, subsLangHref_2, _i, subsLangHref_1, item, parseSubtitle, lang, downloadSubLangUrl, e1_1, e_1;
+    var PROVIDER, DOMAIN, urlSearch, headerSearch, bodySearch, parseSearch_1, LINK_DETAIL_1, parseDetail_1, parseEpisode_1, subsLangHref_2, _i, subsLangHref_1, item, parseSubtitle, lang, downloadSubLangUrl, parseDownloadSubtitle, e1_1, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -44,7 +44,7 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 DOMAIN = "https://www.tvsubtitles.net";
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 10, , 11]);
+                _a.trys.push([1, 11, , 12]);
                 if (movieInfo.type == "movie") {
                     return [2];
                 }
@@ -97,11 +97,11 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 _i = 0, subsLangHref_1 = subsLangHref_2;
                 _a.label = 4;
             case 4:
-                if (!(_i < subsLangHref_1.length)) return [3, 9];
+                if (!(_i < subsLangHref_1.length)) return [3, 10];
                 item = subsLangHref_1[_i];
                 _a.label = 5;
             case 5:
-                _a.trys.push([5, 7, , 8]);
+                _a.trys.push([5, 8, , 9]);
                 return [4, libs.request_get(item, {}, true)];
             case 6:
                 parseSubtitle = _a.sent();
@@ -109,29 +109,39 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 lang = lang.replace("subtitles", "").trim();
                 libs.log({ lang: lang }, PROVIDER, "LANGUAGE");
                 if (!lang) {
-                    return [3, 8];
+                    return [3, 9];
                 }
                 downloadSubLangUrl = item.replace("subtitle-", "download-");
                 libs.log({ downloadSubLangUrl: downloadSubLangUrl }, PROVIDER, "downloadSubLangUrl");
+                return [4, fetch(downloadSubLangUrl, {
+                        redirect: 'manual',
+                        method: "HEAD"
+                    })];
+            case 7:
+                parseDownloadSubtitle = _a.sent();
+                libs.log({ url: parseDownloadSubtitle.url }, PROVIDER, "textParseDownload");
+                if (!parseDownloadSubtitle.url) {
+                    return [3, 9];
+                }
                 callback({
-                    file: downloadSubLangUrl,
+                    file: parseDownloadSubtitle.url,
                     kind: "Captions",
                     label: lang.charAt(0).toUpperCase() + lang.slice(1),
                     type: "download",
                 });
-                return [3, 8];
-            case 7:
-                e1_1 = _a.sent();
-                return [3, 8];
+                return [3, 9];
             case 8:
+                e1_1 = _a.sent();
+                return [3, 9];
+            case 9:
                 _i++;
                 return [3, 4];
-            case 9: return [3, 11];
-            case 10:
+            case 10: return [3, 12];
+            case 11:
                 e_1 = _a.sent();
                 libs.log({ e: e_1 }, PROVIDER, "ERROR");
-                return [3, 11];
-            case 11: return [2, true];
+                return [3, 12];
+            case 12: return [2, true];
         }
     });
 }); };
