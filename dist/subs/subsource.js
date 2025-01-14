@@ -315,7 +315,7 @@ subs.getResource = function (movieInfo, config, callback) {
                   : movieInfo.episode
               );
             if (title.indexOf(episode) == -1) {
-              kind = "Captions_Season";
+              kind = "Captions";
             }
           }
           linkDetail = "".concat(DOMAIN).concat(linkDetail);
