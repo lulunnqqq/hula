@@ -1,8 +1,3 @@
 {
-  "subs": [
-    "dist/subs/subf2m.js",
-    "dist/subs/tvsubtitles.js",
-"dist/subs/subdl.js",
-"dist/subs/subsource.js"
-  ]
+  "subs": ["dist/subs/subsource.js", "dist/subs/podnapisi.js"]
 }
