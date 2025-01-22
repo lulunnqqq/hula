@@ -77,22 +77,7 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                     "vie": "Vietnamese",
                     "ind": "Indonesian"
                 };
-                subLanguageIds = [
-                    { name: 'English', id: 'eng' },
-                    { name: 'Spanish', id: 'spa' },
-                    { name: 'French', id: 'fre' },
-                    { name: 'Italian', id: 'ita' },
-                    { name: 'Portuguese', id: 'por' },
-                    { name: 'Chinese', id: 'chi' },
-                    { name: 'Korean', id: 'kor' },
-                    { name: 'Arabic', id: 'ara' },
-                    { name: 'Hindi', id: 'hin' },
-                    { name: 'Dutch', id: 'dut' },
-                    { name: 'Swedish', id: 'swe' },
-                    { name: 'Polish', id: 'pol' },
-                    { name: 'Turkish', id: 'tur' },
-                    { name: 'Vietnamese', id: 'vie' },
-                ];
+                subLanguageIds = [];
                 url = "https://rest.opensubtitles.org/search/imdbid-".concat(movieInfo.imdb_id.replace("tt", ""));
                 libs.log({ url: url }, PROVIDER, "URL SEARCH");
                 return [4, fetch(url, {
