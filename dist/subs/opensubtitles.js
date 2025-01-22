@@ -45,7 +45,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 var _this = this;
 subs.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, subLang, subLanguageIds, url, response, data, parseData, _i, subLanguageIds_1, item, urlLang, responseLang, dataLang, _a, data_1, item, fileName, episode, lang, e_1;
+    var PROVIDER, DOMAIN, subLang, subLanguageIds, url, response, data, parseData, _i, subLanguageIds_1, item, urlLang, responseLang, dataLang, _a, data_1, item, fileName, lang, season, episode, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -137,23 +137,24 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 for (_a = 0, data_1 = data; _a < data_1.length; _a++) {
                     item = data_1[_a];
                     fileName = item.SubFileName;
+                    lang = item.SubLanguageID.toLowerCase();
                     libs.log({ fileName: fileName, langID: item.SubLanguageID, zip: item.ZipDownloadLink }, PROVIDER, "ITEM INFO");
-                    if (item.IDMovieImdb != movieInfo.imdb_id.replace("tt", "")) {
-                        continue;
-                    }
                     if (movieInfo.type == "tv") {
-                        episode = "S".concat(movieInfo.season < 10 ? "0" + movieInfo.season : movieInfo.season, "E").concat(movieInfo.episode < 10 ? "0" + movieInfo.episode : movieInfo.episode);
-                        if (fileName.indexOf(episode) == -1) {
+                        season = Number(item.SeriesSeason);
+                        episode = Number(item.SeriesEpisode);
+                        libs.log({ episode: episode, season: season, fileName: fileName, lang: lang, zip: item.ZipDownloadLink }, PROVIDER, "EPISODE COMPARE");
+                        if (movieInfo.season == season && movieInfo.episode == episode) {
                             continue;
                         }
                     }
-                    lang = item.SubLanguageID.toLowerCase();
+                    libs.log({ lang: lang, subLang: subLang[lang], zip: item.ZipDownloadLink }, PROVIDER, "LANG INFO");
                     if (!subLang[lang]) {
                         continue;
                     }
                     if (!item.ZipDownloadLink) {
                         continue;
                     }
+                    libs.log({ fileName: fileName, lang: lang, zip: item.ZipDownloadLink }, PROVIDER, "ITEM INFO PASS");
                     callback({
                         file: item.ZipDownloadLink,
                         kind: "Captions",
