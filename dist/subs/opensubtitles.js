@@ -36,137 +36,86 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 subs.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, dataSearch, ID, _i, dataSearch_1, item, urlDetail, URL_DETAIL_1, parseDetail_1, numSeason_1, parseSeason, sourceSubs_2, _loop_1, i, state_1, res, _a, sourceSubs_1, item, parseSub, id, urlDownload, e_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var PROVIDER, DOMAIN, subLang, url, response, data, _i, data_1, item, fileName, episode, lang, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
                 PROVIDER = 'OpenSubtitles';
                 DOMAIN = "https://www.opensubtitles.org";
-                _b.label = 1;
+                _a.label = 1;
             case 1:
-                _b.trys.push([1, 10, , 11]);
-                urlSearch = "".concat(DOMAIN, "/libs/suggest.php?format=json3&MovieName=").concat(libs.url_slug_search(movieInfo, "%20"), "&SubLanguageID=null");
-                return [4, libs.request_get(urlSearch, {}, false)];
+                _a.trys.push([1, 4, , 5]);
+                subLang = {
+                    "eng": "English",
+                    "spa": "Spanish",
+                    "fre": "French",
+                    "ger": "German",
+                    "ita": "Italian",
+                    "por": "Portuguese",
+                    "rus": "Russian",
+                    "chi": "Chinese",
+                    "jpn": "Japanese",
+                    "kor": "Korean",
+                    "ara": "Arabic",
+                    "hin": "Hindi",
+                    "dut": "Dutch",
+                    "swe": "Swedish",
+                    "pol": "Polish",
+                    "tur": "Turkish",
+                    "dan": "Danish",
+                    "nor": "Norwegian",
+                    "fin": "Finnish",
+                    "vie": "Vietnamese",
+                    "ind": "Indonesian"
+                };
+                url = "https://rest.opensubtitles.org/search/imdbid-".concat(movieInfo.imdb_id.replace("tt", ""));
+                libs.log({ url: url }, PROVIDER, "URL SEARCH");
+                return [4, fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'x-user-agent': 'VLSub 0.10.2',
+                        },
+                    })];
             case 2:
-                dataSearch = _b.sent();
-                ID = "";
-                for (_i = 0, dataSearch_1 = dataSearch; _i < dataSearch_1.length; _i++) {
-                    item = dataSearch_1[_i];
-                    if (libs.string_matching_title(movieInfo, item.name) && movieInfo.year == item.year && item.kind == movieInfo.type && !ID) {
-                        ID = item.id;
-                    }
-                }
-                libs.log({ ID: ID }, PROVIDER, 'ID');
-                if (!ID) {
-                    return [2];
-                }
-                urlDetail = "".concat(DOMAIN, "/en/search/sublanguageid-all/idmovie-").concat(ID);
-                URL_DETAIL_1 = "";
-                if (!(movieInfo.type == 'tv')) return [3, 4];
-                return [4, libs.request_get(urlDetail, {}, true)];
+                response = _a.sent();
+                return [4, response.json()];
             case 3:
-                parseDetail_1 = _b.sent();
-                numSeason_1 = 0;
-                libs.log({ length: parseDetail_1("#search_results").length, urlDetail: urlDetail }, PROVIDER, "TV SEARCH");
-                parseSeason = {};
-                parseDetail_1("#search_results tr").each(function (key, item) {
-                    var season = parseDetail_1(item).find("td span").attr("id");
-                    libs.log({ season: season }, PROVIDER, "SEASON");
-                    if (season) {
-                        season = season.match(/season\-+([0-9]+)/i);
-                        season = season ? season[1] : 0;
-                        numSeason_1 = season;
+                data = _a.sent();
+                console.log('openSubtitles', data);
+                for (_i = 0, data_1 = data; _i < data_1.length; _i++) {
+                    item = data_1[_i];
+                    fileName = item.SubFileName;
+                    libs.log({ fileName: fileName, langID: item.SubLanguageID, zip: item.ZipDownloadLink }, PROVIDER, "ITEM INFO");
+                    if (item.IDMovieImdb != movieInfo.imdb_id.replace("tt", "")) {
+                        continue;
                     }
-                    else {
-                        var checkEpisode = parseDetail_1(item).attr("itemprop");
-                        libs.log({ checkEpisode: checkEpisode }, PROVIDER, "CHECK EPISODE");
-                        if (checkEpisode) {
-                            var numEpisode = parseDetail_1(item).find("td span[itemprop=\"episodeNumber\"]").text();
-                            if (numSeason_1 == movieInfo.season && numEpisode == movieInfo.episode) {
-                                var urlEpisode = parseDetail_1(item).find("td a[itemprop=\"url\"]").attr("href");
-                                if (urlEpisode) {
-                                    URL_DETAIL_1 = "".concat(DOMAIN).concat(urlEpisode);
-                                    libs.log({ numEpisode: numEpisode, numSeason: numSeason_1, URL_DETAIL: URL_DETAIL_1 }, PROVIDER, "EPISODE");
-                                }
-                            }
+                    if (movieInfo.type == "tv") {
+                        episode = "S".concat(movieInfo.season < 10 ? "0" + movieInfo.season : movieInfo.season, "E").concat(movieInfo.episode < 10 ? "0" + movieInfo.episode : movieInfo.episode);
+                        if (fileName.indexOf(episode) == -1) {
+                            continue;
                         }
                     }
-                });
+                    lang = item.SubLanguageID.toLowerCase();
+                    if (!subLang[lang]) {
+                        continue;
+                    }
+                    if (!item.ZipDownloadLink) {
+                        continue;
+                    }
+                    callback({
+                        file: item.ZipDownloadLink,
+                        kind: "Captions",
+                        label: subLang[lang],
+                        type: "download",
+                        provider: PROVIDER,
+                    });
+                }
                 return [3, 5];
             case 4:
-                URL_DETAIL_1 = urlDetail;
-                _b.label = 5;
-            case 5:
-                libs.log({ URL_DETAIL: URL_DETAIL_1 }, PROVIDER, 'URL_DETAIL');
-                if (!URL_DETAIL_1) {
-                    return [2];
-                }
-                sourceSubs_2 = [];
-                _loop_1 = function (i) {
-                    var parseSub, length_1;
-                    return __generator(this, function (_c) {
-                        switch (_c.label) {
-                            case 0: return [4, libs.request_get("".concat(URL_DETAIL_1, "/offset-").concat(i), {}, true)];
-                            case 1:
-                                parseSub = _c.sent();
-                                length_1 = parseSub("#search_results tr.change").length;
-                                libs.log({ length: length_1, i: i }, PROVIDER, "OFFSET");
-                                if (!length_1) {
-                                    return [2, "break"];
-                                }
-                                parseSub("#search_results tr.change").each(function (key, item) {
-                                    var link = parseSub(item).find("td a.bnone").attr("href");
-                                    var lang = parseSub(item).find("td:nth-child(2)").find("a").attr('title');
-                                    libs.log({ link: link, lang: lang }, PROVIDER, 'SUBS');
-                                    if (link && lang) {
-                                        link = "".concat(DOMAIN).concat(link);
-                                        sourceSubs_2.push({
-                                            lang: lang,
-                                            link: link
-                                        });
-                                    }
-                                });
-                                return [2];
-                        }
-                    });
-                };
-                i = 0;
-                _b.label = 6;
-            case 6:
-                if (!(i <= 160)) return [3, 9];
-                return [5, _loop_1(i)];
-            case 7:
-                state_1 = _b.sent();
-                if (state_1 === "break")
-                    return [3, 9];
-                _b.label = 8;
-            case 8:
-                i += 40;
-                return [3, 6];
-            case 9:
-                libs.log({ sourceSubs: sourceSubs_2 }, PROVIDER, 'SOURCE SUBS');
-                if (!sourceSubs_2.length) {
-                    return [2];
-                }
-                res = [];
-                for (_a = 0, sourceSubs_1 = sourceSubs_2; _a < sourceSubs_1.length; _a++) {
-                    item = sourceSubs_1[_a];
-                    parseSub = item.link.split('/');
-                    id = parseSub[parseSub.length - 2];
-                    urlDownload = "https://dl.opensubtitles.org/en/download/sub/".concat(id);
-                    callback({
-                        file: urlDownload,
-                        kind: "Captions",
-                        label: item.lang,
-                        type: "download",
-                    });
-                }
-                return [3, 11];
-            case 10:
-                e_1 = _b.sent();
+                e_1 = _a.sent();
                 libs.log({ e: e_1 }, PROVIDER, 'ERROR');
-                return [3, 11];
-            case 11: return [2, true];
+                return [3, 5];
+            case 5: return [2, true];
         }
     });
 }); };
