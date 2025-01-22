@@ -15,5 +15,10 @@
     "show": true,
     "session_time": 120
   },
-  "ads_init" : "admob"
+  "ads_init" : "admob",
+  "ads_remote" : {
+    "enable_admob": true,
+    "enable_applovin": true,
+    "enable_unity": true
+  }
 }
