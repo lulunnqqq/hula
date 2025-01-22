@@ -34,17 +34,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var _this = this;
 subs.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, subLang, url, response, data, _i, data_1, item, fileName, episode, lang, e_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var PROVIDER, DOMAIN, subLang, subLanguageIds, url, response, data, parseData, _i, subLanguageIds_1, item, urlLang, responseLang, dataLang, _a, data_1, item, fileName, episode, lang, e_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 PROVIDER = 'OpenSubtitles';
                 DOMAIN = "https://www.opensubtitles.org";
-                _a.label = 1;
+                _b.label = 1;
             case 1:
-                _a.trys.push([1, 4, , 5]);
+                _b.trys.push([1, 9, , 10]);
                 subLang = {
                     "eng": "English",
                     "spa": "Spanish",
@@ -68,6 +77,22 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                     "vie": "Vietnamese",
                     "ind": "Indonesian"
                 };
+                subLanguageIds = [
+                    { name: 'English', id: 'eng' },
+                    { name: 'Spanish', id: 'spa' },
+                    { name: 'French', id: 'fre' },
+                    { name: 'Italian', id: 'ita' },
+                    { name: 'Portuguese', id: 'por' },
+                    { name: 'Chinese', id: 'chi' },
+                    { name: 'Korean', id: 'kor' },
+                    { name: 'Arabic', id: 'ara' },
+                    { name: 'Hindi', id: 'hin' },
+                    { name: 'Dutch', id: 'dut' },
+                    { name: 'Swedish', id: 'swe' },
+                    { name: 'Polish', id: 'pol' },
+                    { name: 'Turkish', id: 'tur' },
+                    { name: 'Vietnamese', id: 'vie' },
+                ];
                 url = "https://rest.opensubtitles.org/search/imdbid-".concat(movieInfo.imdb_id.replace("tt", ""));
                 libs.log({ url: url }, PROVIDER, "URL SEARCH");
                 return [4, fetch(url, {
@@ -77,13 +102,40 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                         },
                     })];
             case 2:
-                response = _a.sent();
+                response = _b.sent();
                 return [4, response.json()];
             case 3:
-                data = _a.sent();
+                data = _b.sent();
                 console.log('openSubtitles', data);
-                for (_i = 0, data_1 = data; _i < data_1.length; _i++) {
-                    item = data_1[_i];
+                parseData = __spreadArray([], data, true);
+                _i = 0, subLanguageIds_1 = subLanguageIds;
+                _b.label = 4;
+            case 4:
+                if (!(_i < subLanguageIds_1.length)) return [3, 8];
+                item = subLanguageIds_1[_i];
+                urlLang = "https://rest.opensubtitles.org/search/imdbid-".concat(movieInfo.imdb_id.replace("tt", ""), "/sublanguageid-").concat(item.id);
+                return [4, fetch(urlLang, {
+                        method: 'GET',
+                        headers: {
+                            'x-user-agent': 'VLSub 0.10.2',
+                        },
+                    })];
+            case 5:
+                responseLang = _b.sent();
+                return [4, responseLang.json()];
+            case 6:
+                dataLang = _b.sent();
+                libs.log({ urlLang: urlLang, dataLang: dataLang, item: item }, PROVIDER, "URL SEARCH LANG");
+                if (dataLang.length > 0) {
+                    parseData.push.apply(parseData, dataLang);
+                }
+                _b.label = 7;
+            case 7:
+                _i++;
+                return [3, 4];
+            case 8:
+                for (_a = 0, data_1 = data; _a < data_1.length; _a++) {
+                    item = data_1[_a];
                     fileName = item.SubFileName;
                     libs.log({ fileName: fileName, langID: item.SubLanguageID, zip: item.ZipDownloadLink }, PROVIDER, "ITEM INFO");
                     if (item.IDMovieImdb != movieInfo.imdb_id.replace("tt", "")) {
@@ -110,12 +162,12 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                         provider: PROVIDER,
                     });
                 }
-                return [3, 5];
-            case 4:
-                e_1 = _a.sent();
+                return [3, 10];
+            case 9:
+                e_1 = _b.sent();
                 libs.log({ e: e_1 }, PROVIDER, 'ERROR');
-                return [3, 5];
-            case 5: return [2, true];
+                return [3, 10];
+            case 10: return [2, true];
         }
     });
 }); };
