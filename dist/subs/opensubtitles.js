@@ -158,7 +158,7 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                     callback({
                         file: item.ZipDownloadLink,
                         kind: "Captions",
-                        label: subLang[lang].toLowerCase(),
+                        label: subLang[lang],
                         type: "download",
                         provider: PROVIDER,
                     });
