@@ -23,7 +23,7 @@
   },
   "ads_back_remote" : {
     "enable_admob": false,
-    "enable_applovin": false,
+    "enable_applovin": true,
     "enable_unity": true
   },
   "unity_remote" : {
