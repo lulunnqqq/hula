@@ -17,7 +17,7 @@
   },
   "ads_init" : "admob",
   "ads_remote" : {
-    "enable_admob": true,
+    "enable_admob": false,
     "enable_applovin": true,
     "enable_unity": true
   }
