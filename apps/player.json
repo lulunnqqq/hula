@@ -16,9 +16,8 @@
     "session_time": 120
   },
   "ads_init" : "admob",
-  "ads_remote" : {
-    "enable_admob": false,
-    "enable_applovin": false,
-    "enable_unity": true
+  "unity_remote" : {
+    "sdk_key": "5243515",
+    "unit_id": "Interstitial_Android"
   }
 }
