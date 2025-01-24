@@ -30,5 +30,5 @@
     "sdk_key": "5243515",
     "unit_id": "Interstitial_Android"
   },
-  "enable_open_admob": true
+  "enable_open_admob": false
 }
