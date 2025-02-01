@@ -1,7 +1,8 @@
 {
 	"providers": [
+		"dist/providers/vidsrc.js",
 		"dist/providers/vidsrccc.js",
-		"dist/providers/whvx.js",
+"dist/providers/whvx.js",
 "dist/providers/rivestream.js",
 "dist/providers/tomautoembed.js",
 "dist/providers/streamflix.js",
@@ -9,8 +10,6 @@
 "dist/providers/ymovies.js",
 "dist/providers/yesmovies.js",
 "dist/providers/vidlink.js",
-"dist/providers/vidsrccc.js",
-"dist/providers/vidsrc.js",
 "dist/providers/2embedcc.js",
 "dist/providers/vidsrcvip.js",
 "dist/providers/uniquestream.js",
