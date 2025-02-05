@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -49,41 +49,41 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                PROVIDER = 'OpenSubtitles';
+                PROVIDER = "OpenSubtitles";
                 DOMAIN = "https://www.opensubtitles.org";
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 9, , 10]);
                 subLang = {
-                    "eng": "English",
-                    "spa": "Spanish",
-                    "fre": "French",
-                    "ger": "German",
-                    "ita": "Italian",
-                    "por": "Portuguese",
-                    "rus": "Russian",
-                    "chi": "Chinese",
-                    "jpn": "Japanese",
-                    "kor": "Korean",
-                    "ara": "Arabic",
-                    "hin": "Hindi",
-                    "dut": "Dutch",
-                    "swe": "Swedish",
-                    "pol": "Polish",
-                    "tur": "Turkish",
-                    "dan": "Danish",
-                    "nor": "Norwegian",
-                    "fin": "Finnish",
-                    "vie": "Vietnamese",
-                    "ind": "Indonesian"
+                    eng: "English",
+                    spa: "Spanish",
+                    fre: "French",
+                    ger: "German",
+                    ita: "Italian",
+                    por: "Portuguese",
+                    rus: "Russian",
+                    chi: "Chinese",
+                    jpn: "Japanese",
+                    kor: "Korean",
+                    ara: "Arabic",
+                    hin: "Hindi",
+                    dut: "Dutch",
+                    swe: "Swedish",
+                    pol: "Polish",
+                    tur: "Turkish",
+                    dan: "Danish",
+                    nor: "Norwegian",
+                    fin: "Finnish",
+                    vie: "Vietnamese",
+                    ind: "Indonesian",
                 };
                 subLanguageIds = [];
                 url = "https://rest.opensubtitles.org/search/imdbid-".concat(movieInfo.imdb_id.replace("tt", ""));
                 libs.log({ url: url }, PROVIDER, "URL SEARCH");
                 return [4, fetch(url, {
-                        method: 'GET',
+                        method: "GET",
                         headers: {
-                            'x-user-agent': 'VLSub 0.10.2',
+                            "x-user-agent": "VLSub 0.10.2",
                         },
                     })];
             case 2:
@@ -91,7 +91,7 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 return [4, response.json()];
             case 3:
                 data = _b.sent();
-                console.log('openSubtitles', data);
+                console.log("openSubtitles", data);
                 parseData = __spreadArray([], data, true);
                 _i = 0, subLanguageIds_1 = subLanguageIds;
                 _b.label = 4;
@@ -100,9 +100,9 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 item = subLanguageIds_1[_i];
                 urlLang = "https://rest.opensubtitles.org/search/imdbid-".concat(movieInfo.imdb_id.replace("tt", ""), "/sublanguageid-").concat(item.id);
                 return [4, fetch(urlLang, {
-                        method: 'GET',
+                        method: "GET",
                         headers: {
-                            'x-user-agent': 'VLSub 0.10.2',
+                            "x-user-agent": "VLSub 0.10.2",
                         },
                     })];
             case 5:
@@ -144,14 +144,17 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                         file: item.ZipDownloadLink,
                         kind: "Captions",
                         label: subLang[lang],
-                        type: "download",
+                        type: "zip",
                         provider: PROVIDER,
+                        headers: {
+                            "x-user-agent": "VLSub 0.10.2",
+                        },
                     });
                 }
                 return [3, 10];
             case 9:
                 e_1 = _b.sent();
-                libs.log({ e: e_1 }, PROVIDER, 'ERROR');
+                libs.log({ e: e_1 }, PROVIDER, "ERROR");
                 return [3, 10];
             case 10: return [2, true];
         }
