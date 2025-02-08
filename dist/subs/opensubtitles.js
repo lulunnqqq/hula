@@ -282,12 +282,13 @@ subs.getResource = function (movieInfo, config, callback) {
                   fileName: fileName,
                   lang: lang,
                   zip: item.ZipDownloadLink,
+                  movieInfo: movieInfo,
                 },
                 PROVIDER,
                 "EPISODE COMPARE"
               );
               if (
-                movieInfo.season !== season &&
+                movieInfo.season !== season ||
                 movieInfo.episode !== episode
               ) {
                 continue;
@@ -307,7 +308,7 @@ subs.getResource = function (movieInfo, config, callback) {
             libs.log(
               { fileName: fileName, lang: lang, zip: item.ZipDownloadLink },
               PROVIDER,
-              "ITEM INFO PASS"
+              "ITEM INFO PASS==>"
             );
             callback({
               file: item.ZipDownloadLink,
