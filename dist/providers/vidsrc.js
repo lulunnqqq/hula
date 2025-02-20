@@ -262,54 +262,78 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 encodeURL = "";
                 try {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 1");
                     encodeURL = Iry9MQXnLs(textEncode);
                 }
-                catch (e) { }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 1");
+                }
                 try {
                     if (encodeURL.indexOf('m3u8') == -1) {
+                        libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 2");
                         encodeURL = IGLImMhWrI(textEncode);
                     }
                 }
-                catch (e) { }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 2");
+                }
                 try {
                     if (encodeURL.indexOf('m3u8') == -1) {
+                        libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 3");
                         encodeURL = GTAxQyTyBx(textEncode);
                     }
                 }
-                catch (e) { }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 3");
+                }
                 try {
                     if (encodeURL.indexOf('m3u8') == -1) {
+                        libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 4");
                         encodeURL = MyL1IRSfHe(textEncode);
                     }
                 }
-                catch (e) { }
-                try {
-                    if (encodeURL.indexOf('m3u8') == -1) {
-                        encodeURL = detdj7JHiK(textEncode);
-                    }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 4");
                 }
-                catch (e) { }
                 try {
                     if (encodeURL.indexOf('m3u8') == -1) {
+                        libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 5");
                         encodeURL = nZlUnj2VSo(textEncode);
                     }
                 }
-                catch (e) { }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 5");
+                }
                 try {
                     if (encodeURL.indexOf('m3u8') == -1) {
+                        libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 6");
                         encodeURL = laM1dAi3vO(textEncode);
                     }
                 }
-                catch (e) { }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 6");
+                }
                 try {
                     if (encodeURL.indexOf('https') == -1) {
+                        libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 7");
                         encodeURL = GuxKGDsA2T(textEncode);
                     }
                 }
-                catch (e) { }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 7");
+                }
                 try {
                     if (encodeURL.indexOf('m3u8') == -1) {
+                        libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE 8");
                         encodeURL = LXVUMCoAHJ(textEncode);
+                    }
+                }
+                catch (e) {
+                    libs.log({ encodeURL: encodeURL }, PROVIDER, "ENCODE ERROR 8");
+                }
+                try {
+                    if (encodeURL.indexOf('m3u8') == -1) {
+                        encodeURL = detdj7JHiK(textEncode);
                     }
                 }
                 catch (e) { }
