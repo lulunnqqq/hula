@@ -65,16 +65,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         }
         return libs.string_atob(_0x49a8fe);
     }
-    function C66jPHx8qu(_0x48e6c2) {
-        var _0x382290 = _0x48e6c2.split("").reverse().join("");
-        var _0x1cb155 = "X9a(O;FMV2-7VO5x;Ao:dN1NoFs?j,";
-        var _0x50d89b = _0x382290.match(/.{1,2}/g).map(function (_0x58f648) { return String.fromCharCode(parseInt(_0x58f648, 16)); }).join("");
-        var _0x574d54 = "";
-        for (var _0x151d1c = 0; _0x151d1c < _0x50d89b.length; _0x151d1c++) {
-            _0x574d54 += String.fromCharCode(_0x50d89b.charCodeAt(_0x151d1c) ^ _0x1cb155.charCodeAt(_0x151d1c % _0x1cb155.length));
-        }
-        return _0x574d54;
-    }
     function MyL1IRSfHe(_0xa54f5f) {
         var _0x2b197e = _0xa54f5f.split("").reverse().join("");
         var _0x14fe01 = "";
@@ -284,12 +274,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 try {
                     if (encodeURL.indexOf('m3u8') == -1) {
                         encodeURL = GTAxQyTyBx(textEncode);
-                    }
-                }
-                catch (e) { }
-                try {
-                    if (encodeURL.indexOf('m3u8') == -1) {
-                        encodeURL = C66jPHx8qu(textEncode);
                     }
                 }
                 catch (e) { }
