@@ -1,6 +1,6 @@
 {
 	"providers": [
-"dist/providers/whvx.js",
+
 "dist/providers/cineby.js",
 "dist/providers/vidsrc.js",
 "dist/providers/vidsrccc.js",
