@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    function parseM3U8(content) {
+    function parseM3U8(content, urlDirect) {
         var lines = content.split('\n').filter(function (line) { return line.trim() !== ''; });
         var result = [];
         for (var i = 0; i < lines.length; i++) {
@@ -48,13 +48,38 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     if (!file) {
                         continue;
                     }
+                    libs.log({ file: file, quality: quality }, PROVIDER, "PARSE M3U8 DATA");
                     if (file.indexOf(".m3u8") == -1) {
                         file += ".m3u8";
                     }
-                    result.push({
-                        file: file,
-                        quality: quality
-                    });
+                    if (file.indexOf("https://") != -1) {
+                        result.push({
+                            file: file,
+                            quality: quality
+                        });
+                    }
+                    else if (_.startsWith(file, '/')) {
+                        file = urlDirect.replace("/index.m3u8", file);
+                        result.push({
+                            file: file,
+                            quality: quality
+                        });
+                    }
+                    else if (_.startsWith(file, '.')) {
+                        file = file.replace('./', '/');
+                        file = urlDirect.replace("/index.m3u8", file);
+                        result.push({
+                            file: file,
+                            quality: quality
+                        });
+                    }
+                    else {
+                        file = urlDirect.replace("index.m3u8", file);
+                        result.push({
+                            file: file,
+                            quality: quality
+                        });
+                    }
                 }
                 i++;
             }
@@ -108,7 +133,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, parseDirect.text()];
             case 4:
                 textDirect = _b.sent();
-                m3u8Data = parseM3U8(textDirect);
+                m3u8Data = parseM3U8(textDirect, parseSearch.videoSource);
                 libs.log({ m3u8Data: m3u8Data }, PROVIDER, "M3U8 DATA");
                 libs.embed_callback(m3u8Data[0].file, PROVIDER, PROVIDER, 'hls', callback, 1, tracks, m3u8Data, {
                     Referer: parseSearch.videoSource,
