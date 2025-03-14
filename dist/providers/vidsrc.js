@@ -222,7 +222,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         headers: {
                             'user-agent': userAgent,
                             referer: urlSearch
-                        }
+                        },
+                        redirect: "follow"
                     })];
             case 3:
                 requestFrame2 = _a.sent();
