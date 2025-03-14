@@ -135,7 +135,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseEmbedServer_1('.link-item').each(function (key, item) {
                     var serverId = parseEmbedServer_1(item).attr('data-linkid');
                     var serverName = parseEmbedServer_1(item).find('span').text();
-                    serverIds.push(serverId);
+                    if (serverId && serverName.toLowerCase() == "vidcloud") {
+                        serverIds.push(serverId);
+                    }
                 });
                 return [3, 11];
             case 7:
@@ -192,7 +194,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 parseEmbedTv_1('.link-item').each(function (key, item) {
                     var serverId = parseEmbedTv_1(item).attr('data-id');
                     var serverName = parseEmbedTv_1(item).find('span').text();
-                    serverIds.push(serverId);
+                    if (serverId && serverName.toLowerCase() == "vidcloud") {
+                        serverIds.push(serverId);
+                    }
                 });
                 _b.label = 11;
             case 11:
@@ -204,7 +208,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             case 0: return [4, libs.request_get("https://aquariumtv.app/rabbit?url_embed=".concat(libs.string_base64_encode(url)))];
                             case 1:
                                 dataRabbit = _c.sent();
-                                libs.log({ dataRabbit: dataRabbit }, PROVIDER, "DATA RABBIT");
+                                libs.log({ dataRabbit: dataRabbit, url: url, encode: libs.string_base64_encode(url) }, PROVIDER, "DATA RABBIT");
                                 source3 = dataRabbit['sources'] || [];
                                 parseTrack = dataRabbit['tracks'] || [];
                                 tracks = [];
