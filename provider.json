@@ -2,6 +2,7 @@
 	"providers": [
 
 
+"dist/providers/vidlink.js",
 "dist/providers/fmovies.js",
 "dist/providers/cineby.js",
 "dist/providers/vidsrc.js",
