@@ -4,10 +4,8 @@
 
 "dist/providers/vidlink.js",
 "dist/providers/fmovies.js",
-"dist/providers/cineby.js",
 "dist/providers/vidsrc.js",
 "dist/providers/vidsrccc.js",
-"dist/providers/rivestream.js",
 "dist/providers/tomautoembed.js",
 "dist/providers/vidsrcpro.js",
 "dist/providers/ymovies.js",
@@ -15,7 +13,6 @@
 "dist/providers/2embedcc.js",
 "dist/providers/vidsrcvip.js",
 "dist/providers/ridomovie.js",
-"dist/providers/moviesapi.js",
 "dist/providers/catflix.js"
 
 	]
