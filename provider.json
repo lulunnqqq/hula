@@ -2,6 +2,7 @@
 	"providers": [
 
 
+"dist/providers/febbox.js",
 "dist/providers/vidlink.js",
 "dist/providers/fmovies.js",
 "dist/providers/vidsrc.js",
