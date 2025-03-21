@@ -14,7 +14,7 @@
     "show": true,
     "key": "NOTI_1.0"
   },
-  "is_caption": false,
-  "is_ocr_image": true,
-  "is_ocr_scanner": false
+  "is_caption": true,
+  "is_ocr_image": false,
+  "is_ocr_scanner": true
 }
