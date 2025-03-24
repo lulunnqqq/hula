@@ -1,7 +1,7 @@
 {
   "update_release": {
-    "build": 11,
-    "url": "https://github.com/hdoonline/hdotv/releases/download/v1.1.6/hdo-tv-1.1.6.apk",
+    "build": 12,
+    "url": "https://github.com/hdoonline/hdotv/releases/download/v1.1.7/hdotv-1.1.7.apk",
     "contents": "There is a new update, please download to experience.",
     "force_update": true
   },
