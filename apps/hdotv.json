@@ -28,5 +28,15 @@
       "SERVER A1",
       "SERVER A2"
     ]
+  },
+  "ads_start_remote" : {
+    "enable_admob": true,
+    "enable_applovin": true,
+    "enable_unity": true
+  },
+  "ads_back_remote" : {
+    "enable_admob": true,
+    "enable_applovin": true,
+    "enable_unity": true
   }
 }
