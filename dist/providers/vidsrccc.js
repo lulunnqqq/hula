@@ -74,9 +74,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 PROVIDER = 'AVidsrcCC';
                 DOMAIN = "https://vidsrc.cc";
                 headers = {
-                    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-                    'Referer': "https://vidsrc.cc/",
-                    'Origin': DOMAIN,
+                    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
                 };
                 _b.label = 1;
             case 1:
