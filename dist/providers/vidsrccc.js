@@ -88,8 +88,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 libs.log({ vrf: vrf }, PROVIDER, "VRF");
                 myHeaders = new Headers();
-                myHeaders.append("Host", "vidsrc.cc");
-                myHeaders.append("Connection", "keep-alive");
                 myHeaders.append("sec-ch-ua-full-version-list", "\"Chromium\";v=\"134.0.6998.166\", \"Not:A-Brand\";v=\"24.0.0.0\", \"Google Chrome\";v=\"134.0.6998.166\"");
                 myHeaders.append("sec-ch-ua-platform", "\"macOS\"");
                 myHeaders.append("sec-ch-ua", "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\"134\"");
@@ -98,15 +96,15 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 myHeaders.append("sec-ch-ua-mobile", "?0");
                 myHeaders.append("sec-ch-ua-arch", "\"arm\"");
                 myHeaders.append("sec-ch-ua-full-version", "\"134.0.6998.166\"");
-                myHeaders.append("Accept", "application/json, text/plain, */*");
-                myHeaders.append("DNT", "1");
+                myHeaders.append("accept", "application/json, text/plain, */*");
+                myHeaders.append("dnt", "1");
                 myHeaders.append("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36");
                 myHeaders.append("sec-ch-ua-platform-version", "\"14.4.0\"");
-                myHeaders.append("Sec-Fetch-Site", "same-origin");
-                myHeaders.append("Sec-Fetch-Mode", "cors");
-                myHeaders.append("Sec-Fetch-Dest", "empty");
-                myHeaders.append("Referer", "https://vidsrc.cc/v2/embed/movie/777443?autoPlay=false");
-                myHeaders.append("Accept-Language", "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7");
+                myHeaders.append("sec-fetch-site", "same-origin");
+                myHeaders.append("sec-fetch-mode", "cors");
+                myHeaders.append("sec-fetch-dest", "empty");
+                myHeaders.append("referer", "https://vidsrc.cc/v2/embed/movie/777443?autoPlay=false");
+                myHeaders.append("accept-language", "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7");
                 return [4, fetch(urlHash, {
                         method: "GET",
                         headers: myHeaders,
