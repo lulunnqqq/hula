@@ -67,7 +67,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         var key = "BCwZFCsLYWbz2ONSzAYN";
         return libs.string_btoa(libs.string_btoa(rc4(key, input)));
     }
-    var PROVIDER, DOMAIN, headers, vrf, urlHash, resHash, _i, _a, item, urlDirect, resDirect, e_1;
+    var PROVIDER, DOMAIN, headers, vrf, urlHash, myHeaders, resHash, _i, _a, item, urlDirect, resDirect, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -87,8 +87,30 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     urlHash += "&season=".concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
                 libs.log({ vrf: vrf }, PROVIDER, "VRF");
+                myHeaders = new Headers();
+                myHeaders.append("Host", "vidsrc.cc");
+                myHeaders.append("Connection", "keep-alive");
+                myHeaders.append("sec-ch-ua-full-version-list", "\"Chromium\";v=\"134.0.6998.166\", \"Not:A-Brand\";v=\"24.0.0.0\", \"Google Chrome\";v=\"134.0.6998.166\"");
+                myHeaders.append("sec-ch-ua-platform", "\"macOS\"");
+                myHeaders.append("sec-ch-ua", "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\"134\"");
+                myHeaders.append("sec-ch-ua-bitness", "\"64\"");
+                myHeaders.append("sec-ch-ua-model", "\"\"");
+                myHeaders.append("sec-ch-ua-mobile", "?0");
+                myHeaders.append("sec-ch-ua-arch", "\"arm\"");
+                myHeaders.append("sec-ch-ua-full-version", "\"134.0.6998.166\"");
+                myHeaders.append("Accept", "application/json, text/plain, */*");
+                myHeaders.append("DNT", "1");
+                myHeaders.append("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36");
+                myHeaders.append("sec-ch-ua-platform-version", "\"14.4.0\"");
+                myHeaders.append("Sec-Fetch-Site", "same-origin");
+                myHeaders.append("Sec-Fetch-Mode", "cors");
+                myHeaders.append("Sec-Fetch-Dest", "empty");
+                myHeaders.append("Referer", "https://vidsrc.cc/v2/embed/movie/777443?autoPlay=false");
+                myHeaders.append("Accept-Language", "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7");
                 return [4, fetch(urlHash, {
-                        headers: headers
+                        method: "GET",
+                        headers: myHeaders,
+                        redirect: "follow"
                     })];
             case 3:
                 resHash = _b.sent();
