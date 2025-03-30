@@ -100,7 +100,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 myHeaders.append("sec-ch-ua-full-version", "\"134.0.6998.166\"");
                 myHeaders.append("Accept", "application/json, text/plain, */*");
                 myHeaders.append("DNT", "1");
-                myHeaders.append("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36");
+                myHeaders.append("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36");
                 myHeaders.append("sec-ch-ua-platform-version", "\"14.4.0\"");
                 myHeaders.append("Sec-Fetch-Site", "same-origin");
                 myHeaders.append("Sec-Fetch-Mode", "cors");
