@@ -78,7 +78,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 };
                 _b.label = 1;
             case 1:
-                _b.trys.push([1, 8, , 9]);
+                _b.trys.push([1, 9, , 10]);
                 return [4, libs.request_get("https://aquariumtv.app/vidsrccc?id=".concat(movieInfo.tmdb_id))];
             case 2:
                 vrf = _b.sent();
@@ -87,37 +87,42 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     urlHash += "&season=".concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
                 }
                 libs.log({ vrf: vrf }, PROVIDER, "VRF");
-                return [4, libs.request_get(urlHash, headers)];
+                return [4, fetch(urlHash, {
+                        headers: headers
+                    })];
             case 3:
                 resHash = _b.sent();
                 libs.log({ urlHash: urlHash, resHash: resHash, vrf: vrf }, PROVIDER, 'RES HASH');
+                return [4, resHash.json()];
+            case 4:
+                resHash = _b.sent();
                 if (!resHash || !resHash.data || resHash.data.length == 0) {
                     return [2];
                 }
                 _i = 0, _a = resHash.data;
-                _b.label = 4;
-            case 4:
-                if (!(_i < _a.length)) return [3, 7];
+                _b.label = 5;
+            case 5:
+                if (!(_i < _a.length)) return [3, 8];
                 item = _a[_i];
                 urlDirect = "".concat(DOMAIN, "/api/source/").concat(item.hash, "?t=1735063337497");
                 return [4, libs.request_get(urlDirect, headers)];
-            case 5:
+            case 6:
                 resDirect = _b.sent();
                 libs.log({ resDirect: resDirect }, PROVIDER, 'RES DIRECT');
                 if (!resDirect || !resDirect.data || !resDirect.data.source) {
-                    return [3, 6];
+                    return [3, 7];
                 }
                 libs.embed_callback(resDirect.data.source, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: resDirect.data.source, quality: 1080 }], headers);
-                _b.label = 6;
-            case 6:
+                _b.label = 7;
+            case 7:
                 _i++;
-                return [3, 4];
-            case 7: return [3, 9];
-            case 8:
+                return [3, 5];
+            case 8: return [3, 10];
+            case 9:
                 e_1 = _b.sent();
                 libs.log({ e: e_1 }, PROVIDER, "ERROR");
-                return [3, 9];
-            case 9: return [2];
+                return [3, 10];
+            case 10: return [2];
         }
     });
 }); };
