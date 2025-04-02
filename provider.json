@@ -1,6 +1,7 @@
 {
 	"providers": [
 
+"dist/providers/idflix.js",
 "dist/providers/hexa.js",
 "dist/providers/vidsrccc.js",
 "dist/providers/vidlink.js",
