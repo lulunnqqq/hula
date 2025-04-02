@@ -1,14 +1,3 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -47,9 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, urlIco, sources, urlSources, _i, sources_1, item, buildUrl, _a, urlSources_1, item, res, tracks, _b, _c, item2, directSizes, patternSize, directQuality, _d, patternSize_1, patternItem, sizeQuality, e_1;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
+    var PROVIDER, DOMAIN, headers, C, B, A, D, urlovo, formattedString, reversedString, firstBase64, secondBase64, response, json, firstSource, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
                 PROVIDER = 'XVidsrcVip';
                 DOMAIN = "https://vidsrc.vip";
@@ -57,84 +46,52 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                     'referer': "https://vidsrc.vip/"
                 };
-                _e.label = 1;
+                _a.label = 1;
             case 1:
-                _e.trys.push([1, 9, , 10]);
-                urlIco = "".concat(DOMAIN, "/statics/icon/fdfddf.ico");
-                sources = ["nova", "hydrax"];
-                urlSources = [];
-                for (_i = 0, sources_1 = sources; _i < sources_1.length; _i++) {
-                    item = sources_1[_i];
-                    buildUrl = "".concat(DOMAIN, "/").concat(item, ".php?id=").concat(movieInfo.tmdb_id);
-                    if (movieInfo.type == 'tv') {
-                        buildUrl += "&season=".concat(movieInfo.season, "&episode=").concat(movieInfo.episode);
-                    }
-                    urlSources.push(buildUrl);
+                _a.trys.push([1, 4, , 5]);
+                C = movieInfo.tmdb_id
+                    .toString()
+                    .split("")
+                    .map(function (digit) {
+                    var encoding = "abcdefghij";
+                    return encoding[parseInt(digit)];
+                })
+                    .join("");
+                B = C.split("").reverse().join("");
+                A = libs.string_btoa(B);
+                D = libs.string_btoa(A);
+                urlovo = "https://api.vid3c.site/allmvse2.php?id=".concat(D);
+                if (movieInfo.type == 'tv') {
+                    formattedString = "".concat(movieInfo.tmdb_id, "-").concat(movieInfo.season, "-").concat(movieInfo.episode);
+                    reversedString = formattedString.split('').reverse().join('');
+                    firstBase64 = libs.string_btoa(reversedString);
+                    secondBase64 = libs.string_btoa(firstBase64);
+                    urlovo = "https://api.vid3c.site/alltvse2.php?id=".concat(secondBase64);
                 }
-                libs.log({ urlSources: urlSources }, PROVIDER, "URL SOURCE");
-                _a = 0, urlSources_1 = urlSources;
-                _e.label = 2;
+                return [4, fetch(urlovo)];
             case 2:
-                if (!(_a < urlSources_1.length)) return [3, 8];
-                item = urlSources_1[_a];
-                return [4, libs.request_get(urlIco, __assign(__assign({}, headers), { Referer: item }))];
+                response = _a.sent();
+                if (!response.ok) {
+                    return [2];
+                }
+                return [4, response.json()];
             case 3:
-                res = _e.sent();
-                libs.log({ res: res }, PROVIDER, "INFO");
-                tracks = [];
-                if (!res.sources) {
-                    return [3, 7];
+                json = _a.sent();
+                libs.log({ json: json }, PROVIDER, "JSON");
+                firstSource = json["source1"];
+                if (!firstSource.url) {
+                    return [2];
                 }
-                _b = 0, _c = res.sources;
-                _e.label = 4;
+                if (firstSource.language != "English") {
+                    return [2];
+                }
+                libs.embed_callback(firstSource.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: firstSource.url, quality: 1080 }], headers);
+                return [3, 5];
             case 4:
-                if (!(_b < _c.length)) return [3, 7];
-                item2 = _c[_b];
-                if (!item2.file) {
-                    return [3, 6];
-                }
-                return [4, libs.request_get(item2.file, {})];
-            case 5:
-                directSizes = _e.sent();
-                libs.log({ directSizes: directSizes }, PROVIDER, 'DIRECT SIZES');
-                patternSize = directSizes.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig);
-                libs.log({ patternSize: patternSize }, PROVIDER, 'PATTERN SIZE');
-                if (!patternSize) {
-                    return [3, 6];
-                }
-                directQuality = [];
-                libs.log({ patternSize: patternSize }, PROVIDER, 'PATTERN SIZE');
-                for (_d = 0, patternSize_1 = patternSize; _d < patternSize_1.length; _d++) {
-                    patternItem = patternSize_1[_d];
-                    sizeQuality = patternItem.match(/\/([0-9]+)\//i);
-                    sizeQuality = sizeQuality ? Number(sizeQuality[1]) : 1080;
-                    directQuality.push({
-                        file: patternItem,
-                        quality: sizeQuality
-                    });
-                }
-                if (!directQuality.length) {
-                    return [3, 6];
-                }
-                directQuality = _.orderBy(directQuality, ['quality'], ['desc']);
-                libs.log({ directQuality: directQuality }, PROVIDER, 'DIRECT QUALITY');
-                libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, tracks, directQuality, {
-                    "Referer": "https://vidsrc.vip/",
-                    "Origin": "https://vidsrc.vip"
-                });
-                _e.label = 6;
-            case 6:
-                _b++;
-                return [3, 4];
-            case 7:
-                _a++;
-                return [3, 2];
-            case 8: return [3, 10];
-            case 9:
-                e_1 = _e.sent();
+                e_1 = _a.sent();
                 libs.log({ e: e_1 }, PROVIDER, "ERROR");
-                return [3, 10];
-            case 10: return [2];
+                return [3, 5];
+            case 5: return [2];
         }
     });
 }); };
