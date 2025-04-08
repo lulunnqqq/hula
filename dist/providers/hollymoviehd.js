@@ -122,7 +122,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                     if (_.startsWith(item.file, "/")) {
                         directUrl = "https://gstream.hollymoviehd.cc".concat(item.file);
-                        libs.embed_callback(directUrl, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: directUrl, quality: 1080 }]);
+                        libs.embed_callback(directUrl, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: directUrl, quality: 1080 }], {}, {
+                            type: "m3u8",
+                        });
                         continue;
                     }
                 }
