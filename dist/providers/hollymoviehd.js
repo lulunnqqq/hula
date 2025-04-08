@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_b.label) {
             case 0:
                 DOMAIN = "https://hollymoviehd.cc";
-                PROVIDER = 'HollyMovieHD';
+                PROVIDER = 'NHollyMovieHD';
                 headers = {
                     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
                     "Referer": "https://hollymoviehd.cc/",
