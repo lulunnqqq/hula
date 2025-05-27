@@ -70,19 +70,19 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                 };
                 subLanguageIds = [
                     { name: 'English', id: 'eng' },
+                    { name: 'Arabic', id: 'ara' },
                     { name: 'Spanish', id: 'spa' },
                     { name: 'French', id: 'fre' },
+                    { name: 'Vietnamese', id: 'vie' },
                     { name: 'Italian', id: 'ita' },
                     { name: 'Portuguese', id: 'por' },
                     { name: 'Chinese', id: 'chi' },
                     { name: 'Korean', id: 'kor' },
-                    { name: 'Arabic', id: 'ara' },
                     { name: 'Hindi', id: 'hin' },
                     { name: 'Dutch', id: 'dut' },
                     { name: 'Swedish', id: 'swe' },
                     { name: 'Polish', id: 'pol' },
                     { name: 'Turkish', id: 'tur' },
-                    { name: 'Vietnamese', id: 'vie' },
                     { name: 'Indonesian', id: 'ind' },
                 ];
                 url = "https://rest.opensubtitles.org/search/imdbid-".concat(movieInfo.imdb_id.replace("tt", ""));
@@ -111,8 +111,8 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                     lang = itemLang.SubLanguageID.toLowerCase();
                     libs.log({ fileName: fileName, langID: itemLang.SubLanguageID, zip: itemLang.ZipDownloadLink }, PROVIDER, "ITEM INFO");
                     if (movieInfo.type == "tv") {
-                        season = Number(item.SeriesSeason);
-                        episode = Number(item.SeriesEpisode);
+                        season = Number(itemLang.SeriesSeason);
+                        episode = Number(itemLang.SeriesEpisode);
                         libs.log({
                             episode: episode,
                             season: season,
