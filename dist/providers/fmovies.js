@@ -324,7 +324,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                 };
                 extractDirectV2 = function (linkV2) { return __awaiter(_this, void 0, void 0, function () {
-                    var id, domain, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, tracks, _i, parseTrack_2, trackItem, lang, parseLang, deSource, parseDesource, rank, _a, parseDesource_1, item;
+                    var id, domain, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, tracks, _i, parseTrack_2, trackItem, lang, parseLang, key, pKey, deSource, parseDesource, rank, _a, parseDesource_1, item;
                     return __generator(this, function (_b) {
                         switch (_b.label) {
                             case 0:
@@ -366,7 +366,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                         label: parseLang
                                     });
                                 }
-                                deSource = decryptOpenssl(sources, "4d4b1f070091f3e7aeafdd2d8469ae84b4f86f3874e02cad1c8cb3af1c974db3");
+                                return [4, libs.request_get("https://raw.githubusercontent.com/lulunnqqq/mvapi/refs/heads/key/extracted_arrays.json")];
+                            case 2:
+                                key = _b.sent();
+                                pKey = key.decryptionKey;
+                                deSource = decryptOpenssl(sources, pKey);
                                 libs.log({ deSource: deSource }, PROVIDER, 'DE SOURCE');
                                 parseDesource = JSON.parse(deSource);
                                 rank = 0;
