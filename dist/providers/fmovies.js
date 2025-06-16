@@ -298,7 +298,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         var prefixBytes = cryptoS.lib.WordArray.create(prefixWords, 8);
                         var prefixString = cryptoS.enc.Latin1.stringify(prefixBytes);
                         if (prefixString !== "Salted__") {
-                            throw new Error("Invalid OpenSSL format: missing 'Salted__' prefix");
+                            return "";
                         }
                         var saltWords = encryptedData.words.slice(2, 4);
                         var salt = cryptoS.lib.WordArray.create(saltWords, 8);
@@ -315,16 +315,17 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         });
                         var plaintext = decrypted.toString(cryptoS.enc.Utf8);
                         if (!plaintext) {
-                            throw new Error("Decryption failed: invalid password or corrupted data");
+                            return "";
                         }
                         return plaintext;
                     }
                     catch (error) {
-                        throw new Error("OpenSSL decryption failed: ".concat(error.message));
+                        libs.log({ error: error }, PROVIDER, 'ERROR DE');
+                        return "";
                     }
                 };
                 extractDirectV2 = function (linkV2) { return __awaiter(_this, void 0, void 0, function () {
-                    var id, domain, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, tracks, _i, parseTrack_2, trackItem, lang, parseLang, key, pKey, deSource, parseDesource, rank, _a, parseDesource_1, item;
+                    var id, domain, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, isEncrypted, tracks, _i, parseTrack_2, trackItem, lang, parseLang, key, pKey, deSource, parseDesource, rank, _a, parseDesource_1, item;
                     return __generator(this, function (_b) {
                         switch (_b.label) {
                             case 0:
@@ -347,6 +348,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 libs.log({ parseGetLinkEmbed: parseGetLinkEmbed }, PROVIDER, 'PARSE GET LINK EMBED');
                                 sources = parseGetLinkEmbed.sources;
                                 parseTrack = parseGetLinkEmbed.tracks;
+                                isEncrypted = parseGetLinkEmbed.encrypted;
                                 tracks = [];
                                 for (_i = 0, parseTrack_2 = parseTrack; _i < parseTrack_2.length; _i++) {
                                     trackItem = parseTrack_2[_i];
@@ -370,9 +372,19 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             case 2:
                                 key = _b.sent();
                                 pKey = key.decryptionKey;
-                                deSource = decryptOpenssl(sources, pKey);
-                                libs.log({ deSource: deSource }, PROVIDER, 'DE SOURCE');
-                                parseDesource = JSON.parse(deSource);
+                                deSource = sources;
+                                parseDesource = [];
+                                if (isEncrypted) {
+                                    deSource = decryptOpenssl(sources, pKey);
+                                    if (!deSource) {
+                                        return [2];
+                                    }
+                                    libs.log({ deSource: deSource }, PROVIDER, 'DE SOURCE');
+                                    parseDesource = JSON.parse(deSource);
+                                }
+                                else {
+                                    parseDesource = sources;
+                                }
                                 rank = 0;
                                 for (_a = 0, parseDesource_1 = parseDesource; _a < parseDesource_1.length; _a++) {
                                     item = parseDesource_1[_a];
@@ -401,7 +413,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 getLinkEmbedData = _b.sent();
                 libs.log({ getLinkEmbedData: getLinkEmbedData }, PROVIDER, 'LINK EMBED DATA');
                 if (getLinkEmbedData && getLinkEmbedData.link) {
-                    extractDirectV2(getLinkEmbedData.link);
+                    try {
+                        extractDirectV2(getLinkEmbedData.link);
+                    }
+                    catch (errDe) { }
                 }
                 _b.label = 14;
             case 14:
