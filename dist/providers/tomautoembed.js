@@ -94,6 +94,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!decryptData.url) {
                     return [3, 4];
                 }
+                if (_.startsWith(decryptData.url, "/")) {
+                    return [3, 4];
+                }
                 libs.embed_callback(decryptData.url, PROVIDER, PROVIDER, 'hls', callback, 1, [], [{ file: decryptData.url, quality: 1080 }], headers, {
                     type: "m3u8"
                 });
