@@ -1,6 +1,7 @@
 {
 	"providers": [
 "dist/providers/vidfast.js",
+"dist/providers/m4ufree.js",
 "dist/providers/uniquestream.js",
 "dist/providers/2embedcc.js",
 "dist/providers/aoneroom.js",

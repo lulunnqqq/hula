@@ -60,7 +60,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                PROVIDER = 'KM4UFREE';
+                PROVIDER = 'LM4UFREE';
                 DOMAIN = "https://streamm4u.com.co";
                 userAgent = libs.request_getRandomUserAgent();
                 pureheaders = {
