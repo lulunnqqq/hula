@@ -47,7 +47,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     'referer': "".concat(DOMAIN, "/"),
                     "origin": "".concat(DOMAIN)
                 };
-                fixID = "/rebivol/ad/w/2c7998b18129848378021254f87db35df8f562b2/2cf30a7c/APA91nNHHa3xbnvasl8ciswLATkt2fIiVFciF5RLarK4oR7nrTpEDSBjO_kRoBJD730BWfo6bQZIpxCr-PAlSGc8GAAxueegNH5gNzrcqhPDliciuUDv0GTqb_2t1ik9pIAXpVaZ8inm6ey56Qf44wrOOPUfZYlkKuKs18mNKqBluBYTB5lBXWF/775d49bf3b9b4d082f5156cd9f36e21d42014547cd9282b1fe62ccbe3d09f66b/1000094661747536/";
+                fixID = "/e6f92d89-a2ca-5dbb-8d6e-bd815a61ee39/fi/r/bee2170a919418b62088945aeb36d6fae820ab70/APA91ucLnQa-rMM6imkOD8-YIFqEiLoxb-BR2AwQ79wfxrXe69VFTDAwlT2PBwml5huoVA9AoZHkBjt6PcbOohlKj6hVA66lLs3fWrOZXBPba7I2VI9FHQYExb8rltIM0TsLkg-qxoMpL0jq-AHAv2LSWiWJZncrNsSW57wS06vVmOYijxGqee5/cf9fffb937bed2d0f2d4921d86f50f182229460cd808f6aec8039dc8911b267a/beledo/b84e9f0e/";
                 _c.label = 1;
             case 1:
                 _c.trys.push([1, 10, , 11]);
@@ -77,12 +77,24 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                     z;
                 }
-                urlSource = "".concat(DOMAIN).concat(fixID, "k33a7dwPZst1/").concat(deID);
+                urlSource = "".concat(DOMAIN).concat(fixID, "pC8vgkEb9w/").concat(deID);
                 headerSources = {
-                    referer: url,
-                    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                    "Accept": "*/*",
+                    "Accept-Language": "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7",
+                    "Connection": "keep-alive",
+                    "Content-Length": "0",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "DNT": "1",
+                    "Origin": "https://www.vidfast.pro",
+                    "Referer": "https://www.vidfast.pro/",
+                    "Sec-Fetch-Dest": "empty",
+                    "Sec-Fetch-Mode": "cors",
+                    "Sec-Fetch-Site": "same-origin",
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
                     "X-Requested-With": "XMLHttpRequest",
-                    "X-Csrf-Token": "lVx7BVtk9c3SMNbF49PNvUc7GV5zzdem"
+                    "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"macOS\""
                 };
                 libs.log({ urlSource: urlSource, headerSources: headerSources }, PROVIDER, 'URL SOURCE');
                 return [4, libs.request_post(urlSource, headerSources, {})];
@@ -97,13 +109,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 6:
                 if (!(_i < dataSources_1.length)) return [3, 9];
                 item = dataSources_1[_i];
-                urlDirect = "".concat(DOMAIN).concat(fixID, "p6PWA5s/").concat(item.data);
+                urlDirect = "".concat(DOMAIN).concat(fixID, "s2aqGYpfscE0-g/").concat(item.data);
                 headerDirect = {
                     referer: url,
                     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                     "content-type": "application/x-www-form-urlencoded",
                     "X-Requested-With": "XMLHttpRequest",
-                    "X-Csrf-Token": "lVx7BVtk9c3SMNbF49PNvUc7GV5zzdem"
                 };
                 return [4, libs.request_post(urlDirect, headerDirect, {})];
             case 7:
