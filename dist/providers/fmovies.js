@@ -325,7 +325,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                 };
                 extractDirectV2 = function (linkV2) { return __awaiter(_this, void 0, void 0, function () {
-                    var id, domain, dataEmbed, htmlEmbed, _k, k, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, isEncrypted, tracks, _i, parseTrack_2, trackItem, lang, parseLang, key, pKey, deSource, parseDesource, rank, _a, parseDesource_1, item;
+                    var id, domain, dataEmbed, htmlEmbed, k, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, isEncrypted, tracks, _i, parseTrack_2, trackItem, lang, parseLang, key, pKey, deSource, parseDesource, rank, _a, parseDesource_1, item;
                     return __generator(this, function (_b) {
                         switch (_b.label) {
                             case 0:
@@ -348,8 +348,14 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 return [4, dataEmbed.text()];
                             case 2:
                                 htmlEmbed = _b.sent();
-                                _k = htmlEmbed.match(/nonce\=\"([^\"]+)/i);
-                                k = _k ? _k[1] : '';
+                                k = htmlEmbed.match(/nonce\=\"([^\"]+)/i);
+                                if (!k) {
+                                    k = htmlEmbed.match(/\_gg\_fb\" *content\=\"([^\"])/i);
+                                }
+                                if (!k) {
+                                    k = htmlEmbed.match(/\_xy\_ws *\= *\"([^\"]+)/i);
+                                }
+                                k = k ? k[1] : '';
                                 libs.log({ k: k }, PROVIDER, 'K');
                                 if (!k) {
                                     return [2];
@@ -389,10 +395,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             case 4:
                                 key = _b.sent();
                                 pKey = key.rabbit;
+                                libs.log({ pKey: pKey }, PROVIDER, "PKEY");
                                 deSource = sources;
                                 parseDesource = [];
                                 if (isEncrypted) {
                                     deSource = decryptOpenssl(sources, pKey);
+                                    libs.log({ deSource: deSource }, PROVIDER, "DESOURCE 1");
                                     if (!deSource) {
                                         return [2];
                                     }
@@ -402,6 +410,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 else {
                                     parseDesource = sources;
                                 }
+                                libs.log({ deSource: deSource }, PROVIDER, "deSource");
                                 rank = 0;
                                 for (_a = 0, parseDesource_1 = parseDesource; _a < parseDesource_1.length; _a++) {
                                     item = parseDesource_1[_a];
