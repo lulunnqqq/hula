@@ -85,7 +85,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (firstSource.language != "English") {
                     return [2];
                 }
-                libs.embed_callback(firstSource.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: firstSource.url, quality: 1080 }], headers);
+                libs.embed_callback(firstSource.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: firstSource.url, quality: 1080 }], headers, {
+                    type: "m3u8"
+                });
                 return [3, 5];
             case 4:
                 e_1 = _a.sent();
