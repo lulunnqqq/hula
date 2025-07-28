@@ -36,66 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    function parseM3U8(content, urlDirect) {
-        var lines = content.split('\n').filter(function (line) { return line.trim() !== ''; });
-        var result = [];
-        for (var i = 0; i < lines.length; i++) {
-            if (lines[i].startsWith('#EXT-X-STREAM-INF:')) {
-                var resolutionMatch = lines[i].match(/RESOLUTION=(\d+)x(\d+)/);
-                if (resolutionMatch && lines[i + 1]) {
-                    var quality = parseInt(resolutionMatch[2]);
-                    var file = lines[i + 1];
-                    if (!file) {
-                        continue;
-                    }
-                    var qualityInFile = file.match(/\/([0-9]+)\/index.m3u8/i);
-                    if (qualityInFile) {
-                        quality = Number(qualityInFile[1]);
-                    }
-                    libs.log({ file: file, quality: quality }, PROVIDER, "PARSE M3U8 DATA");
-                    if (file.indexOf(".m3u8") == -1) {
-                        file += ".m3u8";
-                    }
-                    if (file.indexOf("https://") != -1) {
-                        result.push({
-                            file: file,
-                            quality: quality
-                        });
-                    }
-                    else if (_.startsWith(file, '/')) {
-                        file = urlDirect.replace("/index.m3u8", file);
-                        result.push({
-                            file: file,
-                            quality: quality
-                        });
-                    }
-                    else if (_.startsWith(file, '.')) {
-                        file = file.replace('./', '/');
-                        file = urlDirect.replace("/index.m3u8", file);
-                        result.push({
-                            file: file,
-                            quality: quality
-                        });
-                    }
-                    else {
-                        file = urlDirect.replace("index.m3u8", file);
-                        result.push({
-                            file: file,
-                            quality: quality
-                        });
-                    }
-                }
-                i++;
-            }
-        }
-        return result;
-    }
-    var PROVIDER, DOMAIN, headers, decryptWithPassword, urlSearch, parseSearch, urlDecrypt, resDecrypt, tracks, _i, _a, item, headerDirect, parseDirect, textDirect, m3u8Data, e_1;
+    var PROVIDER, DOMAIN, headers, decryptWithPassword, _i, _a, serverID, urlDirect, dataDirect, t, a, decryptData, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 PROVIDER = 'TomAutoEmbed';
-                DOMAIN = "https://abc.autoembed.cc";
+                DOMAIN = "https://test.autoembed.cc";
                 headers = {
                     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                     'Referer': "".concat(DOMAIN, "/"),
@@ -123,65 +69,42 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                     return JSON.parse(s);
                 };
-                urlSearch = "".concat(DOMAIN, "/api/getVideoSource?type=movie&id=").concat(movieInfo.tmdb_id);
-                if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/api/getVideoSource?type=tv&id=").concat(movieInfo.tmdb_id, "/").concat(movieInfo.season, "/").concat(movieInfo.episode);
-                }
-                return [4, libs.request_get(urlSearch, headers, false)];
+                _i = 0, _a = [1, 2, 3];
+                _b.label = 2;
             case 2:
-                parseSearch = _b.sent();
-                libs.log({ parseSearch: parseSearch }, PROVIDER, "PARSE SEARCH");
-                urlDecrypt = "".concat(DOMAIN, "/api/decryptVideoSource");
-                return [4, libs.request_post(urlDecrypt, {
-                        'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-                        'referer': "https://hin.autoembed.cc",
-                        'Origin': 'https://hin.autoembed.cc',
-                        "content-type": "application/json"
-                    }, {
-                        encryptedData: parseSearch.encryptedData,
-                    })];
+                if (!(_i < _a.length)) return [3, 5];
+                serverID = _a[_i];
+                urlDirect = "".concat(DOMAIN, "/api/server?id=").concat(movieInfo.tmdb_id, "&sr=").concat(serverID, "&ep=").concat(movieInfo.episode, "&ss=").concat(movieInfo.season);
+                if (movieInfo.type == "movie") {
+                    urlDirect = "".concat(DOMAIN, "/api/server?id=").concat(movieInfo.tmdb_id, "&sr=").concat(serverID);
+                }
+                libs.log({ urlDirect: urlDirect }, PROVIDER, "URL DIRECT");
+                return [4, libs.request_get(urlDirect, headers, false)];
             case 3:
-                resDecrypt = _b.sent();
-                libs.log({ resDecrypt: resDecrypt }, PROVIDER, 'RES DECRYPT');
-                tracks = [];
-                for (_i = 0, _a = resDecrypt.subtitles || []; _i < _a.length; _i++) {
-                    item = _a[_i];
-                    if (!item.file || !item.label) {
-                        continue;
-                    }
-                    tracks.push({
-                        file: item.file,
-                        label: item.label,
-                        kind: item.kind
-                    });
+                dataDirect = _b.sent();
+                libs.log({ dataDirect: dataDirect }, PROVIDER, "DATA DIRECT");
+                if (!dataDirect.data) {
+                    return [3, 4];
                 }
-                if (resDecrypt.videoSource.indexOf(".mp4") != -1) {
-                    libs.embed_callback(resDecrypt.videoSource, PROVIDER, PROVIDER, 'mp4', callback, 1, tracks, [{ file: resDecrypt.videoSource, quality: 1080 }], headerDirect);
-                    return [2];
+                t = libs.string_atob(dataDirect.data);
+                a = JSON.parse(t);
+                libs.log({ a: a }, PROVIDER, "A DATA");
+                decryptData = decryptWithPassword(a);
+                libs.log({ decryptData: decryptData }, PROVIDER, "DECRYPT DATA");
+                if (!decryptData.url) {
+                    return [3, 4];
                 }
-                headerDirect = {
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
-                    "Referer": "".concat(DOMAIN, "/"),
-                    "Origin": "".concat(DOMAIN),
-                };
-                return [4, fetch(resDecrypt.videoSource, {
-                        headers: headerDirect
-                    })];
-            case 4:
-                parseDirect = _b.sent();
-                return [4, parseDirect.text()];
-            case 5:
-                textDirect = _b.sent();
-                m3u8Data = parseM3U8(textDirect, resDecrypt.videoSource);
-                libs.log({ m3u8Data: m3u8Data }, PROVIDER, "M3U8 DATA");
-                if (!m3u8Data.length) {
-                    libs.embed_callback(resDecrypt.videoSource, PROVIDER, PROVIDER, 'hls', callback, 1, tracks, [{ file: resDecrypt.videoSource, quality: 1080 }], headerDirect);
-                    return [2];
+                if (_.startsWith(decryptData.url, "/")) {
+                    return [3, 4];
                 }
-                libs.embed_callback(m3u8Data[0].file, PROVIDER, PROVIDER, 'hls', callback, 1, tracks, m3u8Data, headerDirect, {
+                libs.embed_callback(decryptData.url, PROVIDER, PROVIDER, 'hls', callback, 1, [], [{ file: decryptData.url, quality: 1080 }], headers, {
                     type: "m3u8"
                 });
-                return [3, 7];
+                _b.label = 4;
+            case 4:
+                _i++;
+                return [3, 2];
+            case 5: return [3, 7];
             case 6:
                 e_1 = _b.sent();
                 libs.log({ e: e_1 }, PROVIDER, "ERROR");
