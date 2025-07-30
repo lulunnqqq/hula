@@ -1,6 +1,5 @@
 {
 	"providers": [
-"dist/providers/vidorasu.js",
 "dist/providers/vidsrcvip.js",
 "dist/providers/vidfast.js",
 "dist/providers/m4ufree.js",
