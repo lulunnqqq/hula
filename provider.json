@@ -1,8 +1,8 @@
 {
 	"providers": [
+
+"dist/providers/hollymoviehd.js",
 "dist/providers/vidsrcvip.js",
-"dist/providers/vidfast.js",
-"dist/providers/m4ufree.js",
 "dist/providers/uniquestream.js",
 "dist/providers/2embedcc.js",
 "dist/providers/aoneroom.js",
@@ -15,8 +15,6 @@
 "dist/providers/vidsrcpro.js",
 "dist/providers/ymovies.js",
 "dist/providers/yesmovies.js",
-"dist/providers/ridomovie.js",
-"dist/providers/catflix.js",
-"dist/providers/primewire.js"
+"dist/providers/ridomovie.js"
 	]
 }
