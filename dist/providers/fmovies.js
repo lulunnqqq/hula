@@ -355,7 +355,21 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 if (!k) {
                                     k = htmlEmbed.match(/\_xy\_ws *\= *\"([^\"]+)/i);
                                 }
-                                k = k ? k[1] : '';
+                                if (!k) {
+                                    k = htmlEmbed.match(/data-dpi\=\"([^\"]+)/i);
+                                }
+                                if (!k) {
+                                    k = htmlEmbed.match(/\_is\_th *\: *([A-z0-9]+)/i);
+                                }
+                                if (k) {
+                                    k = k ? k[1] : '';
+                                }
+                                if (!k) {
+                                    k = htmlEmbed.match(/\_lk\_db *\= *\{x\: *\"([^\"]+)\"\, *y\: *\"([^\"]+)\"\, *z\: *\"([^\"]+)/i);
+                                    if (k) {
+                                        k = k[1] + k[2] + k[3];
+                                    }
+                                }
                                 libs.log({ k: k }, PROVIDER, 'K');
                                 if (!k) {
                                     return [2];
@@ -370,7 +384,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 parseGetLinkEmbed = _b.sent();
                                 libs.log({ parseGetLinkEmbed: parseGetLinkEmbed }, PROVIDER, 'PARSE GET LINK EMBED');
                                 sources = parseGetLinkEmbed.sources;
-                                parseTrack = parseGetLinkEmbed.tracks;
+                                parseTrack = parseGetLinkEmbed.tracks || [];
                                 isEncrypted = parseGetLinkEmbed.encrypted;
                                 tracks = [];
                                 for (_i = 0, parseTrack_2 = parseTrack; _i < parseTrack_2.length; _i++) {
@@ -396,6 +410,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                 key = _b.sent();
                                 pKey = key.rabbit;
                                 libs.log({ pKey: pKey }, PROVIDER, "PKEY");
+                                if (!pKey) {
+                                    return [2];
+                                }
                                 deSource = sources;
                                 parseDesource = [];
                                 if (isEncrypted) {
