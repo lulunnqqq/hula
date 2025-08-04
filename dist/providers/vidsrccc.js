@@ -40,7 +40,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                PROVIDER = 'AVidsrcCC';
+                PROVIDER = 'VidsrcCC';
                 DOMAIN = "https://vidsrc.cc";
                 headers = {
                     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
@@ -62,7 +62,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 libs.log({ hashData: hashData }, PROVIDER, 'HASH DATA');
                 dataParse = JSON.stringify(hashData);
-                key = cryptoS.enc.Utf8.parse("u5j3jsFBspwWnxeF");
+                key = cryptoS.enc.Utf8.parse("FMwmgDBDszBnnAso");
                 hash = cryptoS.RC4.encrypt(dataParse, key).toString().replace(/\//g, "-");
                 libs.log({ hash: hash }, PROVIDER, 'HASH');
                 domain = "".concat(DOMAIN, "/api/vidplay/sources?hash=").concat(encodeURIComponent(hash));
