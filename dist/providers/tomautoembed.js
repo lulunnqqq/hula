@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, decryptWithPassword, _i, _a, serverID, urlDirect, dataDirect, t, a, decryptData, e_1;
+    var PROVIDER, DOMAIN, headers, decryptWithPassword, _i, _a, serverID, urlDirect, dataDirect, t, a, decryptData, directUrl, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -94,10 +94,14 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!decryptData.url) {
                     return [3, 4];
                 }
-                if (_.startsWith(decryptData.url, "/")) {
+                if (!_.startsWith(decryptData.url, "/")) {
                     return [3, 4];
                 }
-                libs.embed_callback(decryptData.url, PROVIDER, PROVIDER, 'hls', callback, 1, [], [{ file: decryptData.url, quality: 1080 }], headers, {
+                if (decryptData.url.indexOf("/api/embed-proxy") == -1) {
+                    return [3, 4];
+                }
+                directUrl = "".concat(DOMAIN).concat(decryptData.url);
+                libs.embed_callback(directUrl, PROVIDER, PROVIDER, 'hls', callback, 1, [], [{ file: directUrl, quality: 1080 }], headers, {
                     type: "m3u8"
                 });
                 _b.label = 4;
