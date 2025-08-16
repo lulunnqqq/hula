@@ -2,7 +2,6 @@
 	"providers": [
 
 "dist/providers/vidsrccc.js",
-"dist/providers/vidsrcvip.js",
 "dist/providers/uniquestream.js",
 "dist/providers/2embedcc.js",
 "dist/providers/aoneroom.js",
