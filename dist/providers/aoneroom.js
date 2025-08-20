@@ -41,7 +41,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_f.label) {
             case 0:
                 PROVIDER = 'CAoneroom';
-                DOMAIN = "https://h5.aoneroom.com";
+                DOMAIN = "https://fmoviesunblocked.net";
                 headers = {
                     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                     'referer': "hhttps://h5.aoneroom.com/"
@@ -77,7 +77,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         if (movieInfo.type == 'movie') {
                             releaseDate = item.releaseDate;
                             year = releaseDate.split('-')[0];
-                            libs.log({ year: year, title: title }, PROVIDER, "YEAR INFO");
+                            libs.log({ year: year, title: title, item: item }, PROVIDER, "YEAR INFO");
                             if (movieInfo.year == year) {
                                 ID = item.subjectId;
                                 DETAIL_PATH = item.detailPath;
@@ -91,7 +91,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     }
                 }
-                libs.log({ ID: ID }, PROVIDER, "ID");
+                libs.log({ ID: ID, DETAIL_PATH: DETAIL_PATH }, PROVIDER, "ID");
                 if (!ID) {
                     return [2];
                 }
