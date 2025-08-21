@@ -79,7 +79,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 3:
                 json = _a.sent();
                 libs.log({ json: json }, PROVIDER, "JSON");
-                firstSource = json["source1"];
+                firstSource = json["source1"] && json["source1"].url ? json["source1"] : json["source2"];
                 if (!firstSource.url) {
                     return [2];
                 }
