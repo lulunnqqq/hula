@@ -69,7 +69,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }
                     return JSON.parse(s);
                 };
-                _i = 0, _a = [1, 2, 3, 4];
+                _i = 0, _a = [4, 5];
                 _b.label = 2;
             case 2:
                 if (!(_i < _a.length)) return [3, 5];
@@ -92,6 +92,12 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 decryptData = decryptWithPassword(a);
                 libs.log({ decryptData: decryptData }, PROVIDER, "DECRYPT DATA");
                 if (!decryptData.url) {
+                    return [3, 4];
+                }
+                if (decryptData.url.indexOf("https://") != -1 && decryptData.url.indexOf(".m3u8") != -1) {
+                    libs.embed_callback(decryptData.url, PROVIDER, PROVIDER, 'hls', callback, 1, [], [{ file: decryptData.url, quality: 1080 }], headers, {
+                        type: "m3u8"
+                    });
                     return [3, 4];
                 }
                 if (!_.startsWith(decryptData.url, "/")) {
