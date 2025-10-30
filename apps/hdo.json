@@ -2,7 +2,7 @@
   "notification": {
     "url": "https://ostream.io/",
     "title": "New!!!",
-    "contents": "<p>🌟 Check out our iOS app guide 📱✨</p>",
+    "contents": "<p>🌟 Check out our partner’s brand-new iOS app guide! 📱✨</p>",
     "btn_title": "Visit",
     "show": true,
     "key": "NOTI_1.9"
