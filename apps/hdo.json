@@ -1,11 +1,11 @@
 {
   "notification": {
     "url": "https://ostream.io/",
-    "title": "New!!!",
-    "contents": "<p>🌟 Check out our partner’s brand-new iOS app guide! 📱✨</p>",
+    "title": "Introducing Our Partner’s iOS App!",
+    "contents": "<p>Visit to explore the quick start guide and enjoy the new experience. ✨📱</p>",
     "btn_title": "Visit",
     "show": true,
-    "key": "NOTI_1.9"
+    "key": "NOTI_2.1"
   },
   "ads_config": {
     "init_ads": "admob"
