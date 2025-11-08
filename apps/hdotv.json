@@ -29,22 +29,36 @@
       "SERVER A2"
     ]
   },
-  "ads_start_remote" : {
+  "ads_start_remote": {
     "enable_admob": true,
     "enable_applovin": true,
     "enable_unity": true
   },
-  "ads_back_remote" : {
+  "ads_back_remote": {
     "enable_admob": true,
     "enable_applovin": true,
     "enable_unity": true
   },
-  "ads_inapp_remote" : {
-    "id": "INAPP_1.0",
-    "url": "https://me-qr.com/image/front/cases/billboard-qr-codes/img-3.png",
-    "title": "Introducing Our Partner’s iOS App!",
-    "contents": "<p>Visit to explore the quick start guide and enjoy the new experience. ✨📱</p>",
-    "show": true,
-    "type": "full_modal"
+  "ads_inapp_remote": {
+    "enabled": true,
+    "modal": {
+      "enabled": true,
+      "delay_seconds": 3,
+      "content": {
+        "image_url": "https://domettc.com/uploads/service/2024_03/banner_qrcode_marketing.png",
+        "title": "Khuyến mãi lớn!",
+        "description": "Giảm 50% cho đơn hàng đầu tiên.",
+        "cta_text": "Mua ngay",
+        "cta_link": "https://example.com/sale"
+      }
+    },
+    "floating": {
+      "enabled": true,
+      "position": "bottom_right",
+      "content": {
+        "image_url": "https://quangcaohaidang.com/wp-content/uploads/2024/09/4.-Thiet-ke-QR-code-300x300.jpg",
+        "cta_link": "https://example.com/info"
+      }
+    }
   }
 }
