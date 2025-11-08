@@ -42,8 +42,8 @@
   "ads_inapp_remote": {
     "enabled": true,
     "modal": {
-      "enabled": true,
-      "delay_seconds": 3,
+      "enabled": false,
+      "delay_seconds": 5,
       "content": {
         "image_url": "https://domettc.com/uploads/service/2024_03/banner_qrcode_marketing.png",
         "title": "Khuyến mãi lớn!",
@@ -53,7 +53,7 @@
       }
     },
     "floating": {
-      "enabled": true,
+      "enabled": false,
       "position": "bottom_right",
       "content": {
         "image_url": "https://quangcaohaidang.com/wp-content/uploads/2024/09/4.-Thiet-ke-QR-code-300x300.jpg",
