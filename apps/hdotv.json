@@ -38,5 +38,13 @@
     "enable_admob": true,
     "enable_applovin": true,
     "enable_unity": true
+  },
+  "ads_inapp_remote" : {
+    "id": "INAPP_1.0",
+    "url": "https://me-qr.com/image/front/cases/billboard-qr-codes/img-3.png",
+    "title": "Introducing Our Partner’s iOS App!",
+    "contents": "<p>Visit to explore the quick start guide and enjoy the new experience. ✨📱</p>",
+    "show": true,
+    "type": "full_modal"
   }
 }
