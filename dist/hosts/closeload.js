@@ -37,17 +37,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 hosts["closeload"] = function (url, movieInfo, provider, config, callback) { return __awaiter(_this, void 0, void 0, function () {
     function dc_o55npDX9dLL(value_parts) {
-        var value = value_parts.join("");
+        var value = value_parts.join('');
         var result = value;
         result = result.replace(/[a-zA-Z]/g, function (c) {
-            return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+            return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
         });
+        result = result.split('').reverse().join('');
         result = libs.string_atob(result);
-        result = result.split("").reverse().join("");
-        var unmix = "";
+        var unmix = '';
         for (var i = 0; i < result.length; i++) {
             var charCode = result.charCodeAt(i);
-            charCode = (charCode - 399756995 % (i + 5) + 256) % 256;
+            charCode = (charCode - (399756995 % (i + 5)) + 256) % 256;
             unmix += String.fromCharCode(charCode);
         }
         return unmix;
@@ -92,6 +92,9 @@ hosts["closeload"] = function (url, movieInfo, provider, config, callback) { ret
                 parseDirect = dc_o55npDX9dLL(varName);
                 libs.log({ parseDirect: parseDirect }, provider, 'ParseDirect');
                 if (!parseDirect) {
+                    return [2];
+                }
+                if (parseDirect.indexOf("https") == -1) {
                     return [2];
                 }
                 libs.embed_callback(parseDirect, provider, HOST, 'Hls', callback, 1, [], [{ file: parseDirect, quality: 1080 }], {
