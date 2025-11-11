@@ -60,5 +60,6 @@
         "cta_link": "https://example.com/info"
       }
     }
-  }
+  },
+  "tmdb_api_key": "3161de04ca660985f0b42e883eb49fef"
 }
