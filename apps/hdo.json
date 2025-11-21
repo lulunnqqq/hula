@@ -4,7 +4,7 @@
     "title": "Introducing Our Partner’s iOS App!",
     "contents": "<p>Visit to explore the quick start guide and enjoy the new experience. ✨📱</p>",
     "btn_title": "Visit",
-    "show": true,
+    "show": false,
     "key": "NOTI_2.1"
   },
   "ads_config": {
