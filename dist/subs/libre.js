@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 subs.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, subLanguageIds, url, _i, subLanguageIds_1, item, urlLang, dataLang, _a, dataLang_1, itemLang, fileName, format, url_1, e_1;
+    var PROVIDER, DOMAIN, subLanguageIds, url, _i, subLanguageIds_1, item, urlLang, dataLang, stt, _a, dataLang_1, itemLang, fileName, format, url_1, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -77,9 +77,11 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
             case 3:
                 dataLang = _b.sent();
                 libs.log({ urlLang: urlLang, dataLang: dataLang, item: item }, PROVIDER, "URL SEARCH LANG");
+                stt = 0;
                 for (_a = 0, dataLang_1 = dataLang; _a < dataLang_1.length; _a++) {
                     itemLang = dataLang_1[_a];
-                    fileName = itemLang.media || "No file name";
+                    stt += 1;
+                    fileName = "".concat(itemLang.media, " ").concat(stt) || "No file name";
                     format = itemLang.format;
                     url_1 = itemLang.url;
                     libs.log({ fileName: fileName, format: format, url: url_1 }, PROVIDER, "ITEM INFO");
