@@ -92,7 +92,7 @@ subs.getResource = function (movieInfo, config, callback) { return __awaiter(_th
                         file: url_1,
                         kind: "Captions",
                         label: itemLang.display,
-                        type: format == "srt" ? "office" : "zip",
+                        type: format == "srt" ? "download" : "zip",
                         provider: PROVIDER,
                     });
                 }
