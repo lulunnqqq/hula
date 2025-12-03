@@ -1,11 +1,7 @@
 {
 	"providers": [
 
-
-
-
-
-
+"dist/providers/111movies.js",
 "dist/providers/videasy.js",
 "dist/providers/vixsrc.js",
 "dist/providers/vidsrcvip.js",
