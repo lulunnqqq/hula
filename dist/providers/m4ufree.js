@@ -110,7 +110,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                         }
                     }
                 });
-                libs.log({ LINK_DETAIL: LINK_DETAIL_1 }, PROVIDER, 'LINK_DETAIL');
+                libs.log({ LINK_DETAIL: LINK_DETAIL_1 }, PROVIDER, 'LINK_DETAIL1');
                 if (!LINK_DETAIL_1) {
                     return [2];
                 }
