@@ -80,7 +80,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     text: textDetail,
                     id: movieInfo.tmdb_id
                 };
-                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json" }, body)];
+                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': 'Mozilla/5.0' }, body)];
             case 6:
                 decryptData = _e.sent();
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
