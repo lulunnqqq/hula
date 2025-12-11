@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, sources, _i, sources_1, item, url, dataDetail, textDetail, urlDecrypt, body, decryptData, directQuality, tracks, _a, _b, itemDirect, quality, _c, _d, itemSubtitle, lang, errorSource_1, e_1;
+    var PROVIDER, DOMAIN, headers, sources, _i, sources_1, item, url, dataDetail, textDetail, urlDecrypt, body, random, decryptData, directQuality, tracks, _a, _b, itemDirect, quality, _c, _d, itemSubtitle, lang, errorSource_1, e_1;
     return __generator(this, function (_e) {
         switch (_e.label) {
             case 0:
@@ -80,7 +80,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     text: textDetail,
                     id: movieInfo.tmdb_id
                 };
-                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': 'Mozilla/5.0' }, body)];
+                random = _.random(0, 1000);
+                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36 ".concat(random) }, body)];
             case 6:
                 decryptData = _e.sent();
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
