@@ -80,8 +80,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     text: textDetail,
                     id: movieInfo.tmdb_id
                 };
-                random = _.random(0, 1000);
-                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36 ".concat(random) }, body)];
+                random = _.random(0, 1000000);
+                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': "".concat(random) }, body)];
             case 6:
                 decryptData = _e.sent();
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
