@@ -88,7 +88,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     id: movieInfo.tmdb_id
                 };
                 random = _.random(0, 1000000);
-                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.7444.176 Spotify/1.2.78.418 Safari/537.36 ".concat(generateUUID()) }, body)];
+                return [4, libs.request_post(urlDecrypt, {
+                        "content-type": "application/json",
+                        'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                        Referer: "https://vidsrc-embed.ru/",
+                    }, body)];
             case 6:
                 decryptData = _e.sent();
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
