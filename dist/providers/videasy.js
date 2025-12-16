@@ -36,6 +36,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
+    function generateUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0;
+            var v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
     var PROVIDER, DOMAIN, headers, sources, _i, sources_1, item, url, dataDetail, textDetail, urlDecrypt, body, random, decryptData, directQuality, tracks, _a, _b, itemDirect, quality, _c, _d, itemSubtitle, lang, errorSource_1, e_1;
     return __generator(this, function (_e) {
         switch (_e.label) {
@@ -81,7 +88,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     id: movieInfo.tmdb_id
                 };
                 random = _.random(0, 1000000);
-                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': "".concat(random) }, body)];
+                return [4, libs.request_post(urlDecrypt, { "content-type": "application/json", 'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.7444.176 Spotify/1.2.78.418 Safari/537.36 ".concat(generateUUID()) }, body)];
             case 6:
                 decryptData = _e.sent();
                 libs.log({ decryptData: decryptData }, PROVIDER, 'DECRYPT DATA');
