@@ -71,7 +71,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _c.label = 1;
             case 1:
                 _c.trys.push([1, 12, , 13]);
-                staticID = "h/APA91Pu8JKhvEMftnB2QqFE9aSTlLqQF4iF0DRuk7YXkLqvJaUmlRlblS_1ZK6t2VIbx68GVQ5AVkepTGy82DLIz_uAyGx3Z421GLf2TIhbySFvE1bOInrzHRKLtjkPTpliKjWPhvPIzDjFmHp4zwMvRvqLhstjw4CVCy8jn-BuTxk1SRkl8s1r/ef860363-4e1b-5482-8d76-ec6fdebe974b/e993fc0bc499fdfb502f96b85963f9f0bbc698dd/wiv/1000044292358307/1bda1d30afdf5f775dcddb0a888bf9898b90ad4d3e1089396585236913b00773/ar";
+                staticID = "83430c172a325878deb69e1b2fa7e181c2a9ba8c/1000060586693258/rok/64c494bc/APA91vW7CQJ31D2QQ8VDZUpUI_zVwZ83CqikuxttWjExUTfZ_0g7Dlh0vXAucB5uurMpb8Da7lInYp2-SJYL-2FbVyV8Nl6MVtfHSli8-a0fmWg4ugQG7nJUATHwIcmrY3hOHfBXomhis43rTXlY7_bpr48Ye_X930EZ-bXA5fvUZby8TRWcfZY/kovnifuc/z/3c9419f41db48b15a08b573e289bbc892ca8aa11625fb2ac753bb59b150d34f9";
                 urlDetail = "".concat(DOMAIN, "/movie/").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
                     urlDetail = "".concat(DOMAIN, "/tv/").concat(movieInfo.tmdb_id, "/").concat(movieInfo.season, "/").concat(movieInfo.episode);
@@ -81,6 +81,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
                             "Referer": "".concat(DOMAIN, "/"),
                             "Origin": DOMAIN,
+                            "X-Requested-With": "XMLHttpRequest"
                         }
                     })];
             case 2:
@@ -102,13 +103,15 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 urlServer = "".concat(DOMAIN, "/").concat(staticID, "/").concat(encodedFinal, "/sr");
+                libs.log({ urlServer: urlServer }, PROVIDER, "URL SERVER");
                 return [4, fetch(urlServer, {
+                        method: "POST",
                         headers: {
-                            'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+                            'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
                             "Referer": "".concat(DOMAIN, "/"),
                             "Origin": DOMAIN,
-                            'Content-Type': "text/javascript",
-                            "X-Csrf-Token": "WP6BXZEsOAvSP0tk4AhxIWllVsuBx0Iy"
+                            "Content-Type": "image/gif",
+                            "X-Requested-With": "XMLHttpRequest"
                         }
                     })];
             case 5:
@@ -132,13 +135,13 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 urlEmbed = "".concat(DOMAIN, "/").concat(staticID, "/").concat(id);
                 return [4, fetch(urlEmbed, {
-                        method: 'GET',
+                        method: 'POST',
                         headers: {
-                            'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+                            'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
                             "Referer": "".concat(DOMAIN, "/"),
                             "Origin": DOMAIN,
-                            'Content-Type': "text/javascript",
-                            "X-Csrf-Token": "WP6BXZEsOAvSP0tk4AhxIWllVsuBx0Iy"
+                            "Content-Type": "image/gif",
+                            "X-Requested-With": "XMLHttpRequest"
                         }
                     })];
             case 8:
