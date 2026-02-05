@@ -71,7 +71,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 _c.label = 1;
             case 1:
                 _c.trys.push([1, 12, , 13]);
-                staticID = "83430c172a325878deb69e1b2fa7e181c2a9ba8c/1000060586693258/rok/64c494bc/APA91vW7CQJ31D2QQ8VDZUpUI_zVwZ83CqikuxttWjExUTfZ_0g7Dlh0vXAucB5uurMpb8Da7lInYp2-SJYL-2FbVyV8Nl6MVtfHSli8-a0fmWg4ugQG7nJUATHwIcmrY3hOHfBXomhis43rTXlY7_bpr48Ye_X930EZ-bXA5fvUZby8TRWcfZY/kovnifuc/z/3c9419f41db48b15a08b573e289bbc892ca8aa11625fb2ac753bb59b150d34f9";
+                staticID = "APA91jkm9izwoCjqLPR78ZKT1SE0jVyJz0GDV5BOIgjCDvBU9_B1ymKNYHbOAFeZi6fe1D6xLPgSmhEcQMGCm1f6WyiQRfF4YJlJG5IE5ZDjO38yNE1Zv1wnMGVL6QtRPbsR2s7MvvyFnSTJhTil-H4z60VBjZSyfHArb9qkGwCm_3IB8JtOF9Y/1000019584590139/em";
                 urlDetail = "".concat(DOMAIN, "/movie/").concat(movieInfo.tmdb_id);
                 if (movieInfo.type == 'tv') {
                     urlDetail = "".concat(DOMAIN, "/tv/").concat(movieInfo.tmdb_id, "/").concat(movieInfo.season, "/").concat(movieInfo.episode);
@@ -110,7 +110,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
                             "Referer": "".concat(DOMAIN, "/"),
                             "Origin": DOMAIN,
-                            "Content-Type": "image/gif",
+                            "Content-Type": "text/javascript",
                             "X-Requested-With": "XMLHttpRequest"
                         }
                     })];
@@ -140,7 +140,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
                             "Referer": "".concat(DOMAIN, "/"),
                             "Origin": DOMAIN,
-                            "Content-Type": "image/gif",
+                            "Content-Type": "text/javascript",
                             "X-Requested-With": "XMLHttpRequest"
                         }
                     })];
