@@ -111,7 +111,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 directQuality = _.orderBy(directQuality, ['quality'], ['desc']);
-                libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality, headers);
+                libs.embed_callback(directQuality[0].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], directQuality, headers, {
+                    type: "m3u8",
+                });
                 return [3, 7];
             case 6:
                 e_1 = _a.sent();
