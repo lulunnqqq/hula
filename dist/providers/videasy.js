@@ -51,8 +51,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://api.videasy.net";
                 headers = {
                     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-                    'referer': "".concat(DOMAIN, "/"),
-                    "origin": "".concat(DOMAIN)
+                    'referer': "https://player.videasy.net/",
+                    "origin": "".concat(DOMAIN),
                 };
                 _e.label = 1;
             case 1:
