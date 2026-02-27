@@ -71,7 +71,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
-                PROVIDER = 'VidsrcCC';
+                PROVIDER = 'OVidsrcCC';
                 DOMAIN = "https://vidsrc.cc";
                 headers = {
                     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
