@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, postID, urlEmbed, parseEmbed, iframeData, iframeUrl, htmlDirect, text, directUrl;
+    var PROVIDER, DOMAIN, urlSearch, parseSearch, postID, body, headerIframe, urlEmbed, parseEmbed, iframeData, iframeUrl, htmlDirect, text, directUrl;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -44,7 +44,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 DOMAIN = "https://uniquestream.net";
                 urlSearch = '';
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "".concat(DOMAIN, "/episodes/").concat(libs.url_slug_search(movieInfo), "-season-").concat(movieInfo.season, "-episode-").concat(movieInfo.episode);
+                    urlSearch = "".concat(DOMAIN, "/episodes/").concat(libs.url_slug_search(movieInfo), "-").concat(movieInfo.year, "-season-").concat(movieInfo.season, "-episode-").concat(movieInfo.episode);
                 }
                 else {
                     urlSearch = "".concat(DOMAIN, "/movies/").concat(libs.url_slug_search(movieInfo), "-").concat(movieInfo.year);
@@ -53,13 +53,25 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, libs.request_get(urlSearch, {}, true)];
             case 1:
                 parseSearch = _a.sent();
-                postID = parseSearch("input[name='postid']").val();
+                postID = parseSearch(".server-btn").first().attr("data-post");
                 libs.log({ postID: postID }, PROVIDER, 'POST ID');
                 if (!postID) {
                     return [2];
                 }
-                urlEmbed = "".concat(DOMAIN, "/wp-json/zetaplayer/v2/").concat(postID, "/").concat(movieInfo.type == 'tv' ? 'ep' : 'mv', "/1");
-                return [4, libs.request_get(urlEmbed)];
+                body = qs.stringify({
+                    "action": "uniquestream_player_ajax",
+                    "nonce": "9ed1d7a0e3",
+                    "post": postID,
+                    type: movieInfo.type == 'movie' ? 'mv' : 'tv',
+                    "nume": 1
+                });
+                headerIframe = {
+                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    referer: DOMAIN,
+                    'X-Requested-With': 'XMLHttpRequest',
+                };
+                urlEmbed = "".concat(DOMAIN, "/wp-admin/admin-ajax.php");
+                return [4, libs.request_post(urlEmbed, headerIframe, body, false)];
             case 2:
                 parseEmbed = _a.sent();
                 libs.log({ urlEmbed: urlEmbed, parseEmbed: parseEmbed }, PROVIDER, 'EMBED INFO');
