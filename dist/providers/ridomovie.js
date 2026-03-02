@@ -62,7 +62,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!slugDetail) {
                     return [2];
                 }
-                detailUrl = "".concat(DOMAIN, "/movies/").concat(slugDetail);
+                detailUrl = "".concat(DOMAIN, "/movie/").concat(slugDetail);
                 if (movieInfo.type == 'tv') {
                     detailUrl = "".concat(DOMAIN, "/tv/").concat(slugDetail, "/season-").concat(movieInfo.season, "/episode-").concat(movieInfo.episode);
                 }
