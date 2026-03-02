@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, parseSearch, postID, body, headerIframe, urlEmbed, parseEmbed, iframeData, iframeUrl, htmlDirect, text, directUrl;
+    var PROVIDER, DOMAIN, urlSearch, userAgent, parseSearch, postID, scriptNonce, nonce, body, headerIframe, urlEmbed, parseEmbed, iframeData, iframeUrl, htmlDirect, text, directUrl;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -49,8 +49,11 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 else {
                     urlSearch = "".concat(DOMAIN, "/movies/").concat(libs.url_slug_search(movieInfo), "-").concat(movieInfo.year);
                 }
+                userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36";
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
-                return [4, libs.request_get(urlSearch, {}, true)];
+                return [4, libs.request_get(urlSearch, {
+                        'user-agent': userAgent,
+                    }, true)];
             case 1:
                 parseSearch = _a.sent();
                 postID = parseSearch(".server-btn").first().attr("data-post");
@@ -58,9 +61,16 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!postID) {
                     return [2];
                 }
+                scriptNonce = parseSearch("#uniquestream-player-js-extra").text();
+                nonce = scriptNonce.match(/nonce *\" *\: *\"([^\"]+)/i);
+                nonce = nonce ? nonce[1] : '';
+                libs.log({ nonce: nonce, scriptNonce: scriptNonce }, PROVIDER, 'NONCE');
+                if (!nonce) {
+                    return [2];
+                }
                 body = qs.stringify({
                     "action": "uniquestream_player_ajax",
-                    "nonce": "9ed1d7a0e3",
+                    "nonce": nonce,
                     "post": postID,
                     type: movieInfo.type == 'movie' ? 'mv' : 'tv',
                     "nume": 1
@@ -69,6 +79,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
                     referer: DOMAIN,
                     'X-Requested-With': 'XMLHttpRequest',
+                    'user-agent': userAgent,
                 };
                 urlEmbed = "".concat(DOMAIN, "/wp-admin/admin-ajax.php");
                 return [4, libs.request_post(urlEmbed, headerIframe, body, false)];
@@ -88,7 +99,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, fetch(iframeUrl, {
                         headers: {
                             'referer': "".concat(DOMAIN, "/"),
-                            'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome"
+                            'user-agent': userAgent
                         }
                     })];
             case 3:
@@ -105,7 +116,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.embed_callback(directUrl, PROVIDER, PROVIDER, 'hls', callback, 1, [], [{ file: directUrl, quality: 1080 }], {
                     Origin: "https://hls.uniquestream.net",
                     Referer: "https://hls.uniquestream.net/",
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+                    "User-Agent": userAgent
                 });
                 return [2, true];
         }
