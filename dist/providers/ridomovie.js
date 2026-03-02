@@ -36,24 +36,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, slugDetail, url, parseSearch, _i, _a, item, urlTv, htmlTv, parseTv, parseEpisode, SLUG_TV, _b, parseEpisode_1, item, slugMatch, parseID, detailUrl, parseDetail, _c, _d, item, iframeUrl, htmlDetail, textDetail, parseDirect, e_1;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
+    var PROVIDER, DOMAIN, slugDetail, url, parseSearch, _i, _a, item, detailUrl, parseDetail, iframe, iframeUrl, e_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 PROVIDER = 'LRIDOMOVIE';
                 DOMAIN = "https://ridomovies.tv";
-                _e.label = 1;
+                _b.label = 1;
             case 1:
-                _e.trys.push([1, 14, , 15]);
+                _b.trys.push([1, 5, , 6]);
                 slugDetail = '';
-                url = "".concat(DOMAIN, "/core/api/search?q=").concat(libs.url_slug_search(movieInfo, "%20"));
+                url = "".concat(DOMAIN, "/api/search?q=").concat(libs.url_slug_search(movieInfo, "%20"));
                 return [4, libs.request_get(url)];
             case 2:
-                parseSearch = _e.sent();
+                parseSearch = _b.sent();
                 libs.log({ parseSearch: parseSearch }, PROVIDER, "PARSE SEARCH");
-                for (_i = 0, _a = parseSearch.data.items; _i < _a.length; _i++) {
+                for (_i = 0, _a = parseSearch.data; _i < _a.length; _i++) {
                     item = _a[_i];
-                    if (item.contentable.tmdbId == movieInfo.tmdb_id) {
+                    if (item.tmdb_id == movieInfo.tmdb_id) {
                         slugDetail = item.slug;
                         break;
                     }
@@ -62,93 +62,33 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!slugDetail) {
                     return [2];
                 }
-                if (!(movieInfo.type == 'tv')) return [3, 5];
-                urlTv = "".concat(DOMAIN, "/tv/").concat(slugDetail);
-                return [4, fetch(urlTv, {
-                        headers: {
-                            "user-agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-                            Referer: "".concat(DOMAIN, "/")
-                        }
-                    })];
-            case 3:
-                htmlTv = _e.sent();
-                return [4, htmlTv.text()];
-            case 4:
-                parseTv = _e.sent();
-                parseEpisode = parseTv.match(/\\"id\\":\\"(\d+)\\"\,\\"slug\\":\\"([^\\]+)/img);
-                libs.log({ parseEpisode: parseEpisode }, PROVIDER, 'PARSE EPISODE');
-                SLUG_TV = "";
-                for (_b = 0, parseEpisode_1 = parseEpisode; _b < parseEpisode_1.length; _b++) {
-                    item = parseEpisode_1[_b];
-                    slugMatch = "/season-".concat(movieInfo.season, "/episode-").concat(movieInfo.episode, "-");
-                    if (item.indexOf(slugMatch) == -1) {
-                        continue;
-                    }
-                    parseID = item.match(/([0-9]+)/i);
-                    parseID = parseID ? parseID[1] : '';
-                    libs.log({ parseID: parseID }, PROVIDER, 'PARSE ID - SLUG');
-                    if (!parseID) {
-                        continue;
-                    }
-                    SLUG_TV = parseID;
+                detailUrl = "".concat(DOMAIN, "/movies/").concat(slugDetail);
+                if (movieInfo.type == 'tv') {
+                    detailUrl = "".concat(DOMAIN, "/tv/").concat(slugDetail, "/season-").concat(movieInfo.season, "/episode-").concat(movieInfo.episode);
                 }
-                if (!SLUG_TV) {
+                return [4, libs.request_get(detailUrl, {}, true)];
+            case 3:
+                parseDetail = _b.sent();
+                iframe = parseDetail("#player-cover").attr("data-embed");
+                libs.log({ iframe: iframe }, PROVIDER, 'IFRAME URL');
+                if (!iframe) {
                     return [2];
                 }
-                slugDetail = SLUG_TV;
-                _e.label = 5;
-            case 5:
-                detailUrl = "".concat(DOMAIN, "/api/movies/").concat(slugDetail);
-                if (movieInfo.type == 'tv') {
-                    detailUrl = "".concat(DOMAIN, "/api/episodes/").concat(slugDetail);
-                }
-                return [4, libs.request_get(detailUrl)];
-            case 6:
-                parseDetail = _e.sent();
-                libs.log({ parseDetail: parseDetail }, PROVIDER, "PARSE DETAIL");
-                _c = 0, _d = parseDetail.data;
-                _e.label = 7;
-            case 7:
-                if (!(_c < _d.length)) return [3, 13];
-                item = _d[_c];
-                iframeUrl = item.url.match(/data\-src\=\"([^\"]+)/i);
+                iframeUrl = iframe.match(/src\=\"([^\"]+)/i);
                 iframeUrl = iframeUrl ? iframeUrl[1] : '';
                 libs.log({ iframeUrl: iframeUrl }, PROVIDER, 'IFRAME URL');
                 if (!iframeUrl) {
-                    return [3, 12];
+                    return [2];
                 }
-                if (!(iframeUrl.indexOf("ridoo.net") != -1)) return [3, 10];
-                return [4, fetch(iframeUrl, {
-                        headers: {
-                            Referer: "".concat(DOMAIN, "/"),
-                            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                        }
-                    }, false)];
-            case 8:
-                htmlDetail = _e.sent();
-                return [4, htmlDetail.text()];
-            case 9:
-                textDetail = _e.sent();
-                parseDirect = textDetail.match(/file\:\"([^\"]+)/i);
-                parseDirect = parseDirect ? parseDirect[1] : "";
-                libs.log({ parseDirect: parseDirect }, PROVIDER, 'PARSE DIRECT');
-                libs.embed_callback(parseDirect, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: parseDirect, quality: 1080 }], {
-                    Referer: "".concat(DOMAIN, "/"),
-                });
-                return [3, 12];
-            case 10: return [4, libs.embed_redirect(iframeUrl, '', movieInfo, PROVIDER, callback, undefined, [])];
-            case 11:
-                _e.sent();
-                _e.label = 12;
-            case 12:
-                _c++;
-                return [3, 7];
-            case 13: return [3, 15];
-            case 14:
-                e_1 = _e.sent();
+                return [4, libs.embed_redirect(iframeUrl, '', movieInfo, PROVIDER, callback, undefined, [])];
+            case 4:
+                _b.sent();
+                return [3, 6];
+            case 5:
+                e_1 = _b.sent();
                 libs.log({ e: e_1 }, PROVIDER);
-                return [3, 15];
-            case 15: return [2, true];
+                return [3, 6];
+            case 6: return [2, true];
         }
     });
 }); };
