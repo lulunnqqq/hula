@@ -62,7 +62,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     return [2];
                 }
                 scriptNonce = parseSearch("#uniquestream-player-js-extra").text();
-                nonce = scriptNonce.match(/nonce *\" *\: *\"([^\"]+)/i);
+                nonce = scriptNonce.match(/\"nonce *\" *\: *\"([^\"]+)/i);
                 nonce = nonce ? nonce[1] : '';
                 libs.log({ nonce: nonce, scriptNonce: scriptNonce }, PROVIDER, 'NONCE');
                 if (!nonce) {
