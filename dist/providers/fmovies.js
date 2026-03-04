@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, extractDirectV2, parseSearch_1, LINK_DETAIL_1, TV_LINK_DETAIL_2, flagTv_1, _loop_1, _i, TV_LINK_DETAIL_1, linkTvItem, parseId, filmId, serverIds_2, apiUrlEmbed, parseEmbedServer_1, apiUrlGetSeason, parseGetSeason_1, seasonId_1, apiUrlGetEpisode, episodeId_1, parseGetEpisode_1, urlGetEmbedTv, parseEmbedTv_1, extractDirect, opensslKeyIv_1, decryptOpenssl_1, apiGetLinkEmbed, _a, serverIds_1, serverIdItem, getLinkEmbedData, err_1;
+    var PROVIDER, DOMAIN, urlSearch, extractDirectV2, parseSearch_1, LINK_DETAIL_1, TV_LINK_DETAIL_2, flagTv_1, _loop_1, _i, TV_LINK_DETAIL_1, linkTvItem, parseId, filmId, serverIds_2, apiUrlEmbed, parseEmbedServer_1, apiUrlGetSeason, parseGetSeason_1, seasonId_1, apiUrlGetEpisode, episodeId_1, parseGetEpisode_1, urlGetEmbedTv, parseEmbedTv_1, extractDirect, opensslKeyIv_1, decryptOpenssl, apiGetLinkEmbed, _a, serverIds_1, serverIdItem, getLinkEmbedData, err_1;
     var _this = this;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -48,7 +48,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 1:
                 _b.trys.push([1, 17, , 18]);
                 extractDirectV2 = function (linkV2) { return __awaiter(_this, void 0, void 0, function () {
-                    var id, domain, dataEmbed, htmlEmbed, k, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, isEncrypted, tracks, _i, parseTrack_1, trackItem, lang, parseLang, key, pKey, deSource, parseDesource, rank, _a, parseDesource_1, item;
+                    var id, domain, dataEmbed, htmlEmbed, k, apiUrlGetLinkEmbed, parseGetLinkEmbed, sources, parseTrack, isEncrypted, tracks, _i, parseTrack_1, trackItem, lang, parseLang, rank, _a, parseDesource_1, item;
                     return __generator(this, function (_b) {
                         switch (_b.label) {
                             case 0:
@@ -128,29 +128,8 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                                         label: parseLang
                                     });
                                 }
-                                return [4, libs.request_get("https://raw.githubusercontent.com/yogesh-hacker/MegacloudKeys/refs/heads/main/keys.json")];
-                            case 4:
-                                key = _b.sent();
-                                pKey = key.rabbit;
-                                libs.log({ pKey: pKey }, PROVIDER, "PKEY");
-                                if (!pKey) {
-                                    return [2];
-                                }
-                                deSource = sources;
-                                parseDesource = [];
-                                if (isEncrypted) {
-                                    deSource = decryptOpenssl_1(sources, pKey);
-                                    libs.log({ deSource: deSource }, PROVIDER, "DESOURCE 1");
-                                    if (!deSource) {
-                                        return [2];
-                                    }
-                                    libs.log({ deSource: deSource }, PROVIDER, 'DE SOURCE');
-                                    parseDesource = JSON.parse(deSource);
-                                }
-                                else {
-                                    parseDesource = sources;
-                                }
-                                libs.log({ deSource: deSource }, PROVIDER, "deSource");
+                                parseDesource = sources;
+                                libs.log({ parseDesource: parseDesource }, PROVIDER, "deSource");
                                 if (!parseDesource || !parseDesource.length) {
                                     return [2];
                                 }
@@ -421,7 +400,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     var iv = cryptoS.lib.WordArray.create(derived.words.slice(keyLen / 4, (keyLen + ivLen) / 4), ivLen);
                     return { key: key, iv: iv };
                 };
-                decryptOpenssl_1 = function (encBase64, password) {
+                decryptOpenssl = function (encBase64, password) {
                     try {
                         var encryptedData = cryptoS.enc.Base64.parse(encBase64);
                         var prefixWords = encryptedData.words.slice(0, 2);
