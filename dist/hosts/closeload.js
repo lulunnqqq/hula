@@ -72,10 +72,10 @@ hosts["closeload"] = function (url, movieInfo, provider, config, callback) { ret
         var value = value_parts.join('');
         var result = value;
         result = result.split('').reverse().join('');
-        result = libs.string_atob(result);
         result = result.replace(/[a-zA-Z]/g, function (c) {
             return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
         });
+        result = libs.string_atob(result);
         var unmix = '';
         for (var i = 0; i < result.length; i++) {
             var charCode = result.charCodeAt(i);
