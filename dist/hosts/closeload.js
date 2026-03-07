@@ -100,6 +100,20 @@ hosts["closeload"] = function (url, movieInfo, provider, config, callback) { ret
         }
         return unmix;
     }
+    function dc_AEtIE9ASRaK(value_parts) {
+        var value = value_parts.join('');
+        var result = value;
+        result = result.split('').reverse().join('');
+        result = libs.string_atob(result);
+        result = libs.string_atob(result);
+        var unmix = '';
+        for (var i = 0; i < result.length; i++) {
+            var charCode = result.charCodeAt(i);
+            charCode = (charCode - (399756995 % (i + 5)) + 256) % 256;
+            unmix += String.fromCharCode(charCode);
+        }
+        return unmix;
+    }
     var DOMAIN, HOST, parseDetail_1, script_1, unpacker, getKey, keyName, varName, parseDirect, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -151,6 +165,13 @@ hosts["closeload"] = function (url, movieInfo, provider, config, callback) { ret
                 }
                 if (parseDirect.indexOf("https") == -1) {
                     parseDirect = dc_o55npDX9dLL3(varName);
+                    libs.log({ parseDirect: parseDirect }, provider, 'ParseDirect');
+                    if (!parseDirect) {
+                        return [2];
+                    }
+                }
+                if (parseDirect.indexOf("https") == -1) {
+                    parseDirect = dc_AEtIE9ASRaK(varName);
                     libs.log({ parseDirect: parseDirect }, provider, 'ParseDirect');
                     if (!parseDirect) {
                         return [2];
