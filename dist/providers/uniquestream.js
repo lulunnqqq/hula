@@ -53,6 +53,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
                 return [4, libs.request_get(urlSearch, {
                         'user-agent': userAgent,
+                        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
                     }, true)];
             case 1:
                 parseSearch = _a.sent();
