@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, headers, fixID, url, dataDetail, htmlDetail, ID, deID, urlSource, headerSources, dataSources, _i, dataSources_1, item, urlDirect, headerDirect, dataDirect, tracks, _a, _b, trackItem, e_1;
+    var PROVIDER, DOMAIN, headers, url, dataDetail, htmlDetail, ID, parseStreamData, headerDefault, serverData, _i, serverData_1, itemServer, streamData, tracks, _a, _b, trackItem, label, e_1;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -47,7 +47,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     'referer': "".concat(DOMAIN, "/"),
                     "origin": "".concat(DOMAIN)
                 };
-                fixID = "/e6f92d89-a2ca-5dbb-8d6e-bd815a61ee39/fi/r/bee2170a919418b62088945aeb36d6fae820ab70/APA91ucLnQa-rMM6imkOD8-YIFqEiLoxb-BR2AwQ79wfxrXe69VFTDAwlT2PBwml5huoVA9AoZHkBjt6PcbOohlKj6hVA66lLs3fWrOZXBPba7I2VI9FHQYExb8rltIM0TsLkg-qxoMpL0jq-AHAv2LSWiWJZncrNsSW57wS06vVmOYijxGqee5/cf9fffb937bed2d0f2d4921d86f50f182229460cd808f6aec8039dc8911b267a/beledo/b84e9f0e/";
                 _c.label = 1;
             case 1:
                 _c.trys.push([1, 10, , 11]);
@@ -63,81 +62,60 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 return [4, dataDetail.text()];
             case 3:
                 htmlDetail = _c.sent();
-                ID = htmlDetail.match(/\"en\\\" *\: *\\ *\"([^\\]+)/i);
+                ID = htmlDetail.match(/\\"en\\":\\"(.*?)\\"/i);
                 ID = ID ? ID[1] : "";
                 libs.log({ ID: ID }, PROVIDER, 'ID');
                 if (!ID) {
                     return [2];
                 }
-                return [4, libs.request_get("https://aquariumtv.app/vf?id=".concat(ID))];
+                return [4, libs.request_get("https://enc-dec.app/api/enc-vidfast?text=".concat(ID))];
             case 4:
-                deID = _c.sent();
-                libs.log({ deID: deID }, PROVIDER, 'DE ID');
-                if (!deID) {
+                parseStreamData = _c.sent();
+                libs.log({ parseStreamData: parseStreamData }, PROVIDER, 'PARSE STREAM DATA');
+                if (!parseStreamData || !parseStreamData.result || !parseStreamData.result.servers || !parseStreamData.result.stream) {
                     return [2];
-                    z;
                 }
-                urlSource = "".concat(DOMAIN).concat(fixID, "pC8vgkEb9w/").concat(deID);
-                headerSources = {
-                    "Accept": "*/*",
-                    "Accept-Language": "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7",
-                    "Connection": "keep-alive",
-                    "Content-Length": "0",
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "DNT": "1",
-                    "Origin": "https://www.vidfast.pro",
-                    "Referer": "https://www.vidfast.pro/",
-                    "Sec-Fetch-Dest": "empty",
-                    "Sec-Fetch-Mode": "cors",
-                    "Sec-Fetch-Site": "same-origin",
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
-                    "sec-ch-ua-mobile": "?0",
-                    "sec-ch-ua-platform": "\"macOS\""
+                headerDefault = {
+                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                    "Referer": "https://vidfast.pro/",
+                    "X-Requested-With": "XMLHttpRequest"
                 };
-                libs.log({ urlSource: urlSource, headerSources: headerSources }, PROVIDER, 'URL SOURCE');
-                return [4, libs.request_post(urlSource, headerSources, {})];
+                return [4, libs.request_get(parseStreamData.result.servers, headerDefault)];
             case 5:
-                dataSources = _c.sent();
-                libs.log({ dataSources: dataSources }, PROVIDER, 'DATA SOURCES');
-                if (!dataSources) {
+                serverData = _c.sent();
+                libs.log({ serverData: serverData }, PROVIDER, 'SERVER DATA');
+                if (!serverData || !serverData.length) {
                     return [2];
                 }
-                _i = 0, dataSources_1 = dataSources;
+                _i = 0, serverData_1 = serverData;
                 _c.label = 6;
             case 6:
-                if (!(_i < dataSources_1.length)) return [3, 9];
-                item = dataSources_1[_i];
-                urlDirect = "".concat(DOMAIN).concat(fixID, "s2aqGYpfscE0-g/").concat(item.data);
-                headerDirect = {
-                    referer: url,
-                    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-                    "content-type": "application/x-www-form-urlencoded",
-                    "X-Requested-With": "XMLHttpRequest",
-                };
-                return [4, libs.request_post(urlDirect, headerDirect, {})];
+                if (!(_i < serverData_1.length)) return [3, 9];
+                itemServer = serverData_1[_i];
+                if (itemServer.name != "Alpha") {
+                    return [3, 8];
+                }
+                return [4, libs.request_get(parseStreamData.result.stream + "/" + itemServer.data, headerDefault)];
             case 7:
-                dataDirect = _c.sent();
-                libs.log({ dataDirect: dataDirect }, PROVIDER, 'DATA DIRECT');
-                if (!dataDirect || !dataDirect.url) {
-                    return [3, 8];
-                }
-                if (dataDirect.url.indexOf(".m3u8") == -1 || dataDirect.url.indexOf("feltrixfire11") != -1) {
-                    return [3, 8];
-                }
+                streamData = _c.sent();
+                libs.log({ streamData: streamData }, PROVIDER, 'STREAM DATA');
                 tracks = [];
-                for (_a = 0, _b = dataDirect.tracks; _a < _b.length; _a++) {
-                    trackItem = _b[_a];
-                    tracks.push({
-                        file: trackItem.file,
-                        kind: 'captions',
-                        label: trackItem.label,
-                    });
+                if (streamData && streamData.tracks) {
+                    for (_a = 0, _b = streamData.tracks; _a < _b.length; _a++) {
+                        trackItem = _b[_a];
+                        label = trackItem.label.split("-")[0].trim();
+                        tracks.push({
+                            file: trackItem.file,
+                            kind: 'captions',
+                            label: label,
+                        });
+                    }
                 }
                 libs.log({ tracks: tracks }, PROVIDER, 'TRACKS');
-                libs.embed_callback(dataDirect.url, PROVIDER, PROVIDER, 'Hls', callback, 1, tracks, [{ file: dataDirect.url, quality: 1080 }], headers);
-                return [2];
+                if (streamData && streamData.url) {
+                    libs.embed_callback(streamData.url, PROVIDER, PROVIDER, 'Hls', callback, 1, tracks, [{ file: streamData.url, quality: 1080 }], headers);
+                }
+                _c.label = 8;
             case 8:
                 _i++;
                 return [3, 6];

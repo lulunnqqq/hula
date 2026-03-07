@@ -1,7 +1,7 @@
 {
 	"providers": [
 
-
+"dist/providers/vidfast.js",
 "dist/providers/fmovies.js",
 "dist/providers/111movies.js",
 "dist/providers/videasy.js",
