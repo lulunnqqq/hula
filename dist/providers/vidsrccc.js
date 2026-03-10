@@ -106,7 +106,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!v) {
                     return [2];
                 }
-                return [4, fetch("https://aquariumtv.app/vidsrccc?id=".concat(movieInfo.tmdb_id, "&user_id=").concat("76h6FLuA#4@5jgN".split("").reverse().join("") + "_" + userID))];
+                return [4, fetch("https://aquariumtv.app/vidsrccc?id=".concat(movieInfo.tmdb_id, "&user_id=").concat("76h6FLuA%234@5jgN" + "_" + userID))];
             case 4:
                 reqVrf = _d.sent();
                 return [4, reqVrf.text()];
