@@ -113,6 +113,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
             case 5:
                 secretKeyText = _d.sent();
                 secretKeyText = encodeURIComponent(secretKeyText);
+                secretKeyText = "5ui3Y1rPbC";
                 return [4, fetch("https://aquariumtv.app/vidsrccc?id=".concat(movieInfo.tmdb_id, "&user_id=").concat(secretKeyText + "_" + userID))];
             case 6:
                 reqVrf = _d.sent();
