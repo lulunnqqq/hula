@@ -92,9 +92,6 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 }
                 for (_i = 0, _a = dataDecrypt.result.sources; _i < _a.length; _i++) {
                     item = _a[_i];
-                    if (item.server != "alpha" || !item.url) {
-                        continue;
-                    }
                     libs.embed_callback(item.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: item.url, quality: 1080 }], {
                         "Referer": "https://hexa.su/",
                         "Origin": "https://hexa.su",
@@ -102,6 +99,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     }, {
                         type: "m3u8",
                     });
+                    break;
                 }
                 return [3, 7];
             case 6:
