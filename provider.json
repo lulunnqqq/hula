@@ -1,6 +1,7 @@
 {
 	"providers": [
 
+"dist/providers/hexa.js",
 "dist/providers/fmovies.js",
 "dist/providers/111movies.js",
 "dist/providers/videasy.js",

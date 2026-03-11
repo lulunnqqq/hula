@@ -36,67 +36,79 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var DOMAIN, PROVIDER, t, urlSearch, dataSearch, headerHexa, dataHexa, headerAqua, dataAqua, item, e_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    function getRandomBytes(size) {
+        return Array.from({ length: size }, function () {
+            return Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+        }).join('');
+    }
+    var DOMAIN, PROVIDER, urlData, key, headers, directEncrypt, dataDirectEncrypt, decrypt, dataDecrypt, _i, _a, item, e_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                DOMAIN = "https://heartbeat.hexa.watch";
+                DOMAIN = "https://themoviedb.hexa.su";
                 PROVIDER = 'XHexaWatch';
-                _a.label = 1;
+                _b.label = 1;
             case 1:
-                _a.trys.push([1, 5, , 6]);
-                t = Date.now();
-                urlSearch = "https://aquariumtv.app/hexae?media_type=movie&tmdb_id=".concat(movieInfo.tmdb_id, "&timestamp=").concat(t);
+                _b.trys.push([1, 6, , 7]);
+                urlData = "".concat(DOMAIN, "/api/tmdb/movie/").concat(movieInfo.tmdb_id, "/images");
                 if (movieInfo.type == 'tv') {
-                    urlSearch = "https://aquariumtv.app/hexae?media_type=tv&tmdb_id=".concat(movieInfo.tmdb_id, "&season_id=").concat(movieInfo.season, "&episode_id=").concat(movieInfo.episode, "&timestamp=").concat(t);
+                    urlData = "".concat(DOMAIN, "/api/tmdb/tv/").concat(movieInfo.tmdb_id, "/season/").concat(movieInfo.season, "/episode/").concat(movieInfo.episode, "/images");
                 }
-                return [4, libs.request_get(urlSearch)];
+                key = getRandomBytes(32);
+                headers = {
+                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                    "Referer": "https://hexa.su/",
+                    "Accept": "plain/text",
+                    "X-Api-Key": key,
+                };
+                return [4, fetch(urlData, {
+                        method: "GET",
+                        headers: headers
+                    })];
             case 2:
-                dataSearch = _a.sent();
-                libs.log({ dataSearch: dataSearch }, PROVIDER, 'SEARCH');
-                if (!dataSearch) {
-                    return [2];
-                }
-                headerHexa = {
-                    "content-type": "application/json",
-                    "Referer": "https://hexa.watch/",
-                    "Origin": "https://hexa.watch",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
-                };
-                return [4, libs.request_post(DOMAIN, headerHexa, dataSearch)];
+                directEncrypt = _b.sent();
+                return [4, directEncrypt.text()];
             case 3:
-                dataHexa = _a.sent();
-                libs.log({ dataHexa: dataHexa }, PROVIDER, 'HEXA');
-                if (!dataHexa) {
-                    return [2];
-                }
-                headerAqua = {
-                    "content-type": "application/json",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
-                };
-                return [4, libs.request_post("https://aquariumtv.app/hexad", headerAqua, dataHexa)];
+                dataDirectEncrypt = _b.sent();
+                libs.log({ dataDirectEncrypt: dataDirectEncrypt, key: key }, PROVIDER, 'DATA ENCRYPT');
+                return [4, fetch('https://enc-dec.app/api/dec-hexa', {
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                        method: "POST",
+                        body: JSON.stringify({
+                            text: dataDirectEncrypt,
+                            key: key
+                        })
+                    })];
             case 4:
-                dataAqua = _a.sent();
-                libs.log({ dataAqua: dataAqua }, PROVIDER, 'AQUA');
-                if (!dataAqua) {
+                decrypt = _b.sent();
+                return [4, decrypt.json()];
+            case 5:
+                dataDecrypt = _b.sent();
+                libs.log({ dataDecrypt: dataDecrypt }, PROVIDER, 'DATA DECRYPT');
+                if (dataDecrypt.status != 200 || !dataDecrypt.result || !dataDecrypt.result.sources.length) {
                     return [2];
                 }
-                for (item in dataAqua.sources) {
-                    if (!dataAqua.sources[item].file) {
+                for (_i = 0, _a = dataDecrypt.result.sources; _i < _a.length; _i++) {
+                    item = _a[_i];
+                    if (item.server != "alpha" || !item.url) {
                         continue;
                     }
-                    libs.embed_callback(dataAqua.sources[item].file, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: dataAqua.sources[item].file, quality: 1080 }], {
-                        "Referer": "https://hexa.watch/",
-                        "Origin": "https://hexa.watch",
-                        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+                    libs.embed_callback(item.url, PROVIDER, PROVIDER, 'Hls', callback, 1, [], [{ file: item.url, quality: 1080 }], {
+                        "Referer": "https://hexa.su/",
+                        "Origin": "https://hexa.su",
+                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                    }, {
+                        type: "m3u8",
                     });
                 }
-                return [3, 6];
-            case 5:
-                e_1 = _a.sent();
+                return [3, 7];
+            case 6:
+                e_1 = _b.sent();
                 libs.log(e_1, PROVIDER, 'ERROR');
-                return [3, 6];
-            case 6: return [2, true];
+                return [3, 7];
+            case 7: return [2, true];
         }
     });
 }); };
