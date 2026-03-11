@@ -46,7 +46,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
         switch (_b.label) {
             case 0:
                 DOMAIN = "https://themoviedb.hexa.su";
-                PROVIDER = 'XHexaWatch';
+                PROVIDER = 'QHexaWatch';
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 6, , 7]);
