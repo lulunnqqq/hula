@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 source.getResource = function (movieInfo, config, callback) { return __awaiter(_this, void 0, void 0, function () {
-    var PROVIDER, DOMAIN, urlSearch, userAgent, parseSearch, postID, scriptNonce, nonce, body, headerIframe, urlEmbed, parseEmbed, iframeData, iframeUrl, htmlDirect, text, directUrl;
+    var PROVIDER, DOMAIN, urlSearch, userAgent, dataCookie, headerCookie, cache, parseSearch, postID, scriptNonce, nonce, body, headerIframe, urlEmbed, parseEmbed, iframeData, iframeUrl, htmlDirect, text, directUrl;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -50,12 +50,34 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                     urlSearch = "".concat(DOMAIN, "/movies/").concat(libs.url_slug_search(movieInfo), "-").concat(movieInfo.year);
                 }
                 userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36";
+                return [4, libs.cookies_clearAll()];
+            case 1:
+                _a.sent();
+                return [4, fetch("https://uniquestream.net/wp-content/plugins/litespeed-cache/guest.vary.php", {
+                        headers: {
+                            "user-agent": userAgent,
+                            "Accept": "*/*",
+                            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                        },
+                        method: "POST",
+                    })];
+            case 2:
+                dataCookie = _a.sent();
+                return [4, libs.cookies_get("https://uniquestream.net/wp-content/plugins/litespeed-cache/guest.vary.php")];
+            case 3:
+                headerCookie = _a.sent();
+                libs.log({ headerCookie: headerCookie }, PROVIDER, 'COOKIE INFO');
+                cache = headerCookie["_lscache_vary"]["value"] || "";
+                if (!cache) {
+                    return [2];
+                }
                 libs.log({ urlSearch: urlSearch }, PROVIDER, 'URL SEARCH');
                 return [4, libs.request_get(urlSearch, {
                         'user-agent': userAgent,
-                        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                        "Cookie": "_lscache_vary=".concat(cache, ";")
                     }, true)];
-            case 1:
+            case 4:
                 parseSearch = _a.sent();
                 postID = parseSearch(".server-btn").first().attr("data-post");
                 libs.log({ postID: postID }, PROVIDER, 'POST ID');
@@ -84,7 +106,7 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 };
                 urlEmbed = "".concat(DOMAIN, "/wp-admin/admin-ajax.php");
                 return [4, libs.request_post(urlEmbed, headerIframe, body, false)];
-            case 2:
+            case 5:
                 parseEmbed = _a.sent();
                 libs.log({ urlEmbed: urlEmbed, parseEmbed: parseEmbed }, PROVIDER, 'EMBED INFO');
                 iframeData = parseEmbed.embed_url;
@@ -103,10 +125,10 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                             'user-agent': userAgent
                         }
                     })];
-            case 3:
+            case 6:
                 htmlDirect = _a.sent();
                 return [4, htmlDirect.text()];
-            case 4:
+            case 7:
                 text = _a.sent();
                 directUrl = text.match(/let *url *\= *\'([^\']+)/i);
                 directUrl = directUrl ? directUrl[1] : '';
