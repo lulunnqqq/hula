@@ -144,6 +144,9 @@ source.getResource = function (movieInfo, config, callback) { return __awaiter(_
                 if (!res || !res.data) {
                     return [3, 11];
                 }
+                if (res.data.source && res.data.source.indexOf('lucky.vidbox') != -1) {
+                    return [3, 11];
+                }
                 tracks = [];
                 for (_b = 0, _c = res.data.subtitles || []; _b < _c.length; _b++) {
                     item_1 = _c[_b];
